@@ -17,6 +17,8 @@ namespace Twiddler.Tests
 
             foreach (TwitterStatus x in test.Tweets.ToEnumerable())
                 Debug.WriteLine(x.ToString());
+
+            poller.Stop();
         }
     }
 }

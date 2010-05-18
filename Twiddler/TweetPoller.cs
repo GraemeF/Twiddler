@@ -13,7 +13,7 @@ namespace Twiddler
         public void Start()
         {
             _twitter = FluentTwitter.CreateRequest()
-                .Statuses().Mentions()
+                .Statuses().OnPublicTimeline()
                 .Configuration.UseRateLimiting(20.Percent())
                 .RepeatEvery(5.Seconds()); // initial value, will be adjusted automatically
             _twitter.CallbackTo(GotTweets);
