@@ -1,0 +1,88 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Caliburn.Ninject</name>
+    </assembly>
+    <members>
+        <member name="T:Caliburn.Ninject.NinjectAdapter">
+            <summary>
+            An adapter allowing an <see cref="T:Ninject.IKernel"/> to plug into Caliburn via <see cref="T:Microsoft.Practices.ServiceLocation.IServiceLocator"/> and <see cref="T:Caliburn.Core.IoC.IRegistry"/>.
+            </summary>
+        </member>
+        <member name="M:Caliburn.Ninject.NinjectAdapter.#ctor(Ninject.IKernel)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Caliburn.Ninject.NinjectAdapter"/> class.
+            </summary>
+            <param name="kernel">The kernel.</param>
+        </member>
+        <member name="M:Caliburn.Ninject.NinjectAdapter.DoGetInstance(System.Type,System.String)">
+            <summary>
+            When implemented by inheriting classes, this method will do the actual work of resolving
+            the requested service instance.
+            </summary>
+            <param name="serviceType">Type of instance requested.</param>
+            <param name="key">Name of registered service you want. May be null.</param>
+            <returns>The requested service instance.</returns>
+        </member>
+        <member name="M:Caliburn.Ninject.NinjectAdapter.DoGetAllInstances(System.Type)">
+            <summary>
+            When implemented by inheriting classes, this method will do the actual work of
+            resolving all the requested service instances.
+            </summary>
+            <param name="serviceType">Type of service requested.</param>
+            <returns>Sequence of service instance objects.</returns>
+        </member>
+        <member name="M:Caliburn.Ninject.NinjectAdapter.WithProxyFactory``1">
+            <summary>
+            Installs a proxy factory.
+            </summary>
+            <typeparam name="T">The type of the proxy factory.</typeparam>
+            <returns>
+            A container with an installed proxy factory.
+            </returns>
+        </member>
+        <member name="P:Caliburn.Ninject.NinjectAdapter.Kernel">
+            <summary>
+            Gets or sets the kernel.
+            </summary>
+            <value>The kernel.</value>
+        </member>
+        <member name="T:Caliburn.Ninject.ProxyInjectorFactory">
+            <summary>
+            An <see cref="T:Ninject.Injection.IInjectorFactory"/> which adds proxy capabilities.
+            </summary>
+        </member>
+        <member name="M:Caliburn.Ninject.ProxyInjectorFactory.Dispose">
+            <summary>
+            Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+            </summary>
+        </member>
+        <member name="M:Caliburn.Ninject.ProxyInjectorFactory.Create(System.Reflection.ConstructorInfo)">
+            <summary>
+            Creates the specified constructor.
+            </summary>
+            <param name="constructor">The constructor.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Caliburn.Ninject.ProxyInjectorFactory.Create(System.Reflection.PropertyInfo)">
+            <summary>
+            Creates the specified property.
+            </summary>
+            <param name="property">The property.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Caliburn.Ninject.ProxyInjectorFactory.Create(System.Reflection.MethodInfo)">
+            <summary>
+            Creates the specified method.
+            </summary>
+            <param name="method">The method.</param>
+            <returns></returns>
+        </member>
+        <member name="P:Caliburn.Ninject.ProxyInjectorFactory.Settings">
+            <summary>
+            Gets or sets the settings.
+            </summary>
+            <value>The settings.</value>
+        </member>
+    </members>
+</doc>
