@@ -136,7 +136,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
-    <Compile Include="Screens\ITweetScreen.cs" />
+    <Compile Include="Screens\Interfaces\ITweetScreen.cs" />
     <Compile Include="Screens\TimelineScreen.cs" />
     <Compile Include="TweetPoller.cs" />
     <Compile Include="TweetSource.cs" />
