@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace Twiddler
+namespace Twiddler.Views
 {
     public partial class Shell : Window
     {
