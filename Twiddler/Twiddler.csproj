@@ -137,12 +137,14 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Services\Interfaces\ITweetSource.cs" />
+    <Compile Include="Services\Interfaces\ITweetPoller.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Models\Timeline.cs" />
     <Compile Include="Models\Tweet.cs" />
-    <Compile Include="NewTweetsEventArgs.cs" />
+    <Compile Include="Services\NewTweetsEventArgs.cs" />
     <Compile Include="OAuthDialog.xaml.cs">
       <DependentUpon>OAuthDialog.xaml</DependentUpon>
     </Compile>
@@ -166,8 +168,8 @@
     <Compile Include="Screens\Interfaces\ITimelineScreen.cs" />
     <Compile Include="Screens\ShellScreen.cs" />
     <Compile Include="Screens\TimelineScreen.cs" />
-    <Compile Include="TweetPoller.cs" />
-    <Compile Include="TweetSource.cs" />
+    <Compile Include="Services\TweetPoller.cs" />
+    <Compile Include="Services\TweetSource.cs" />
     <Compile Include="Views\TimelineView.xaml.cs">
       <DependentUpon>TimelineView.xaml</DependentUpon>
     </Compile>

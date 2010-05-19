@@ -1,15 +1,28 @@
 using System;
+using System.Collections.ObjectModel;
 using Caliburn.Core.IoC;
 using Twiddler.Models.Interfaces;
+using Twiddler.Services.Interfaces;
 
 namespace Twiddler.Models
 {
-    [PerRequest(typeof(ITimeline))]
+    [PerRequest(typeof (ITimeline))]
     public class Timeline : ITimeline
     {
-        public IObservable<ITweet> Tweets
+        private readonly ITweetSource _tweetSource;
+
+        public Timeline(ITweetSource tweetSource)
         {
-            get { throw new NotImplementedException(); }
+            _tweetSource = tweetSource;
+            Tweets = new ObservableCollection<ITweet>();
+
+            _tweetSource.Tweets.Subscribe(x => Tweets.Add(x));
         }
+
+        #region ITimeline Members
+
+        public ObservableCollection<ITweet> Tweets { get; private set; }
+
+        #endregion
     }
 }

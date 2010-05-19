@@ -2,5 +2,6 @@
 {
     public interface ITweet
     {
+        string Status { get; }
     }
 }

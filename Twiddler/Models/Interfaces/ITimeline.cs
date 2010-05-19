@@ -1,9 +1,10 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 
 namespace Twiddler.Models.Interfaces
 {
     public interface ITimeline
     {
-        IObservable<ITweet> Tweets { get; }
+        ObservableCollection<ITweet> Tweets { get; }
     }
 }

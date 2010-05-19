@@ -1,16 +1,19 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using TweetSharp.Twitter.Model;
+using Caliburn.Core.IoC;
+using Twiddler.Models.Interfaces;
+using Twiddler.Services.Interfaces;
 
-namespace Twiddler
+namespace Twiddler.Services
 {
-    public class TweetSource
+    [PerRequest(typeof (ITweetSource))]
+    public class TweetSource : ITweetSource
     {
         private readonly IObservable<IEvent<NewTweetsEventArgs>> _newTweetsObserver;
-        private readonly TweetPoller _poller;
+        private readonly ITweetPoller _poller;
 
-        public TweetSource(TweetPoller poller)
+        public TweetSource(ITweetPoller poller)
         {
             _poller = poller;
 
@@ -22,6 +25,10 @@ namespace Twiddler
             Tweets = _newTweetsObserver.SelectMany(x => x.EventArgs.Tweets);
         }
 
-        public IObservable<TwitterStatus> Tweets { get; private set; }
+        #region ITweetSource Members
+
+        public IObservable<ITweet> Tweets { get; private set; }
+
+        #endregion
     }
 }
