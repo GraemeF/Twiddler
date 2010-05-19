@@ -33,5 +33,17 @@ namespace Twiddler.Tests
             Assert.Contains(mockScreen.Object, test.Screens);
             mockScreen.Verify(x => x.Initialize());
         }
+
+        [Fact]
+        public void GettingScreens_WhenShutdownBeforeTweetArrives_IsEmpty()
+        {
+            var test = new TimelineScreen(_fakeTimeline.Object, null);
+            test.Initialize();
+            test.Shutdown();
+
+            _tweetObservable.OnNext(New.Tweet);
+
+            Assert.Empty(test.Screens);
+        }
     }
 }

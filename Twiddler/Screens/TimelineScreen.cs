@@ -8,6 +8,7 @@ namespace Twiddler.Screens
     {
         private readonly ITimeline _timeline;
         private readonly Func<ITweet, ITweetScreen> _screenFactory;
+        private IDisposable _subscription;
 
         public TimelineScreen(ITimeline timeline, Func<ITweet,ITweetScreen> screenFactory) : base(false)
         {
@@ -19,7 +20,14 @@ namespace Twiddler.Screens
         {
             base.OnInitialize();
 
-            _timeline.Tweets.Subscribe(AddTweetScreen);
+            _subscription = _timeline.Tweets.Subscribe(AddTweetScreen);
+        }
+
+        public override void Shutdown()
+        {
+            _subscription.Dispose();
+
+            base.Shutdown();
         }
 
         public void AddTweetScreen(ITweet tweet)
