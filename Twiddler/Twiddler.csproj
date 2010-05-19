@@ -140,6 +140,7 @@
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Models\Timeline.cs" />
     <Compile Include="Models\Tweet.cs" />
     <Compile Include="NewTweetsEventArgs.cs" />
     <Compile Include="OAuthDialog.xaml.cs">

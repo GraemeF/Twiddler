@@ -1,10 +1,12 @@
 ﻿using System;
+using Caliburn.Core.IoC;
 using Caliburn.PresentationFramework.Screens;
 using Twiddler.Models.Interfaces;
 using Twiddler.Screens.Interfaces;
 
 namespace Twiddler.Screens
 {
+    [PerRequest(typeof (ITimelineScreen))]
     public class TimelineScreen : ScreenConductor<ITweetScreen>.WithCollection.AllScreensActive, ITimelineScreen
     {
         private readonly Func<ITweet, ITweetScreen> _screenFactory;
