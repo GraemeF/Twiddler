@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Moq;
+using Twiddler.Models.Interfaces;
 using Twiddler.Screens;
 using Twiddler.Screens.Interfaces;
 using Xunit;

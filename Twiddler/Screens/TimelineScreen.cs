@@ -1,5 +1,6 @@
 ﻿using System;
 using Caliburn.PresentationFramework.Screens;
+using Twiddler.Models.Interfaces;
 using Twiddler.Screens.Interfaces;
 
 namespace Twiddler.Screens

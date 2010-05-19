@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Twiddler.Screens
+namespace Twiddler.Models.Interfaces
 {
     public interface ITimeline
     {

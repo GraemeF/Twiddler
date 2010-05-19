@@ -1,4 +1,5 @@
-﻿using Twiddler.Screens;
+﻿using Twiddler.Models.Interfaces;
+using Twiddler.Screens;
 
 namespace Twiddler.Models
 {
