@@ -119,6 +119,7 @@
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Models\Tweet.cs" />
     <Compile Include="NewTweetsEventArgs.cs" />
     <Compile Include="OAuthDialog.xaml.cs">
       <DependentUpon>OAuthDialog.xaml</DependentUpon>
@@ -137,6 +138,8 @@
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="Screens\Interfaces\ITweetScreen.cs" />
+    <Compile Include="Screens\ITimeline.cs" />
+    <Compile Include="Screens\ITweet.cs" />
     <Compile Include="Screens\TimelineScreen.cs" />
     <Compile Include="TweetPoller.cs" />
     <Compile Include="TweetSource.cs" />

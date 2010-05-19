@@ -6,17 +6,13 @@ namespace Twiddler.Screens
 {
     public class TimelineScreen : ScreenConductor<ITweetScreen>.WithCollection.AllScreensActive
     {
-        public TimelineScreen() : base(false)
+        private readonly ITimeline _timeline;
+        private readonly Func<ITweet, ITweetScreen> _screenFactory;
+
+        public TimelineScreen(ITimeline timeline, Func<ITweet,ITweetScreen> screenFactory) : base(false)
         {
+            _timeline = timeline;
+            _screenFactory = screenFactory;
         }
-    }
-
-    public interface ITweet
-    {
-    }
-
-    public interface ITimeline
-    {
-        IObservable<ITweet> Tweets { get; }
     }
 }
