@@ -14,5 +14,17 @@ namespace Twiddler.Screens
             _timeline = timeline;
             _screenFactory = screenFactory;
         }
+
+        protected override void OnInitialize()
+        {
+            base.OnInitialize();
+
+            _timeline.Tweets.Subscribe(AddTweetScreen);
+        }
+
+        public void AddTweetScreen(ITweet tweet)
+        {
+            this.OpenScreen(_screenFactory(tweet));
+        }
     }
 }
