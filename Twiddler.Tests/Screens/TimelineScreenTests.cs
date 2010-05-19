@@ -5,7 +5,7 @@ using Twiddler.Screens;
 using Twiddler.Screens.Interfaces;
 using Xunit;
 
-namespace Twiddler.Tests
+namespace Twiddler.Tests.Screens
 {
     public class TimelineScreenTests
     {
