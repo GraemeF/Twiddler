@@ -11,6 +11,11 @@ namespace Twiddler.Tests
         private readonly Mock<ITimeline> _fakeTimeline = new Mock<ITimeline>();
         private readonly Subject<ITweet> _tweetObservable = new Subject<ITweet>();
 
+        public TimelineScreenTests()
+        {
+            _fakeTimeline.Setup(x => x.Tweets).Returns(_tweetObservable);
+        }
+
         [Fact]
         public void GettingScreens_WhenThereAreNoTweets_IsEmpty()
         {
@@ -23,7 +28,6 @@ namespace Twiddler.Tests
         public void GettingScreens_WhenThereIsATweet_ContainsAScreen()
         {
             var mockScreen = new Mock<ITweetScreen>();
-            _fakeTimeline.Setup(x => x.Tweets).Returns(_tweetObservable);
 
             var test = new TimelineScreen(_fakeTimeline.Object, x => mockScreen.Object);
             test.Initialize();
