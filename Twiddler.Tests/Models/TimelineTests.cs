@@ -9,19 +9,37 @@ namespace Twiddler.Tests.Models
 {
     public class TimelineTests
     {
-        [Fact]
-        public void Tweets_WhenPollerPublishesATweet_PublishesATweet()
-        {
-            var stubSource = new Mock<ITweetSource>();
-            var tweets = new Subject<ITweet>();
-            stubSource.Setup(x => x.Tweets).Returns(tweets);
+        readonly Mock<ITweetSource> _stubSource = new Mock<ITweetSource>();
+        readonly Subject<ITweet> _tweets = new Subject<ITweet>();
 
-            var test = new Timeline(stubSource.Object );
+        public TimelineTests()
+        {
+            _stubSource.Setup(x => x.Tweets).Returns(_tweets);
+        }
+
+        [Fact]
+        public void GettingTweets_WhenPollerPublishesATweet_ContainsATweet()
+        {
+            var test = new Timeline(_stubSource.Object );
 
             ITweet tweet = New.Tweet;
-            tweets.OnNext(tweet);
+            _tweets.OnNext(tweet);
 
             Assert.Contains(tweet,test.Tweets);
         }
+
+
+        [Fact]
+        public void Dispose__UnsubscribesFromNewTweets()
+        {
+            var test = new Timeline(_stubSource.Object);
+            test.Dispose();
+
+            ITweet tweet = New.Tweet;
+            _tweets.OnNext(tweet);
+
+            Assert.Empty(test.Tweets);
+        }
+
     }
 }

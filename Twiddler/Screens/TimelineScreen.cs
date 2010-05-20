@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Collections.Specialized;
+using System.Linq;
 using Caliburn.Core.IoC;
 using Caliburn.PresentationFramework.Screens;
 using Twiddler.Models.Interfaces;
@@ -11,7 +14,9 @@ namespace Twiddler.Screens
     {
         private readonly Func<ITweet, ITweetScreen> _screenFactory;
         private readonly ITimeline _timeline;
-        private IDisposable _subscription;
+        private IObservable<ITweet> _tweetAdded;
+        private IObservable<ITweet> _tweetRemoved;
+        private IObservable<IEvent<NotifyCollectionChangedEventArgs>> _tweetsChanged;
 
         public TimelineScreen(ITimeline timeline, Func<ITweet, ITweetScreen> screenFactory) : base(false)
         {
@@ -23,9 +28,14 @@ namespace Twiddler.Screens
 
         public override void Shutdown()
         {
-            _subscription.Dispose();
+            UnsubscribeFromTweets();
 
             base.Shutdown();
+        }
+
+        private void UnsubscribeFromTweets()
+        {
+            throw new NotImplementedException();
         }
 
         #endregion
@@ -34,10 +44,27 @@ namespace Twiddler.Screens
         {
             base.OnInitialize();
 
-            _subscription = _timeline.Tweets.Subscribe(AddTweetScreen);
+            SubscribeToTweets();
         }
 
-        public void AddTweetScreen(ITweet tweet)
+        private void SubscribeToTweets()
+        {
+            _tweetsChanged = Observable.FromEvent(
+                (EventHandler<NotifyCollectionChangedEventArgs> ev)
+                => new NotifyCollectionChangedEventHandler(ev),
+                ev => _timeline.Tweets.CollectionChanged += ev,
+                ev => _timeline.Tweets.CollectionChanged -= ev);
+
+            _tweetAdded = _tweetsChanged.
+                SelectMany(c => c.EventArgs.NewItems.Cast<ITweet>().ToObservable());
+
+            _tweetRemoved = _tweetsChanged.
+                SelectMany(c => c.EventArgs.OldItems.Cast<ITweet>().ToObservable());
+
+            _tweetAdded.Subscribe(AddTweetScreen);
+        }
+
+        private void AddTweetScreen(ITweet tweet)
         {
             this.OpenScreen(_screenFactory(tweet));
         }

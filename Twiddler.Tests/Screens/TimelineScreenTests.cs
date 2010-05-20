@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using Moq;
 using Twiddler.Models.Interfaces;
 using Twiddler.Screens;
@@ -10,11 +11,11 @@ namespace Twiddler.Tests.Screens
     public class TimelineScreenTests
     {
         private readonly Mock<ITimeline> _fakeTimeline = new Mock<ITimeline>();
-        private readonly Subject<ITweet> _tweetObservable = new Subject<ITweet>();
+        private readonly ObservableCollection<ITweet> _tweets = new ObservableCollection<ITweet>();
 
         public TimelineScreenTests()
         {
-            _fakeTimeline.Setup(x => x.Tweets).Returns(_tweetObservable);
+            _fakeTimeline.Setup(x => x.Tweets).Returns(_tweets);
         }
 
         [Fact]
@@ -33,22 +34,10 @@ namespace Twiddler.Tests.Screens
             var test = new TimelineScreen(_fakeTimeline.Object, x => mockScreen.Object);
             test.Initialize();
 
-            _tweetObservable.OnNext(New.Tweet);
+            _tweets.Add(New.Tweet);
 
             Assert.Contains(mockScreen.Object, test.Screens);
             mockScreen.Verify(x => x.Initialize());
-        }
-
-        [Fact]
-        public void GettingScreens_WhenShutdownBeforeTweetArrives_IsEmpty()
-        {
-            var test = new TimelineScreen(_fakeTimeline.Object, null);
-            test.Initialize();
-            test.Shutdown();
-
-            _tweetObservable.OnNext(New.Tweet);
-
-            Assert.Empty(test.Screens);
         }
     }
 }

@@ -6,6 +6,6 @@ namespace Twiddler.Tests
 {
     public class New
     {
-        public static ITweet Tweet { get { return new Tweet(); } }
+        public static ITweet Tweet { get { return new Tweet("Unspecified"); } }
     }
 }
