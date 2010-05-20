@@ -12,13 +12,13 @@ namespace Twiddler.Screens
     [PerRequest(typeof (ITimelineScreen))]
     public class TimelineScreen : ScreenConductor<ITweetScreen>.WithCollection.AllScreensActive, ITimelineScreen
     {
-        private readonly Func<ITweet, ITweetScreen> _screenFactory;
+        private readonly Factories.TweetScreen _screenFactory;
         private readonly ITimeline _timeline;
         private IObservable<ITweet> _tweetAdded;
         private IObservable<ITweet> _tweetRemoved;
         private IObservable<IEvent<NotifyCollectionChangedEventArgs>> _tweetsChanged;
 
-        public TimelineScreen(ITimeline timeline, Func<ITweet, ITweetScreen> screenFactory) : base(false)
+        public TimelineScreen(ITimeline timeline, Factories.TweetScreen screenFactory) : base(false)
         {
             _timeline = timeline;
             _screenFactory = screenFactory;

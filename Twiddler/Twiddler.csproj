@@ -33,6 +33,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Autofac, Version=2.1.12.802, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Library\Caliburn\Bin\NET-3.5\release\Autofac.dll</HintPath>
+    </Reference>
+    <Reference Include="Caliburn.Autofac, Version=2.0.0.48114, Culture=neutral, PublicKeyToken=8e5891231f2ed21f, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Library\Caliburn\Bin\NET-3.5\release\Caliburn.Autofac.dll</HintPath>
+    </Reference>
     <Reference Include="Caliburn.Core, Version=2.0.0.48114, Culture=neutral, PublicKeyToken=8e5891231f2ed21f, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Library\Caliburn\Bin\NET-3.5\release\Caliburn.Core.dll</HintPath>
@@ -119,7 +127,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\Shell.xaml">
+    <Page Include="Views\ShellView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -131,12 +139,14 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Views\Shell.xaml.cs">
-      <DependentUpon>Shell.xaml</DependentUpon>
+    <Compile Include="Views\ShellView.xaml.cs">
+      <DependentUpon>ShellView.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\Interfaces\Factories.cs" />
+    <Compile Include="Screens\Interfaces\TweetScreen.cs" />
     <Compile Include="Services\Interfaces\ITweetSource.cs" />
     <Compile Include="Services\Interfaces\ITweetPoller.cs" />
     <Compile Include="MainWindow.xaml.cs">

@@ -2,6 +2,6 @@
                                       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                                       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                                       xmlns:ApplicationModel="clr-namespace:Caliburn.PresentationFramework.ApplicationModel;assembly=Caliburn.PresentationFramework"
-                                      StartupUri="Views\Shell.xaml">
+                                      StartupUri="Views\ShellView.xaml">
     <Application.Resources></Application.Resources>
 </ApplicationModel:CaliburnApplication>

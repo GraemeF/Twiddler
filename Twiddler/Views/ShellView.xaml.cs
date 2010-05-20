@@ -2,9 +2,9 @@
 
 namespace Twiddler.Views
 {
-    public partial class Shell : Window
+    public partial class ShellView : Window
     {
-        public Shell()
+        public ShellView()
         {
             InitializeComponent();
         }

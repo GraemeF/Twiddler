@@ -1,7 +1,9 @@
-﻿using Twiddler.Models.Interfaces;
+﻿using Caliburn.Core.IoC;
+using Twiddler.Models.Interfaces;
 
 namespace Twiddler.Models
 {
+    [PerRequest(typeof (ITweet))]
     public class Tweet : ITweet
     {
         public Tweet(string status)
