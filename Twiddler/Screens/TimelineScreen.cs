@@ -49,8 +49,8 @@ namespace Twiddler.Screens
 
         private void SubscribeToTweets()
         {
-            _tweetsChanged = Observable.FromEvent(
-                (EventHandler<NotifyCollectionChangedEventArgs> ev)
+            _tweetsChanged = 
+                Observable.FromEvent((EventHandler<NotifyCollectionChangedEventArgs> ev)
                 => new NotifyCollectionChangedEventHandler(ev),
                 ev => _timeline.Tweets.CollectionChanged += ev,
                 ev => _timeline.Tweets.CollectionChanged -= ev);
