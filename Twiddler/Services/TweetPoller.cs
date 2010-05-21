@@ -13,12 +13,14 @@ namespace Twiddler.Services
     [PerRequest(typeof (ITweetPoller))]
     public class TweetPoller : ITweetPoller
     {
+        private readonly ITwitterCredentials _credentials;
         private readonly Factories.Tweet _tweetFactory;
 
         private IFluentTwitter _twitter;
 
-        public TweetPoller(Factories.Tweet tweetFactory)
+        public TweetPoller(ITwitterCredentials credentials, Factories.Tweet tweetFactory)
         {
+            _credentials = credentials;
             _tweetFactory = tweetFactory;
         }
 
@@ -31,6 +33,7 @@ namespace Twiddler.Services
             _twitter =
                 FluentTwitter.
                     CreateRequest().
+                    AuthenticateWith(_credentials.Token, _credentials.TokenSecret).
                     Statuses().
                     OnHomeTimeline().
                     Configuration.

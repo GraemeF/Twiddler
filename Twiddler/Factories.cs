@@ -1,6 +1,7 @@
-﻿using Twiddler.Screens.Interfaces;
+﻿using Twiddler.Models.Interfaces;
+using Twiddler.Screens.Interfaces;
 
-namespace Twiddler.Models.Interfaces
+namespace Twiddler
 {
     public static class Factories
     {

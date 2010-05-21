@@ -149,7 +149,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\Interfaces\Factories.cs" />
+    <Compile Include="Factories.cs" />
+    <Compile Include="Models\TwitterCredentials.cs" />
     <Compile Include="Screens\TweetScreen.cs" />
     <Compile Include="Services\Interfaces\ITweetSource.cs" />
     <Compile Include="Services\Interfaces\ITweetPoller.cs" />
@@ -159,6 +160,7 @@
     <Compile Include="Models\Timeline.cs" />
     <Compile Include="Models\Tweet.cs" />
     <Compile Include="Services\Interfaces\ITwitterClient.cs" />
+    <Compile Include="Models\Interfaces\ITwitterCredentials.cs" />
     <Compile Include="Services\NewTweetsEventArgs.cs" />
     <Compile Include="OAuthDialog.xaml.cs">
       <DependentUpon>OAuthDialog.xaml</DependentUpon>
