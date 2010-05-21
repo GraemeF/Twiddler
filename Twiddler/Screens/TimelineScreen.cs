@@ -35,7 +35,6 @@ namespace Twiddler.Screens
 
         private void UnsubscribeFromTweets()
         {
-            throw new NotImplementedException();
         }
 
         #endregion
