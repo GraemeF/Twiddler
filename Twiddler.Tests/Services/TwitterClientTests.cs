@@ -1,4 +1,7 @@
-﻿using Twiddler.Services;
+﻿using Moq;
+using Twiddler.Models.Interfaces;
+using Twiddler.Services;
+using Twiddler.Services.Interfaces;
 using Xunit;
 
 namespace Twiddler.Tests.Services
@@ -6,9 +9,11 @@ namespace Twiddler.Tests.Services
     public class TwitterClientTests
     {
         [Fact]
-        public void GettingAuthorization__ReturnsAuthorizationFromSettings()
+        public void GettingAuthorization_Initially_ReturnsUnknown()
         {
-            var test = new TwitterClient();
+            var test = new TwitterClient(new Mock<ITwitterCredentials>().Object);
+
+            Assert.Equal(AuthorizationStatus.Unknown, test.AuthorizationStatus);
         }
     }
 }
