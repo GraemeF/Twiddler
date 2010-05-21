@@ -1,31 +1,19 @@
-﻿using System;
-using Caliburn.Core.IoC;
-using Twiddler.Models.Interfaces;
-using Twiddler.Properties;
+﻿using Twiddler.Models.Interfaces;
 
 namespace Twiddler.Models
 {
-    [Singleton(typeof (ITwitterCredentials))]
     public class TwitterCredentials : ITwitterCredentials
     {
-        public TwitterCredentials()
+        public TwitterCredentials(string accessToken, string accessTokenSecret)
         {
-            Settings.Default.SettingsSaving += (sender, args) => CredentialsChanged(this, EventArgs.Empty);
+            TokenSecret = accessTokenSecret;
+            Token = accessToken;
         }
 
         #region ITwitterCredentials Members
 
-        public string TokenSecret
-        {
-            get { return Settings.Default.AccessTokenSecret; }
-        }
-
-        public string Token
-        {
-            get { return Settings.Default.AccessToken; }
-        }
-
-        public event EventHandler<EventArgs> CredentialsChanged;
+        public string TokenSecret { get; private set; }
+        public string Token { get; private set; }
 
         #endregion
     }

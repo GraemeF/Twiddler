@@ -5,6 +5,7 @@ namespace Twiddler.Services.Interfaces
         Unknown,
         Athorizing,
         Authorized,
-        NotAuthorized
+        NotAuthorized,
+        InvalidApplication
     }
 }
