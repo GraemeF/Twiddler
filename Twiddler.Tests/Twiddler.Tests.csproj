@@ -86,6 +86,7 @@
     <Compile Include="Screens\ShellScreenTests.cs" />
     <Compile Include="Screens\TimelineScreenTests.cs" />
     <Compile Include="Screens\TweetScreenTests.cs" />
+    <Compile Include="Services\TwitterClientTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Twiddler\Twiddler.csproj">

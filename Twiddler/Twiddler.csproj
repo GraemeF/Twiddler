@@ -158,6 +158,7 @@
     </Compile>
     <Compile Include="Models\Timeline.cs" />
     <Compile Include="Models\Tweet.cs" />
+    <Compile Include="Services\Interfaces\ITwitterClient.cs" />
     <Compile Include="Services\NewTweetsEventArgs.cs" />
     <Compile Include="OAuthDialog.xaml.cs">
       <DependentUpon>OAuthDialog.xaml</DependentUpon>
@@ -184,6 +185,7 @@
     <Compile Include="Screens\TimelineScreen.cs" />
     <Compile Include="Services\TweetPoller.cs" />
     <Compile Include="Services\TweetSource.cs" />
+    <Compile Include="Services\TwitterClient.cs" />
     <Compile Include="Views\TimelineView.xaml.cs">
       <DependentUpon>TimelineView.xaml</DependentUpon>
     </Compile>
