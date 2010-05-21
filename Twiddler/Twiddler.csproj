@@ -135,6 +135,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\TweetView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -146,7 +150,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\Interfaces\Factories.cs" />
-    <Compile Include="Screens\Interfaces\TweetScreen.cs" />
+    <Compile Include="Screens\TweetScreen.cs" />
     <Compile Include="Services\Interfaces\ITweetSource.cs" />
     <Compile Include="Services\Interfaces\ITweetPoller.cs" />
     <Compile Include="MainWindow.xaml.cs">
@@ -182,6 +186,9 @@
     <Compile Include="Services\TweetSource.cs" />
     <Compile Include="Views\TimelineView.xaml.cs">
       <DependentUpon>TimelineView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\TweetView.xaml.cs">
+      <DependentUpon>TweetView.xaml</DependentUpon>
     </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

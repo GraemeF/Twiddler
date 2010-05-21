@@ -1,4 +1,4 @@
-﻿using Twiddler.Screens.Interfaces;
+﻿using Twiddler.Screens;
 using Xunit;
 
 namespace Twiddler.Tests.Screens
