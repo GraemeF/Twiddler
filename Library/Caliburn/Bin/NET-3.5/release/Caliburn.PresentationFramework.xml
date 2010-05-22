@@ -2340,12 +2340,6 @@
             <typeparam name="T"></typeparam>
             <returns></returns>
         </member>
-        <member name="M:Caliburn.PresentationFramework.Configuration.IPresentationFrameworkServicesDescription.Validator``1">
-            <summary>
-            Customizes the validator used by Caliburn.
-            </summary>
-            <typeparam name="T">The validator type.</typeparam>
-        </member>
         <member name="M:Caliburn.PresentationFramework.Configuration.IPresentationFrameworkServicesDescription.WindowManager``1">
             <summary>
             Customizes the window manager used by Caliburn.
@@ -2512,7 +2506,7 @@
             A base class for binding conventions.
             </summary>
         </member>
-        <member name="M:Caliburn.PresentationFramework.Conventions.ViewConventionBase.Initialize(Caliburn.PresentationFramework.RoutedMessaging.IMessageBinder,Caliburn.PresentationFramework.ViewModels.IViewModelDescriptionFactory,Caliburn.PresentationFramework.ViewModels.IValidator)">
+        <member name="M:Caliburn.PresentationFramework.Conventions.ViewConventionBase.Initialize(Caliburn.PresentationFramework.RoutedMessaging.IMessageBinder,Caliburn.PresentationFramework.ViewModels.IViewModelDescriptionFactory,Caliburn.Core.Validation.IValidator)">
             <summary>
             Initializes the specified message binder.
             </summary>
@@ -6376,116 +6370,6 @@
             <summary>
             Initializes a new instance of the <see cref="T:Caliburn.PresentationFramework.ViewModels.BindableEnumCollection`1"/> class.
             </summary>
-        </member>
-        <member name="T:Caliburn.PresentationFramework.ViewModels.DefaultValidationError">
-            <summary>
-            The default implementation of <see cref="T:Caliburn.PresentationFramework.ViewModels.IValidationError"/>.
-            </summary>
-        </member>
-        <member name="T:Caliburn.PresentationFramework.ViewModels.IValidationError">
-            <summary>
-            Represents a validation error.
-            </summary>
-        </member>
-        <member name="P:Caliburn.PresentationFramework.ViewModels.IValidationError.Instance">
-            <summary>
-            Gets the invalid instance.
-            </summary>
-            <value>The instance.</value>
-        </member>
-        <member name="P:Caliburn.PresentationFramework.ViewModels.IValidationError.PropertyName">
-            <summary>
-            Gets the name of the invalid property.
-            </summary>
-            <value>The name of the property.</value>
-        </member>
-        <member name="P:Caliburn.PresentationFramework.ViewModels.IValidationError.Message">
-            <summary>
-            Gets the error message.
-            </summary>
-            <value>The message.</value>
-        </member>
-        <member name="M:Caliburn.PresentationFramework.ViewModels.DefaultValidationError.#ctor(System.Object,System.String,System.String)">
-            <summary>
-            Initializes a new instance of the <see cref="T:Caliburn.PresentationFramework.ViewModels.DefaultValidationError"/> class.
-            </summary>
-            <param name="instance">The instance.</param>
-            <param name="propertyName">Name of the property.</param>
-            <param name="message">The message.</param>
-        </member>
-        <member name="P:Caliburn.PresentationFramework.ViewModels.DefaultValidationError.Instance">
-            <summary>
-            Gets the invalid instance.
-            </summary>
-            <value>The instance.</value>
-        </member>
-        <member name="P:Caliburn.PresentationFramework.ViewModels.DefaultValidationError.PropertyName">
-            <summary>
-            Gets the name of the invalid property.
-            </summary>
-            <value>The name of the property.</value>
-        </member>
-        <member name="P:Caliburn.PresentationFramework.ViewModels.DefaultValidationError.Message">
-            <summary>
-            Gets the error message.
-            </summary>
-            <value>The message.</value>
-        </member>
-        <member name="T:Caliburn.PresentationFramework.ViewModels.DefaultValidator">
-            <summary>
-            The default implemenation of <see cref="T:Caliburn.PresentationFramework.ViewModels.IValidator"/>.
-            </summary>
-        </member>
-        <member name="T:Caliburn.PresentationFramework.ViewModels.IValidator">
-            <summary>
-            A service that validates the state of classes and their properties.
-            </summary>
-        </member>
-        <member name="M:Caliburn.PresentationFramework.ViewModels.IValidator.ShouldValidate(System.Reflection.PropertyInfo)">
-            <summary>
-            Inidcates whether the specified property should be validated.
-            </summary>
-            <param name="property">The property.</param>
-            <returns>true if should be validated; otherwise false</returns>
-        </member>
-        <member name="M:Caliburn.PresentationFramework.ViewModels.IValidator.Validate(System.Object)">
-            <summary>
-            Validates the specified instance.
-            </summary>
-            <param name="instance">The instance.</param>
-            <returns>The validation errors.</returns>
-        </member>
-        <member name="M:Caliburn.PresentationFramework.ViewModels.IValidator.Validate(System.Object,System.String)">
-            <summary>
-            Validates the specified property on the instance.
-            </summary>
-            <param name="instance">The instance.</param>
-            <param name="propertyName">Name of the property.</param>
-            <returns>The validation errors.</returns>
-        </member>
-        <member name="M:Caliburn.PresentationFramework.ViewModels.DefaultValidator.ShouldValidate(System.Reflection.PropertyInfo)">
-            <summary>
-            Indicates whether the specified property should be validated.
-            </summary>
-            <param name="property">The property.</param>
-            <returns>
-            true if should be validated; otherwise false
-            </returns>
-        </member>
-        <member name="M:Caliburn.PresentationFramework.ViewModels.DefaultValidator.Validate(System.Object)">
-            <summary>
-            Validates the specified instance.
-            </summary>
-            <param name="instance">The instance.</param>
-            <returns>The validation errors.</returns>
-        </member>
-        <member name="M:Caliburn.PresentationFramework.ViewModels.DefaultValidator.Validate(System.Object,System.String)">
-            <summary>
-            Validates the specified property on the instance.
-            </summary>
-            <param name="instance">The instance.</param>
-            <param name="propertyName">Name of the property.</param>
-            <returns>The validation errors.</returns>
         </member>
         <member name="T:Caliburn.PresentationFramework.ViewModels.DefaultViewModelBinder">
             <summary>

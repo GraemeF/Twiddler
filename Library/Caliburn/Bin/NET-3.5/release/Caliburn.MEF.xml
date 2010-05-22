@@ -200,6 +200,13 @@
             </summary>
             <value>The container.</value>
         </member>
+        <member name="P:Caliburn.MEF.MEFAdapter.BatchStrategy">
+            <summary>
+            Gets or sets the batch strategy used when registering components. Defaults to <see cref="T:Caliburn.MEF.CompositionBatchStrategy"/>.
+            </summary>
+            <remarks>A call to <see cref="M:Caliburn.MEF.MEFAdapter.WithProxyFactory``1"/> sets this to <see cref="T:Caliburn.MEF.ProxiedCompositionBatchStrategy"/></remarks>
+            <value>The batch strategy.</value>
+        </member>
         <member name="T:Caliburn.MEF.ProxyCatalog">
             <summary>
             A <see cref="T:System.ComponentModel.Composition.Primitives.ComposablePartCatalog"/> which adds proxy capabilities.

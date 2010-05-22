@@ -231,14 +231,6 @@
             <param name="implementation">The implementation.</param>
             <returns>The registration.</returns>
         </member>
-        <member name="M:Caliburn.Core.Configuration.ModuleBase.PerRequest(System.Type,System.Type)">
-            <summary>
-            Creates a per request registration.
-            </summary>
-            <param name="service">The service.</param>
-            <param name="implementation">The implementation.</param>
-            <returns>The registration.</returns>
-        </member>
         <member name="M:Caliburn.Core.Configuration.ModuleBase.Singleton``2">
             <summary>
             Creates a singleton registration.
@@ -265,6 +257,14 @@
             <param name="key">The key.</param>
             <returns>The registration.</returns>
         </member>
+        <member name="M:Caliburn.Core.Configuration.ModuleBase.PerRequest(System.Type,System.Type)">
+            <summary>
+            Creates a per request registration.
+            </summary>
+            <param name="service">The service.</param>
+            <param name="implementation">The implementation.</param>
+            <returns>The registration.</returns>
+        </member>
         <member name="M:Caliburn.Core.Configuration.ModuleBase.PerRequest``2">
             <summary>
             Creates a per request registration.
@@ -288,6 +288,40 @@
             </summary>
             <param name="service">The service.</param>
             <param name="implementation">The implementation.</param>
+            <param name="key">The key.</param>
+            <returns>The registration.</returns>
+        </member>
+        <member name="M:Caliburn.Core.Configuration.ModuleBase.Instance(System.Type,System.Object)">
+            <summary>
+            Creates an instance registration.
+            </summary>
+            <param name="service">The service.</param>
+            <param name="instance">The instance.</param>
+            <returns>The registration.</returns>
+        </member>
+        <member name="M:Caliburn.Core.Configuration.ModuleBase.Instance``1(``0)">
+            <summary>
+            Creates an instance registration.
+            </summary>
+            <typeparam name="TService">The type of the service.</typeparam>
+            <param name="instance">The instance.</param>
+            <returns>The registration.</returns>
+        </member>
+        <member name="M:Caliburn.Core.Configuration.ModuleBase.Instance(System.Type,System.Object,System.String)">
+            <summary>
+            Creates an instance registration.
+            </summary>
+            <param name="service">The service.</param>
+            <param name="instance">The instance.</param>
+            <param name="key">The key.</param>
+            <returns>The registration.</returns>
+        </member>
+        <member name="M:Caliburn.Core.Configuration.ModuleBase.Instance``1(``0,System.String)">
+            <summary>
+            Creates an instance registration.
+            </summary>
+            <typeparam name="TService">The type of the service.</typeparam>
+            <param name="instance">The instance.</param>
             <param name="key">The key.</param>
             <returns>The registration.</returns>
         </member>
@@ -397,6 +431,12 @@
             Usings the assembly source.
             </summary>
             <typeparam name="T"></typeparam>
+        </member>
+        <member name="M:Caliburn.Core.Configuration.ICoreServicesDescription.Validator``1">
+            <summary>
+            Customizes the validator used by Caliburn.
+            </summary>
+            <typeparam name="T">The validator type.</typeparam>
         </member>
         <member name="T:Caliburn.Core.Configuration.IServiceConfiguration">
             <summary>
@@ -1176,6 +1216,110 @@
             </summary>
             <param name="type">The type.</param>
             <returns></returns>
+        </member>
+        <member name="T:Caliburn.Core.Validation.DefaultError">
+            <summary>
+            The default implementation of <see cref="T:Caliburn.Core.Validation.IError"/>.
+            </summary>
+        </member>
+        <member name="T:Caliburn.Core.Validation.IError">
+            <summary>
+            Represents a validation error.
+            </summary>
+        </member>
+        <member name="P:Caliburn.Core.Validation.IError.Key">
+            <summary>
+            Gets the name of the invalid property.
+            </summary>
+            <value>The name of the property.</value>
+        </member>
+        <member name="P:Caliburn.Core.Validation.IError.Message">
+            <summary>
+            Gets the error message.
+            </summary>
+            <value>The message.</value>
+        </member>
+        <member name="M:Caliburn.Core.Validation.DefaultError.#ctor(System.Object,System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Caliburn.Core.Validation.DefaultError"/> class.
+            </summary>
+            <param name="instance">The instance.</param>
+            <param name="propertyName">Name of the property.</param>
+            <param name="message">The message.</param>
+        </member>
+        <member name="P:Caliburn.Core.Validation.DefaultError.Instance">
+            <summary>
+            Gets the invalid instance.
+            </summary>
+            <value>The instance.</value>
+        </member>
+        <member name="P:Caliburn.Core.Validation.DefaultError.Key">
+            <summary>
+            Gets the name of the invalid property.
+            </summary>
+            <value>The name of the property.</value>
+        </member>
+        <member name="P:Caliburn.Core.Validation.DefaultError.Message">
+            <summary>
+            Gets the error message.
+            </summary>
+            <value>The message.</value>
+        </member>
+        <member name="T:Caliburn.Core.Validation.DefaultValidator">
+            <summary>
+            The default implemenation of <see cref="T:Caliburn.Core.Validation.IValidator"/>.
+            </summary>
+        </member>
+        <member name="T:Caliburn.Core.Validation.IValidator">
+            <summary>
+            A service that validates the state of classes and their properties.
+            </summary>
+        </member>
+        <member name="M:Caliburn.Core.Validation.IValidator.ShouldValidate(System.Reflection.PropertyInfo)">
+            <summary>
+            Inidcates whether the specified property should be validated.
+            </summary>
+            <param name="property">The property.</param>
+            <returns>true if should be validated; otherwise false</returns>
+        </member>
+        <member name="M:Caliburn.Core.Validation.IValidator.Validate(System.Object)">
+            <summary>
+            Validates the specified instance.
+            </summary>
+            <param name="instance">The instance.</param>
+            <returns>The validation errors.</returns>
+        </member>
+        <member name="M:Caliburn.Core.Validation.IValidator.Validate(System.Object,System.String)">
+            <summary>
+            Validates the specified property on the instance.
+            </summary>
+            <param name="instance">The instance.</param>
+            <param name="propertyName">Name of the property.</param>
+            <returns>The validation errors.</returns>
+        </member>
+        <member name="M:Caliburn.Core.Validation.DefaultValidator.ShouldValidate(System.Reflection.PropertyInfo)">
+            <summary>
+            Indicates whether the specified property should be validated.
+            </summary>
+            <param name="property">The property.</param>
+            <returns>
+            true if should be validated; otherwise false
+            </returns>
+        </member>
+        <member name="M:Caliburn.Core.Validation.DefaultValidator.Validate(System.Object)">
+            <summary>
+            Validates the specified instance.
+            </summary>
+            <param name="instance">The instance.</param>
+            <returns>The validation errors.</returns>
+        </member>
+        <member name="M:Caliburn.Core.Validation.DefaultValidator.Validate(System.Object,System.String)">
+            <summary>
+            Validates the specified property on the instance.
+            </summary>
+            <param name="instance">The instance.</param>
+            <param name="propertyName">Name of the property.</param>
+            <returns>The validation errors.</returns>
         </member>
         <member name="T:Caliburn.Core.CaliburnException">
             <summary>

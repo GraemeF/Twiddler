@@ -145,7 +145,7 @@
             A hash code for the current <see cref="T:System.Object"/>.
             </returns>
         </member>
-        <member name="M:Caliburn.DynamicProxy.Interceptors.DataErrorInfoInterceptor.#ctor(Caliburn.PresentationFramework.ViewModels.IValidator)">
+        <member name="M:Caliburn.DynamicProxy.Interceptors.DataErrorInfoInterceptor.#ctor(Caliburn.Core.Validation.IValidator)">
             <summary>
             Initializes a new instance of the <see cref="T:Caliburn.DynamicProxy.Interceptors.DataErrorInfoInterceptor"/> class.
             </summary>

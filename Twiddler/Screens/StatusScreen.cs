@@ -1,4 +1,3 @@
-using System.Windows.Input;
 using Caliburn.Core.IoC;
 using Caliburn.PresentationFramework.Screens;
 using MvvmFoundation.Wpf;
