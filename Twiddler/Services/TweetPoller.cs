@@ -14,9 +14,8 @@ namespace Twiddler.Services
     public class TweetPoller : ITweetPoller
     {
         private readonly ITwitterClient _client;
-        private IFluentTwitter _request;
         private readonly Factories.Tweet _tweetFactory;
-        private IAsyncResult _result;
+        private IFluentTwitter _request;
         private PropertyObserver<ITwitterClient> _statusObserver;
 
         public TweetPoller(ITwitterClient client, Factories.Tweet tweetFactory)
@@ -28,20 +27,6 @@ namespace Twiddler.Services
                 RegisterHandler(x => x.AuthorizationStatus,
                                 y => PollIfAuthorized());
             PollIfAuthorized();
-        }
-
-        private void CreateRequest()
-        {
-            _request =
-                _client.
-                    MakeRequestFor().
-                    Statuses().
-                    OnPublicTimeline().
-                    Configuration.
-                    UseRateLimiting(20.Percent()).
-                    RepeatEvery(25.Seconds());
-
-            _request.CallbackTo(GotTweets);
         }
 
         #region ITweetPoller Members
@@ -56,6 +41,22 @@ namespace Twiddler.Services
 
         #endregion
 
+        private IFluentTwitter CreateRequest()
+        {
+            //IFluentTwitter request = _requestFactory(_client);
+            IFluentTwitter request = _client.
+                MakeRequestFor().
+                Statuses().
+                OnPublicTimeline().
+                Configuration.
+                UseRateLimiting(20.Percent()).
+                RepeatEvery(25.Seconds());
+
+            request.CallbackTo(GotTweets);
+
+            return request;
+        }
+
         private void PollIfAuthorized()
         {
             if (_client.AuthorizationStatus == AuthorizationStatus.Authorized)
@@ -66,10 +67,10 @@ namespace Twiddler.Services
 
         private void EnsureNotPolling()
         {
-            if (_request!= null)
+            if (_request != null)
             {
                 _request.Cancel();
-                _request= null;
+                _request = null;
             }
         }
 
@@ -77,7 +78,7 @@ namespace Twiddler.Services
         {
             if (_request == null)
             {
-                CreateRequest();
+                _request = CreateRequest();
                 _request.BeginRequest();
             }
         }

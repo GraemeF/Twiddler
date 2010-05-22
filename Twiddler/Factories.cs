@@ -1,5 +1,7 @@
-﻿using Twiddler.Models.Interfaces;
+﻿using TweetSharp.Twitter.Fluent;
+using Twiddler.Models.Interfaces;
 using Twiddler.Screens.Interfaces;
+using Twiddler.Services.Interfaces;
 
 namespace Twiddler
 {
@@ -7,5 +9,6 @@ namespace Twiddler
     {
         public delegate ITweet Tweet(string status);
         public delegate ITweetScreen TweetScreen(ITweet tweet);
+        public delegate IFluentTwitter Request(ITwitterClient client);
     }
 }
