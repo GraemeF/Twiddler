@@ -4,5 +4,6 @@
     {
         string TokenSecret { get; }
         string Token { get; }
+        bool AreValid { get; }
     }
 }

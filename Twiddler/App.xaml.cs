@@ -2,8 +2,6 @@
 using Caliburn.Autofac;
 using Caliburn.PresentationFramework.ApplicationModel;
 using Microsoft.Practices.ServiceLocation;
-using TweetSharp.Twitter.Model;
-using Twiddler.Models.Interfaces;
 using Twiddler.Screens.Interfaces;
 
 namespace Twiddler

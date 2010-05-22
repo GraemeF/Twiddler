@@ -12,11 +12,12 @@ namespace Twiddler.Services
     [Singleton(typeof (ITwitterClient))]
     public class TwitterClient : ITwitterClient
     {
-        private readonly ITwitterCredentials _credentials;
+        private readonly ICredentialsStore _credentialsStore;
+        private ITwitterCredentials _credentials;
 
-        public TwitterClient(ITwitterCredentials credentials)
+        public TwitterClient(ICredentialsStore credentialsStore)
         {
-            _credentials = credentials;
+            _credentialsStore = credentialsStore;
         }
 
         #region ITwitterClient Members
@@ -37,6 +38,8 @@ namespace Twiddler.Services
 
         public void CheckAuthorization()
         {
+            _credentials = _credentialsStore.Load();
+
             if (string.IsNullOrEmpty(Settings.Default.ConsumerKey) ||
                 string.IsNullOrEmpty(Settings.Default.ConsumerSecret))
                 AuthorizationStatus = AuthorizationStatus.InvalidApplication;
@@ -46,11 +49,10 @@ namespace Twiddler.Services
 
         private void CheckCredentials()
         {
-            if (string.IsNullOrEmpty(Settings.Default.AccessToken) ||
-                string.IsNullOrEmpty(Settings.Default.AccessTokenSecret))
-                AuthorizationStatus = AuthorizationStatus.NotAuthorized;
-            else
+            if (_credentials.AreValid)
                 VerifyCredentialsWithTwitter();
+            else
+                AuthorizationStatus = AuthorizationStatus.NotAuthorized;
         }
 
         private void VerifyCredentialsWithTwitter()
@@ -61,7 +63,7 @@ namespace Twiddler.Services
                 FluentTwitter.
                     CreateRequest().
                     AuthenticateWith(Settings.Default.ConsumerKey, Settings.Default.ConsumerSecret,
-                                     Settings.Default.AccessToken, Settings.Default.AccessTokenSecret).
+                                     _credentials.Token, _credentials.TokenSecret).
                     Account().
                     VerifyCredentials();
 

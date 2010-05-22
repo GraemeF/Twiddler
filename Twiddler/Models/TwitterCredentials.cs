@@ -15,6 +15,15 @@ namespace Twiddler.Models
         public string TokenSecret { get; private set; }
         public string Token { get; private set; }
 
+        public bool AreValid
+        {
+            get
+            {
+                return !(string.IsNullOrEmpty(Token) ||
+                         string.IsNullOrEmpty(TokenSecret));
+            }
+        }
+
         #endregion
     }
 }
