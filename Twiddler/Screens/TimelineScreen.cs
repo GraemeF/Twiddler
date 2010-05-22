@@ -33,11 +33,11 @@ namespace Twiddler.Screens
             base.Shutdown();
         }
 
+        #endregion
+
         private void UnsubscribeFromTweets()
         {
         }
-
-        #endregion
 
         protected override void OnInitialize()
         {
@@ -48,11 +48,11 @@ namespace Twiddler.Screens
 
         private void SubscribeToTweets()
         {
-            _tweetsChanged = 
+            _tweetsChanged =
                 Observable.FromEvent((EventHandler<NotifyCollectionChangedEventArgs> ev)
-                => new NotifyCollectionChangedEventHandler(ev),
-                ev => _timeline.Tweets.CollectionChanged += ev,
-                ev => _timeline.Tweets.CollectionChanged -= ev);
+                                     => new NotifyCollectionChangedEventHandler(ev),
+                                     ev => _timeline.Tweets.CollectionChanged += ev,
+                                     ev => _timeline.Tweets.CollectionChanged -= ev);
 
             _tweetAdded = _tweetsChanged.
                 SelectMany(c => c.EventArgs.NewItems.Cast<ITweet>().ToObservable());

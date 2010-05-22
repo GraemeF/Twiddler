@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using Caliburn.Core.IoC;
+using MvvmFoundation.Wpf;
 using TweetSharp.Extensions;
 using TweetSharp.Twitter.Extensions;
 using TweetSharp.Twitter.Fluent;
@@ -13,40 +14,39 @@ namespace Twiddler.Services
     public class TweetPoller : ITweetPoller
     {
         private readonly ITwitterClient _client;
+        private IFluentTwitter _request;
         private readonly Factories.Tweet _tweetFactory;
-
-        private IFluentTwitter _twitter;
+        private IAsyncResult _result;
+        private PropertyObserver<ITwitterClient> _statusObserver;
 
         public TweetPoller(ITwitterClient client, Factories.Tweet tweetFactory)
         {
             _client = client;
             _tweetFactory = tweetFactory;
+
+            _statusObserver = new PropertyObserver<ITwitterClient>(_client).
+                RegisterHandler(x => x.AuthorizationStatus,
+                                y => PollIfAuthorized());
+            PollIfAuthorized();
+        }
+
+        private void CreateRequest()
+        {
+            _request =
+                _client.
+                    MakeRequestFor().
+                    Statuses().
+                    OnPublicTimeline().
+                    Configuration.
+                    UseRateLimiting(20.Percent()).
+                    RepeatEvery(25.Seconds());
+
+            _request.CallbackTo(GotTweets);
         }
 
         #region ITweetPoller Members
 
         public event EventHandler<NewTweetsEventArgs> NewTweets = delegate { };
-
-        public void Start()
-        {
-            _twitter =
-                _client.
-                    MakeRequestFor().
-                    Statuses().
-                    OnHomeTimeline().
-                    Configuration.
-                    UseRateLimiting(20.Percent()).
-                    RepeatEvery(25.Seconds());
-
-            _twitter.CallbackTo(GotTweets);
-
-            _twitter.BeginRequest();
-        }
-
-        public void Stop()
-        {
-            _twitter.Cancel();
-        }
 
         public void Dispose()
         {
@@ -56,6 +56,32 @@ namespace Twiddler.Services
 
         #endregion
 
+        private void PollIfAuthorized()
+        {
+            if (_client.AuthorizationStatus == AuthorizationStatus.Authorized)
+                EnsurePolling();
+            else
+                EnsureNotPolling();
+        }
+
+        private void EnsureNotPolling()
+        {
+            if (_request!= null)
+            {
+                _request.Cancel();
+                _request= null;
+            }
+        }
+
+        private void EnsurePolling()
+        {
+            if (_request == null)
+            {
+                CreateRequest();
+                _request.BeginRequest();
+            }
+        }
+
         ~TweetPoller()
         {
             Dispose(false);
@@ -64,7 +90,7 @@ namespace Twiddler.Services
         protected virtual void Dispose(bool disposing)
         {
             if (disposing)
-                Stop();
+                EnsureNotPolling();
         }
 
         private void GotTweets(object sender, TwitterResult result, object userstate)

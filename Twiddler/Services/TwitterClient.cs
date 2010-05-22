@@ -41,7 +41,8 @@ namespace Twiddler.Services
             return
                 FluentTwitter.
                     CreateRequest().
-                    AuthenticateWith(_credentials.Token, _credentials.TokenSecret);
+                    AuthenticateWith(_credentials.ConsumerKey, _credentials.ConsumerSecret,
+                                     _credentials.Token, _credentials.TokenSecret);
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

@@ -13,7 +13,8 @@ namespace Twiddler.Services
 
         public ITwitterCredentials Load()
         {
-            return new TwitterCredentials(Settings.Default.AccessToken, Settings.Default.AccessTokenSecret);
+            return new TwitterCredentials(Settings.Default.ConsumerKey, Settings.Default.ConsumerSecret,
+                                          Settings.Default.AccessToken, Settings.Default.AccessTokenSecret);
         }
 
         public void Save(ITwitterCredentials credentials)
