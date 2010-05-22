@@ -34,6 +34,8 @@ namespace Twiddler.Screens
             _observer = new PropertyObserver<ITwitterClient>(_client).
                 RegisterHandler(x => x.AuthorizationStatus,
                                 y => NotifyOfPropertyChange(() => Authorization));
+
+            _client.CheckAuthorization();
         }
     }
 }

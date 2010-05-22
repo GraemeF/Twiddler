@@ -3,9 +3,10 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:cal="clr-namespace:Caliburn.PresentationFramework.Views;assembly=Caliburn.PresentationFramework"
         Title="Twiddler"
-        Height="300"
-        Width="300">
-    <Grid>
+        MinHeight="300"
+        MinWidth="300">
+    <StackPanel Orientation="Vertical">
+        <ContentControl cal:View.Model="{Binding Status}" />
         <ContentControl cal:View.Model="{Binding Timeline}" />
-    </Grid>
+    </StackPanel>
 </Window>
