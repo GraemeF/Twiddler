@@ -1,5 +1,4 @@
 ﻿using Moq;
-using Twiddler.Models.Interfaces;
 using Twiddler.Services;
 using Twiddler.Services.Interfaces;
 using Xunit;
@@ -11,7 +10,7 @@ namespace Twiddler.Tests.Services
         [Fact]
         public void GettingAuthorization_Initially_ReturnsUnknown()
         {
-            var test = new TwitterClient(new Mock<ITwitterCredentials>().Object);
+            var test = new TwitterClient(new Mock<ICredentialsStore>().Object);
 
             Assert.Equal(AuthorizationStatus.Unknown, test.AuthorizationStatus);
         }

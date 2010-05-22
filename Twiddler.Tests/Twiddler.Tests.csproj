@@ -43,6 +43,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Library\Moq\Moq.dll</HintPath>
     </Reference>
+    <Reference Include="PresentationCore">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -84,6 +87,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Commands\AuthorizeCommandTests.cs" />
     <Compile Include="Models\TimelineTests.cs" />
     <Compile Include="New.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
