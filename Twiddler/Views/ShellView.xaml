@@ -5,8 +5,9 @@
         Title="Twiddler"
         MinHeight="300"
         MinWidth="300">
-    <StackPanel Orientation="Vertical">
-        <ContentControl cal:View.Model="{Binding Status}" />
+    <DockPanel>
+        <ContentControl cal:View.Model="{Binding Status}"
+                        DockPanel.Dock="Top" />
         <ContentControl cal:View.Model="{Binding Timeline}" />
-    </StackPanel>
+    </DockPanel>
 </Window>
