@@ -39,51 +39,49 @@ namespace Twiddler.Services
         {
             var dlg = new OAuthDialog();
             bool? result = dlg.ShowDialog();
+
             if (result.HasValue == result.Value)
-            {
-                if (VerifyOAuthCredentials())
-                    AuthorizationStatus = AuthorizationStatus.Authorized;
-            }
+                VerifyCredentialsWithTwitter();
             else
                 AuthorizationStatus = AuthorizationStatus.NotAuthorized;
         }
 
-        private bool CheckHasAuthorization()
+        private void CheckAuthorization()
         {
-            bool authorized = false;
-            if (!string.IsNullOrEmpty(Settings.Default.AccessToken)
-                && !string.IsNullOrEmpty(Settings.Default.AccessTokenSecret))
-                authorized = VerifyOAuthCredentials();
+            if (string.IsNullOrEmpty(Settings.Default.ConsumerKey) ||
+                string.IsNullOrEmpty(Settings.Default.ConsumerSecret))
+                AuthorizationStatus = AuthorizationStatus.InvalidApplication;
             else
-                AuthorizationStatus = AuthorizationStatus.NotAuthorized;
-            return authorized;
+                CheckCredentials();
         }
 
-        private static bool VerifyOAuthCredentials()
+        private void CheckCredentials()
         {
-            bool authorized = false;
-            ITwitterAccountVerifyCredentials twitter = FluentTwitter.CreateRequest()
-                .AuthenticateWith(Settings.Default.ConsumerKey, Settings.Default.ConsumerSecret,
-                                  Settings.Default.AccessToken, Settings.Default.AccessTokenSecret)
-                .Account().VerifyCredentials();
+            if (string.IsNullOrEmpty(Settings.Default.AccessToken) ||
+                string.IsNullOrEmpty(Settings.Default.AccessTokenSecret))
+                AuthorizationStatus = AuthorizationStatus.NotAuthorized;
+            else
+                VerifyCredentialsWithTwitter();
+        }
+
+        private void VerifyCredentialsWithTwitter()
+        {
+            AuthorizationStatus = AuthorizationStatus.Verifying;
+
+            ITwitterAccountVerifyCredentials twitter =
+                FluentTwitter.
+                    CreateRequest().
+                    AuthenticateWith(Settings.Default.ConsumerKey, Settings.Default.ConsumerSecret,
+                                     Settings.Default.AccessToken, Settings.Default.AccessTokenSecret).
+                    Account().
+                    VerifyCredentials();
+
             TwitterResult response = twitter.Request();
             TwitterUser profile = response.AsUser();
-            if (profile != null)
-                authorized = true;
 
-            return authorized;
-        }
-
-        private void CheckAuth()
-        {
-            if (string.IsNullOrEmpty(Settings.Default.ConsumerKey)
-                || string.IsNullOrEmpty(Settings.Default.ConsumerSecret))
-                AuthorizationStatus = AuthorizationStatus.InvalidApplication;
-
-            if (!CheckHasAuthorization())
-                PerformOAuthAuthorization();
-            else
-                AuthorizationStatus = AuthorizationStatus.Authorized;
+            AuthorizationStatus = profile != null
+                                      ? AuthorizationStatus.Authorized
+                                      : AuthorizationStatus.NotAuthorized;
         }
     }
 }
