@@ -43,7 +43,7 @@ namespace Twiddler.Services
 
         private IFluentTwitter CreateRequest()
         {
-            //IFluentTwitter request = _requestFactory(_client);
+            //IFluentTwitter request = _requestFactory(Client);
             IFluentTwitter request = _client.
                 MakeRequestFor().
                 Statuses().

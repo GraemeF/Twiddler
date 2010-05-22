@@ -153,6 +153,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Commands\AuthorizationCommand.cs" />
     <Compile Include="Commands\AuthorizeCommand.cs" />
     <Compile Include="Commands\DeauthorizeCommand.cs" />
     <Compile Include="Factories.cs" />
