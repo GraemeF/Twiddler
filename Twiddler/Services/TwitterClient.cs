@@ -13,6 +13,7 @@ namespace Twiddler.Services
     public class TwitterClient : ITwitterClient
     {
         private readonly ICredentialsStore _credentialsStore;
+        private AuthorizationStatus _authorizationStatus;
         private ITwitterCredentials _credentials;
 
         public TwitterClient(ICredentialsStore credentialsStore)
@@ -22,7 +23,18 @@ namespace Twiddler.Services
 
         #region ITwitterClient Members
 
-        public AuthorizationStatus AuthorizationStatus { get; private set; }
+        public AuthorizationStatus AuthorizationStatus
+        {
+            get { return _authorizationStatus; }
+            private set
+            {
+                if (_authorizationStatus != value)
+                {
+                    _authorizationStatus = value;
+                    PropertyChanged.Raise(x => AuthorizationStatus);
+                }
+            }
+        }
 
         public IFluentTwitter MakeRequestFor()
         {
@@ -34,8 +46,6 @@ namespace Twiddler.Services
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        #endregion
-
         public void CheckAuthorization()
         {
             _credentials = _credentialsStore.Load();
@@ -46,6 +56,8 @@ namespace Twiddler.Services
             else
                 CheckCredentials();
         }
+
+        #endregion
 
         private void CheckCredentials()
         {
