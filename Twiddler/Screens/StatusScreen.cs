@@ -13,10 +13,13 @@ namespace Twiddler.Screens
         private readonly ITwitterClient _client;
         private PropertyObserver<ITwitterClient> _observer;
 
-        public StatusScreen(ITwitterClient client, IAuthorizeCommand authorizeCommand)
+        public StatusScreen(ITwitterClient client,
+                            IAuthorizeCommand authorizeCommand,
+                            IDeauthorizeCommand deauthorizeCommand)
         {
             _client = client;
             AuthorizeCommand = authorizeCommand;
+            DeauthorizeCommand = deauthorizeCommand;
         }
 
         public AuthorizationStatus Authorization
@@ -25,6 +28,7 @@ namespace Twiddler.Screens
         }
 
         public IAuthorizeCommand AuthorizeCommand { get; private set; }
+        public IDeauthorizeCommand DeauthorizeCommand { get; private set; }
 
         protected override void OnInitialize()
         {

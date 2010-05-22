@@ -5,5 +5,7 @@
         <TextBlock Text="{Binding Authorization}" />
         <Button Command="{Binding AuthorizeCommand}"
                 Content="Authorize" />
+        <Button Command="{Binding DeauthorizeCommand}"
+                Content="Deauthorize" />
     </StackPanel>
 </UserControl>

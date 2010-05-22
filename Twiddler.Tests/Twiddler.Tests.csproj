@@ -88,6 +88,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Commands\AuthorizeCommandTests.cs" />
+    <Compile Include="Commands\DeauthorizeCommandTests.cs" />
     <Compile Include="Models\TimelineTests.cs" />
     <Compile Include="New.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

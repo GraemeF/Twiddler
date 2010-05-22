@@ -12,6 +12,7 @@ namespace Twiddler.Tests.Screens
     public class StatusScreenTests
     {
         private readonly IAuthorizeCommand _authorizeCommand = new Mock<IAuthorizeCommand>().Object;
+        private readonly IDeauthorizeCommand _deauthorizeCommand = new Mock<IDeauthorizeCommand>().Object;
         private readonly Mock<ITwitterClient> _fakeClient = new Mock<ITwitterClient>();
 
         [Theory]
@@ -27,11 +28,6 @@ namespace Twiddler.Tests.Screens
             test.Initialize();
 
             Assert.Equal(status, test.Authorization);
-        }
-
-        private StatusScreen BuildDefaultTestSubject()
-        {
-            return new StatusScreen(_fakeClient.Object, _authorizeCommand);
         }
 
         [Fact]
@@ -68,11 +64,24 @@ namespace Twiddler.Tests.Screens
             Assert.Same(_authorizeCommand, test.AuthorizeCommand);
         }
 
+        [Fact]
+        public void GettingDeauthorizeCommand__ReturnsCommand()
+        {
+            StatusScreen test = BuildDefaultTestSubject();
+
+            Assert.Same(_deauthorizeCommand, test.DeauthorizeCommand);
+        }
+
         private void ClientAuthorizationStatusChangesTo(AuthorizationStatus status)
         {
             _fakeClient.Setup(x => x.AuthorizationStatus).Returns(status);
             _fakeClient.Raise(x => x.PropertyChanged += null,
                               new PropertyChangedEventArgs("AuthorizationStatus"));
+        }
+
+        private StatusScreen BuildDefaultTestSubject()
+        {
+            return new StatusScreen(_fakeClient.Object, _authorizeCommand, _deauthorizeCommand);
         }
     }
 }

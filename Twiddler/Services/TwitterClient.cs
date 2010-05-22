@@ -3,6 +3,7 @@ using Caliburn.Core.IoC;
 using TweetSharp.Twitter.Extensions;
 using TweetSharp.Twitter.Fluent;
 using TweetSharp.Twitter.Model;
+using Twiddler.Models;
 using Twiddler.Models.Interfaces;
 using Twiddler.Properties;
 using Twiddler.Services.Interfaces;
@@ -56,6 +57,15 @@ namespace Twiddler.Services
                 AuthorizationStatus = AuthorizationStatus.InvalidApplication;
             else
                 CheckCredentials();
+        }
+
+        public void Deauthorize()
+        {
+            AuthorizationStatus = AuthorizationStatus.NotAuthorized;
+
+            _credentialsStore.Save(new TwitterCredentials(_credentials.ConsumerKey,
+                                                          _credentials.ConsumerSecret,
+                                                          null, null));
         }
 
         #endregion
