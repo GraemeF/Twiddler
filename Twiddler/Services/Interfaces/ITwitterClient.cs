@@ -7,5 +7,6 @@ namespace Twiddler.Services.Interfaces
     {
         AuthorizationStatus AuthorizationStatus { get; }
         IFluentTwitter MakeRequestFor();
+        void CheckAuthorization();
     }
 }

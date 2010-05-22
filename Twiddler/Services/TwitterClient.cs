@@ -35,18 +35,7 @@ namespace Twiddler.Services
 
         #endregion
 
-        private void PerformOAuthAuthorization()
-        {
-            var dlg = new OAuthDialog();
-            bool? result = dlg.ShowDialog();
-
-            if (result.HasValue == result.Value)
-                VerifyCredentialsWithTwitter();
-            else
-                AuthorizationStatus = AuthorizationStatus.NotAuthorized;
-        }
-
-        private void CheckAuthorization()
+        public void CheckAuthorization()
         {
             if (string.IsNullOrEmpty(Settings.Default.ConsumerKey) ||
                 string.IsNullOrEmpty(Settings.Default.ConsumerSecret))

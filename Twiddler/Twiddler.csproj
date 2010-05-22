@@ -149,7 +149,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Commands\AuthorizeCommand.cs" />
     <Compile Include="Factories.cs" />
+    <Compile Include="Commands\Interfaces\IAuthorizeCommand.cs" />
     <Compile Include="Services\Interfaces\ICredentialsStore.cs" />
     <Compile Include="Services\SettingsCredentialsStore.cs" />
     <Compile Include="Models\TwitterCredentials.cs" />

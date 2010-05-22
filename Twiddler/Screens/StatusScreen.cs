@@ -1,6 +1,8 @@
+using System.Windows.Input;
 using Caliburn.Core.IoC;
 using Caliburn.PresentationFramework.Screens;
 using MvvmFoundation.Wpf;
+using Twiddler.Commands.Interfaces;
 using Twiddler.Screens.Interfaces;
 using Twiddler.Services.Interfaces;
 
@@ -12,15 +14,18 @@ namespace Twiddler.Screens
         private readonly ITwitterClient _client;
         private PropertyObserver<ITwitterClient> _observer;
 
-        public StatusScreen(ITwitterClient client)
+        public StatusScreen(ITwitterClient client, IAuthorizeCommand authorizeCommand)
         {
             _client = client;
+            AuthorizeCommand = authorizeCommand;
         }
 
         public AuthorizationStatus Authorization
         {
             get { return _client.AuthorizationStatus; }
         }
+
+        public IAuthorizeCommand AuthorizeCommand { get; private set; }
 
         protected override void OnInitialize()
         {
