@@ -5,7 +5,6 @@ using TweetSharp.Extensions;
 using TweetSharp.Twitter.Extensions;
 using TweetSharp.Twitter.Fluent;
 using TweetSharp.Twitter.Model;
-using Twiddler.Models.Interfaces;
 using Twiddler.Services.Interfaces;
 
 namespace Twiddler.Services
@@ -13,14 +12,14 @@ namespace Twiddler.Services
     [PerRequest(typeof (ITweetPoller))]
     public class TweetPoller : ITweetPoller
     {
-        private readonly ITwitterCredentials _credentials;
+        private readonly ITwitterClient _client;
         private readonly Factories.Tweet _tweetFactory;
 
         private IFluentTwitter _twitter;
 
-        public TweetPoller(ITwitterCredentials credentials, Factories.Tweet tweetFactory)
+        public TweetPoller(ITwitterClient client, Factories.Tweet tweetFactory)
         {
-            _credentials = credentials;
+            _client = client;
             _tweetFactory = tweetFactory;
         }
 
@@ -31,9 +30,8 @@ namespace Twiddler.Services
         public void Start()
         {
             _twitter =
-                FluentTwitter.
-                    CreateRequest().
-                    AuthenticateWith(_credentials.Token, _credentials.TokenSecret).
+                _client.
+                    MakeRequestFor().
                     Statuses().
                     OnHomeTimeline().
                     Configuration.

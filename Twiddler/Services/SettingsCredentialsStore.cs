@@ -1,8 +1,10 @@
 ﻿using Caliburn.Core.IoC;
+using Twiddler.Models;
 using Twiddler.Models.Interfaces;
 using Twiddler.Properties;
+using Twiddler.Services.Interfaces;
 
-namespace Twiddler.Models
+namespace Twiddler.Services
 {
     [PerRequest(typeof (ICredentialsStore))]
     public class SettingsCredentialsStore : ICredentialsStore

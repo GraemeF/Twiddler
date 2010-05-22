@@ -9,7 +9,7 @@ using Twiddler.Services.Interfaces;
 
 namespace Twiddler.Services
 {
-    [PerRequest(typeof (ITwitterClient))]
+    [Singleton(typeof (ITwitterClient))]
     public class TwitterClient : ITwitterClient
     {
         private readonly ITwitterCredentials _credentials;
@@ -22,6 +22,14 @@ namespace Twiddler.Services
         #region ITwitterClient Members
 
         public AuthorizationStatus AuthorizationStatus { get; private set; }
+
+        public IFluentTwitter MakeRequestFor()
+        {
+            return
+                FluentTwitter.
+                    CreateRequest().
+                    AuthenticateWith(_credentials.Token, _credentials.TokenSecret);
+        }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
