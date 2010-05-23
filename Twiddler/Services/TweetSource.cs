@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Caliburn.Core.IoC;
-using Twiddler.Models.Interfaces;
+using Twiddler.Models;
 using Twiddler.Services.Interfaces;
 
 namespace Twiddler.Services
@@ -27,7 +27,7 @@ namespace Twiddler.Services
 
         #region ITweetSource Members
 
-        public IObservable<ITweet> Tweets { get; private set; }
+        public IObservable<Tweet> Tweets { get; private set; }
 
         #endregion
     }

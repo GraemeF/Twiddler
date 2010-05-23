@@ -1,20 +1,9 @@
-﻿using Caliburn.Core.IoC;
-using Twiddler.Models.Interfaces;
-
-namespace Twiddler.Models
+﻿namespace Twiddler.Models
 {
-    [PerRequest(typeof (ITweet))]
-    public class Tweet : ITweet
+    public class Tweet
     {
-        public Tweet(string status)
-        {
-            Status = status;
-        }
-
-        #region ITweet Members
-
-        public string Status { get; private set; }
-
-        #endregion
+        public long Id { get; set; }
+        public User User { get; set; }
+        public string Status { get; set; }
     }
 }

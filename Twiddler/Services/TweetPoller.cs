@@ -14,11 +14,11 @@ namespace Twiddler.Services
     public class TweetPoller : ITweetPoller
     {
         private readonly ITwitterClient _client;
-        private readonly Factories.Tweet _tweetFactory;
+        private readonly Factories.TweetFactory _tweetFactory;
         private IFluentTwitter _request;
         private PropertyObserver<ITwitterClient> _statusObserver;
 
-        public TweetPoller(ITwitterClient client, Factories.Tweet tweetFactory)
+        public TweetPoller(ITwitterClient client, Factories.TweetFactory tweetFactory)
         {
             _client = client;
             _tweetFactory = tweetFactory;
@@ -98,7 +98,7 @@ namespace Twiddler.Services
             if (!result.SkippedDueToRateLimiting)
                 NewTweets(this, new NewTweetsEventArgs(result.
                                                            AsStatuses().
-                                                           Select(x => _tweetFactory(x.Text))));
+                                                           Select(x => _tweetFactory(x))));
         }
     }
 }

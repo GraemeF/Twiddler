@@ -1,11 +1,26 @@
 ﻿using Twiddler.Models;
-using Twiddler.Models.Interfaces;
-using Twiddler.Screens;
 
 namespace Twiddler.Tests
 {
     public class New
     {
-        public static ITweet Tweet { get { return new Tweet("Unspecified"); } }
+        public static Tweet Tweet
+        {
+            get { return new Tweet {Status = "Unspecified Status", Id = 1, User = User}; }
+        }
+
+        public static User User
+        {
+            get
+            {
+                return new User
+                           {
+                               Id = 2,
+                               Name = "Unspecified Name",
+                               ProfileImageUrl = "http://unspecified.url/",
+                               ScreenName = "Unspecified Screen Name"
+                           };
+            }
+        }
     }
 }

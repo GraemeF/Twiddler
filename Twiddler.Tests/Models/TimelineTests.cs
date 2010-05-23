@@ -10,7 +10,7 @@ namespace Twiddler.Tests.Models
     public class TimelineTests
     {
         private readonly Mock<ITweetSource> _stubSource = new Mock<ITweetSource>();
-        private readonly Subject<ITweet> _tweets = new Subject<ITweet>();
+        private readonly Subject<Tweet> _tweets = new Subject<Tweet>();
 
         public TimelineTests()
         {
@@ -22,7 +22,7 @@ namespace Twiddler.Tests.Models
         {
             Timeline test = BuildDefaultTestSubject();
 
-            ITweet tweet = New.Tweet;
+            Tweet tweet = New.Tweet;
             _tweets.OnNext(tweet);
 
             Assert.Contains(tweet, test.Tweets);
@@ -39,7 +39,7 @@ namespace Twiddler.Tests.Models
             Timeline test = BuildDefaultTestSubject();
             test.Dispose();
 
-            ITweet tweet = New.Tweet;
+            Tweet tweet = New.Tweet;
             _tweets.OnNext(tweet);
 
             Assert.Empty(test.Tweets);

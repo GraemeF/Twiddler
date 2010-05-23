@@ -1,16 +1,17 @@
-﻿using Caliburn.Core.IoC;
+﻿using System;
+using Caliburn.Core.IoC;
 using Caliburn.PresentationFramework.Screens;
-using Twiddler.Models.Interfaces;
+using Twiddler.Models;
 using Twiddler.Screens.Interfaces;
 
 namespace Twiddler.Screens
 {
     [PerRequest(typeof (ITweetScreen))]
-    public class TweetScreen : Screen<ITweet>, ITweetScreen
+    public class TweetScreen : Screen<Tweet>, ITweetScreen
     {
-        private readonly ITweet _tweet;
+        private readonly Tweet _tweet;
 
-        public TweetScreen(ITweet tweet)
+        public TweetScreen(Tweet tweet)
         {
             _tweet = tweet;
         }
@@ -18,6 +19,11 @@ namespace Twiddler.Screens
         public string Status
         {
             get { return _tweet.Status; }
+        }
+
+        public User User
+        {
+            get { return _tweet.User; }
         }
     }
 }

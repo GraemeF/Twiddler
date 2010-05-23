@@ -49,9 +49,25 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Library\Caliburn\Bin\NET-3.5\release\Caliburn.PresentationFramework.dll</HintPath>
     </Reference>
+    <Reference Include="Esent.Interop, Version=1.6.0.0, Culture=neutral, PublicKeyToken=8dd49bbdae3f61af, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Library\RavenDB\EmbeddedClient\Esent.Interop.dll</HintPath>
+    </Reference>
     <Reference Include="Hammock, Version=1.0.0.0, Culture=neutral, PublicKeyToken=c148cfba29ed1a4d, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Library\TweetSharp\Hammock.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.NRefactory, Version=3.0.0.3800, Culture=neutral, PublicKeyToken=efe927acf176eea2, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Library\RavenDB\EmbeddedClient\ICSharpCode.NRefactory.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Library\RavenDB\EmbeddedClient\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Lucene.Net, Version=2.9.2.1, Culture=neutral, PublicKeyToken=02f879aa45933051, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Library\RavenDB\EmbeddedClient\Lucene.Net.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -64,6 +80,14 @@
     <Reference Include="Newtonsoft.Json, Version=3.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Library\TweetSharp\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Raven.Client, Version=1.0.0.0, Culture=neutral, PublicKeyToken=37f41c7f99471593, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Library\RavenDB\EmbeddedClient\Raven.Client.dll</HintPath>
+    </Reference>
+    <Reference Include="Raven.Database, Version=1.0.0.0, Culture=neutral, PublicKeyToken=37f41c7f99471593, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Library\RavenDB\EmbeddedClient\Raven.Database.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
@@ -158,6 +182,7 @@
     <Compile Include="Commands\DeauthorizeCommand.cs" />
     <Compile Include="Factories.cs" />
     <Compile Include="Commands\Interfaces\IAuthorizeCommand.cs" />
+    <Compile Include="Models\User.cs" />
     <Compile Include="PropertyHelper.cs" />
     <Compile Include="Commands\Interfaces\IDeauthorizeCommand.cs" />
     <Compile Include="Services\Interfaces\ICredentialsStore.cs" />
@@ -193,7 +218,6 @@
     <Compile Include="Screens\Interfaces\IShellScreen.cs" />
     <Compile Include="Screens\Interfaces\ITweetScreen.cs" />
     <Compile Include="Models\Interfaces\ITimeline.cs" />
-    <Compile Include="Models\Interfaces\ITweet.cs" />
     <Compile Include="Screens\Interfaces\ITimelineScreen.cs" />
     <Compile Include="Screens\ShellScreen.cs" />
     <Compile Include="Screens\TimelineScreen.cs" />

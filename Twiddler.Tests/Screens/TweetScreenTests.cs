@@ -1,16 +1,27 @@
-﻿using Twiddler.Screens;
+﻿using Twiddler.Models;
+using Twiddler.Screens;
 using Xunit;
 
 namespace Twiddler.Tests.Screens
 {
     public class TweetScreenTests
     {
+        private readonly Tweet _tweet = New.Tweet;
+
         [Fact]
         public void GettingStatus__ReturnsTweetStatus()
         {
-            var test = new TweetScreen(New.Tweet);
+            var test = new TweetScreen(_tweet);
 
-            Assert.Equal("Unspecified", test.Status);
+            Assert.Equal(_tweet.Status, test.Status);
+        }
+
+        [Fact]
+        public void GettingUser__ReturnsUser()
+        {
+            var test = new TweetScreen(_tweet);
+
+            Assert.Equal(_tweet.User, test.User);
         }
     }
 }

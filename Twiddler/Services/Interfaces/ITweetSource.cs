@@ -1,10 +1,10 @@
 using System;
-using Twiddler.Models.Interfaces;
+using Twiddler.Models;
 
 namespace Twiddler.Services.Interfaces
 {
     public interface ITweetSource
     {
-        IObservable<ITweet> Tweets { get; }
+        IObservable<Tweet> Tweets { get; }
     }
 }

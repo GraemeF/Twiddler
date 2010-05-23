@@ -1,16 +1,16 @@
 using System;
 using System.Collections.Generic;
-using Twiddler.Models.Interfaces;
+using Twiddler.Models;
 
 namespace Twiddler.Services
 {
     public class NewTweetsEventArgs : EventArgs
     {
-        public NewTweetsEventArgs(IEnumerable<ITweet> tweets)
+        public NewTweetsEventArgs(IEnumerable<Tweet> tweets)
         {
             Tweets = tweets;
         }
 
-        public IEnumerable<ITweet> Tweets { get; private set; }
+        public IEnumerable<Tweet> Tweets { get; private set; }
     }
 }

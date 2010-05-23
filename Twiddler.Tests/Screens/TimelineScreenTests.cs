@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using Moq;
+using Twiddler.Models;
 using Twiddler.Models.Interfaces;
 using Twiddler.Screens;
 using Twiddler.Screens.Interfaces;
@@ -11,7 +12,7 @@ namespace Twiddler.Tests.Screens
     public class TimelineScreenTests
     {
         private readonly Mock<ITimeline> _fakeTimeline = new Mock<ITimeline>();
-        private readonly ObservableCollection<ITweet> _tweets = new ObservableCollection<ITweet>();
+        private readonly ObservableCollection<Tweet> _tweets = new ObservableCollection<Tweet>();
 
         public TimelineScreenTests()
         {

@@ -1,9 +1,9 @@
 ﻿using Caliburn.PresentationFramework.Screens;
-using Twiddler.Models.Interfaces;
+using Twiddler.Models;
 
 namespace Twiddler.Screens.Interfaces
 {
-    public interface ITweetScreen : IScreen<ITweet>
+    public interface ITweetScreen : IScreen<Tweet>
     {
     }
 }
