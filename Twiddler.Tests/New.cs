@@ -12,7 +12,7 @@ namespace Twiddler.Tests
                 return new Tweet
                            {
                                Status = "Unspecified Status",
-                               Id = 1,
+                               Id = new TweetId(1),
                                User = User,
                                CreatedDate = DateTime.Now.AddMinutes(-5.0)
                            };
@@ -25,7 +25,7 @@ namespace Twiddler.Tests
             {
                 return new User
                            {
-                               Id = 2,
+                               Id = new UserId(2),
                                Name = "Unspecified Name",
                                ProfileImageUrl = "http://unspecified.url/",
                                ScreenName = "Unspecified Screen Name"

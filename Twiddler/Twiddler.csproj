@@ -182,7 +182,9 @@
     <Compile Include="Commands\DeauthorizeCommand.cs" />
     <Compile Include="Factories.cs" />
     <Compile Include="Commands\Interfaces\IAuthorizeCommand.cs" />
+    <Compile Include="Models\TweetId.cs" />
     <Compile Include="Models\User.cs" />
+    <Compile Include="Models\UserId.cs" />
     <Compile Include="PropertyHelper.cs" />
     <Compile Include="Commands\Interfaces\IDeauthorizeCommand.cs" />
     <Compile Include="Services\Interfaces\ICredentialsStore.cs" />

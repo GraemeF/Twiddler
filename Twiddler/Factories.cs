@@ -24,7 +24,7 @@ namespace Twiddler
         {
             return new Tweet
                        {
-                           Id = status.Id,
+                           Id = new TweetId(status.Id),
                            Status = status.Text,
                            User = CreateUserFromTwitterUser(status.User),
                            CreatedDate = status.CreatedDate
@@ -35,7 +35,7 @@ namespace Twiddler
         {
             return new User
                        {
-                           Id = user.Id,
+                           Id = new UserId(user.Id),
                            Name = user.Name,
                            ProfileImageUrl = user.ProfileImageUrl,
                            ScreenName = user.ScreenName
