@@ -1,5 +1,4 @@
-﻿using System;
-using Caliburn.Core.IoC;
+﻿using Caliburn.Core.IoC;
 using Caliburn.PresentationFramework.Screens;
 using Twiddler.Models;
 using Twiddler.Screens.Interfaces;
@@ -24,6 +23,11 @@ namespace Twiddler.Screens
         public User User
         {
             get { return _tweet.User; }
+        }
+
+        public string CreatedDate
+        {
+            get { return _tweet.CreatedDate.ToString(); }
         }
     }
 }

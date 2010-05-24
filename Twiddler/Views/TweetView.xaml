@@ -10,6 +10,9 @@
             <TextBlock Text="{Binding User.Name}"
                        HorizontalAlignment="Left" />
         </StackPanel>
-        <TextBlock Text="{Binding Status}" />
+        <StackPanel Margin="4">
+            <TextBlock Text="{Binding Status}" />
+            <TextBlock Text="{Binding CreatedDate}" />
+        </StackPanel>
     </StackPanel>
 </UserControl>

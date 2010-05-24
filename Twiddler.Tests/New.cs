@@ -1,4 +1,5 @@
-﻿using Twiddler.Models;
+﻿using System;
+using Twiddler.Models;
 
 namespace Twiddler.Tests
 {
@@ -6,7 +7,16 @@ namespace Twiddler.Tests
     {
         public static Tweet Tweet
         {
-            get { return new Tweet {Status = "Unspecified Status", Id = 1, User = User}; }
+            get
+            {
+                return new Tweet
+                           {
+                               Status = "Unspecified Status",
+                               Id = 1,
+                               User = User,
+                               CreatedDate = DateTime.Now.AddMinutes(-5.0)
+                           };
+            }
         }
 
         public static User User

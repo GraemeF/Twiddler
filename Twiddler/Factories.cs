@@ -26,7 +26,8 @@ namespace Twiddler
                        {
                            Id = status.Id,
                            Status = status.Text,
-                           User = CreateUserFromTwitterUser(status.User)
+                           User = CreateUserFromTwitterUser(status.User),
+                           CreatedDate = status.CreatedDate
                        };
         }
 

@@ -23,5 +23,13 @@ namespace Twiddler.Tests.Screens
 
             Assert.Equal(_tweet.User, test.User);
         }
+
+        [Fact]
+        public void GettingCreatedDate__ReturnsCreatedDate()
+        {
+            var test = new TweetScreen(_tweet);
+
+            Assert.Equal(_tweet.CreatedDate.ToString(), test.CreatedDate);
+        }
     }
 }
