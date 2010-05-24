@@ -10,14 +10,14 @@ namespace Twiddler.Models
     public class Timeline : ITimeline
     {
         private readonly IDisposable _subscription;
-        private readonly ITweetSource _tweetSource;
+        private readonly IUpdatingTweetStore _store;
 
-        public Timeline(ITweetSource tweetSource)
+        public Timeline(IUpdatingTweetStore store)
         {
-            _tweetSource = tweetSource;
+            _store = store;
             Tweets = new ObservableCollection<Tweet>();
 
-            _subscription = _tweetSource.Tweets.Subscribe(x => Tweets.Add(x));
+            _subscription = _store.NewTweets.Subscribe(x => Tweets.Add(x));
         }
 
         #region ITimeline Members

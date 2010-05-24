@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using Moq;
 using Twiddler.Models;
-using Twiddler.Models.Interfaces;
 using Twiddler.Services.Interfaces;
 using Xunit;
 
@@ -9,12 +8,12 @@ namespace Twiddler.Tests.Models
 {
     public class TimelineTests
     {
-        private readonly Mock<ITweetSource> _stubSource = new Mock<ITweetSource>();
+        private readonly Mock<IUpdatingTweetStore> _stubStore = new Mock<IUpdatingTweetStore>();
         private readonly Subject<Tweet> _tweets = new Subject<Tweet>();
 
         public TimelineTests()
         {
-            _stubSource.Setup(x => x.Tweets).Returns(_tweets);
+            _stubStore.Setup(x => x.NewTweets).Returns(_tweets);
         }
 
         [Fact]
@@ -30,7 +29,7 @@ namespace Twiddler.Tests.Models
 
         private Timeline BuildDefaultTestSubject()
         {
-            return new Timeline(_stubSource.Object);
+            return new Timeline(_stubStore.Object);
         }
 
         [Fact]
