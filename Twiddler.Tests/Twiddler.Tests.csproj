@@ -96,6 +96,7 @@
     <Compile Include="Screens\StatusScreenTests.cs" />
     <Compile Include="Screens\TimelineScreenTests.cs" />
     <Compile Include="Screens\TweetScreenTests.cs" />
+    <Compile Include="Services\MemoryTweetStoreTests.cs" />
     <Compile Include="Services\TwitterClientTests.cs" />
   </ItemGroup>
   <ItemGroup>
