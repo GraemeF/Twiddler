@@ -2,10 +2,13 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <StackPanel Orientation="Horizontal">
-        <TextBlock Text="{Binding Authorization}" />
+        <TextBlock Text="{Binding Authorization}" VerticalAlignment="Center"
+                   Margin="4" />
         <Button Command="{Binding AuthorizeCommand}"
-                Content="Authorize" />
+                Content="Authorize"
+                Margin="4"/>
         <Button Command="{Binding DeauthorizeCommand}"
-                Content="Deauthorize" />
+                Content="Deauthorize"
+                Margin="4" />
     </StackPanel>
 </UserControl>
