@@ -5,7 +5,6 @@ using TweetSharp.Twitter.Fluent;
 using TweetSharp.Twitter.Model;
 using Twiddler.Models;
 using Twiddler.Models.Interfaces;
-using Twiddler.Properties;
 using Twiddler.Services.Interfaces;
 
 namespace Twiddler.Services
@@ -52,8 +51,8 @@ namespace Twiddler.Services
         {
             _credentials = _credentialsStore.Load();
 
-            if (string.IsNullOrEmpty(Settings.Default.ConsumerKey) ||
-                string.IsNullOrEmpty(Settings.Default.ConsumerSecret))
+            if (string.IsNullOrEmpty(_credentials.ConsumerKey) ||
+                string.IsNullOrEmpty(_credentials.ConsumerSecret))
                 AuthorizationStatus = AuthorizationStatus.InvalidApplication;
             else
                 CheckCredentials();
@@ -85,7 +84,7 @@ namespace Twiddler.Services
             ITwitterAccountVerifyCredentials twitter =
                 FluentTwitter.
                     CreateRequest().
-                    AuthenticateWith(Settings.Default.ConsumerKey, Settings.Default.ConsumerSecret,
+                    AuthenticateWith(_credentials.ConsumerKey, _credentials.ConsumerSecret,
                                      _credentials.Token, _credentials.TokenSecret).
                     Account().
                     VerifyCredentials();
