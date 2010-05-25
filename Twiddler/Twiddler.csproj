@@ -182,6 +182,8 @@
     <Compile Include="Commands\DeauthorizeCommand.cs" />
     <Compile Include="Factories.cs" />
     <Compile Include="Commands\Interfaces\IAuthorizeCommand.cs" />
+    <Compile Include="Screens\Interfaces\ILoadingTweetScreen.cs" />
+    <Compile Include="Screens\LoadingTweetScreen.cs" />
     <Compile Include="Services\Interfaces\IUpdatingTweetStore.cs" />
     <Compile Include="Services\MemoryTweetStore.cs" />
     <Compile Include="Services\Interfaces\ITweetStore.cs" />
