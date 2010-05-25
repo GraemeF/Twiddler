@@ -1,7 +1,9 @@
 using System;
+using System.Diagnostics;
 
 namespace Twiddler.Models
 {
+    [DebuggerDisplay("Tweet:{_id}")]
     public struct TweetId
     {
         private readonly long _id;
@@ -29,6 +31,11 @@ namespace Twiddler.Models
         public static bool operator !=(TweetId x, TweetId y)
         {
             return !(x == y);
+        }
+
+        public override string ToString()
+        {
+            return string.Concat("Tweet:", _id.ToString());
         }
     }
 }
