@@ -12,17 +12,15 @@ namespace Twiddler.Screens
     public class LoadingTweetScreen : ScreenConductor<ITweetScreen>, ILoadingTweetScreen
     {
         private readonly TweetId _id;
-        private readonly ITweetStore _store;
+        private readonly IUpdatingTweetStore _store;
         private readonly Factories.TweetScreenFactory _tweetScreenFactory;
 
-        public LoadingTweetScreen(ITweetStore store, TweetId id, Factories.TweetScreenFactory tweetScreenFactory)
+        public LoadingTweetScreen(IUpdatingTweetStore store, TweetId id, Factories.TweetScreenFactory tweetScreenFactory)
         {
             _store = store;
             _id = id;
             _tweetScreenFactory = tweetScreenFactory;
         }
-
-        public ITweetScreen Tweet { get; private set; }
 
         protected override void OnInitialize()
         {
@@ -35,8 +33,7 @@ namespace Twiddler.Screens
 
         private void PopulateWithTweet(Tweet tweet)
         {
-            Tweet = _tweetScreenFactory(tweet);
-            OpenScreen(Tweet, delegate { });
+            OpenScreen(_tweetScreenFactory(tweet), delegate { });
         }
     }
 }

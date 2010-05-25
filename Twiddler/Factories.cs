@@ -16,6 +16,8 @@ namespace Twiddler
 
         public delegate ITweetScreen TweetScreenFactory(Tweet tweet);
 
+        public delegate ILoadingTweetScreen LoadingTweetScreenFactory(TweetId id);
+
         public delegate User UserFactory(TwitterUser user);
 
         #endregion

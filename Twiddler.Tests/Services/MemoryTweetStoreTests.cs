@@ -9,17 +9,6 @@ namespace Twiddler.Tests.Services
     public class MemoryTweetStoreTests
     {
         [Fact]
-        public void AddTweet_GivenAUniqueTweet_AddsTweetToAllTweets()
-        {
-            var test = new MemoryTweetStore();
-
-            Tweet tweet = New.Tweet;
-            test.AddTweet(tweet);
-
-            Assert.Contains(tweet, test.AllTweets);
-        }
-
-        [Fact]
         public void AddTweet_GivenADuplicatedTweet_Throws()
         {
             var test = new MemoryTweetStore();

@@ -3,8 +3,8 @@ using Twiddler.Models;
 
 namespace Twiddler.Services.Interfaces
 {
-    public interface IUpdatingTweetStore
+    public interface IUpdatingTweetStore : ITweetStore
     {
-        IObservable<Tweet> NewTweets { get; }
+        IObservable<TweetId> NewTweets { get; }
     }
 }

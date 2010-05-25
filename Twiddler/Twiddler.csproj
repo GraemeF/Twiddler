@@ -151,6 +151,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Views\LoadingTweetView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\ShellView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -231,7 +235,10 @@
     <Compile Include="Services\TweetPoller.cs" />
     <Compile Include="Services\TweetSource.cs" />
     <Compile Include="Services\TwitterClient.cs" />
-    <Compile Include="Services\UpdatingTweetStore.cs" />
+    <Compile Include="Services\UpdatingTwitterStore.cs" />
+    <Compile Include="Views\LoadingTweetView.xaml.cs">
+      <DependentUpon>LoadingTweetView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\StatusView.xaml.cs">
       <DependentUpon>StatusView.xaml</DependentUpon>
     </Compile>

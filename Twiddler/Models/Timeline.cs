@@ -15,14 +15,14 @@ namespace Twiddler.Models
         public Timeline(IUpdatingTweetStore store)
         {
             _store = store;
-            Tweets = new ObservableCollection<Tweet>();
+            Tweets = new ObservableCollection<TweetId>();
 
             _subscription = _store.NewTweets.Subscribe(x => Tweets.Add(x));
         }
 
         #region ITimeline Members
 
-        public ObservableCollection<Tweet> Tweets { get; private set; }
+        public ObservableCollection<TweetId> Tweets { get; private set; }
 
         public void Dispose()
         {

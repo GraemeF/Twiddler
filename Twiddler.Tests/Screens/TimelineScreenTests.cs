@@ -11,7 +11,7 @@ namespace Twiddler.Tests.Screens
     public class TimelineScreenTests
     {
         private readonly Mock<ITimeline> _fakeTimeline = new Mock<ITimeline>();
-        private readonly ObservableCollection<Tweet> _tweets = new ObservableCollection<Tweet>();
+        private readonly ObservableCollection<TweetId> _tweets = new ObservableCollection<TweetId>();
 
         public TimelineScreenTests()
         {
@@ -29,12 +29,12 @@ namespace Twiddler.Tests.Screens
         [Fact]
         public void GettingScreens_WhenThereIsATweet_ContainsAScreen()
         {
-            var mockScreen = new Mock<ITweetScreen>();
+            var mockScreen = new Mock<ILoadingTweetScreen>();
 
             var test = new TimelineScreen(_fakeTimeline.Object, x => mockScreen.Object);
             test.Initialize();
 
-            _tweets.Add(New.Tweet);
+            _tweets.Add(new TweetId(5));
 
             Assert.Contains(mockScreen.Object, test.Screens);
             mockScreen.Verify(x => x.Initialize());
