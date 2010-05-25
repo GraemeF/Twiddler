@@ -1,0 +1,3518 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>TweetSharp.Yammer</name>
+    </assembly>
+    <members>
+        <member name="T:TweetSharp.Yammer.Model.YammerAttachmentFile">
+            <summary>
+            Reprentation of a file attachment to a <see cref="T:TweetSharp.Yammer.Model.YammerMessage"/>
+            </summary>
+        </member>
+        <member name="T:TweetSharp.Yammer.Model.YammerAttachmentContent">
+            <summary>
+            Represents the content of a yammer attachment
+            </summary>
+        </member>
+        <member name="T:TweetSharp.Yammer.Model.IYammerModel">
+            <summary>
+            Interface for classes that represent the Yammer data model. 
+            </summary>
+        </member>
+        <member name="P:TweetSharp.Yammer.Model.YammerAttachmentContent.Size">
+            <summary>
+            Gets or sets the size of the attachment content
+            </summary>
+            <value>The size.</value>
+        </member>
+        <member name="P:TweetSharp.Yammer.Model.YammerAttachmentContent.Url">
+            <summary>
+            Gets or sets the URL of the attachment content.
+            </summary>
+            <value>The URL.</value>
+        </member>
+        <member name="P:TweetSharp.Yammer.Model.YammerAttachmentContent.RawSource">
+            <summary>
+            The source content used to deserialize the model entity instance.
+            Can be XML or JSON, depending on the endpoint used.
+            </summary>
+        </member>
+        <member name="T:TweetSharp.Yammer.Extensions.YammerExtensions">
+            <summary>
+             Extensions for Yammer model instances.
+            </summary>
+        </member>
+        <member name="M:TweetSharp.Yammer.Extensions.YammerExtensions.AsError(TweetSharp.Yammer.Model.YammerResult)">
+            <summary>
+            This method attempts to cast a <see cref="T:TweetSharp.Yammer.Model.YammerResult"/> into an <see cref="T:TweetSharp.Yammer.Model.YammerError"/>.
+            If unsuccessful, null is returned.
+            </summary>
+            <param name="result">The XML or JSON result to convert</param>
+            <returns>An error instance, or null if the result cannot cast to an error.</returns>
+        </member>
+        <member name="M:TweetSharp.Yammer.Extensions.YammerExtensions.AsToken(TweetSharp.Yammer.Model.YammerResult)">
+            <summary>
+            This method attempts to cast a <see cref="T:TweetSharp.Yammer.Model.YammerResult"/> into an <see cref="T:TweetSharp.Model.OAuthToken"/>.
+            If unsuccessful, null is returned.
+            </summary>
+            <param name="result">The XML or JSON result to convert</param>
+            <returns>A token instance, or null if the result cannot cast to a token pair.</returns>
+        </member>
+        <member name="M:TweetSharp.Yammer.Extensions.YammerExtensions.AsMessage(TweetSharp.Yammer.Model.YammerResult)">
+            <summary>
+            This method attempts to cast a <see cref="T:TweetSharp.Yammer.Model.YammerResult"/> into an <see cref="T:TweetSharp.Yammer.Model.YammerMessage"/>.
+            If unsuccessful, null is returned.
+            </summary>
+            <param name="result">The XML or JSON result to convert</param>
+            <returns>A YammerMessage instance, or null if the result cannot cast to a message.</returns>
+        </member>
+        <member name="M:TweetSharp.Yammer.Extensions.YammerExtensions.AsGroups(TweetSharp.Yammer.Model.YammerResult)">
+            <summary>
+            This method attempts to cast a <see cref="T:TweetSharp.Yammer.Model.YammerResult"/> into a <see cref="T:TweetSharp.Yammer.Model.YammerGroup"/> enumeration
+            If unsuccessful, null is returned.
+            </summary>
+            <param name="result">The XML or JSON result to convert</param>
+            <returns>A YammerGroup enumeration, or null if the result cannot cast successfully.</returns>
+        </member>
+        <member name="M:TweetSharp.Yammer.Extensions.YammerExtensions.AsUser(TweetSharp.Yammer.Model.YammerResult)">
+            <summary>
+            This method attempts to cast a <see cref="T:TweetSharp.Yammer.Model.YammerResult"/> into an <see cref="T:TweetSharp.Yammer.Model.YammerUser"/>.
+            If unsuccessful, null is returned.
+            </summary>
+            <param name="result">The XML or JSON result to convert</param>
+            <returns>A YammerUser instance, or null if the result cannot cast to a user.</returns>
+        </member>
+        <member name="M:TweetSharp.Yammer.Extensions.YammerExtensions.AsAutoCompleteSuggestions(TweetSharp.Yammer.Model.YammerResult)">
+            <summary>
+            This method attempts to cast a <see cref="T:TweetSharp.Yammer.Model.YammerResult"/> into a <see cref="T:TweetSharp.Yammer.Model.YammerAutoCompleteSuggestions"/> collection.
+            If unsuccessful, null is returned.
+            </summary>
+            <param name="result">The XML or JSON result to convert</param>
+            <returns>An AutoComplete suggestions collection, or null if the result cannot be cast successfully.</returns>
+        </member>
+        <member name="M:TweetSharp.Yammer.Extensions.YammerExtensions.AsNetworks(TweetSharp.Yammer.Model.YammerResult)">
+            <summary>
+            This method attempts to cast a <see cref="T:TweetSharp.Yammer.Model.YammerResult"/> into a <see cref="T:TweetSharp.Yammer.Model.YammerNetwork"/> enumeration.
+            If unsuccessful, null is returned.
+            </summary>
+            <param name="result">The XML or JSON result to convert</param>
+            <returns>An YammerNetwork enumeration, or null if the result cannot cast successfully.</returns>
+        </member>
+        <member name="M:TweetSharp.Yammer.Extensions.YammerExtensions.AsSearchResult(TweetSharp.Yammer.Model.YammerResult)">
+            <summary>
+            This method attempts to cast a <see cref="T:TweetSharp.Yammer.Model.YammerResult"/> into a <see cref="T:TweetSharp.Yammer.Model.YammerSearchResult"/>
+            If unsuccessful, null is returned.
+            </summary>
+            <param name="result">The XML or JSON result to convert</param>
+            <returns>A YamerSearchResult, or null if the result cannot cast successfully.</returns>
+        </member>
+        <member name="M:TweetSharp.Yammer.Extensions.YammerExtensions.AsRelationships(TweetSharp.Yammer.Model.YammerResult)">
+            <summary>
+            This method attempts to cast a <see cref="T:TweetSharp.Yammer.Model.YammerResult"/> into a <see cref="T:TweetSharp.Yammer.Model.YammerRelationships"/> collection
+            If unsuccessful, null is returned.
+            </summary>
+            <param name="result">The XML or JSON result to convert</param>
+            <returns>A YammerRelationships collection, or null if the result cannot cast successfully.</returns>
+        </member>
+        <member name="M:TweetSharp.Yammer.Extensions.YammerExtensions.AsUsers(TweetSharp.Yammer.Model.YammerResult)">
+            <summary>
+            This method attempts to cast a <see cref="T:TweetSharp.Yammer.Model.YammerResult"/> into a <see cref="T:TweetSharp.Yammer.Model.YammerUser"/> enumeration
+            If unsuccessful, null is returned.
+            </summary>
+            <param name="result">The XML or JSON result to convert</param>
+            <returns>A YammerUser enumeration, or null if the result cannot cast successfully.</returns>
+        </member>
+        <member name="M:TweetSharp.Yammer.Extensions.YammerExtensions.AsTag(TweetSharp.Yammer.Model.YammerResult)">
+            <summary>
+            This method attempts to cast a <see cref="T:TweetSharp.Yammer.Model.YammerResult"/> into a <see cref="T:TweetSharp.Yammer.Model.YammerTag"/>
+            If unsuccessful, null is returned.
+            </summary>
+            <param name="result">The XML or JSON result to convert</param>
+            <returns>A YammerTag, or null if the result cannot cast successfully.</returns>
+        </member>
+        <member name="M:TweetSharp.Yammer.Extensions.YammerExtensions.AsSubscription(TweetSharp.Yammer.Model.YammerResult)">
+            <summary>
+            This method attempts to cast a <see cref="T:TweetSharp.Yammer.Model.YammerResult"/> into a <see cref="T:TweetSharp.Yammer.Model.YammerSubscription"/>
+            If unsuccessful, null is returned.
+            </summary>
+            <param name="result">The XML or JSON result to convert</param>
+            <returns>A YammerSubscription, or null if the result cannot cast successfully.</returns>
+        </member>
+        <member name="M:TweetSharp.Yammer.Extensions.YammerExtensions.AsTags(TweetSharp.Yammer.Model.YammerResult)">
+            <summary>
+            This method attempts to cast a <see cref="T:TweetSharp.Yammer.Model.YammerResult"/> into a <see cref="T:TweetSharp.Yammer.Model.YammerTag"/> enumeration
+            If unsuccessful, null is returned.
+            </summary>
+            <param name="result">The XML or JSON result to convert</param>
+            <returns>A YammerTag enumeration, or null if the result cannot cast successfully.</returns>
+        </member>
+        <member name="M:TweetSharp.Yammer.Extensions.YammerExtensions.AsMessages(TweetSharp.Yammer.Model.YammerResult)">
+            <summary>
+            This method attempts to cast a <see cref="T:TweetSharp.Yammer.Model.YammerResult"/> into a <see cref="T:TweetSharp.Yammer.Model.YammerMessage"/> enumeration
+            If unsuccessful, null is returned.
+            </summary>
+            <param name="result">The XML or JSON result to convert</param>
+            <returns>A YammerMessages enumeration, or null if the result cannot cast successfully.</returns>
+        </member>
+        <member name="M:TweetSharp.Yammer.Extensions.YammerExtensions.AsResponseMetadata(TweetSharp.Yammer.Model.YammerResult)">
+            <summary>
+            This method attempts to cast a <see cref="T:TweetSharp.Yammer.Model.YammerResult"/> into a <see cref="T:TweetSharp.Yammer.Model.YammerResponseMetadata"/> object
+            If unsuccessful, null is returned.
+            </summary>
+            <param name="result">The XML or JSON result to convert</param>
+            <returns>A YammerResponseMetadata object, or null if the result cannot cast successfully.</returns>
+        </member>
+        <member name="M:TweetSharp.Yammer.Extensions.YammerExtensions.AsTagReferences(TweetSharp.Yammer.Model.YammerResult)">
+            <summary>
+            This method attempts to cast a <see cref="T:TweetSharp.Yammer.Model.YammerResult"/> into a <see cref="T:TweetSharp.Yammer.Model.YammerTagReference"/> enumeration
+            If unsuccessful, null is returned.
+            </summary>
+            <param name="result">The XML or JSON result to convert</param>
+            <returns>A YammerTagReference enumeration, or null if the result cannot cast successfully.</returns>
+        </member>
+        <member name="M:TweetSharp.Yammer.Extensions.YammerExtensions.AsThreadReferences(TweetSharp.Yammer.Model.YammerResult)">
+            <summary>
+            This method attempts to cast a <see cref="T:TweetSharp.Yammer.Model.YammerResult"/> into a <see cref="T:TweetSharp.Yammer.Model.YammerThreadReference"/> enumeration
+            If unsuccessful, null is returned.
+            </summary>
+            <param name="result">The XML or JSON result to convert</param>
+            <returns>A YammerThreadReference enumeration, or null if the result cannot cast successfully.</returns>
+        </member>
+        <member name="M:TweetSharp.Yammer.Extensions.YammerExtensions.AsUserReferences(TweetSharp.Yammer.Model.YammerResult)">
+            <summary>
+            This method attempts to cast a <see cref="T:TweetSharp.Yammer.Model.YammerResult"/> into a <see cref="T:TweetSharp.Yammer.Model.YammerUserReference"/> enumeration
+            If unsuccessful, null is returned.
+            </summary>
+            <param name="result">The XML or JSON result to convert</param>
+            <returns>A YammerUserReference enumeration, or null if the result cannot cast successfully.</returns>
+        </member>
+        <member name="M:TweetSharp.Yammer.Extensions.YammerExtensions.AsGuideReferences(TweetSharp.Yammer.Model.YammerResult)">
+            <summary>
+            This method attempts to cast a <see cref="T:TweetSharp.Yammer.Model.YammerResult"/> into a <see cref="T:TweetSharp.Yammer.Model.YammerGuideReference"/> enumeration
+            If unsuccessful, null is returned.
+            </summary>
+            <param name="result">The XML or JSON result to convert</param>
+            <returns>A YammerGuideReference enumeration, or null if the result cannot cast successfully.</returns>
+        </member>
+        <member name="T:TweetSharp.Yammer.Fluent.IFluentYammerAuthentication">
+            <summary>
+            Twitter authentication details interface
+            </summary>
+        </member>
+        <member name="P:TweetSharp.Yammer.Fluent.IFluentYammerAuthentication.Root">
+            <summary>
+            Gets the query root.
+            </summary>
+            <value>The query root.</value>
+        </member>
+        <member name="T:TweetSharp.Yammer.Fluent.IYammerAutoComplete">
+            <summary>
+            Fluent yammer node for the AutoComplete endpoint
+            </summary>
+        </member>
+        <member name="T:TweetSharp.Yammer.Fluent.IYammerLeafNodeXmlJson">
+            <summary>
+            Interface for a fluent query node that can request Json or Xml formatted data
+            </summary>
+        </member>
+        <member name="T:TweetSharp.Yammer.Fluent.IYammerLeafNodeXml">
+            <summary>
+            Interface for a fluent query node that can request Xml formatted data
+            </summary>
+        </member>
+        <member name="T:TweetSharp.Yammer.Fluent.IYammerLeafNode">
+            <summary>
+            The interface describing a Yammer leaf node in the fluent expression tree.
+            </summary>
+        </member>
+        <member name="T:TweetSharp.Yammer.Fluent.IYammerNode">
+            <summary>
+            The interface describing a node in the fluent expression tree.
+            </summary>
+        </member>
+        <member name="P:TweetSharp.Yammer.Fluent.IYammerNode.Root">
+            <summary>
+            Gets the root node for the query
+            </summary>
+        </member>
+        <member name="P:TweetSharp.Yammer.Fluent.IYammerNode.Configuration">
+            <summary>
+            Gets the configuration for the query
+            </summary>
+        </member>
+        <member name="M:TweetSharp.Yammer.Fluent.IYammerLeafNode.AsUrl">
+            <summary>
+            Returns the query as a URL.
+            </summary>
+            <returns>The Url</returns>
+        </member>
+        <member name="M:TweetSharp.Yammer.Fluent.IYammerLeafNode.CallbackTo(TweetSharp.Yammer.Fluent.YammerWebCallback)">
+            <summary>
+            The callback method to invoke when an asynchronous query completes.
+            </summary>
+            <param name="callback"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TweetSharp.Yammer.Fluent.IYammerLeafNodeXml.AsXml">
+            <summary>
+            Requests the data as Xml
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:TweetSharp.Yammer.Fluent.IYammerLeafNodeJson">
+            <summary>
+            Interface for a fluent query node that can request Json formatted data.
+            </summary>
+        </member>
+        <member name="M:TweetSharp.Yammer.Fluent.IYammerLeafNodeJson.AsJson">
+            <summary>
+            Requests results in Json format. 
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:TweetSharp.Yammer.Fluent.YammerNodeBase">
+            <summary>
+            The base implementation for fluent query nodes on an <see cref="T:TweetSharp.Yammer.Fluent.IFluentYammer"/> instance.
+            </summary>
+        </member>
+        <member name="T:TweetSharp.Yammer.Fluent.YammerAutoCompleteExtensions">
+            <summary>
+            Extension methods for accessing the AutoComplete endpoints.
+            </summary>
+        </member>
+        <member name="M:TweetSharp.Yammer.Fluent.YammerAutoCompleteExtensions.GetSuggestions(TweetSharp.Yammer.Fluent.IYammerAutoComplete,System.String)">
+            <summary>
+            Request auto-complete suggestions 
+            </summary>
+            <param name="instance"></param>
+            <param name="prefix">The prefix to use to seed the autocomplete search</param>
+            <returns></returns>
+        </member>
+        <member name="T:TweetSharp.Yammer.Fluent.IFluentYammerConfiguration">
+            <summary>
+            Node in the fluent expression tree for accessing configuration options
+            </summary>
+        </member>
+        <member name="P:TweetSharp.Yammer.Fluent.IFluentYammerConfiguration.Root">
+            <summary>
+            Gets the root of the expression tree.
+            </summary>
+            <value>The root node in the expression tree.</value>
+        </member>
+        <member name="T:TweetSharp.Yammer.Fluent.Extensions">
+            <summary>
+            Extension methods for Yammer
+            </summary>
+        </member>
+        <member name="M:TweetSharp.Yammer.Fluent.Extensions.CacheWith(TweetSharp.Yammer.Fluent.IFluentYammerConfiguration,Hammock.Caching.ICache)">
+            <summary>
+            When this configuration option is called, the specified cache provider is used for any subsequent
+            caching on the request. The default caching strategy is this method is not used, is <see cref="T:Hammock.Caching.AspNetCache"/>.
+            </summary>
+            <param name="cache">The caching strategy to use</param>
+            <param name="instance">The current position in the fluent expression</param>
+            <returns>The current position in the fluent expression</returns>
+        </member>
+        <member name="M:TweetSharp.Yammer.Fluent.Extensions.CacheUntil(TweetSharp.Yammer.Fluent.IFluentYammerConfiguration,System.DateTime)">
+            <summary>
+            When this configuration option is called, any request made inside the specified absolute expiration date,
+            is served from the client cache rather than from a request made to Yammer.
+            </summary>
+            <param name="absoluteExpiration">The specified local time that the cache for the request as defined will expire</param>
+            <param name="instance">The current position in the fluent expression</param>
+            <returns>The current position in the fluent expression</returns>
+        </member>
+        <member name="M:TweetSharp.Yammer.Fluent.Extensions.CacheForInactivityOf(TweetSharp.Yammer.Fluent.IFluentYammerConfiguration,System.TimeSpan)">
+            <summary>
+            When this configuration option is called, any request made inside the specified sliding expiratino date,
+            is served from the client cache rather than from a request made to Yammer. Sliding expiration countdown begins
+            from the last time a request for the same URL was executed.
+            </summary>
+            <param name="slidingExpiration">The specified amount of inactivity that may elapse before expiring the cache</param>
+            <param name="instance">The current position in the fluent expression</param>
+            <returns>The current position in the fluent expression</returns>
+        </member>
+        <member name="M:TweetSharp.Yammer.Fluent.Extensions.UseProxy(TweetSharp.Yammer.Fluent.IFluentYammerConfiguration,System.String)">
+            <summary>
+            When this configuration option is called, the query request is sent via the specified proxy URL,
+            rather than directly to Yammer.
+            <remarks>
+            Currently, the .NET default of using the Internet Explorer defined proxy as a default for all
+            outgoing requests is in place, but may change before the version 1.0 release.
+            </remarks>
+            </summary>
+            <param name="url">The URL of a proxy to use</param>
+            <param name="instance">The current position in the fluent expression</param>
+            <returns>The current position in the fluent expression</returns>
+        </member>
+        <member name="M:TweetSharp.Yammer.Fluent.Extensions.UseTransparentProxy(TweetSharp.Yammer.Fluent.IFluentYammerConfiguration,System.String)">
+            <summary>
+            Uses the transparent proxy instead of calling Yammer directly
+            </summary>
+            <param name="instance">The FluentYammer instance.</param>
+            <param name="url">The transparent proxy URL.</param>
+            <returns>The FluentYammer instance</returns>
+        </member>
+        <member name="M:TweetSharp.Yammer.Fluent.Extensions.UseGzipCompression(TweetSharp.Yammer.Fluent.IFluentYammerConfiguration)">
+            <summary>
+            When this configuration option is called, the query request is sent as GZIP encoded content,
+            and automatically decompressed when received. This is useful for requests that retrieve a large
+            number of results, but will increase bandwidth on smaller requests.
+            </summary>
+            <param name="instance">The current position in the fluent expression</param>
+            <returns>The current position in the fluent expression</returns>
+        </member>
+        <member name="M:TweetSharp.Yammer.Fluent.Extensions.UseAutomaticRetries(TweetSharp.Yammer.Fluent.IFluentYammerConfiguration,TweetSharp.Yammer.Fluent.RetryOn,System.Int32)">
+            <summary>
+            Sets up automatic retries for the error conditions indicated in 'retryPolicies'
+            </summary>
+            <param name="instance">The intance</param>
+            <param name="retryOn">The error condition(s) that trigger a retry</param>
+            <param name="maximumRetries">Max number of times to retry.  If exhausted, the last error will be returned</param>
+            <returns></returns>
+        </member>
+        <member name="M:TweetSharp.Yammer.Fluent.Extensions.TimeoutAfter(TweetSharp.Yammer.Fluent.IFluentYammerConfiguration,System.TimeSpan)">
+            <summary>
+            Sets the timeout value for the query
+            </summary>
+            <param name="instance"></param>
+            <param name="timeout">Amount of time to wait for a response</param>
+            <returns></returns>
+        </member>
+        <member name="M:TweetSharp.Yammer.Fluent.Extensions.GetRequestToken(TweetSharp.Yammer.Fluent.IFluentYammerAuthentication,System.String,System.String)">
+            <summary>
+            Starts the OAuth authorization process by requesting a new Request Token
+            </summary>
+            <param name="instance"></param>
+            <param name="consumerKey">Your application's consumer key</param>
+            <param name="consumerSecret">Your application's consumer secret</param>
+            <returns></returns>
+        </member>
+        <member name="M:TweetSharp.Yammer.Fluent.Extensions.GetRequestToken(TweetSharp.Yammer.Fluent.IFluentYammerAuthentication)">
+            <summary>
+            Starts the OAuth authorization process by requesting a new Request Token
+            </summary>
+            <param name="instance"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TweetSharp.Yammer.Fluent.Extensions.AuthorizeDesktop(TweetSharp.Yammer.Fluent.IFluentYammerAuthentication,System.String,System.String,System.String,System.String)">
+            <summary>
+            Requests user authorization for a desktop application by launching a browser instance 
+            and redirecting the user to the Yammer site to provide authorization
+            </summary>
+            <param name="instance"></param>
+            <param name="consumerKey">Your application's consumer key</param>
+            <param name="consumerSecret">Your application's consumer secret</param>
+            <param name="token">a valid request token</param>
+            <param name="tokenSecret">a valid request token secret</param>
+            <returns></returns>
+        </member>
+        <member name="M:TweetSharp.Yammer.Fluent.Extensions.SetVerifier(TweetSharp.Yammer.Fluent.IFluentYammerAuthentication,System.String)">
+            <summary>
+            Sets the PIN provided by the service to the user
+            </summary>
+            <param name="instance">The fluent twitter instance.</param>
+            <param name="pin">The pin obtained from the user who authorized the application.</param>
+            <returns></returns>
+        </member>
+        <member name="M:TweetSharp.Yammer.Fluent.Extensions.AuthorizeDesktop(TweetSharp.Yammer.Fluent.IFluentYammerAuthentication,System.String,System.String,System.String,System.String,System.String)">
+            <summary>
+            Requests user authorization for a desktop application by launching a browser instance 
+            and redirecting the user to the Yammer site to provide authorization
+            </summary>
+            <param name="instance"></param>
+            <param name="consumerKey">Your application's consumer key</param>
+            <param name="consumerSecret">Your application's consumer secret</param>
+            <param name="token">A valid request token</param>
+            <param name="tokenSecret">A valid request token secret</param>
+            <param name="callback">A callback url</param>
+            <returns></returns>
+        </member>
+        <member name="M:TweetSharp.Yammer.Fluent.Extensions.GetAccessToken(TweetSharp.Yammer.Fluent.IFluentYammerAuthentication,System.String,System.String,System.String)">
+            <summary>
+            Exchanges a request token for an access token
+            </summary>
+            <param name="instance"></param>
+            <param name="consumerKey">Your application's consumer key</param>
+            <param name="consumerSecret">Your application's consumer secret</param>
+            <param name="token">An authorized request token</param>
+            <returns></returns>
+        </member>
+        <member name="M:TweetSharp.Yammer.Fluent.Extensions.GetAccessToken(TweetSharp.Yammer.Fluent.IFluentYammerAuthentication,System.String)">
+            <summary>
+            Exchanges a request token for an access token
+            </summary>
+            <param name="instance"></param>
+            <param name="token">An authorized request token</param>
+            <returns></returns>
+        </member>
+        <member name="M:TweetSharp.Yammer.Fluent.Extensions.GetAuthorizationUrl(TweetSharp.Yammer.Fluent.IFluentYammerAuthentication,System.String)">
+            <summary>
+            Gets the url to where the user should be sent to authorize your application
+            </summary>
+            <param name="instance"></param>
+            <param name="token">An as yet unauthorized request token</param>
+            <returns>The url to direct the user to</returns>
+        </member>
+        <member name="M:TweetSharp.Yammer.Fluent.Extensions.GetAuthorizationUrl(TweetSharp.Yammer.Fluent.IFluentYammerAuthentication,System.String,System.String)">
+            <summary>
+            Gets the url to where the user should be sent to authorize your application
+            </summary>
+            <param name="instance"></param>
+            <param name="token">An as yet unauthorized request token</param>
+            <param name="callback">A callback url to direct the user to after the authorization step. 
+            (If different than the registered callback url)</param>
+            <returns>The url to direct the user to</returns>
+        </member>
+        <member name="M:TweetSharp.Yammer.Fluent.Extensions.OlderThan(TweetSharp.Yammer.Fluent.IYammerAllMessages,System.Int64)">
+            <summary>
+            Retrieves messages older than the provided id
+            </summary>
+            <param name="instance">the instance</param>
+            <param name="id">retrieve messages older than this id</param>
+            <returns></returns>
+        </member>
+        <member name="M:TweetSharp.Yammer.Fluent.Extensions.NewerThan(TweetSharp.Yammer.Fluent.IYammerAllMessages,System.Int64)">
+            <summary>
+            Retrieves messages newer than the provided id
+            </summary>
+            <param name="instance">the instance</param>
+            <param name="id">retrieve messages newer than this id</param>
+            <returns></returns>
+        </member>
+        <member name="M:TweetSharp.Yammer.Fluent.Extensions.Threaded(TweetSharp.Yammer.Fluent.IYammerAllMessages)">
+            <summary>
+            Retrieves messages arranged by thread
+            </summary>
+            <param name="instance">the instance</param>
+            <returns></returns>
+        </member>
+        <member name="M:TweetSharp.Yammer.Fluent.Extensions.OlderThan(TweetSharp.Yammer.Fluent.IYammerFavoriteMessages,System.Int32)">
+            <summary>
+            Requests the user's favorite messages that are older than a specific message
+            </summary>
+            <param name="instance"></param>
+            <param name="id">The id of the message</param>
+            <returns></returns>
+        </member>
+        <member name="M:TweetSharp.Yammer.Fluent.Extensions.NewerThan(TweetSharp.Yammer.Fluent.IYammerFavoriteMessages,System.Int32)">
+            <summary>
+            Requests the user's favorite messages that are newer than a specific message
+            </summary>
+            <param name="instance"></param>
+            <param name="id">The id of the message</param>
+            <returns></returns>
+        </member>
+        <member name="M:TweetSharp.Yammer.Fluent.Extensions.Threaded(TweetSharp.Yammer.Fluent.IYammerFavoriteMessages)">
+            <summary>
+            Requests the results in a threaded format
+            </summary>
+            <param name="instance"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TweetSharp.Yammer.Fluent.Extensions.OlderThan(TweetSharp.Yammer.Fluent.IYammerFollowingMessages,System.Int32)">
+            <summary>
+            Requests messages posted by users that the current user is following and that are older than a specific message
+            </summary>
+            <param name="instance"></param>
+            <param name="id">The id of the message</param>
+            <returns></returns>        
+        </member>
+        <member name="M:TweetSharp.Yammer.Fluent.Extensions.NewerThan(TweetSharp.Yammer.Fluent.IYammerFollowingMessages,System.Int32)">
+            <summary>
+            Requests messages posted by users that the current user is following and that are newer than a specific message
+            </summary>
+            <param name="instance"></param>
+            <param name="id">The id of the message</param>
+            <returns></returns>
+        </member>
+        <member name="M:TweetSharp.Yammer.Fluent.Extensions.Threaded(TweetSharp.Yammer.Fluent.IYammerFollowingMessages)">
+            <summary>
+            Requests that the results be returned in a threaded format
+            </summary>
+            <param name="instance"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TweetSharp.Yammer.Fluent.Extensions.OlderThan(TweetSharp.Yammer.Fluent.IYammerMessagesFromBot,System.Int32)">
+            <summary>
+            Requests messages posted by a bot and that are older than a specific message
+            </summary>
+            <param name="instance"></param>
+            <param name="id">The id of the message</param>
+            <returns></returns>
+        </member>
+        <member name="M:TweetSharp.Yammer.Fluent.Extensions.NewerThan(TweetSharp.Yammer.Fluent.IYammerMessagesFromBot,System.Int32)">
+            <summary>
+            Requests messages posted by a bot and that are newer than a specific message
+            </summary>
+            <param name="instance"></param>
+            <param name="id">The id of the message</param>
+            <returns></returns>
+        </member>
+        <member name="M:TweetSharp.Yammer.Fluent.Extensions.Threaded(TweetSharp.Yammer.Fluent.IYammerMessagesFromBot)">
+            <summary>
+            Requests that the messages be returned in a threaded format
+            </summary>
+            <param name="instance"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TweetSharp.Yammer.Fluent.Extensions.OlderThan(TweetSharp.Yammer.Fluent.IYammerMessagesFromUser,System.Int32)">
+            <summary>
+            Requests messages posted by a specific user and that are older than a specific message
+            </summary>
+            <param name="instance"></param>
+            <param name="id">The id of the message</param>
+            <returns></returns>
+        </member>
+        <member name="M:TweetSharp.Yammer.Fluent.Extensions.NewerThan(TweetSharp.Yammer.Fluent.IYammerMessagesFromUser,System.Int32)">
+            <summary>
+            Requests messages posted by a specific user and that are newer than a specific message
+            </summary>
+            <param name="instance"></param>
+            <param name="id">The id of the message</param>
+            <returns></returns>
+        </member>
+        <member name="M:TweetSharp.Yammer.Fluent.Extensions.Threaded(TweetSharp.Yammer.Fluent.IYammerMessagesFromUser)">
+            <summary>
+            Requests that the results be returned in a threaded format
+            </summary>
+            <param name="instance"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TweetSharp.Yammer.Fluent.Extensions.OlderThan(TweetSharp.Yammer.Fluent.IYammerMessagesInGroup,System.Int32)">
+            <summary>
+            Requests messages posted to a group that are older than a specific message
+            </summary>
+            <param name="instance"></param>
+            <param name="id">The id of the message</param>
+            <returns></returns>
+        </member>
+        <member name="M:TweetSharp.Yammer.Fluent.Extensions.NewerThan(TweetSharp.Yammer.Fluent.IYammerMessagesInGroup,System.Int32)">
+            <summary>
+            Requests messages posted to a group and that are newer than a specific message
+            </summary>
+            <param name="instance"></param>
+            <param name="id">The id of the message</param>
+            <returns></returns>
+        </member>
+        <member name="M:TweetSharp.Yammer.Fluent.Extensions.Threaded(TweetSharp.Yammer.Fluent.IYammerMessagesInGroup)">
+            <summary>
+            Requests that the result be returned in a threaded format
+            </summary>
+            <param name="instance"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TweetSharp.Yammer.Fluent.Extensions.OlderThan(TweetSharp.Yammer.Fluent.IYammerMessagesInThread,System.Int32)">
+            <summary>
+            Requests messages in the thread older than the message with the specified Id
+            </summary>
+            <param name="instance"></param>
+            <param name="id">the Id of the message</param>
+            <returns></returns>
+        </member>
+        <member name="M:TweetSharp.Yammer.Fluent.Extensions.NewerThan(TweetSharp.Yammer.Fluent.IYammerMessagesInThread,System.Int32)">
+            <summary>
+            Requests messages in the thread newer than the message with the specified Id
+            </summary>
+            <param name="instance"></param>
+            <param name="id">the Id of the message</param>
+            <returns></returns>
+        </member>
+        <member name="M:TweetSharp.Yammer.Fluent.Extensions.OlderThan(TweetSharp.Yammer.Fluent.IYammerMessagesWithTag,System.Int32)">
+            <summary>
+            Requests messages posted with a specific tag and that are older than a specific message
+            </summary>
+            <param name="instance"></param>
+            <param name="id">The id of the message</param>
+            <returns></returns>
+        </member>
+        <member name="M:TweetSharp.Yammer.Fluent.Extensions.NewerThan(TweetSharp.Yammer.Fluent.IYammerMessagesWithTag,System.Int32)">
+            <summary>
+            Requests messages posted with a specific tag and that are newer than a specific message
+            </summary>
+            <param name="instance"></param>
+            <param name="id">The id of the message</param>
+            <returns></returns>
+        </member>
+        <member name="M:TweetSharp.Yammer.Fluent.Extensions.Threaded(TweetSharp.Yammer.Fluent.IYammerMessagesWithTag)">
+            <summary>
+            Requests that the results be returned in threaded format
+            </summary>
+            <param name="instance"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TweetSharp.Yammer.Fluent.Extensions.InReplyTo(TweetSharp.Yammer.Fluent.IYammerMessagePost,TweetSharp.Yammer.Model.YammerMessage)">
+            <summary>
+            Post a reply to the specified message
+            </summary>
+            <param name="instance"></param>
+            <param name="message">The message to reply to</param>
+            <returns></returns>
+        </member>
+        <member name="M:TweetSharp.Yammer.Fluent.Extensions.ToGroup(TweetSharp.Yammer.Fluent.IYammerMessagePost,TweetSharp.Yammer.Model.YammerGroup)">
+            <summary>
+            Post the message to a specific group
+            </summary>
+            <param name="instance"></param>
+            <param name="group">The group</param>
+            <returns></returns>
+        </member>
+        <member name="M:TweetSharp.Yammer.Fluent.Extensions.DirectToUser(TweetSharp.Yammer.Fluent.IYammerMessagePost,TweetSharp.Yammer.Model.YammerUser)">
+            <summary>
+            Sends a message directly to a specific user
+            </summary>
+            <param name="instance"></param>
+            <param name="user">The user to whom to send the message</param>
+            <returns></returns>
+        </member>
+        <member name="M:TweetSharp.Yammer.Fluent.Extensions.InReplyTo(TweetSharp.Yammer.Fluent.IYammerMessagePost,System.Int64)">
+            <summary>
+            Post a reply to the specified message
+            </summary>
+            <param name="instance"></param>
+            <param name="messageId">Id of the message to reply to</param>
+            <returns></returns>
+        </member>
+        <member name="M:TweetSharp.Yammer.Fluent.Extensions.ToGroup(TweetSharp.Yammer.Fluent.IYammerMessagePost,System.Int64)">
+            <summary>
+            Posts a message to a specifc group
+            </summary>
+            <param name="instance"></param>
+            <param name="groupId">Id of the group</param>
+            <returns></returns>
+        </member>
+        <member name="M:TweetSharp.Yammer.Fluent.Extensions.DirectToUser(TweetSharp.Yammer.Fluent.IYammerMessagePost,System.Int64)">
+            <summary>
+            Sends a message directly to a specific user
+            </summary>
+            <param name="instance"></param>
+            <param name="userId">The id of the user to whom to send the message</param>
+            <returns></returns>
+        </member>
+        <member name="M:TweetSharp.Yammer.Fluent.Extensions.WithAttachment(TweetSharp.Yammer.Fluent.IYammerMessagePost,System.String)">
+            <summary>
+            Post a message with an attachment
+            </summary>
+            <param name="instance"></param>
+            <param name="attachmentPath">Path to the file to atach</param>
+            <returns></returns>
+        </member>
+        <member name="M:TweetSharp.Yammer.Fluent.Extensions.OlderThan(TweetSharp.Yammer.Fluent.IYammerReceivedMessages,System.Int64)">
+            <summary>
+            Retrieves messages older than the provided id
+            </summary>
+            <param name="instance">the instance</param>
+            <param name="id">retrieve messages older than this id</param>
+            <returns></returns>
+        </member>
+        <member name="M:TweetSharp.Yammer.Fluent.Extensions.NewerThan(TweetSharp.Yammer.Fluent.IYammerReceivedMessages,System.Int64)">
+            <summary>
+            Retrieves messages newer than the provided id
+            </summary>
+            <param name="instance">the instance</param>
+            <param name="id">retrieve messages newer than this id</param>
+            <returns></returns>
+        </member>
+        <member name="M:TweetSharp.Yammer.Fluent.Extensions.Threaded(TweetSharp.Yammer.Fluent.IYammerReceivedMessages)">
+            <summary>
+            Retrieves messages arranged by thread
+            </summary>
+            <param name="instance">the instance</param>
+            <returns></returns>
+        </member>
+        <member name="M:TweetSharp.Yammer.Fluent.Extensions.OlderThan(TweetSharp.Yammer.Fluent.IYammerSentMessages,System.Int32)">
+            <summary>
+            Retrieves messages older than the provided id
+            </summary>
+            <param name="instance">the instance</param>
+            <param name="id">retrieve messages older than this id</param>
+            <returns></returns>
+        </member>
+        <member name="M:TweetSharp.Yammer.Fluent.Extensions.NewerThan(TweetSharp.Yammer.Fluent.IYammerSentMessages,System.Int32)">
+            <summary>
+            Retrieves messages newer than the provided id
+            </summary>
+            <param name="instance">the instance</param>
+            <param name="id">retrieve messages newer than this id</param>
+            <returns></returns>
+        </member>
+        <member name="M:TweetSharp.Yammer.Fluent.Extensions.Threaded(TweetSharp.Yammer.Fluent.IYammerSentMessages)">
+            <summary>
+            Retrieves messages arranged by thread
+            </summary>
+            <param name="instance">the instance</param>
+            <returns></returns>
+        </member>
+        <member name="T:TweetSharp.Yammer.Fluent.RetryOn">
+            <summary>
+            Sets conditions on which TweetSharp should retry a failed query (can be combined).
+            </summary>
+        </member>
+        <member name="F:TweetSharp.Yammer.Fluent.RetryOn.Never">
+            <summary>
+            Never retry failed queries
+            </summary>
+        </member>
+        <member name="F:TweetSharp.Yammer.Fluent.RetryOn.ServiceError">
+            <summary>
+            Retry when the service returns an error result.
+            </summary>
+        </member>
+        <member name="F:TweetSharp.Yammer.Fluent.RetryOn.Timeout">
+            <summary>
+            Retry when the request times out
+            </summary>
+        </member>
+        <member name="F:TweetSharp.Yammer.Fluent.RetryOn.Network">
+            <summary>
+            Retry on any network related error (includes timeout)
+            </summary>
+        </member>
+        <member name="F:TweetSharp.Yammer.Fluent.RetryOn.ConnectionClosed">
+            <summary>
+            Retry when the connection is closed unexpectedly
+            </summary>
+        </member>
+        <member name="T:TweetSharp.Yammer.Fluent.IFluentYammerExtensions">
+            <summary>
+            Extension methods for the IFluentYammer Interface
+            </summary>
+        </member>
+        <member name="M:TweetSharp.Yammer.Fluent.IFluentYammerExtensions.Messages(TweetSharp.Yammer.Fluent.IFluentYammer)">
+            <summary>
+            Accesses the Messages subset of the Yammer REST API
+            </summary>
+            <param name="instance">The instance.</param>
+            <returns>An <see cref="T:TweetSharp.Yammer.Fluent.IYammerMessages"/> instance with methods for dealing with messages</returns>
+        </member>
+        <member name="M:TweetSharp.Yammer.Fluent.IFluentYammerExtensions.Groups(TweetSharp.Yammer.Fluent.IFluentYammer)">
+            <summary>
+            Accesses the Groups subset of the Yammer REST API
+            </summary>
+            <param name="instance">The instance.</param>
+            <returns>An <see cref="T:TweetSharp.Yammer.Fluent.IYammerMessages"/> instance with methods for dealing with groups</returns>
+        </member>
+        <member name="M:TweetSharp.Yammer.Fluent.IFluentYammerExtensions.Tags(TweetSharp.Yammer.Fluent.IFluentYammer)">
+            <summary>
+            Accesses the Tags subset of the Yammer REST API
+            </summary>
+            <param name="instance">The instance.</param>
+            <returns>An <see cref="T:TweetSharp.Yammer.Fluent.IYammerMessages"/> instance with methods for dealing with tags</returns>
+        </member>
+        <member name="M:TweetSharp.Yammer.Fluent.IFluentYammerExtensions.Users(TweetSharp.Yammer.Fluent.IFluentYammer)">
+            <summary>
+            Accesses the Users subset of the Yammer REST API
+            </summary>
+            <param name="instance">The instance.</param>
+            <returns>An <see cref="T:TweetSharp.Yammer.Fluent.IYammerMessages"/> instance with methods for dealing with users</returns>
+        </member>
+        <member name="M:TweetSharp.Yammer.Fluent.IFluentYammerExtensions.GroupMemberships(TweetSharp.Yammer.Fluent.IFluentYammer)">
+            <summary>
+            Accesses the Group Memberships subset of the Yammer REST API
+            </summary>
+            <param name="instance">The instance.</param>
+            <returns>An <see cref="T:TweetSharp.Yammer.Fluent.IYammerMessages"/> instance with methods for dealing with group memberships</returns>
+        </member>
+        <member name="M:TweetSharp.Yammer.Fluent.IFluentYammerExtensions.Relationships(TweetSharp.Yammer.Fluent.IFluentYammer)">
+            <summary>
+            Accesses the Relationships subset of the Yammer REST API
+            </summary>
+            <param name="instance">The instance.</param>
+            <returns>An <see cref="T:TweetSharp.Yammer.Fluent.IYammerMessages"/> instance with methods for dealing with relationships</returns>
+        </member>
+        <member name="M:TweetSharp.Yammer.Fluent.IFluentYammerExtensions.Suggestions(TweetSharp.Yammer.Fluent.IFluentYammer)">
+            <summary>
+            Accesses the Suggestions subset of the Yammer REST API
+            </summary>
+            <param name="instance">The instance.</param>
+            <returns>An <see cref="T:TweetSharp.Yammer.Fluent.IYammerMessages"/> instance with methods for dealing with suggestions</returns>
+        </member>
+        <member name="M:TweetSharp.Yammer.Fluent.IFluentYammerExtensions.Subscriptions(TweetSharp.Yammer.Fluent.IFluentYammer)">
+            <summary>
+            Accesses the Subscriptions subset of the Yammer REST API
+            </summary>
+            <param name="instance">The instance.</param>
+            <returns>An <see cref="T:TweetSharp.Yammer.Fluent.IYammerMessages"/> instance with methods for dealing with subscriptions</returns>
+        </member>
+        <member name="M:TweetSharp.Yammer.Fluent.IFluentYammerExtensions.AutoComplete(TweetSharp.Yammer.Fluent.IFluentYammer)">
+            <summary>
+            Accesses the AutoComplete subset of the Yammer REST API
+            </summary>
+            <param name="instance">The instance.</param>
+            <returns>An <see cref="T:TweetSharp.Yammer.Fluent.IYammerMessages"/> instance with methods for dealing with auto-complete</returns>
+        </member>
+        <member name="M:TweetSharp.Yammer.Fluent.IFluentYammerExtensions.Invitations(TweetSharp.Yammer.Fluent.IFluentYammer)">
+            <summary>
+            Accesses the Invitations subset of the Yammer REST API
+            </summary>
+            <param name="instance">The instance.</param>
+            <returns>An <see cref="T:TweetSharp.Yammer.Fluent.IYammerMessages"/> instance with methods for dealing with invitations</returns>
+        </member>
+        <member name="M:TweetSharp.Yammer.Fluent.IFluentYammerExtensions.Search(TweetSharp.Yammer.Fluent.IFluentYammer)">
+            <summary>
+            Accesses the Search subset of the Yammer REST API
+            </summary>
+            <param name="instance">The instance.</param>
+            <returns>An <see cref="T:TweetSharp.Yammer.Fluent.IYammerMessages"/> instance with methods for dealing with search</returns>
+        </member>
+        <member name="M:TweetSharp.Yammer.Fluent.IFluentYammerExtensions.Networks(TweetSharp.Yammer.Fluent.IFluentYammer)">
+            <summary>
+            Accesses the Networks subset of the Yammer REST API
+            </summary>
+            <param name="instance">The instance.</param>
+            <returns>An <see cref="T:TweetSharp.Yammer.Fluent.IYammerMessages"/> instance with methods for dealing with networks</returns>
+        </member>
+        <member name="M:TweetSharp.Yammer.Fluent.IFluentYammerExtensions.AuthenticateWith(TweetSharp.Yammer.Fluent.IFluentYammer,System.String,System.String,System.String,System.String)">
+            <summary>
+            Specifies the authentication details to use for the query \
+            </summary>
+            <param name="instance">the instance</param>
+            <param name="consumerKey">Your application's OAuth Consumer Key</param>
+            <param name="consumerSecret">Your application's OAuth Consumer secret</param>
+            <param name="token">The user's Access token</param>
+            <param name="tokenSecret">The user's Access token secret</param>
+            <returns></returns>
+        </member>
+        <member name="M:TweetSharp.Yammer.Fluent.IFluentYammerExtensions.AuthenticateWith(TweetSharp.Yammer.Fluent.IFluentYammer,System.String,System.String)">
+            <summary>
+            Specifies the authentication details to use for the query with consumer key set in the <see cref="T:TweetSharp.YammerClientInfo"/> object.
+            </summary>
+            <param name="instance">the instance</param>
+            <param name="token">The user's Access token</param>
+            <param name="tokenSecret">The user's Access token secret</param>
+            <returns></returns>
+        </member>
+        <member name="M:TweetSharp.Yammer.Fluent.IFluentYammerExtensions.CallbackTo(TweetSharp.Yammer.Fluent.IFluentYammer,TweetSharp.Yammer.Fluent.YammerWebCallback)">
+            <summary>
+            Method to callback to when an asynchronous request completes
+            </summary>
+            <param name="instance">The instance</param>
+            <param name="callback">The callback method</param>
+            <returns></returns>
+        </member>
+        <member name="T:TweetSharp.Yammer.Fluent.FluentYammer">
+            <summary>
+            This is the main fluent class for building expressions
+            bound for the Yammer API.
+            </summary>
+        </member>
+        <member name="T:TweetSharp.Yammer.Fluent.IFluentYammer">
+            <summary>
+            The base fluent query instance for the Yammer API.
+            </summary>
+        </member>
+        <member name="M:TweetSharp.Yammer.Fluent.IFluentYammer.AsUrl">
+            <summary>
+            Converts this query node into an API URL representation.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:TweetSharp.Yammer.Fluent.IFluentYammer.ClientInfo">
+            <summary>
+            Gets or sets the client info.
+            This is used to set OAuth consumer information
+            and other metadata on a per-request basis.
+            </summary>
+            <value>The client info.</value>
+        </member>
+        <member name="P:TweetSharp.Yammer.Fluent.IFluentYammer.Method">
+            <summary>
+            Gets or sets the HTTP method used for this query.
+            </summary>
+            <value>The HTTP method.</value>
+        </member>
+        <member name="P:TweetSharp.Yammer.Fluent.IFluentYammer.Format">
+            <summary>
+            Gets or sets the web content format expected in the query response.
+            </summary>
+            <value>The format.</value>
+        </member>
+        <member name="P:TweetSharp.Yammer.Fluent.IFluentYammer.Callback">
+            <summary>
+            Gets or sets the method callback to invoke after a query response.
+            </summary>
+            <value>The callback.</value>
+        </member>
+        <member name="P:TweetSharp.Yammer.Fluent.IFluentYammer.Authentication">
+            <summary>
+            Gets or sets the authentication info for the query.
+            </summary>
+            <value>The authentication.</value>
+        </member>
+        <member name="P:TweetSharp.Yammer.Fluent.IFluentYammer.Parameters">
+            <summary>
+            Gets the query parameters branch.
+            </summary>
+            <value>The parameters.</value>
+        </member>
+        <member name="P:TweetSharp.Yammer.Fluent.IFluentYammer.Configuration">
+            <summary>
+            Gets the query configuration.
+            </summary>
+            <value>The configuration.</value>
+        </member>
+        <member name="M:TweetSharp.Yammer.Fluent.FluentYammer.SetClientInfo(TweetSharp.YammerClientInfo)">
+            <summary>
+            Sets the client info.
+            </summary>
+            <param name="clientInfo">The client info.</param>
+        </member>
+        <member name="M:TweetSharp.Yammer.Fluent.FluentYammer.Request">
+            <summary>
+            Makes a sequential call to the service to get the results of this query.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:TweetSharp.Yammer.Fluent.FluentYammer.CreateRequest">
+            <summary>
+            Creates a new composable query, using the default client and platform.
+            </summary>
+        </member>
+        <member name="M:TweetSharp.Yammer.Fluent.FluentYammer.BuildResult(Hammock.RestResponseBase)">
+            <summary>
+            Builds the result
+            </summary>
+            <param name="response">The result from yammer</param>
+            <returns>The result</returns>
+        </member>
+        <member name="M:TweetSharp.Yammer.Fluent.FluentYammer.AsUrl(System.Boolean)">
+            <summary>
+            Converts this query node into an API URL representation, ignoring any transparent proxy settings
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:TweetSharp.Yammer.Fluent.FluentYammer.AsUrl">
+            <summary>
+            Converts this query node into an API URL representation.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:TweetSharp.Yammer.Fluent.FluentYammer.EndRequest(System.IAsyncResult)">
+            <summary>
+            Completes the asynchronous request.
+            </summary>
+            <param name="asyncResult">The <see cref="T:System.IAsyncResult"/>handle returned from <see cref="M:TweetSharp.Fluent.FluentBase`1.BeginRequest"/></param>
+            <returns></returns>
+        </member>
+        <member name="M:TweetSharp.Yammer.Fluent.FluentYammer.BuildQuery(System.Boolean,System.String,System.String,System.String)">
+            <summary>
+            Builds the query.
+            </summary>
+            <param name="hasAction">if set to <c>true</c> the query uses a URL-based action.</param>
+            <param name="format">The format.</param>
+            <param name="activity">The activity.</param>
+            <param name="action">The action.</param>
+            <returns></returns>
+        </member>
+        <member name="M:TweetSharp.Yammer.Fluent.FluentYammer.BeginRequest">
+            <summary>
+            Starts the request asynchronously.
+            </summary>
+            <returns>The <see cref="T:System.IAsyncResult"/> handle for the request</returns>
+        </member>
+        <member name="M:TweetSharp.Yammer.Fluent.FluentYammer.BeginRequest(System.Object)">
+            <summary>
+            Starts the request asynchronously.
+            </summary>
+            <returns>The <see cref="T:System.IAsyncResult"/> handle for the request</returns>
+        </member>
+        <member name="P:TweetSharp.Yammer.Fluent.FluentYammer.UrlOAuthAuthority">
+            <summary>
+            Base URL for OAuth operations
+            </summary>
+        </member>
+        <member name="P:TweetSharp.Yammer.Fluent.FluentYammer.AuthenticationPair">
+            <summary>
+            Gets the authentication pair used to authenticate to yammer
+            </summary>
+            <value>The authentication pair, typically a username and password or a oauth token and tokensecret.</value>
+        </member>
+        <member name="P:TweetSharp.Yammer.Fluent.FluentYammer.Parameters">
+            <summary>
+            The parameters for the instance
+            </summary>
+        </member>
+        <member name="P:TweetSharp.Yammer.Fluent.FluentYammer.InternalCallback">
+            <summary>
+            Gets the internal callback.
+            </summary>
+            <value>The internal callback.</value>
+        </member>
+        <member name="P:TweetSharp.Yammer.Fluent.FluentYammer.Callback">
+            <summary>
+            Gets or sets the callback.
+            </summary>
+            <value>The callback.</value>
+        </member>
+        <member name="T:TweetSharp.Yammer.Fluent.IFluentYammerParameters">
+            <summary>
+            Parameters used in Yammer queries
+            </summary>
+        </member>
+        <member name="P:TweetSharp.Yammer.Fluent.IFluentYammerParameters.Activity">
+            <summary>
+            Gets or sets the activity
+            </summary>
+            <value>The activity</value>
+        </member>
+        <member name="P:TweetSharp.Yammer.Fluent.IFluentYammerParameters.Action">
+            <summary>
+            Gets or sets the action
+            </summary>
+            <value>The Action</value>
+        </member>
+        <member name="P:TweetSharp.Yammer.Fluent.IFluentYammerParameters.OlderThan">
+            <summary>
+            Gets or sets the value for the OlderThan query parameter
+            </summary>
+            <value>The OlderThan Id</value>
+        </member>
+        <member name="P:TweetSharp.Yammer.Fluent.IFluentYammerParameters.NewerThan">
+            <summary>
+            Gets or sets the value for the NewerThan query parameter
+            </summary>
+            <value>The NewerThan Id</value>
+        </member>
+        <member name="P:TweetSharp.Yammer.Fluent.IFluentYammerParameters.Threaded">
+            <summary>
+            Gets or sets the threaded flag
+            </summary>
+            <value>The flag</value>
+        </member>
+        <member name="P:TweetSharp.Yammer.Fluent.IFluentYammerParameters.ThreadID">
+            <summary>
+            Gets or sets the thread Id
+            </summary>
+            <value>The thread Id</value>
+        </member>
+        <member name="P:TweetSharp.Yammer.Fluent.IFluentYammerParameters.Count">
+            <summary>
+            Gets or sets the count
+            </summary>
+            <value>The count</value>
+        </member>
+        <member name="P:TweetSharp.Yammer.Fluent.IFluentYammerParameters.Page">
+            <summary>
+            Gets or sets the page number
+            </summary>
+            <value>The page number</value>
+        </member>
+        <member name="P:TweetSharp.Yammer.Fluent.IFluentYammerParameters.ReturnPerPage">
+            <summary>
+            Gets or sets the number of results per page
+            </summary>
+            <value>The desired number of results</value>
+        </member>
+        <member name="P:TweetSharp.Yammer.Fluent.IFluentYammerParameters.Id">
+            <summary>
+            Gets or sets the Id
+            </summary>
+            <value>the Id</value>
+        </member>
+        <member name="P:TweetSharp.Yammer.Fluent.IFluentYammerParameters.ScreenName">
+            <summary>
+            Gets or sets the screen name
+            </summary>
+            <value>The screen name</value>
+        </member>
+        <member name="P:TweetSharp.Yammer.Fluent.IFluentYammerParameters.Body">
+            <summary>
+            Gets or sets the message body
+            </summary>
+            <value>The message body</value>
+        </member>
+        <member name="P:TweetSharp.Yammer.Fluent.IFluentYammerParameters.Email">
+            <summary>
+            Gets or sets the email
+            </summary>
+            <value>The email address</value>
+        </member>
+        <member name="P:TweetSharp.Yammer.Fluent.IFluentYammerParameters.UserScreenName">
+            <summary>
+            Gets or sets the user screen name
+            </summary>
+            <value>The user screen name</value>
+        </member>
+        <member name="P:TweetSharp.Yammer.Fluent.IFluentYammerParameters.UserId">
+            <summary>
+            Gets or sets the user Id
+            </summary>
+            <value>The user Id</value>
+        </member>
+        <member name="P:TweetSharp.Yammer.Fluent.IFluentYammerParameters.UseCurrentAsUserId">
+            <summary>
+            Gets or sets a flag indicating that the current user's Id should be used
+            </summary>
+            <value>the flag</value>
+        </member>
+        <member name="P:TweetSharp.Yammer.Fluent.IFluentYammerParameters.BotID">
+            <summary>
+            Gets or sets the Bot Id
+            </summary>
+            <value>The bot Id</value>
+        </member>
+        <member name="P:TweetSharp.Yammer.Fluent.IFluentYammerParameters.GroupID">
+            <summary>
+            Gets or sets the group Id
+            </summary>
+            <value>The group Id.</value>
+        </member>
+        <member name="P:TweetSharp.Yammer.Fluent.IFluentYammerParameters.Follow">
+            <summary>
+            Gets or sets the follow flag
+            </summary>
+            <value>The flag</value>
+        </member>
+        <member name="P:TweetSharp.Yammer.Fluent.IFluentYammerParameters.Tag">
+            <summary>
+            Gets or sets the tag
+            </summary>
+            <value>The tag</value>  
+        </member>
+        <member name="P:TweetSharp.Yammer.Fluent.IFluentYammerParameters.DirectToUser">
+            <summary>
+            Gets or sets the Id of the user to whom to send a direct message
+            </summary>
+            <value>The user Id</value>
+        </member>
+        <member name="P:TweetSharp.Yammer.Fluent.IFluentYammerParameters.ToGroupID">
+            <summary>
+            Gets or sets the Id of the group to which to post a message
+            </summary>
+            <value>The group Id</value>
+        </member>
+        <member name="P:TweetSharp.Yammer.Fluent.IFluentYammerParameters.InReplyTo">
+            <summary>
+            Gets or sets the Id of the message to which to reply
+            </summary>
+            <value>The message Id</value>
+        </member>
+        <member name="P:TweetSharp.Yammer.Fluent.IFluentYammerParameters.MessageId">
+            <summary>
+            Gets or sets the message Id
+            </summary>
+            <value>The message Id</value>
+        </member>
+        <member name="P:TweetSharp.Yammer.Fluent.IFluentYammerParameters.StartingWith">
+            <summary>
+            Gets or sets the starting string
+            </summary>
+            <value>The starting string</value>
+        </member>
+        <member name="P:TweetSharp.Yammer.Fluent.IFluentYammerParameters.GroupName">
+            <summary>
+            Gets or sets the group name
+            </summary>
+            <value>The group name</value>
+        </member>
+        <member name="P:TweetSharp.Yammer.Fluent.IFluentYammerParameters.SortGroupsBy">
+            <summary>
+            Gets or sets the group sort order
+            </summary>
+            <value>The sort order</value>
+        </member>
+        <member name="P:TweetSharp.Yammer.Fluent.IFluentYammerParameters.SortUsersBy">
+            <summary>
+            Gets or sets the user sort order
+            </summary>
+            <value>The sort order</value>
+        </member>
+        <member name="P:TweetSharp.Yammer.Fluent.IFluentYammerParameters.Reverse">
+            <summary>
+            Gets or sets the reverse flag
+            </summary>
+            <value>The reverse flag value</value>
+        </member>
+        <member name="P:TweetSharp.Yammer.Fluent.IFluentYammerParameters.Private">
+            <summary>
+            Gets or sets the private flag
+            </summary>
+            <value>The private flag</value>
+        </member>
+        <member name="P:TweetSharp.Yammer.Fluent.IFluentYammerParameters.Attachments">
+            <summary>
+            Gets the list of attachments
+            </summary>
+        </member>
+        <member name="P:TweetSharp.Yammer.Fluent.IFluentYammerParameters.UserData">
+            <summary>
+            Gets or sets the user data
+            </summary>
+            <value>The user data</value>
+        </member>
+        <member name="P:TweetSharp.Yammer.Fluent.IFluentYammerParameters.Colleague">
+            <summary>
+            Gets or sets the colleague's name
+            </summary>
+            <value>The colleague's name</value>
+        </member>
+        <member name="P:TweetSharp.Yammer.Fluent.IFluentYammerParameters.Superior">
+            <summary>
+            Gets or sets the superior's name
+            </summary>
+            <value>The superior's name</value>
+        </member>
+        <member name="P:TweetSharp.Yammer.Fluent.IFluentYammerParameters.Subordinate">
+            <summary>
+            Gets or sets the subordinate's name
+            </summary>
+            <value>The subordinate's name</value>
+        </member>
+        <member name="P:TweetSharp.Yammer.Fluent.IFluentYammerParameters.TargetId">
+            <summary>
+            Gets or sets the target Id
+            </summary>
+            <value>The target Id</value>
+        </member>
+        <member name="P:TweetSharp.Yammer.Fluent.IFluentYammerParameters.TargetType">
+            <summary>
+            Gets or sets the TargetType
+            </summary>
+            <value>The target type</value>
+        </member>
+        <member name="P:TweetSharp.Yammer.Fluent.IFluentYammerParameters.Prefix">
+            <summary>
+            Gets or sets the prefix
+            </summary>
+            <value>The prefix</value> 
+        </member>
+        <member name="P:TweetSharp.Yammer.Fluent.IFluentYammerParameters.Search">
+            <summary>
+            Gets or sets the search query
+            </summary>
+            <value>The search query</value>
+        </member>
+        <member name="P:TweetSharp.Yammer.Fluent.IFluentYammerParameters.RelationshipType">
+            <summary>
+            Gets or sets the relationship type
+            </summary>
+            <value>The relationship type</value>
+        </member>
+        <member name="T:TweetSharp.Yammer.Fluent.YammerGroupMembershipExtensions">
+            <summary>
+            Extension methods for accessing the group membership subset of the Yammer REST API.
+            </summary>
+        </member>
+        <member name="M:TweetSharp.Yammer.Fluent.YammerGroupMembershipExtensions.JoinGroup(TweetSharp.Yammer.Fluent.IYammerGroupMemberships,System.Int64)">
+            <summary>
+            Adds the current user to the specified group
+            </summary>
+            <param name="instance">The instance.</param>
+            <param name="groupId">Id of the group to which to add the current user</param>
+            <returns></returns>
+        </member>
+        <member name="M:TweetSharp.Yammer.Fluent.YammerGroupMembershipExtensions.LeaveGroup(TweetSharp.Yammer.Fluent.IYammerGroupMemberships,System.Int64)">
+            <summary>
+            Removes the current user from the specified group.
+            </summary>
+            <param name="instance">The instance.</param>
+            <param name="groupId">Id of the group from which to remove the current user</param>
+            <returns></returns>
+        </member>
+        <member name="T:TweetSharp.Yammer.Fluent.IYammerGroupMemberships">
+            <summary>
+            Fluent Yammer node for the group membership endpoints
+            </summary>
+        </member>
+        <member name="T:TweetSharp.Yammer.Fluent.IYammerGroupMembershipsJoin">
+            <summary>
+            Fluent Yammer node for the group joining endpoint
+            </summary>
+        </member>
+        <member name="T:TweetSharp.Yammer.Fluent.IYammerGroupMembershipsLeave">
+            <summary>
+            Fluent Yammer node for the group leaving endpoint
+            </summary>
+        </member>
+        <member name="T:TweetSharp.Yammer.Fluent.IYammerGroupsCreate">
+            <summary>
+            Node in the fluent expression tree for accessing the Yammer group creation apis
+            </summary>
+        </member>
+        <member name="T:TweetSharp.Yammer.Fluent.IYammerGroups">
+            <summary>
+            Fluent Yammer node for the Groups endpoints.
+            </summary>
+        </member>
+        <member name="T:TweetSharp.Yammer.Fluent.IYammerGroupsExtensions">
+            <summary>
+            Extension methods used for accessing the Groups subset of the Yammer REST API.
+            </summary>
+        </member>
+        <member name="M:TweetSharp.Yammer.Fluent.IYammerGroupsExtensions.All(TweetSharp.Yammer.Fluent.IYammerGroups)">
+            <summary>
+            Gets all groups in the network.
+            </summary>
+            <param name="instance">The instance.</param>
+            <returns></returns>
+        </member>
+        <member name="M:TweetSharp.Yammer.Fluent.IYammerGroupsExtensions.StartingWith(TweetSharp.Yammer.Fluent.IYammerGroups,System.Char)">
+            <summary>
+            Gets groups that begin with the specified letter.
+            </summary>
+            <param name="instance">The instance.</param>
+            <param name="startingWith">The letter to search for.</param>
+            <returns></returns>
+        </member>
+        <member name="M:TweetSharp.Yammer.Fluent.IYammerGroupsExtensions.Page(TweetSharp.Yammer.Fluent.IYammerGroups,System.Int32)">
+            <summary>
+            Gets the specified page of groups (20 per page).
+            </summary>
+            <param name="instance">The instance.</param>
+            <param name="page">The requested page.</param>
+            <returns></returns>
+        </member>
+        <member name="M:TweetSharp.Yammer.Fluent.IYammerGroupsExtensions.SortedBy(TweetSharp.Yammer.Fluent.IYammerGroups,TweetSharp.Yammer.Fluent.SortGroupsBy)">
+            <summary>
+            Gets groups from the network sorted using the provided criterion.
+            </summary>
+            <param name="instance">The instance.</param>
+            <param name="sortGroupsBy">The desired sort.</param>
+            <returns></returns>
+        </member>
+        <member name="M:TweetSharp.Yammer.Fluent.IYammerGroupsExtensions.Create(TweetSharp.Yammer.Fluent.IYammerGroups,System.String)">
+            <summary>
+            Creates a new list in the network.
+            </summary>
+            <param name="instance">The instance.</param>
+            <param name="name">The desired name for the list.</param>
+            <returns></returns>
+        </member>
+        <member name="M:TweetSharp.Yammer.Fluent.IYammerGroupsExtensions.Create(TweetSharp.Yammer.Fluent.IYammerGroups,System.String,TweetSharp.Yammer.Model.YammerGroupPrivacy)">
+            <summary>
+            Creates a new group in the network.
+            </summary>
+            <param name="instance">the instance.</param>
+            <param name="name">the desired name for the list.</param>
+            <param name="privacy">the desired privacy setting for the list.</param>
+            <returns></returns>
+        </member>
+        <member name="M:TweetSharp.Yammer.Fluent.IYammerGroupsExtensions.Update(TweetSharp.Yammer.Fluent.IYammerGroups,TweetSharp.Yammer.Model.YammerGroup)">
+            <summary>
+            Updates an existing group.
+            </summary>
+            <param name="instance">the instance.</param>
+            <param name="group">The group to update.</param>
+            <returns></returns>
+        </member>
+        <member name="M:TweetSharp.Yammer.Fluent.IYammerGroupsExtensions.Update(TweetSharp.Yammer.Fluent.IYammerGroups,System.Int64)">
+            <summary>
+            Updates an existing group.
+            </summary>
+            <param name="instance">the instance.</param>
+            <param name="groupId">The id of the group to update.</param>
+            <returns></returns>
+        </member>
+        <member name="T:TweetSharp.Yammer.Fluent.IYammerGroupSortedExtensions">
+            <summary>
+            Extension methods for Yammer group sorting options.
+            </summary>
+        </member>
+        <member name="M:TweetSharp.Yammer.Fluent.IYammerGroupSortedExtensions.Reverse(TweetSharp.Yammer.Fluent.IYammerGroupsSorted)">
+            <summary>
+            Sort the groups in reverse order.
+            </summary>
+            <param name="instance"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TweetSharp.Yammer.Fluent.IYammerGroupSortedExtensions.Page(TweetSharp.Yammer.Fluent.IYammerGroupsSorted,System.Int32)">
+            <summary>
+            Requests a specific page of results.
+            </summary>
+            <param name="instance"></param>
+            <param name="page"></param>
+            <returns></returns>
+        </member>
+        <member name="T:TweetSharp.Yammer.Fluent.IYammerGroupsSorted">
+            <summary>
+            Node in the fluent expression tree for accessing the Yammer APIs for retrieving sorted lists of groups
+            </summary>
+        </member>
+        <member name="T:TweetSharp.Yammer.Fluent.IYammerGroupsUpdate">
+            <summary>
+            Fluent Yammer node for the group updating endpoint.
+            </summary>
+        </member>
+        <member name="T:TweetSharp.Yammer.Fluent.IYammerGroupsUpdateExtensions">
+            <summary>
+            Extension methods for updating groups
+            </summary>
+        </member>
+        <member name="M:TweetSharp.Yammer.Fluent.IYammerGroupsUpdateExtensions.SetName(TweetSharp.Yammer.Fluent.IYammerGroupsUpdate,System.String)">
+            <summary>
+            Sets the new name of the group being updated.
+            </summary>
+            <param name="instance">the instance.</param>
+            <param name="newName">The new name for the list.</param>
+            <returns></returns>
+        </member>
+        <member name="M:TweetSharp.Yammer.Fluent.IYammerGroupsUpdateExtensions.SetPrivacy(TweetSharp.Yammer.Fluent.IYammerGroupsUpdate,TweetSharp.Yammer.Model.YammerGroupPrivacy)">
+            <summary>
+            Sets the new privacy setting for the list.
+            </summary>
+            <param name="instance">the instance.</param>
+            <param name="privacy">New desired privacy setting for the list.</param>
+            <returns></returns>
+        </member>
+        <member name="T:TweetSharp.Yammer.Fluent.SortGroupsBy">
+            <summary>
+            Allowable sort orders for groups
+            </summary>
+        </member>
+        <member name="F:TweetSharp.Yammer.Fluent.SortGroupsBy.Messages">
+            <summary>
+            Sort by number of messages
+            </summary>
+        </member>
+        <member name="F:TweetSharp.Yammer.Fluent.SortGroupsBy.Members">
+            <summary>
+            Sort by number of users
+            </summary>
+        </member>
+        <member name="F:TweetSharp.Yammer.Fluent.SortGroupsBy.Privacy">
+            <summary>
+            Sort by group privacy
+            </summary>
+        </member>
+        <member name="F:TweetSharp.Yammer.Fluent.SortGroupsBy.Created_At">
+            <summary>
+            Sort by the group's created date
+            </summary>
+        </member>
+        <member name="F:TweetSharp.Yammer.Fluent.SortGroupsBy.Creator">
+            <summary>
+            Sort by the group creator's name
+            </summary>
+        </member>
+        <member name="T:TweetSharp.Yammer.Fluent.SortUsersBy">
+            <summary>
+            Allowable sort orders for users
+            </summary>
+        </member>
+        <member name="F:TweetSharp.Yammer.Fluent.SortUsersBy.Messages">
+            <summary>
+            Sort by number of messages
+            </summary>
+        </member>
+        <member name="F:TweetSharp.Yammer.Fluent.SortUsersBy.Followers">
+            <summary>
+            Sort by number of followers
+            </summary>
+        </member>
+        <member name="T:TweetSharp.Yammer.Fluent.IYammerInvitationsInvite">
+            <summary>
+            Fluent Yammer node for the Invite endpoint.
+            </summary>
+        </member>
+        <member name="T:TweetSharp.Yammer.Fluent.IYammerInvitations">
+            <summary>
+            Fluent Yammer node for the invitations endpoints.
+            </summary>
+        </member>
+        <member name="T:TweetSharp.Yammer.Fluent.YammerInvitationExtensions">
+            <summary>
+            Extension methods for accessing the Invitation subset of the Yammer REST APIs
+            </summary>
+        </member>
+        <member name="M:TweetSharp.Yammer.Fluent.YammerInvitationExtensions.Invite(TweetSharp.Yammer.Fluent.IYammerInvitations,System.String)">
+            <summary>
+            Invite another person to this Yammer network. 
+            </summary>
+            <param name="instance"></param>
+            <param name="emailAddress">The email address to which to send the invitation.</param>
+            <returns></returns>
+        </member>
+        <member name="T:TweetSharp.Yammer.Fluent.IYammerLeafNodeAll">
+            <summary>
+            Interface for a fluent query node that can request all supported data formats.
+            </summary>
+        </member>
+        <member name="T:TweetSharp.Yammer.Fluent.IYammerAllMessages">
+            <summary>
+            Fluent yammer node for the AllMessages endpoint
+            </summary>
+        </member>
+        <member name="T:TweetSharp.Yammer.Fluent.IYammerMessageDelete">
+            <summary>
+            Node in the fluent expression tree for accessing the Yammer APIs to delete posted messages
+            </summary>
+        </member>
+        <member name="T:TweetSharp.Yammer.Fluent.IYammerFavoritesCreate">
+            <summary>
+            Fluent Yammer node for creating favorites
+            </summary>
+        </member>
+        <member name="T:TweetSharp.Yammer.Fluent.IYammerFavoritesDestroy">
+            <summary>
+            Node in the fluent expression tree for accessing the Yammer favorite deletion APIs
+            </summary>
+        </member>
+        <member name="T:TweetSharp.Yammer.Fluent.IYammerFavoriteMessages">
+            <summary>
+            Fluent Yammer node for the Favorite Messages endpoint
+            </summary>
+        </member>
+        <member name="T:TweetSharp.Yammer.Fluent.IYammerFavoriteMessagesExtensions">
+            <summary>
+            Extension methods for accessing the Favorite Messages subset of the Yammer REST API
+            </summary>
+        </member>
+        <member name="M:TweetSharp.Yammer.Fluent.IYammerFavoriteMessagesExtensions.Create(TweetSharp.Yammer.Fluent.IYammerFavoriteMessages,System.Int64)">
+            <summary>
+            Create a new favorite message
+            </summary>
+            <param name="instance"></param>
+            <param name="id">The id of the message to favorite</param>
+            <returns></returns>
+        </member>
+        <member name="M:TweetSharp.Yammer.Fluent.IYammerFavoriteMessagesExtensions.Destroy(TweetSharp.Yammer.Fluent.IYammerFavoriteMessages,System.Int64)">
+            <summary>
+            Remove an existing favorite
+            </summary>
+            <param name="instance"></param>
+            <param name="id">The id of the message to un-favorite</param>
+            <returns></returns>
+        </member>
+        <member name="T:TweetSharp.Yammer.Fluent.IYammerFollowingMessages">
+            <summary>
+            Fluent Yammer node for the messages from follwers endpoint
+            </summary>
+        </member>
+        <member name="T:TweetSharp.Yammer.Fluent.IYammerMessages">
+            <summary>
+            Node in the fluent expression tree for accessing the Yammer APIs dealing with messages
+            </summary>
+        </member>
+        <member name="T:TweetSharp.Yammer.Fluent.IYammerMessagesExtensions">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:TweetSharp.Yammer.Fluent.IYammerMessagesExtensions.All(TweetSharp.Yammer.Fluent.IYammerMessages)">
+            <summary>
+            Gets up to 20 messages from all messages in the network 
+            </summary>
+            <param name="instance">The instance.</param>
+            <returns></returns>
+        </member>
+        <member name="M:TweetSharp.Yammer.Fluent.IYammerMessagesExtensions.Sent(TweetSharp.Yammer.Fluent.IYammerMessages)">
+            <summary>
+            Gets up to 20 messages sent by the current user
+            </summary>
+            <param name="instance">The instance.</param>
+            <returns></returns>
+        </member>
+        <member name="M:TweetSharp.Yammer.Fluent.IYammerMessagesExtensions.Received(TweetSharp.Yammer.Fluent.IYammerMessages)">
+            <summary>
+            Gets up to 20 received messages for the logged in user 
+            </summary>
+            <param name="instance">The instance.</param>
+            <returns></returns>
+        </member>
+        <member name="M:TweetSharp.Yammer.Fluent.IYammerMessagesExtensions.Following(TweetSharp.Yammer.Fluent.IYammerMessages)">
+            <summary>
+            Gets up to 20 messages posted by users that the current user is following 
+            </summary>
+            <param name="instance">The instance.</param>
+            <returns></returns>
+        </member>
+        <member name="M:TweetSharp.Yammer.Fluent.IYammerMessagesExtensions.FromUser(TweetSharp.Yammer.Fluent.IYammerMessages,System.Int64)">
+            <summary>
+            Gets up to 20 messages sent by the specified user
+            </summary>
+            <param name="user">The id of the user whose messages to get</param>
+            <param name="instance">The instance.</param>
+            <returns></returns>
+        </member>
+        <member name="M:TweetSharp.Yammer.Fluent.IYammerMessagesExtensions.FromBot(TweetSharp.Yammer.Fluent.IYammerMessages,System.Int64)">
+            <summary>
+            Gets up to 20 messages sent by the specified bot
+            </summary>
+            <param name="botId">The id of the bot whose messages to get</param>
+            <param name="instance">The instance.</param>
+            <returns></returns>
+        </member>
+        <member name="M:TweetSharp.Yammer.Fluent.IYammerMessagesExtensions.WithTag(TweetSharp.Yammer.Fluent.IYammerMessages,System.Int64)">
+            <summary>
+            Gets up to 20 messages containing the specified tag
+            </summary>
+            <param name="tagId">The id of the tag</param>
+            <param name="instance">The instance.</param>
+            <returns></returns>
+        </member>
+        <member name="M:TweetSharp.Yammer.Fluent.IYammerMessagesExtensions.InGroup(TweetSharp.Yammer.Fluent.IYammerMessages,System.Int64)">
+            <summary>
+            Gets up to 20 messages posted to the specified group 
+            </summary>
+            <param name="instance">The instance.</param>
+            <param name="groupId">The group id.</param>
+            <returns></returns>
+        </member>
+        <member name="M:TweetSharp.Yammer.Fluent.IYammerMessagesExtensions.FavoritesOf(TweetSharp.Yammer.Fluent.IYammerMessages,System.Int64)">
+            <summary>
+            Gets the favorite messages of another user
+            </summary>
+            <param name="instance">The instance.</param>
+            <param name="userId">The id of the user whose favorites to get</param>
+            <returns></returns>
+        </member>
+        <member name="M:TweetSharp.Yammer.Fluent.IYammerMessagesExtensions.InThread(TweetSharp.Yammer.Fluent.IYammerMessages,System.Int64)">
+            <summary>
+            Gets up to 20 messages in the specified thread
+            </summary>
+            <param name="instance">The instance.</param>
+            <param name="threadId">The thread id.</param>
+            <returns></returns>
+        </member>
+        <member name="M:TweetSharp.Yammer.Fluent.IYammerMessagesExtensions.Favorites(TweetSharp.Yammer.Fluent.IYammerMessages)">
+            <summary>
+            Gets the favorite messages of the current user
+            </summary>
+            <param name="instance">The instance.</param>
+            <returns></returns>
+        </member>
+        <member name="M:TweetSharp.Yammer.Fluent.IYammerMessagesExtensions.Post(TweetSharp.Yammer.Fluent.IYammerMessages,System.String)">
+            <summary>
+            Posts a new message from the current user
+            </summary>
+            <param name="instance">The instance.</param>
+            <param name="messageText">The message text.</param>
+            <returns></returns>
+        </member>
+        <member name="M:TweetSharp.Yammer.Fluent.IYammerMessagesExtensions.Delete(TweetSharp.Yammer.Fluent.IYammerMessages,System.Int64)">
+            <summary>
+            Deletes the specified message from the current user
+            </summary>
+            <param name="instance">The instance.</param>
+            <param name="messageID">The message ID.</param>
+            <returns></returns>
+        </member>
+        <member name="T:TweetSharp.Yammer.Fluent.IYammerMessagesFromBot">
+            <summary>
+            Node in the fluent expression tree for accessing Yammer APIs to fetch messages posted by a bot
+            </summary>
+        </member>
+        <member name="T:TweetSharp.Yammer.Fluent.IYammerMessagesFromUser">
+            <summary>
+            Node in the fluent expression tree for accessing the Yammer APIs to fetch messages from a user
+            </summary>
+        </member>
+        <member name="T:TweetSharp.Yammer.Fluent.IYammerMessagesInGroup">
+            <summary>
+            Fluent yammer node for messages in a group endpoint.
+            </summary>
+        </member>
+        <member name="T:TweetSharp.Yammer.Fluent.IYammerMessagesInThread">
+            <summary>
+            Fluent yammer node for messages in a thread endpoint.
+            </summary>
+        </member>
+        <member name="T:TweetSharp.Yammer.Fluent.IYammerMessagesWithTag">
+            <summary>
+            Node in the fluent expression tree for accessing messages in the current network with a specific tag
+            </summary>
+        </member>
+        <member name="T:TweetSharp.Yammer.Fluent.IYammerMessagePost">
+            <summary>
+            Node in the fluent expression tree for posting a message to the Yammer network
+            </summary>
+        </member>
+        <member name="T:TweetSharp.Yammer.Fluent.IYammerReceivedMessages">
+            <summary>
+            Node in the fluent expression tree for accessing recieved messages
+            </summary>
+        </member>
+        <member name="T:TweetSharp.Yammer.Fluent.IYammerSentMessages">
+            <summary>
+            Node in the fluent expression tree for accessing the Yammer sent messages APIs
+            </summary>
+        </member>
+        <member name="T:TweetSharp.Yammer.Fluent.IYammerNetworksAccessible">
+            <summary>
+            Fluent yammer node for the accessible networks endpoint.
+            </summary>
+        </member>
+        <member name="T:TweetSharp.Yammer.Fluent.IYammerNetworks">
+            <summary>
+            Fluent yammer node for the networks endpoints.
+            </summary>
+        </member>
+        <member name="T:TweetSharp.Yammer.Fluent.YammerNetworksExtensions">
+            <summary>
+            Extension methods for accessing the Networks subset of the Yammer REST API.
+            </summary>
+        </member>
+        <member name="M:TweetSharp.Yammer.Fluent.YammerNetworksExtensions.AccessibleToCurrentUser(TweetSharp.Yammer.Fluent.IYammerNetworks)">
+            <summary>
+            retrieves details about networks that the current user has access to
+            </summary>
+            <param name="instance">the instance</param>
+            <returns></returns>
+        </member>
+        <member name="T:TweetSharp.Yammer.Fluent.IYammerRelationshipsCreate">
+            <summary>
+            Node in the fluent expression tree for accessing Yammer APIs to create org-chart relationships
+            </summary>
+        </member>
+        <member name="T:TweetSharp.Yammer.Fluent.IYammerRelationshipsDestroy">
+            <summary>
+            Node in the fluent expression tree for accessing the Yammer APIs to remove org chart relationships
+            </summary>
+        </member>
+        <member name="T:TweetSharp.Yammer.Fluent.IYammerRelationships">
+            <summary>
+            Node in the fluent expression tree for accessing the Yammer Org-Chart related APIs
+            </summary>
+        </member>
+        <member name="T:TweetSharp.Yammer.Fluent.YammerRelationshipExtensions">
+            <summary>
+            Extension methods for accessing the Relationships subset of the Yammer REST API
+            </summary>
+        </member>
+        <member name="M:TweetSharp.Yammer.Fluent.YammerRelationshipExtensions.AddSubordinate(TweetSharp.Yammer.Fluent.IYammerRelationships,System.Int64,System.String)">
+            <summary>
+            Adds a subordinate to the specified user's org chart
+            </summary>
+            <param name="instance">the instance</param>
+            <param name="userId">The id of the user whose org chart to update</param>
+            <param name="emailOfSubordinate">email address of the user's subordinate to add</param>
+            <returns></returns>
+        </member>
+        <member name="M:TweetSharp.Yammer.Fluent.YammerRelationshipExtensions.AddColleague(TweetSharp.Yammer.Fluent.IYammerRelationships,System.Int64,System.String)">
+            <summary>
+            Adds a colleague to the specified user's org chart
+            </summary>
+            <param name="instance">the instance</param>
+            <param name="userId">The id of the user whose org chart to update</param>
+            <param name="emailOfColleague">email address of the user's colleague to add</param>
+            <returns></returns>
+        </member>
+        <member name="M:TweetSharp.Yammer.Fluent.YammerRelationshipExtensions.AddSuperior(TweetSharp.Yammer.Fluent.IYammerRelationships,System.Int64,System.String)">
+            <summary>
+            Adds a subordinate to the specified user's org chart
+            </summary>
+            <param name="instance">the instance</param>
+            <param name="userId">The id of the user whose org chart to update</param>
+            <param name="emailOfSuperior">email address of the user's superior to add</param>
+            <returns></returns>
+        </member>
+        <member name="M:TweetSharp.Yammer.Fluent.YammerRelationshipExtensions.Create(TweetSharp.Yammer.Fluent.IYammerRelationships,System.Int64,System.String,System.String,System.String)">
+            <summary>
+            Creates relationships in specified user's org chart
+            </summary>
+            <param name="instance">the instance</param>
+            <param name="userId">The id of the user whose org chart to update</param>
+            <param name="emailOfSubordinate">email address of the user's subordinate to add</param>
+            <param name="emailOfSuperior">email address of the user's superior to add</param>
+            <param name="emailOfColleague">email address of the user's colleague to add</param>
+            <returns></returns>
+        </member>
+        <member name="M:TweetSharp.Yammer.Fluent.YammerRelationshipExtensions.Destroy(TweetSharp.Yammer.Fluent.IYammerRelationships,System.Int64,System.Int64,TweetSharp.Yammer.Model.OrgChartRelationshipType)">
+            <summary>
+            Destroys a relationship in the current user's org chart
+            </summary>
+            <param name="instance">The instance.</param>
+            <param name="userId">The id of the user whose org chart to update</param>
+            <param name="userIdToRemove">The user id to remove from the user's org chart</param>
+            <param name="relationshipType">Type of the relationship from which to remove the specified user.</param>
+            <returns></returns>
+        </member>
+        <member name="M:TweetSharp.Yammer.Fluent.YammerRelationshipExtensions.Show(TweetSharp.Yammer.Fluent.IYammerRelationships,System.Int64)">
+            <summary>
+            Gets the org chart relationships for a specific user.
+            </summary>
+            <param name="instance"></param>
+            <param name="forUserId">The id of the user for whom to get the org chart relationships.</param>
+            <returns></returns>
+        </member>
+        <member name="T:TweetSharp.Yammer.Fluent.IYammerRelationshipsShow">
+            <summary>
+            Fluent yammer node for the show relationships endpoint.
+            </summary>
+        </member>
+        <member name="T:TweetSharp.Yammer.Fluent.YammerSearchExtensions">
+            <summary>
+            Extension methods for accessing the Search subset of the Yammer REST API.
+            </summary>
+        </member>
+        <member name="M:TweetSharp.Yammer.Fluent.YammerSearchExtensions.Page(TweetSharp.Yammer.Fluent.IYammerSearchForContent,System.Int32)">
+            <summary>
+            Requests a specific page of search results. 
+            </summary>
+            <param name="instance"></param>
+            <param name="pageNumber">The page number to request.</param>
+            <returns></returns>
+        </member>
+        <member name="M:TweetSharp.Yammer.Fluent.YammerSearchExtensions.ForContent(TweetSharp.Yammer.Fluent.IYammerSearch,System.String)">
+            <summary>
+            Performs a search for content in the Yammer network. 
+            </summary>
+            <param name="instance"></param>
+            <param name="searchString">The search query.</param>
+            <returns></returns>
+        </member>
+        <member name="T:TweetSharp.Yammer.Fluent.IYammerSearchForContent">
+            <summary>
+            Node in the fluent expression tree for accessing Yammer's search API to find content
+            </summary>
+        </member>
+        <member name="T:TweetSharp.Yammer.Fluent.IYammerSearch">
+            <summary>
+            Node in the fluent expression tree for accessing Yammer's Search API
+            </summary>
+        </member>
+        <member name="T:TweetSharp.Yammer.Fluent.IYammerSubscriptions">
+            <summary>
+            Fluent yammer node for the subscriptions endpoints.
+            </summary>
+        </member>
+        <member name="T:TweetSharp.Yammer.Fluent.YammerSusbcriptionsExtensions">
+            <summary>
+            Extension methods for accessing the subscriptions subset of the Yammer REST API.
+            </summary>
+        </member>
+        <member name="M:TweetSharp.Yammer.Fluent.YammerSusbcriptionsExtensions.GetSubscriptionToUser(TweetSharp.Yammer.Fluent.IYammerSubscriptions,System.Int64)">
+            <summary>
+            Query for an existing subscription to another <see cref="T:TweetSharp.Yammer.Model.YammerUser"/>
+            </summary>
+            <param name="instance"></param>
+            <param name="otherUserId">Id of the user to check</param>
+            <returns></returns>
+        </member>
+        <member name="M:TweetSharp.Yammer.Fluent.YammerSusbcriptionsExtensions.GetSubscriptionToTag(TweetSharp.Yammer.Fluent.IYammerSubscriptions,System.Int64)">
+            <summary>
+            Query for an existing subscription to a <see cref="T:TweetSharp.Yammer.Model.YammerTag"/>. 
+            </summary>
+            <param name="instance"></param>
+            <param name="tagId">Id of the tag to check.</param>
+            <returns></returns>
+        </member>
+        <member name="M:TweetSharp.Yammer.Fluent.YammerSusbcriptionsExtensions.SubscribeToTag(TweetSharp.Yammer.Fluent.IYammerSubscriptions,System.Int64)">
+            <summary>
+            Subscribes to (follows) all messages with a specific tag.
+            </summary>
+            <param name="instance"></param>
+            <param name="tagId">The id of the tag to follow.</param>
+            <returns></returns>
+        </member>
+        <member name="M:TweetSharp.Yammer.Fluent.YammerSusbcriptionsExtensions.SubscribeToUser(TweetSharp.Yammer.Fluent.IYammerSubscriptions,System.Int64)">
+            <summary>
+            Subscribes to (follows) another user's updates. 
+            </summary>
+            <param name="instance"></param>
+            <param name="userId">The Id of the user to follow.</param>
+            <returns></returns>
+        </member>
+        <member name="M:TweetSharp.Yammer.Fluent.YammerSusbcriptionsExtensions.UnsubscribeFromTag(TweetSharp.Yammer.Fluent.IYammerSubscriptions,System.Int64)">
+            <summary>
+            Unsubscribes from a tag.
+            </summary>
+            <param name="instance"></param>
+            <param name="tagId">The id of the tag from which to unsubscribe.</param>
+            <returns></returns>
+        </member>
+        <member name="M:TweetSharp.Yammer.Fluent.YammerSusbcriptionsExtensions.UnsubscribeFromUser(TweetSharp.Yammer.Fluent.IYammerSubscriptions,System.Int64)">
+            <summary>
+            Unsubscribes from another user's messages.
+            </summary>
+            <param name="instance"></param>
+            <param name="userId">The id of the user from which to unsubscribe.</param>
+            <returns></returns>
+        </member>
+        <member name="T:TweetSharp.Yammer.Fluent.IYammerSubscriptionCreate">
+            <summary>
+            Node in the fluent expression tree for accessing the Yammer APIs to create subscriptions 
+            </summary>
+        </member>
+        <member name="T:TweetSharp.Yammer.Fluent.IYammerSubscriptionsToTag">
+            <summary>
+            Fluent yammer node for the tag subscriptions endpoint.
+            </summary>
+        </member>
+        <member name="T:TweetSharp.Yammer.Fluent.IYammerSubscriptionsToUser">
+            <summary>
+            Node in the fluent expression tree for accessing subscriptions to other yammer users
+            </summary>
+        </member>
+        <member name="T:TweetSharp.Yammer.Fluent.IYammerSubscriptionDelete">
+            <summary>
+            Fluent yammer node for the delete subscription endpoint.
+            </summary>
+        </member>
+        <member name="T:TweetSharp.Yammer.Fluent.IYammerSuggestionsAll">
+            <summary>
+            Fluent yammer node for the all suggestions endpoint.
+            </summary>
+        </member>
+        <member name="T:TweetSharp.Yammer.Fluent.IYammerSuggestionsDecline">
+            <summary>
+            Fluent yammer node for the decline suggestions endpoint.
+            </summary>
+        </member>
+        <member name="T:TweetSharp.Yammer.Fluent.IYammerSuggestionsGroups">
+            <summary>
+            Fluent yammer node for the group suggestions endpoint.
+            </summary>
+        </member>
+        <member name="T:TweetSharp.Yammer.Fluent.IYammerSuggestions">
+            <summary>
+            Fluent yammer node for the suggestions endpoints.
+            </summary>
+        </member>
+        <member name="T:TweetSharp.Yammer.Fluent.YammerSuggestionsExtensions">
+            <summary>
+            Extension methods for accessing the Suggestions subset of the Yammer REST API. 
+            </summary>
+        </member>
+        <member name="M:TweetSharp.Yammer.Fluent.YammerSuggestionsExtensions.ShowAll(TweetSharp.Yammer.Fluent.IYammerSuggestions)">
+            <summary>
+            Gets all pending suggestions.
+            </summary>
+            <param name="instance"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TweetSharp.Yammer.Fluent.YammerSuggestionsExtensions.ShowUsers(TweetSharp.Yammer.Fluent.IYammerSuggestions)">
+            <summary>
+            Gets suggested <see cref="T:TweetSharp.Yammer.Model.YammerUser">users</see>.
+            </summary>
+            <param name="instance"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TweetSharp.Yammer.Fluent.YammerSuggestionsExtensions.ShowGroups(TweetSharp.Yammer.Fluent.IYammerSuggestions)">
+            <summary>
+            Gets suggested <see cref="T:TweetSharp.Yammer.Model.YammerGroup">groups</see>.
+            </summary>
+            <param name="instance"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TweetSharp.Yammer.Fluent.YammerSuggestionsExtensions.Decline(TweetSharp.Yammer.Fluent.IYammerSuggestions,System.Int32)">
+            <summary>
+            Declines a pending suggestion.
+            </summary>
+            <param name="instance"></param>
+            <param name="suggestionId">Id of the suggestion to decline.</param>
+            <returns></returns>
+        </member>
+        <member name="T:TweetSharp.Yammer.Fluent.IYammerSuggestionsUsers">
+            <summary>
+            Fluent yammer node for the user suggestions endpoint.
+            </summary>
+        </member>
+        <member name="T:TweetSharp.Yammer.Fluent.IYammerTagsAll">
+            <summary>
+            Fluent yammer node for the all tags endpoint.
+            </summary>
+        </member>
+        <member name="T:TweetSharp.Yammer.Fluent.IYammerTagsGet">
+            <summary>
+            Node in the fluent expression tree for accessing the Yammer APIs to fetch tags in the network
+            </summary>
+        </member>
+        <member name="T:TweetSharp.Yammer.Fluent.IYammerTags">
+            <summary>
+            Node in the fluent expression tree for accessing the Yammer APIs that deal with Tags
+            </summary>
+        </member>
+        <member name="T:TweetSharp.Yammer.Fluent.YammerTagsExtensions">
+            <summary>
+            Extension methods for accessing the Tags subset of the Yammer REST API.
+            </summary>
+        </member>
+        <member name="M:TweetSharp.Yammer.Fluent.YammerTagsExtensions.Get(TweetSharp.Yammer.Fluent.IYammerTags,System.Int64)">
+            <summary>
+            Gets the details of a specific tag
+            </summary>
+            <param name="instance">The instance</param>
+            <param name="tagId">The id of the tag to get the details for</param>
+            <returns></returns>
+        </member>
+        <member name="M:TweetSharp.Yammer.Fluent.YammerTagsExtensions.All(TweetSharp.Yammer.Fluent.IYammerTags)">
+            <summary>
+            Gets all tags in the network.
+             (Listed as 'not implemented' in the Yammer API spec, but appears to work - may not give correct results)
+            </summary>
+            <param name="instance"></param>
+            <returns></returns>
+        </member>
+        <member name="T:TweetSharp.Yammer.Fluent.IYammerUsersByEmail">
+            <summary>
+            Fluent yammer node for the users by email endpoint.
+            </summary>
+        </member>
+        <member name="T:TweetSharp.Yammer.Fluent.IYammerUsersCreate">
+            <summary>
+            Fluent yammer node for the create user endpoint.
+            </summary>
+        </member>
+        <member name="T:TweetSharp.Yammer.Fluent.IYammerUsersGet">
+            <summary>
+            Fluent yammer node for the get users endpoint.
+            </summary>
+        </member>
+        <member name="T:TweetSharp.Yammer.Fluent.IYammerUsers">
+            <summary>
+            Node in the fluent expression tree for accessing user account APIs
+            </summary>
+        </member>
+        <member name="T:TweetSharp.Yammer.Fluent.IYammerUsersSorted">
+            <summary>
+            Node in the fluent expression tree for accessing the Yammer APIs that fetch user account data and sort it
+            </summary>
+        </member>
+        <member name="T:TweetSharp.Yammer.Fluent.IYammerUsersSortedExtensions">
+            <summary>
+            Extension methods for accessing the sorted user endpoints.
+            </summary>
+        </member>
+        <member name="M:TweetSharp.Yammer.Fluent.IYammerUsersSortedExtensions.Reverse(TweetSharp.Yammer.Fluent.IYammerUsersSorted)">
+            <summary>
+            Requests the results in reverse sort order.
+            </summary>
+            <param name="instance"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TweetSharp.Yammer.Fluent.IYammerUsersSortedExtensions.Page(TweetSharp.Yammer.Fluent.IYammerUsersSorted,System.Int32)">
+            <summary>
+            Requests a specific page of results.
+            </summary>
+            <param name="instance"></param>
+            <param name="page">The page to request</param>
+            <returns></returns>
+        </member>
+        <member name="T:TweetSharp.Yammer.Fluent.IYammerUsersUpdate">
+            <summary>
+            Node in the fluent expression tree for accessing the APIs to update iusers in the Yammer network. 
+            </summary>
+        </member>
+        <member name="T:TweetSharp.Yammer.Fluent.YammerUsersExtensions">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:TweetSharp.Yammer.Fluent.YammerUsersExtensions.All(TweetSharp.Yammer.Fluent.IYammerUsers)">
+            <summary>
+            Gets all users in the network
+            </summary>
+            <param name="instance">The instance</param>
+            <returns></returns>
+        </member>
+        <member name="M:TweetSharp.Yammer.Fluent.YammerUsersExtensions.StartingWith(TweetSharp.Yammer.Fluent.IYammerUsers,System.Char)">
+            <summary>
+            Gets users that begin with the specified letter
+            </summary>
+            <param name="instance">The instance</param>
+            <param name="startingWith">The letter to search for</param>
+            <returns></returns>
+        </member>
+        <member name="M:TweetSharp.Yammer.Fluent.YammerUsersExtensions.Page(TweetSharp.Yammer.Fluent.IYammerUsers,System.Int32)">
+            <summary>
+            Gets the specified page of users (50 per page)
+            </summary>
+            <param name="instance">The instance</param>
+            <param name="page">The requested page</param>
+            <returns></returns>
+        </member>
+        <member name="M:TweetSharp.Yammer.Fluent.YammerUsersExtensions.SortedBy(TweetSharp.Yammer.Fluent.IYammerUsers,TweetSharp.Yammer.Fluent.SortUsersBy)">
+            <summary>
+            Gets users from the network sorted using the provided criterion
+            </summary>
+            <param name="instance">The instance</param>
+            <param name="sortUsersBy">The desired sort</param>
+            <returns></returns>
+        </member>
+        <member name="M:TweetSharp.Yammer.Fluent.YammerUsersExtensions.Current(TweetSharp.Yammer.Fluent.IYammerUsers)">
+            <summary>
+            Gets the currently logged in user
+            </summary>
+            <param name="instance">The instance</param>
+            <returns></returns>
+        </member>
+        <member name="M:TweetSharp.Yammer.Fluent.YammerUsersExtensions.Get(TweetSharp.Yammer.Fluent.IYammerUsers,System.Int64)">
+            <summary>
+            Gets a specific user by Id
+            </summary>
+            <param name="instance">the instance</param>
+            <param name="userId">the id of the user to get</param>
+            <returns></returns>
+        </member>
+        <member name="M:TweetSharp.Yammer.Fluent.YammerUsersExtensions.GetByEmail(TweetSharp.Yammer.Fluent.IYammerUsers,System.String)">
+            <summary>
+            Gets a specific user by email address
+            </summary>
+            <param name="instance">the instance</param>
+            <param name="emailAddress">the email address of the user to get</param>
+            <returns></returns>
+        </member>
+        <member name="M:TweetSharp.Yammer.Fluent.YammerUsersExtensions.Create(TweetSharp.Yammer.Fluent.IYammerUsers,System.String)">
+            <summary>
+            Creates a new user in the network (Requires admin status)
+            </summary>
+            <param name="instance">The instance</param>
+            <param name="email">The email address of the user for the user</param>
+            <returns></returns>
+        </member>
+        <member name="M:TweetSharp.Yammer.Fluent.YammerUsersExtensions.Create(TweetSharp.Yammer.Fluent.IYammerUsers,TweetSharp.Yammer.Model.YammerUser)">
+            <summary>
+            Creates a new user in the network (Requires admin status)
+            </summary>
+            <param name="instance">The instance</param>
+            <param name="userData">a YammerUser object representing the user data</param>
+            <returns></returns>
+        </member>
+        <member name="M:TweetSharp.Yammer.Fluent.YammerUsersExtensions.UpdateCurrent(TweetSharp.Yammer.Fluent.IYammerUsers,TweetSharp.Yammer.Model.YammerUser)">
+            <summary>
+            Updates the currently active user's profile
+            </summary>
+            <param name="instance">The instance.</param>
+            <param name="userData">a YammerUser object representing the user data to change</param>
+            <returns></returns>
+        </member>
+        <member name="M:TweetSharp.Yammer.Fluent.YammerUsersExtensions.Update(TweetSharp.Yammer.Fluent.IYammerUsers,System.Int64,TweetSharp.Yammer.Model.YammerUser)">
+            <summary>
+            Updates the specified user's profile data (requires admin status).
+            </summary>
+            <param name="instance">The instance.</param>
+            <param name="id">The id of the user to update</param>
+            <param name="userData">a YammerUser object representing the user data to change</param>
+            <returns></returns>
+        </member>
+        <member name="T:TweetSharp.YammerClientInfo">
+            <summary>
+            Information about your client  
+            </summary>
+        </member>
+        <member name="P:TweetSharp.YammerClientInfo.ClientName">
+            <summary>
+            This is the name of your client application. This is meta-data only,
+            and not used by Yammer for client processing. Your application's name
+            is stored by Yammer when you register your application for OAuth.
+            </summary>
+        </member>
+        <member name="P:TweetSharp.YammerClientInfo.ClientVersion">
+            <summary>
+            This is the version of your application. This is meta-data only,
+            and not used by Yammer for client processing.
+            </summary>
+        </member>
+        <member name="P:TweetSharp.YammerClientInfo.ClientUrl">
+            <summary>
+            This is the URL of your application. This is meta-data only,
+            and not used by Yammer for client processing. Your application's URL
+            is stored by Yammer when you register your application for OAuth.
+            </summary>
+        </member>
+        <member name="P:TweetSharp.YammerClientInfo.ConsumerKey">
+            <summary>
+            If your client is using OAuth authentication, this value should be set
+            to the value of your consumer key. This avoids having to provide the key
+            in every query.
+            </summary>
+        </member>
+        <member name="P:TweetSharp.YammerClientInfo.ConsumerSecret">
+            <summary>
+            If your client is using OAuth authentication, this value should be set
+            to the value of your consumer secret. This avoids having to provide the secret
+            in every query.</summary>
+        </member>
+        <member name="P:TweetSharp.YammerClientInfo.TransparentProxy">
+            <summary>
+            Since you are communicating from the client-side, this value should point to a 
+            proxy that is configured to work transparently (API methods are identical other
+            than the domain), allow cross-domain access, and understand TweetSharp custom 
+            headers.
+            </summary>
+        </member>
+        <member name="T:TweetSharp.Yammer.Fluent.YammerWebCallback">
+            <summary>
+            Represents a callback from an API call.
+            </summary>
+        </member>
+        <member name="T:TweetSharp.Yammer.Model.Converters.YammerDateConverter.Rfc3339DateTime">
+            <summary>
+            Provides methods for converting <see cref="T:System.DateTime"/> structures to and from the equivalent RFC 3339 string representation.
+            </summary>
+        </member>
+        <member name="M:TweetSharp.Yammer.Model.Converters.YammerDateConverter.Rfc3339DateTime.Parse(System.String)">
+            <summary>
+            Converts the specified string representation of a date and time to its <see cref="T:System.DateTime"/> equivalent.
+            </summary>
+            <param name="s">A string containing a date and time to convert.</param>
+            <returns>A <see cref="T:System.DateTime"/> equivalent to the date and time contained in <paramref name="s"/>.</returns>
+            <remarks>
+            The string <paramref name="s"/> is parsed using formatting information in the <see cref="P:System.Globalization.DateTimeFormatInfo.InvariantInfo"/> object.
+            </remarks>
+            <exception cref="T:System.ArgumentNullException"><paramref name="s"/> is a <b>null</b> reference (Nothing in Visual Basic).</exception>
+            <exception cref="T:System.FormatException"><paramref name="s"/> does not contain a valid RFC 3339 string representation of a date and time.</exception>
+        </member>
+        <member name="M:TweetSharp.Yammer.Model.Converters.YammerDateConverter.Rfc3339DateTime.ToString(System.DateTime)">
+            <summary>
+            Converts the value of the specified <see cref="T:System.DateTime"/> object to its equivalent string representation.
+            </summary>
+            <param name="utcDateTime">The Coordinated Universal Time (UTC) <see cref="T:System.DateTime"/> to convert.</param>
+            <returns>A RFC 3339 string representation of the value of the <paramref name="utcDateTime"/>.</returns>
+            <remarks>
+            <para>
+            This method returns a string representation of the <paramref name="utcDateTime"/> that 
+            is precise to the three most significant digits of the seconds fraction; that is, it represents 
+            the milliseconds in a date and time value.
+            </para>
+            <para>
+            While it is possible to display higher precision fractions of a second component of a time value, 
+            that value may not be meaningful. The precision of date and time values depends on the resolution 
+            of the system clock. On Windows NT 3.5 and later, and Windows Vista operating systems, the clock's 
+            resolution is approximately 10-15 milliseconds.
+            </para>
+            </remarks>
+            <exception cref="T:System.ArgumentException">The specified <paramref name="utcDateTime"/> object does not represent a <see cref="F:System.DateTimeKind.Utc">Coordinated Universal Time (UTC)</see> value.</exception>
+        </member>
+        <member name="M:TweetSharp.Yammer.Model.Converters.YammerDateConverter.Rfc3339DateTime.TryParse(System.String,System.DateTime@)">
+            <summary>
+            Converts the specified string representation of a date and time to its <see cref="T:System.DateTime"/> equivalent.
+            </summary>
+            <param name="s">A string containing a date and time to convert.</param>
+            <param name="result">
+            When this method returns, contains the <see cref="T:System.DateTime"/> value equivalent to the date and time 
+            contained in <paramref name="s"/>, if the conversion succeeded, 
+            or <see cref="F:System.DateTime.MinValue">MinValue</see> if the conversion failed. 
+            The conversion fails if the s parameter is a <b>null</b> reference (Nothing in Visual Basic), 
+            or does not contain a valid string representation of a date and time. 
+            This parameter is passed uninitialized.
+            </param>
+            <returns><b>true</b> if the <paramref name="s"/> parameter was converted successfully; otherwise, <b>false</b>.</returns>
+            <remarks>
+            The string <paramref name="s"/> is parsed using formatting information in the <see cref="P:System.Globalization.DateTimeFormatInfo.InvariantInfo"/> object.
+            </remarks>
+        </member>
+        <member name="T:TweetSharp.Yammer.Model.YammerAttachment">
+            <summary>
+            Class representing an attachment to a yammer message
+            </summary>
+        </member>
+        <member name="P:TweetSharp.Yammer.Model.YammerAttachment.AttachmentType">
+            <summary>
+            Gets or sets the type of attachment
+            </summary>
+            <value>The type.</value>
+        </member>
+        <member name="P:TweetSharp.Yammer.Model.YammerAttachment.Id">
+            <summary>
+            Gets or sets the id of the attachment.
+            </summary>
+            <value>The id.</value>
+        </member>
+        <member name="P:TweetSharp.Yammer.Model.YammerAttachment.Name">
+            <summary>
+            Gets or sets the name of the attachment
+            </summary>
+            <value>The name of the attachment.</value>
+        </member>
+        <member name="P:TweetSharp.Yammer.Model.YammerAttachment.WebUrl">
+            <summary>
+            Gets or sets the web URL for the attachment
+            </summary>
+            <value>The web URL.</value>
+        </member>
+        <member name="P:TweetSharp.Yammer.Model.YammerAttachment.RawSource">
+            <summary>
+            The source content used to deserialize the model entity instance.
+            Can be XML or JSON, depending on the endpoint used.
+            </summary>
+        </member>
+        <member name="T:TweetSharp.Yammer.Model.YammerAttachmentImage">
+            <summary>
+            Representation of an attached image. 
+            </summary>
+        </member>
+        <member name="P:TweetSharp.Yammer.Model.YammerAttachmentImage.ThumbnailUrl">
+            <summary>
+            Gets or sets the web address for a thumbnail version of the image. 
+            </summary>
+        </member>
+        <member name="T:TweetSharp.Yammer.Model.YammerAttachmentType">
+            <summary>
+            The type of yammer attachment
+            </summary>
+        </member>
+        <member name="F:TweetSharp.Yammer.Model.YammerAttachmentType.Image">
+            <summary>
+            Image attachment
+            </summary>
+        </member>
+        <member name="F:TweetSharp.Yammer.Model.YammerAttachmentType.File">
+            <summary>
+            File attachment
+            </summary>
+        </member>
+        <member name="T:TweetSharp.Yammer.Model.YammerAutoCompleteSuggestions">
+            <summary>
+            Represents a bundle of auto-complete suggestions for various entities in the network. 
+            </summary>
+        </member>
+        <member name="T:TweetSharp.Yammer.Model.YammerObjectBase">
+            <summary>
+            Abstract base class for several data classes representing entities in the Yammer network. 
+            </summary>
+        </member>
+        <member name="P:TweetSharp.Yammer.Model.YammerObjectBase.Id">
+            <summary>
+            the id of the object
+            </summary>
+        </member>
+        <member name="P:TweetSharp.Yammer.Model.YammerObjectBase.Url">
+            <summary>
+            The API resource for fetching this object.
+            </summary>
+        </member>
+        <member name="P:TweetSharp.Yammer.Model.YammerObjectBase.WebUrl">
+            <summary>
+            The URL for viewing this object on the main Yammer website.
+            </summary>
+        </member>
+        <member name="P:TweetSharp.Yammer.Model.YammerObjectBase.CreatedAt">
+            <summary>
+            The time and date this message was created.
+            </summary>
+        </member>
+        <member name="P:TweetSharp.Yammer.Model.YammerAutoCompleteSuggestions.Users">
+            <summary>
+            Gets or sets an enumeration user references that are candidates for auto-completion.
+            </summary>
+        </member>
+        <member name="P:TweetSharp.Yammer.Model.YammerAutoCompleteSuggestions.Tags">
+            <summary>
+            Gets or sets an enumeration of tag references that are candidates for auto-completion.
+            </summary>
+        </member>
+        <member name="P:TweetSharp.Yammer.Model.YammerAutoCompleteSuggestions.Groups">
+            <summary>
+            Gets or sets an enumeration of groups that are candidates for auto-completion
+            </summary>
+        </member>
+        <member name="P:TweetSharp.Yammer.Model.YammerAutoCompleteSuggestions.RawSource">
+            <summary>
+            The source content used to deserialize the model entity instance.
+            Can be XML or JSON, depending on the endpoint used.
+            </summary>
+        </member>
+        <member name="T:TweetSharp.Yammer.Model.YammerBot">
+            <summary>
+            Representation of a non-human member to the Yammer network. 
+            </summary>
+        </member>
+        <member name="P:TweetSharp.Yammer.Model.YammerBot.Name">
+            <summary>
+            Gets or sets the name of the bot.
+            </summary>
+        </member>
+        <member name="P:TweetSharp.Yammer.Model.YammerBot.FullName">
+            <summary>
+            Gets or sets the full name of the bot. 
+            </summary>
+        </member>
+        <member name="P:TweetSharp.Yammer.Model.YammerBot.MugshotUrl">
+            <summary>
+            Gets or sets the web address of the bot's photo.
+            </summary>
+        </member>
+        <member name="P:TweetSharp.Yammer.Model.YammerBot.RawSource">
+            <summary>
+            The source content used to deserialize the model entity instance.
+            Can be XML or JSON, depending on the endpoint used.
+            </summary>
+        </member>
+        <member name="T:TweetSharp.Yammer.Model.YammerContactInfo">
+            <summary>
+            Representation of contact information for a <see cref="T:TweetSharp.Yammer.Model.YammerUser"/>
+            </summary>
+        </member>
+        <member name="P:TweetSharp.Yammer.Model.YammerContactInfo.EmailAddresses">
+            <summary>
+            List of email addresses for this user
+            </summary>
+        </member>
+        <member name="P:TweetSharp.Yammer.Model.YammerContactInfo.PhoneNumbers">
+            <summary>
+            List of phone numbers for this user
+            </summary>
+        </member>
+        <member name="P:TweetSharp.Yammer.Model.YammerContactInfo.Im">
+            <summary>
+            Intstant-messaging contact info for this user
+            </summary>
+        </member>
+        <member name="P:TweetSharp.Yammer.Model.YammerContactInfo.RawSource">
+            <summary>
+            The source content used to deserialize the model entity instance.
+            Can be XML or JSON, depending on the endpoint used.
+            </summary>
+        </member>
+        <member name="T:TweetSharp.Yammer.Model.YammerEmailAddress">
+            <summary>
+            Represent's a user's email address
+            </summary>
+        </member>
+        <member name="P:TweetSharp.Yammer.Model.YammerEmailAddress.EmailType">
+            <summary>
+            The type of address (primary, personal, etc...)
+            </summary>
+        </member>
+        <member name="P:TweetSharp.Yammer.Model.YammerEmailAddress.Address">
+            <summary>
+            The email address
+            </summary>
+        </member>
+        <member name="P:TweetSharp.Yammer.Model.YammerEmailAddress.RawSource">
+            <summary>
+            The source content used to deserialize the model entity instance.
+            Can be XML or JSON, depending on the endpoint used.
+            </summary>
+        </member>
+        <member name="T:TweetSharp.Yammer.Model.YammerError">
+            <summary>
+            Gets or sets an error message from the Yammer service. 
+            </summary>
+        </member>
+        <member name="P:TweetSharp.Yammer.Model.YammerError.ErrorMessage">
+            <summary>
+            Gets or sets the error text.
+            </summary>
+        </member>
+        <member name="P:TweetSharp.Yammer.Model.YammerError.RawSource">
+            <summary>
+            The source content used to deserialize the model entity instance.
+            Can be XML or JSON, depending on the endpoint used.
+            </summary>
+        </member>
+        <member name="T:TweetSharp.Yammer.Model.YammerExternalUrl">
+            <summary>
+            Representation of a web address outside the Yammer network. 
+            </summary>
+        </member>
+        <member name="P:TweetSharp.Yammer.Model.YammerExternalUrl.ExternalUrl">
+            <summary>
+            Gets or sets the external url. 
+            </summary>
+        </member>
+        <member name="P:TweetSharp.Yammer.Model.YammerExternalUrl.RawSource">
+            <summary>
+            The source content used to deserialize the model entity instance.
+            Can be XML or JSON, depending on the endpoint used.
+            </summary>
+        </member>
+        <member name="T:TweetSharp.Yammer.Model.YammerGroupPrivacy">
+            <summary>
+            Allowable privacy values for <see cref="T:TweetSharp.Yammer.Model.YammerGroup">Groups</see>
+            </summary>
+        </member>
+        <member name="F:TweetSharp.Yammer.Model.YammerGroupPrivacy.Public">
+            <summary>
+            Messages posted to this group are visible to all users in the network
+            </summary>
+        </member>
+        <member name="F:TweetSharp.Yammer.Model.YammerGroupPrivacy.Private">
+            <summary>
+            Messages posted to this group are visible only to group members
+            </summary>
+        </member>
+        <member name="T:TweetSharp.Yammer.Model.YammerGroup">
+            <summary>
+            Representation of a Yammer Group.
+            </summary>
+        </member>
+        <member name="P:TweetSharp.Yammer.Model.YammerGroup.FullName">
+            <summary>
+            Gets or sets the full name of the group.
+            </summary>
+        </member>
+        <member name="P:TweetSharp.Yammer.Model.YammerGroup.Name">
+            <summary>
+            Gets or sets the name of the group
+            </summary>
+        </member>
+        <member name="P:TweetSharp.Yammer.Model.YammerGroup.Privacy">
+            <summary>
+            Gets or sets the privacy setting for the group.
+            </summary>
+        </member>
+        <member name="P:TweetSharp.Yammer.Model.YammerGroup.Stats">
+            <summary>
+            Gets or sets statistics about the group.
+            </summary>
+            <value>The stats</value>
+        </member>
+        <member name="P:TweetSharp.Yammer.Model.YammerGroup.RawSource">
+            <summary>
+            The source content used to deserialize the model entity instance.
+            Can be XML or JSON, depending on the endpoint used.
+            </summary>
+        </member>
+        <member name="T:TweetSharp.Yammer.Model.YammerGroupStats">
+            <summary>
+            Representation of statistics about a <see cref="T:TweetSharp.Yammer.Model.YammerGroup"/>
+            </summary>
+        </member>
+        <member name="P:TweetSharp.Yammer.Model.YammerGroupStats.Members">
+            <summary>
+            Gets or sets the number of group members. 
+            </summary>
+        </member>
+        <member name="P:TweetSharp.Yammer.Model.YammerGroupStats.Updates">
+            <summary>
+            Gets or sets the group update counter. 
+            </summary>
+        </member>
+        <member name="P:TweetSharp.Yammer.Model.YammerGroupStats.RawSource">
+            <summary>
+            The source content used to deserialize the model entity instance.
+            Can be XML or JSON, depending on the endpoint used.
+            </summary>
+        </member>
+        <member name="T:TweetSharp.Yammer.Model.YammerGuideReference">
+            <summary>
+            Representation of a reference to a Yammer guide user
+            </summary>
+        </member>
+        <member name="P:TweetSharp.Yammer.Model.YammerGuideReference.Name">
+            <summary>
+            Gets or sets the name of the guide.
+            </summary>
+        </member>
+        <member name="P:TweetSharp.Yammer.Model.YammerGuideReference.MugshotUrl">
+            <summary>
+            Gets or sets the web address of the Guide's photo
+            </summary>
+        </member>
+        <member name="P:TweetSharp.Yammer.Model.YammerGuideReference.FullName">
+            <summary>
+            Gets or sets the guide's full name
+            </summary>
+        </member>
+        <member name="P:TweetSharp.Yammer.Model.YammerGuideReference.RawSource">
+            <summary>
+            The source content used to deserialize the model entity instance.
+            Can be XML or JSON, depending on the endpoint used.
+            </summary>
+        </member>
+        <member name="T:TweetSharp.Yammer.Model.YammerImInfo">
+            <summary>
+            Representation of instant messaging service contact information for a <see cref="T:TweetSharp.Yammer.Model.YammerUser"/>
+            </summary>
+        </member>
+        <member name="P:TweetSharp.Yammer.Model.YammerImInfo.UserName">
+            <summary>
+            User's name or ID in the IM system
+            </summary>
+        </member>
+        <member name="P:TweetSharp.Yammer.Model.YammerImInfo.Provider">
+            <summary>
+            the IM network
+            </summary>
+        </member>
+        <member name="P:TweetSharp.Yammer.Model.YammerImInfo.RawSource">
+            <summary>
+            The source content used to deserialize the model entity instance.
+            Can be XML or JSON, depending on the endpoint used.
+            </summary>
+        </member>
+        <member name="T:TweetSharp.Yammer.Model.YammerMessage">
+            <summary>
+            Representation of a message posted to the Yammer network. 
+            </summary>
+        </member>
+        <member name="T:TweetSharp.Yammer.Model.YammerMessageReference">
+            <summary>
+            Summary reference to a Yammer message
+            </summary>
+        </member>
+        <member name="P:TweetSharp.Yammer.Model.YammerMessageReference.DirectToId">
+            <summary>
+            When a message is a private 1-to-1 (or "direct") message, this will indicate the intended recipient.
+            </summary>
+        </member>
+        <member name="P:TweetSharp.Yammer.Model.YammerMessageReference.RepliedToId">
+            <summary>
+            The ID of the message this message is in reply to, if applicable.
+            </summary>
+        </member>
+        <member name="P:TweetSharp.Yammer.Model.YammerMessageReference.Body">
+            <summary>
+            the body of the message
+            </summary>
+        </member>
+        <member name="P:TweetSharp.Yammer.Model.YammerMessageReference.SenderId">
+            <summary>
+            The ID of the message's sender
+            </summary>
+        </member>
+        <member name="P:TweetSharp.Yammer.Model.YammerMessageReference.MessageType">
+            <summary>
+            One of the supported message types
+            </summary>
+        </member>
+        <member name="P:TweetSharp.Yammer.Model.YammerMessageReference.SenderType">
+            <summary>
+            the type of the sender (user,bot,guide...)
+            </summary>
+        </member>
+        <member name="P:TweetSharp.Yammer.Model.YammerMessageReference.RawSource">
+            <summary>
+            The source content used to deserialize the model entity instance.
+            Can be XML or JSON, depending on the endpoint used.
+            </summary>
+        </member>
+        <member name="P:TweetSharp.Yammer.Model.YammerMessage.ThreadId">
+            <summary>
+            The id of the thread in which this message appears
+            </summary>
+        </member>
+        <member name="P:TweetSharp.Yammer.Model.YammerMessage.GroupId">
+            <summary>
+            the (optional) id of the group the message was posted to (if posted to a group)
+            </summary>
+        </member>
+        <member name="P:TweetSharp.Yammer.Model.YammerMessage.Attachments">
+            <summary>
+            Gets or set a List of attachments to the message. 
+            </summary>
+        </member>
+        <member name="P:TweetSharp.Yammer.Model.YammerMessage.ClientType">
+            <summary>
+            Gets or sets the description of the client used to post the message. 
+            </summary>
+            <value>The client description.</value>
+        </member>
+        <member name="T:TweetSharp.Yammer.Model.YammerMessageBody">
+            <summary>
+            Represents the body of a yammer message
+            </summary>
+        </member>
+        <member name="P:TweetSharp.Yammer.Model.YammerMessageBody.Plain">
+            <summary>
+            Gets or sets the unparsed version of the yammer message body.
+            </summary>
+            <value>String representing the unparsed version of the yammer message body.</value>
+        </member>
+        <member name="P:TweetSharp.Yammer.Model.YammerMessageBody.RawSource">
+            <summary>
+            The source content used to deserialize the model entity instance.
+            Can be XML or JSON, depending on the endpoint used.
+            </summary>
+        </member>
+        <member name="P:TweetSharp.Yammer.Model.YammerMessageBody.Parsed">
+            <summary>
+            Gets or sets the unparsed version of the yammer message body.
+            </summary>
+            <value>String representing the unparsed version of the yammer message body.</value>
+        </member>
+        <member name="T:TweetSharp.Yammer.Model.YammerMessageType">
+            <summary>
+            The type of yammer message
+            </summary>
+        </member>
+        <member name="F:TweetSharp.Yammer.Model.YammerMessageType.Update">
+            <summary>
+            An update type message
+            </summary>
+        </member>
+        <member name="T:TweetSharp.Yammer.Model.YammerNetwork">
+            <summary>
+            Representation of a Yammer Network.
+            </summary>
+        </member>
+        <member name="P:TweetSharp.Yammer.Model.YammerNetwork.PermaLink">
+            <summary>
+            Gets or sets the full web address to this network on Yammer.com.
+            </summary>
+        </member>
+        <member name="P:TweetSharp.Yammer.Model.YammerNetwork.UnseenMessageCount">
+            <summary>
+            Gets or sets the number of messages not yet seen by the authenticating user. 
+            </summary>
+        </member>
+        <member name="P:TweetSharp.Yammer.Model.YammerNetwork.Name">
+            <summary>
+            Gets or sets the network name. 
+            </summary>
+        </member>
+        <member name="P:TweetSharp.Yammer.Model.YammerNetwork.Id">
+            <summary>
+            Gets or sets the id of the network. 
+            </summary>
+        </member>
+        <member name="P:TweetSharp.Yammer.Model.YammerNetwork.RawSource">
+            <summary>
+            The source content used to deserialize the model entity instance.
+            Can be XML or JSON, depending on the endpoint used.
+            </summary>
+        </member>
+        <member name="T:TweetSharp.Yammer.Model.YammerNetworkDomain">
+            <summary>
+            A network domain
+            </summary>
+        </member>
+        <member name="P:TweetSharp.Yammer.Model.YammerNetworkDomain.NetworkDomain">
+            <summary>
+            the domain name
+            </summary>
+        </member>
+        <member name="P:TweetSharp.Yammer.Model.YammerNetworkDomain.RawSource">
+            <summary>
+            The source content used to deserialize the model entity instance.
+            Can be XML or JSON, depending on the endpoint used.
+            </summary>
+        </member>
+        <member name="T:TweetSharp.Yammer.Model.YammerPhoneNumber">
+            <summary>
+            Represent's a contact phone number for a user
+            </summary>
+        </member>
+        <member name="P:TweetSharp.Yammer.Model.YammerPhoneNumber.NumberType">
+            <summary>
+            The type of phone number. (Primary, personal, etc.)
+            </summary>
+        </member>
+        <member name="P:TweetSharp.Yammer.Model.YammerPhoneNumber.Number">
+            <summary>
+            The phone number
+            </summary>
+        </member>
+        <member name="P:TweetSharp.Yammer.Model.YammerPhoneNumber.RawSource">
+            <summary>
+            The source content used to deserialize the model entity instance.
+            Can be XML or JSON, depending on the endpoint used.
+            </summary>
+        </member>
+        <member name="T:TweetSharp.Yammer.Model.YammerPreviousCompany">
+            <summary>
+            Details about a user's previous company.
+            </summary>
+        </member>
+        <member name="P:TweetSharp.Yammer.Model.YammerPreviousCompany.Employer">
+            <summary>
+            Gets or sets the name of the user's previous company.
+            </summary>
+            <value>The name of the company.</value>
+        </member>
+        <member name="P:TweetSharp.Yammer.Model.YammerPreviousCompany.Position">
+            <summary>
+            Gets or sets the user's position at a previous company. 
+            </summary>
+            <value>The position</value>
+        </member>
+        <member name="P:TweetSharp.Yammer.Model.YammerPreviousCompany.Description">
+            <summary>
+            Gets or sets the description of the user's previous company.
+            </summary>
+            <value>The description.</value>
+        </member>
+        <member name="P:TweetSharp.Yammer.Model.YammerPreviousCompany.StartYear">
+            <summary>
+            Gets or sets the user's first year at a previous company.
+            </summary>
+            <value>The year.</value>
+        </member>
+        <member name="P:TweetSharp.Yammer.Model.YammerPreviousCompany.EndYear">
+            <summary>
+            Gets or sets the user's last year at a previous company. 
+            </summary>
+            <value>The year.</value>
+        </member>
+        <member name="P:TweetSharp.Yammer.Model.YammerPreviousCompany.RawSource">
+            <summary>
+            The source content used to deserialize the model entity instance.
+            Can be XML or JSON, depending on the endpoint used.
+            </summary>
+        </member>
+        <member name="T:TweetSharp.Yammer.Model.OrgChartRelationshipType">
+            <summary>
+            Allowable types of org-chart relationships
+            </summary>
+        </member>
+        <member name="F:TweetSharp.Yammer.Model.OrgChartRelationshipType.Subordinate">
+            <summary>
+            User B reports to user A.
+            </summary>
+        </member>
+        <member name="F:TweetSharp.Yammer.Model.OrgChartRelationshipType.Superior">
+            <summary>
+            User A reports to user B.
+            </summary>
+        </member>
+        <member name="F:TweetSharp.Yammer.Model.OrgChartRelationshipType.Colleague">
+            <summary>
+            Users A and B are peers.
+            </summary>
+        </member>
+        <member name="T:TweetSharp.Yammer.Model.YammerRelationships">
+            <summary>
+            Representation of org-chart relationships
+            </summary>
+        </member>
+        <member name="P:TweetSharp.Yammer.Model.YammerRelationships.Superiors">
+            <summary>
+            Gets or sets an enumeration of user references that represent superiors of another user in the company org-chart. 
+            </summary>
+        </member>
+        <member name="P:TweetSharp.Yammer.Model.YammerRelationships.Subordinates">
+            <summary>
+            Gets or sets an enumeration of user references that represent subordinates of another user in the company org-chart. 
+            </summary>
+        </member>
+        <member name="P:TweetSharp.Yammer.Model.YammerRelationships.Colleagues">
+            <summary>
+            Gets or sets an enumeration of user references that represent collegues of the another user. 
+            </summary>
+        </member>
+        <member name="P:TweetSharp.Yammer.Model.YammerRelationships.RawSource">
+            <summary>
+            The source content used to deserialize the model entity instance.
+            Can be XML or JSON, depending on the endpoint used.
+            </summary>
+        </member>
+        <member name="T:TweetSharp.Yammer.Model.YammerResponseMetadata">
+            <summary>
+            Class representing metadata associated with a Yammer query response.
+            </summary>
+        </member>
+        <member name="P:TweetSharp.Yammer.Model.YammerResponseMetadata.RequestedPollInterval">
+            <summary>
+            The amount of time (in seconds) that Yammer requests you wait between polls
+            </summary>
+        </member>
+        <member name="P:TweetSharp.Yammer.Model.YammerResponseMetadata.CurrentUserId">
+            <summary>
+            the ID of the user who made the request
+            </summary>
+        </member>
+        <member name="P:TweetSharp.Yammer.Model.YammerResponseMetadata.RawSource">
+            <summary>
+            The source content used to deserialize the model entity instance.
+            Can be XML or JSON, depending on the endpoint used.
+            </summary>
+        </member>
+        <member name="P:TweetSharp.Yammer.Model.YammerResponseMetadata.UserReferences">
+            <summary>
+            Gets or sets an enumeration of references to <see cref="T:TweetSharp.Yammer.Model.YammerUser">users</see> made in this response.
+            </summary>
+        </member>
+        <member name="P:TweetSharp.Yammer.Model.YammerResponseMetadata.ThreadReferences">
+            <summary>
+            Gets or sets an enumeration of references to <see cref="T:TweetSharp.Yammer.Model.YammerThread">threads</see> made in this response.
+            </summary>
+        </member>
+        <member name="P:TweetSharp.Yammer.Model.YammerResponseMetadata.TagReferences">
+            <summary>
+            Gets or sets an enumeration of references to <see cref="T:TweetSharp.Yammer.Model.YammerTag">tags</see> made in this response.
+            </summary>
+        </member>
+        <member name="P:TweetSharp.Yammer.Model.YammerResponseMetadata.GuideReferences">
+            <summary>
+            Gets or sets an enumeration of references to <see cref="T:TweetSharp.Yammer.Model.YammerUser">guides</see> made in this response.
+            </summary>
+        </member>
+        <member name="T:TweetSharp.Yammer.Model.YammerResult">
+            <summary>
+            Represents a result returning from the Twitter API.
+            </summary>
+        </member>
+        <member name="M:TweetSharp.Yammer.Model.YammerResult.#ctor(Hammock.Web.WebQueryResult,System.Net.WebException)">
+            <summary>
+            Initializes a new instance of the <see cref="T:TweetSharp.Yammer.Model.YammerResult"/> class.
+            </summary>
+            <param name="result">The result.</param>
+            <param name="exception">The WebException that was caught during the query</param>
+        </member>
+        <member name="M:TweetSharp.Yammer.Model.YammerResult.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:TweetSharp.Yammer.Model.YammerResult"/> class.
+            </summary>
+        </member>
+        <member name="P:TweetSharp.Yammer.Model.YammerResult.IsYammerError">
+            <summary>
+            Gets a value indicating whether this result returned a Twitter error.
+            </summary>
+            <value><c>true</c> if this result is in error; otherwise, <c>false</c>.</value>
+        </member>
+        <member name="P:TweetSharp.Yammer.Model.YammerResult.IsServiceError">
+            <summary>
+            Gets or sets a value indicating that the query failed due to an error in the target REST service.
+            </summary>
+        </member>
+        <member name="T:TweetSharp.Yammer.Model.YammerSchool">
+            <summary>
+            Details about a school attended by a Yammer user. 
+            </summary>
+        </member>
+        <member name="P:TweetSharp.Yammer.Model.YammerSchool.School">
+            <summary>
+            the name of the school
+            </summary>
+        </member>
+        <member name="P:TweetSharp.Yammer.Model.YammerSchool.Degree">
+            <summary>
+            Degree attained at this school
+            </summary>
+        </member>
+        <member name="P:TweetSharp.Yammer.Model.YammerSchool.Description">
+            <summary>
+            Description of the program attended
+            </summary>
+        </member>
+        <member name="P:TweetSharp.Yammer.Model.YammerSchool.StartYear">
+            <summary>
+            The first year the user attended this school
+            </summary>
+        </member>
+        <member name="P:TweetSharp.Yammer.Model.YammerSchool.EndYear">
+            <summary>
+            The last year the user attended this school
+            </summary>
+        </member>
+        <member name="P:TweetSharp.Yammer.Model.YammerSchool.RawSource">
+            <summary>
+            The source content used to deserialize the model entity instance.
+            Can be XML or JSON, depending on the endpoint used.
+            </summary>
+        </member>
+        <member name="T:TweetSharp.Yammer.Model.YammerSearchResult">
+            <summary>
+            Representation of a Yammer search result. 
+            </summary>
+        </member>
+        <member name="P:TweetSharp.Yammer.Model.YammerSearchResult.Users">
+            <summary>
+            Gets or sets an enumeration of Users found by the search.
+            </summary>
+        </member>
+        <member name="P:TweetSharp.Yammer.Model.YammerSearchResult.Tags">
+            <summary>
+            Gets or sets an enumeration of Tags found by the search.
+            </summary>
+        </member>
+        <member name="P:TweetSharp.Yammer.Model.YammerSearchResult.Groups">
+            <summary>
+            Gets or sets an enumeration of Groups returned by the search.
+            </summary>
+        </member>
+        <member name="P:TweetSharp.Yammer.Model.YammerSearchResult.Messages">
+            <summary>
+            Gets or sets an enumeration of messages found by the search.
+            </summary>
+        </member>
+        <member name="P:TweetSharp.Yammer.Model.YammerSearchResult.RawSource">
+            <summary>
+            The source content used to deserialize the model entity instance.
+            Can be XML or JSON, depending on the endpoint used.
+            </summary>
+        </member>
+        <member name="T:TweetSharp.Yammer.Model.YammerSenderType">
+            <summary>
+            The type of yammer sender
+            </summary>
+        </member>
+        <member name="F:TweetSharp.Yammer.Model.YammerSenderType.User">
+            <summary>
+            Sender is a user
+            </summary>
+        </member>
+        <member name="F:TweetSharp.Yammer.Model.YammerSenderType.Guide">
+            <summary>
+            Sender is a guide
+            </summary>
+        </member>
+        <member name="T:TweetSharp.Yammer.Model.SubscriptionType">
+            <summary>
+            The type of subscription (what is subscribed to)
+            </summary>
+        </member>
+        <member name="F:TweetSharp.Yammer.Model.SubscriptionType.User">
+            <summary>
+            Subscription is to a <see cref="T:TweetSharp.Yammer.Model.YammerUser"/>
+            </summary>
+        </member>
+        <member name="F:TweetSharp.Yammer.Model.SubscriptionType.Tag">
+            <summary>
+            Subscription is to a <see cref="T:TweetSharp.Yammer.Model.YammerTag"/>
+            </summary>
+        </member>
+        <member name="T:TweetSharp.Yammer.Model.YammerSubscription">
+            <summary>
+            Representation of a subscription to another entity in the Yammer network. 
+            </summary>
+        </member>
+        <member name="P:TweetSharp.Yammer.Model.YammerSubscription.SubscriptionType">
+            <summary>
+            Gets or sets the type of subscription. 
+            </summary>
+        </member>
+        <member name="P:TweetSharp.Yammer.Model.YammerSubscription.RawSource">
+            <summary>
+            The source content used to deserialize the model entity instance.
+            Can be XML or JSON, depending on the endpoint used.
+            </summary>
+        </member>
+        <member name="T:TweetSharp.Yammer.Model.YammerSuggestions">
+            <summary>
+            Represents a bundle of group and or user suggestions from one or more users to another. 
+            </summary>
+        </member>
+        <member name="P:TweetSharp.Yammer.Model.YammerSuggestions.SuggestedUsers">
+            <summary>
+            Gets or sets an enumeration of suggested users. 
+            </summary>
+        </member>
+        <member name="P:TweetSharp.Yammer.Model.YammerSuggestions.SuggestedGroups">
+            <summary>
+            Gets or sets an enumeration of suggested groups. 
+            </summary>
+        </member>
+        <member name="P:TweetSharp.Yammer.Model.YammerSuggestions.RawSource">
+            <summary>
+            The source content used to deserialize the model entity instance.
+            Can be XML or JSON, depending on the endpoint used.
+            </summary>
+        </member>
+        <member name="T:TweetSharp.Yammer.Model.YammerTag">
+            <summary>
+            Represents a tag (a.k.a. hashtag) in the Yammer network. 
+            </summary>
+        </member>
+        <member name="T:TweetSharp.Yammer.Model.YammerTagReference">
+            <summary>
+            Represents a reference to a tag (a.k.a. hashtag) in the Yammer network. 
+            </summary>
+        </member>
+        <member name="P:TweetSharp.Yammer.Model.YammerTagReference.Name">
+            <summary>
+            Gets or set's the tag name. 
+            </summary>
+        </member>
+        <member name="P:TweetSharp.Yammer.Model.YammerTagReference.RawSource">
+            <summary>
+            The source content used to deserialize the model entity instance.
+            Can be XML or JSON, depending on the endpoint used.
+            </summary>
+        </member>
+        <member name="P:TweetSharp.Yammer.Model.YammerTag.Stats">
+            <summary>
+            Gets or sets statistics about the tag's usage.
+            </summary>
+        </member>
+        <member name="T:TweetSharp.Yammer.Model.YammerThread">
+            <summary>
+            Representation of a threaded list of related <see cref="T:TweetSharp.Yammer.Model.YammerMessage">messages</see>.
+            </summary>
+        </member>
+        <member name="T:TweetSharp.Yammer.Model.YammerThreadReference">
+            <summary>
+            Representation of a reference to a thread of <see cref="T:TweetSharp.Yammer.Model.YammerMessage">messages</see>.
+            </summary>
+        </member>
+        <member name="P:TweetSharp.Yammer.Model.YammerThreadReference.Stats">
+            <summary>
+            Gets or sets statistics about the thread. 
+            </summary>
+        </member>
+        <member name="P:TweetSharp.Yammer.Model.YammerThreadReference.RawSource">
+            <summary>
+            The source content used to deserialize the model entity instance.
+            Can be XML or JSON, depending on the endpoint used.
+            </summary>
+        </member>
+        <member name="T:TweetSharp.Yammer.Model.YammerThreadStats">
+            <summary>
+            Reprentation of <see cref="T:TweetSharp.Yammer.Model.YammerMessage"/> thread statistics. 
+            </summary>
+        </member>
+        <member name="P:TweetSharp.Yammer.Model.YammerThreadStats.Updates">
+            <summary>
+            Gets or sets the number of updates to the thread. 
+            </summary>
+        </member>
+        <member name="P:TweetSharp.Yammer.Model.YammerThreadStats.LastReplyAt">
+            <summary>
+            Gets or sets the date and time of the last reply in the thread. 
+            </summary>
+        </member>
+        <member name="P:TweetSharp.Yammer.Model.YammerThreadStats.RawSource">
+            <summary>
+            The source content used to deserialize the model entity instance.
+            Can be XML or JSON, depending on the endpoint used.
+            </summary>
+        </member>
+        <member name="T:TweetSharp.Yammer.Model.YammerUser">
+            <summary>
+            Represents a Yammer User (full details)
+            </summary>
+        </member>
+        <member name="T:TweetSharp.Yammer.Model.YammerUserReference">
+            <summary>
+            Represents a yammer user (summary details)
+            </summary>
+        </member>
+        <member name="P:TweetSharp.Yammer.Model.YammerUserReference.Name">
+            <summary>
+            the screen name of the user
+            </summary>
+        </member>
+        <member name="P:TweetSharp.Yammer.Model.YammerUserReference.FullName">
+            <summary>
+            the full name of the user
+            </summary>
+        </member>
+        <member name="P:TweetSharp.Yammer.Model.YammerUserReference.MugshotUrl">
+            <summary>
+            url to the user's photo
+            </summary>
+        </member>
+        <member name="P:TweetSharp.Yammer.Model.YammerUserReference.JobTitle">
+            <summary>
+            The user's job title
+            </summary>
+        </member>
+        <member name="P:TweetSharp.Yammer.Model.YammerUserReference.UserStats">
+            <summary>
+            Counters for the user (updates, following, followers...)
+            </summary>
+        </member>
+        <member name="P:TweetSharp.Yammer.Model.YammerUserReference.RawSource">
+            <summary>
+            The source content used to deserialize the model entity instance.
+            Can be XML or JSON, depending on the endpoint used.
+            </summary>
+        </member>
+        <member name="P:TweetSharp.Yammer.Model.YammerUser.Location">
+            <summary>
+            The user's location
+            </summary>
+        </member>
+        <member name="P:TweetSharp.Yammer.Model.YammerUser.BirthDate">
+            <summary>
+            The user's birth date
+            </summary>
+        </member>
+        <member name="P:TweetSharp.Yammer.Model.YammerUser.HireDate">
+            <summary>
+            The date the user was hired
+            </summary>
+        </member>
+        <member name="P:TweetSharp.Yammer.Model.YammerUser.Interests">
+            <summary>
+            The user's interests
+            </summary>
+        </member>
+        <member name="P:TweetSharp.Yammer.Model.YammerUser.Expertise">
+            <summary>
+            The user's expertise
+            </summary>
+        </member>
+        <member name="P:TweetSharp.Yammer.Model.YammerUser.Summary">
+            <summary>
+            Summary text from the user's profile
+            </summary>
+        </member>
+        <member name="P:TweetSharp.Yammer.Model.YammerUser.TimeZone">
+            <summary>
+            the current timezone of the user
+            </summary>
+        </member>
+        <member name="P:TweetSharp.Yammer.Model.YammerUser.State">
+            <summary>
+            value indicating the user's active state
+            </summary>
+        </member>
+        <member name="P:TweetSharp.Yammer.Model.YammerUser.NetworkId">
+            <summary>
+            the id of the network that this user belongs to
+            </summary>
+        </member>
+        <member name="P:TweetSharp.Yammer.Model.YammerUser.NetworkDomains">
+            <summary>
+            List of applicable network domains
+            </summary>
+        </member>
+        <member name="P:TweetSharp.Yammer.Model.YammerUser.Schools">
+            <summary>
+            list of schools attended by this user
+            </summary>
+        </member>
+        <member name="P:TweetSharp.Yammer.Model.YammerUser.PreviousCompanies">
+            <summary>
+            list of previous companies that employed this user
+            </summary>
+        </member>
+        <member name="P:TweetSharp.Yammer.Model.YammerUser.ExternalUrls">
+            <summary>
+            List of external web addresses for the user (homepage, blog, etc)
+            </summary>
+        </member>
+        <member name="P:TweetSharp.Yammer.Model.YammerUser.ContactInfo">
+            <summary>
+            Gets or sets the user's contact info.
+            </summary>
+            <value>The contact info.</value>
+        </member>
+        <member name="P:TweetSharp.Yammer.Model.YammerUser.KidsNames">
+            <summary>
+            Gets or sets the user's kids' names
+            </summary>
+            <value>The name(s) of the user's kid(s)</value>
+        </member>
+        <member name="P:TweetSharp.Yammer.Model.YammerUser.SignificantOther">
+            <summary>
+            Gets or sets the user's significant other.
+            </summary>
+            <value>The significant other's name</value>
+        </member>
+        <member name="T:TweetSharp.Yammer.Model.YammerUserStats">
+            <summary>
+            Representation of statistics about a <see cref="T:TweetSharp.Yammer.Model.YammerUser"/>.
+            </summary>
+        </member>
+        <member name="P:TweetSharp.Yammer.Model.YammerUserStats.Updates">
+            <summary>
+            the number of status updates posted by this user
+            </summary>
+        </member>
+        <member name="P:TweetSharp.Yammer.Model.YammerUserStats.Followers">
+            <summary>
+            the number of followers this user has
+            </summary>
+        </member>
+        <member name="P:TweetSharp.Yammer.Model.YammerUserStats.Following">
+            <summary>
+            the number of other users this user is following
+            </summary>
+        </member>
+        <member name="P:TweetSharp.Yammer.Model.YammerUserStats.RawSource">
+            <summary>
+            The source content used to deserialize the model entity instance.
+            Can be XML or JSON, depending on the endpoint used.
+            </summary>
+        </member>
+        <member name="T:TweetSharp.Yammer.Service.YammerService">
+            <summary>
+            This service provides a simple API layer for Yammer that hides
+            serialization details and uses the most efficient API configuration.
+            </summary>
+        </member>
+        <member name="M:TweetSharp.Yammer.Service.YammerService.#ctor(TweetSharp.YammerClientInfo)">
+            <summary>
+            Initializes a new instance of the <see cref="T:TweetSharp.Yammer.Service.YammerService"/> class.
+            </summary>
+            <param name="info">The client info.</param>
+        </member>
+        <member name="M:TweetSharp.Yammer.Service.YammerService.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:TweetSharp.Yammer.Service.YammerService"/> class.
+            </summary>
+        </member>
+        <member name="M:TweetSharp.Yammer.Service.YammerService.CacheWith(Hammock.Caching.ICache)">
+            <summary>
+            Delegates caching to the provided <see cref="T:Hammock.Caching.ICache"/> instance.
+            </summary>
+            <param name="cache">The cache.</param>
+        </member>
+        <member name="M:TweetSharp.Yammer.Service.YammerService.CacheFor(System.TimeSpan)">
+            <summary>
+            Caches all following API calls using the current caching scheme
+            for a specified length of time. 
+            Cache keys are scoped to the authenticating user and the API URI.
+            </summary>
+            <param name="length">The length of time to cache individual queries for until they are invalid.</param>
+        </member>
+        <member name="M:TweetSharp.Yammer.Service.YammerService.CacheForInactivityOf(System.TimeSpan)">
+            <summary>
+            Caches all following API calls using the current caching scheme
+            for a specified length of inactive time. Inactive time corresponds
+            to the amount of time passed without attempts to access or update
+            the cache key.
+            Cache keys are scoped to the authenticating user and the API URI.
+            </summary>
+            <param name="length">The length of inactivity required to invalid individual cached queries.</param>
+        </member>
+        <member name="M:TweetSharp.Yammer.Service.YammerService.RetryOn(TweetSharp.Yammer.Fluent.RetryOn,System.Int32)">
+            <summary>
+            Sets the retry policy for API requests based on 
+            <see cref="M:TweetSharp.Yammer.Service.YammerService.RetryOn(TweetSharp.Yammer.Fluent.RetryOn,System.Int32)"/> condition flags and a maximum number
+            of retry attempts.
+            </summary>
+            <param name="conditions">The conditions.</param>
+            <param name="maxRetries">The max retries.</param>
+        </member>
+        <member name="M:TweetSharp.Yammer.Service.YammerService.TimeoutAfter(System.TimeSpan)">
+            <summary>
+            Sets a duration before timing out an API request
+            or Stream API read operation.
+            </summary>
+            <param name="duration">The duration before timing out.</param>
+        </member>
+        <member name="M:TweetSharp.Yammer.Service.YammerService.AuthenticateAs(System.String,System.String)">
+            <summary>
+            Authenticates the service using a username and password.
+            </summary>
+            <param name="username">The username.</param>
+            <param name="password">The password.</param>
+        </member>
+        <member name="M:TweetSharp.Yammer.Service.YammerService.AuthenticateWith(System.String,System.String)">
+            <summary>
+            Authenticates the service using an OAuth token and secret.
+            </summary>
+            <param name="token">The token.</param>
+            <param name="tokenSecret">The token secret.</param>
+        </member>
+        <member name="M:TweetSharp.Yammer.Service.YammerService.GetAuthenticatedQuery">
+            <summary>
+            Gets a query with authentication details set.  
+            </summary>
+            <returns>A Yammer query</returns>
+        </member>
+        <member name="M:TweetSharp.Yammer.Service.YammerService.PrepareQuery``1(TweetSharp.Yammer.Fluent.IFluentYammer,System.Func{TweetSharp.Yammer.Fluent.IFluentYammer,TweetSharp.Yammer.Fluent.IYammerLeafNode})">
+            <summary>
+            Not implemented for Yammer
+            </summary>
+            <param name="query">(Unused)</param>
+            <param name="executor">(Unused)</param>
+        </member>
+        <member name="M:TweetSharp.Yammer.Service.YammerService.HandleResponse``1(TweetSharp.Yammer.Fluent.IFluentYammer,TweetSharp.Yammer.Model.YammerResult)">
+            <summary>
+            Not implemented for Yammer
+            </summary>
+            <param name="query">(Unused)</param>
+            <param name="response">(Unused)</param>
+        </member>
+        <member name="M:TweetSharp.Yammer.Service.YammerService.HandleResponse(TweetSharp.Yammer.Fluent.IFluentYammer,TweetSharp.Yammer.Model.YammerResult)">
+            <summary>
+            Not implemented for Yammer
+            </summary>
+            <param name="query">(Unused)</param>
+            <param name="response">(Unused)</param>
+        </member>
+        <member name="M:TweetSharp.Yammer.Service.YammerService.ListMessages">
+            <summary>
+            Gets a list of all messages. 
+            </summary>
+            <returns>An enumeration of messages</returns>
+        </member>
+        <member name="M:TweetSharp.Yammer.Service.YammerService.ListMessagesSince(System.Int64)">
+            <summary>
+            Gets threaded list of messages posted after a specific message. 
+            </summary>
+            <param name="sinceId">The id of the low-water mark message.</param>
+            <returns>An enumeration of messages</returns>
+        </member>
+        <member name="M:TweetSharp.Yammer.Service.YammerService.ListMessagesBefore(System.Int64)">
+            <summary>
+            Gets a list of messages posted before a specific message. 
+            </summary>
+            <param name="beforeId">The id of the low-water mark message.</param>
+            <returns>An enumeration of messages</returns>
+        </member>
+        <member name="M:TweetSharp.Yammer.Service.YammerService.ListThreadedMessages">
+            <summary>
+            Gets a threaded list of messages.
+            </summary>
+            <returns>An enumeration of messages</returns>
+        </member>
+        <member name="M:TweetSharp.Yammer.Service.YammerService.ListThreadedMessagesSince(System.Int64)">
+            <summary>
+            Gets a threaded list of messages posted after a specific message. 
+            </summary>
+            <param name="sinceId">The id of the low-water mark message.</param>
+            <returns>An enumeration of messages</returns>
+        </member>
+        <member name="M:TweetSharp.Yammer.Service.YammerService.ListThreadedMessagesBefore(System.Int64)">
+            <summary>
+            Gets a threaded list of messages posted before a specific message. 
+            </summary>
+            <param name="beforeId">The id of the low-water mark message.</param>
+            <returns>An enumeration of messages</returns>
+        </member>
+        <member name="M:TweetSharp.Yammer.Service.YammerService.ListMessagesSent">
+            <summary>
+            Gets received messages.
+            </summary>
+            <returns>An enumeration of sent messages.</returns>
+        </member>
+        <member name="M:TweetSharp.Yammer.Service.YammerService.ListMessagesSentSince(System.Int32)">
+            <summary>
+            Gets sent messages posted after a specific message. 
+            </summary>
+            <param name="sinceId">The id of the low-water mark message.</param>
+            <returns>An enumeration of sent messages</returns>
+        </member>
+        <member name="M:TweetSharp.Yammer.Service.YammerService.ListMessagesSentBefore(System.Int32)">
+            <summary>
+            Gets sent messages posted after a specific message. 
+            </summary>
+            <param name="beforeId">The id of the high-water mark message.</param>
+            <returns>An enumeration of sent messages</returns>
+        </member>
+        <member name="M:TweetSharp.Yammer.Service.YammerService.ListThreadedMessagesSent">
+            <summary>
+            Gets a threaded list of sent messages.
+            </summary>
+            <returns>An enumeration of sent messages</returns>
+        </member>
+        <member name="M:TweetSharp.Yammer.Service.YammerService.ListThreadedMessagesSentSince(System.Int32)">
+            <summary>
+            Gets threaded list of sent messages posted after a specific message. 
+            </summary>
+            <param name="sinceId">The id of the low-water mark message.</param>
+            <returns>An enumeration of sent messages</returns>
+        </member>
+        <member name="M:TweetSharp.Yammer.Service.YammerService.ListThreadedMessagesSentBefore(System.Int32)">
+            <summary>
+            Gets threaded list of sent messages posted before a specific message. 
+            </summary>
+            <param name="beforeId">The id of the high-water mark message.</param>
+            <returns>An enumeration of sent messages</returns>
+        </member>
+        <member name="M:TweetSharp.Yammer.Service.YammerService.ListMessagesReceived">
+            <summary>
+            Gets received messages.
+            </summary>
+            <returns>An enumeration of received messages.</returns>
+        </member>
+        <member name="M:TweetSharp.Yammer.Service.YammerService.ListMessagesReceivedSince(System.Int32)">
+            <summary>
+            Gets received messages posted after a specific message. 
+            </summary>
+            <param name="sinceId">The id of the high-water mark message.</param>
+            <returns>An enumeration of received messages</returns>
+        </member>
+        <member name="M:TweetSharp.Yammer.Service.YammerService.ListMessagesReceivedBefore(System.Int32)">
+            <summary>
+            Gets received messages posted before a specific message. 
+            </summary>
+            <param name="beforeId">The id of the high-water mark message.</param>
+            <returns>An enumeration of received messages</returns>
+        </member>
+        <member name="M:TweetSharp.Yammer.Service.YammerService.ListThreadedMessagesReceived">
+            <summary>
+            Gets a threaded list of received messages.
+            </summary>
+            <returns>An enumeration of received messages.</returns>
+        </member>
+        <member name="M:TweetSharp.Yammer.Service.YammerService.ListThreadedMessagesReceivedSince(System.Int32)">
+            <summary>
+            Gets a threaded list of messages posted after a specific message. 
+            </summary>
+            <param name="sinceId">The id of the low-water mark message.</param>
+            <returns>An enumeration of messages</returns>
+        </member>
+        <member name="M:TweetSharp.Yammer.Service.YammerService.ListThreadedMessagesReceivedBefore(System.Int32)">
+            <summary>
+            Gets a threaded list of messages posted before a specific message. 
+            </summary>
+            <param name="beforeId">The id of the high-water mark message.</param>
+            <returns>An enumeration of received messages</returns>
+        </member>
+        <member name="P:TweetSharp.Yammer.Service.YammerService.Result">
+            <summary>
+            Gets the <see cref="T:TweetSharp.Yammer.Model.YammerResult"/> of the last call made to the Yammer API.
+            </summary>
+            <value>The result based on the last API call.</value>
+        </member>
+    </members>
+</doc>
