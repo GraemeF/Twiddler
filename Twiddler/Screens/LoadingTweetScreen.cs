@@ -28,7 +28,9 @@ namespace Twiddler.Screens
         {
             base.OnInitialize();
 
-            Observable.Start(() => _store.GetTweet(_id)).Subscribe(PopulateWithTweet);
+            Observable.
+                Start(() => _store.GetTweet(_id)).
+                Subscribe(PopulateWithTweet);
         }
 
         private void PopulateWithTweet(Tweet tweet)
