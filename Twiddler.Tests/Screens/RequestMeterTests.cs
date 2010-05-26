@@ -1,23 +1,39 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using Moq;
 using Twiddler.Screens;
+using Twiddler.Services.Interfaces;
 using Xunit;
 
 namespace Twiddler.Tests.Screens
 {
     public class RequestMeterTests
     {
+        private readonly Mock<IRequestStatus> _fakeRequestStatus = new Mock<IRequestStatus>();
+
         [Fact]
         public void GettingHourlyLimit__GetsHourlyLimitFromLimitStatus()
         {
-            var test = BuildDefaultTestSubject();
+            RequestMeterScreen test = BuildDefaultTestSubject();
+
+            const int hourlyLimit = 350;
+            _fakeRequestStatus.Setup(x => x.HourlyLimit).Returns(hourlyLimit);
+
+            Assert.Equal(hourlyLimit, test.HourlyLimit);
         }
 
-        private RequestMeter BuildDefaultTestSubject()
+        [Fact]
+        public void GettingRemainingHits__GetsRemainingHitsFromLimitStatus()
         {
-            return new RequestMeter();
+            RequestMeterScreen test = BuildDefaultTestSubject();
+
+            const int remainingHits = 33;
+            _fakeRequestStatus.Setup(x => x.RemainingHits).Returns(remainingHits);
+
+            Assert.Equal(remainingHits, test.RemainingHits);
+        }
+
+        private RequestMeterScreen BuildDefaultTestSubject()
+        {
+            return new RequestMeterScreen(_fakeRequestStatus.Object);
         }
     }
 }
