@@ -25,7 +25,7 @@ namespace Twiddler.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        [global::System.Configuration.DefaultSettingValueAttribute("AQ8gY3dFm0R2FE4pjqGQ")]
         public string ConsumerKey {
             get {
                 return ((string)(this["ConsumerKey"]));
@@ -34,7 +34,7 @@ namespace Twiddler.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        [global::System.Configuration.DefaultSettingValueAttribute("nNN52t9DBk0QlwLcnlhY1z6b36LDRV1McGr9P243E")]
         public string ConsumerSecret {
             get {
                 return ((string)(this["ConsumerSecret"]));
