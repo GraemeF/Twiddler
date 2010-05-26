@@ -174,9 +174,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Screens\Interfaces\IRequestMeterScreen.cs" />
-    <Compile Include="Services\Interfaces\IRequestStatus.cs" />
+    <Compile Include="Services\Interfaces\IRequestLimitStatus.cs" />
     <Compile Include="Screens\RequestMeterScreen.cs" />
-    <Compile Include="Services\RequestStatus.cs" />
+    <Compile Include="Services\RequestLimitStatus.cs" />
     <Compile Include="Views\RequestMeterView.xaml.cs">
       <DependentUpon>RequestMeterView.xaml</DependentUpon>
     </Compile>

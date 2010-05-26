@@ -5,15 +5,15 @@ using Twiddler.Services.Interfaces;
 
 namespace Twiddler.Services
 {
-    [Singleton(typeof (IRequestStatus))]
-    public class RequestStatus : IRequestStatus
+    [Singleton(typeof (IRequestLimitStatus))]
+    public class RequestLimitStatus : IRequestLimitStatus
     {
         private int _hourlyLimit;
         private TimeSpan _periodDuration;
         private DateTime _periodEndTime;
         private int _remainingHits;
 
-        #region IRequestStatus Members
+        #region IRequestLimitStatus Members
 
         public event PropertyChangedEventHandler PropertyChanged;
 

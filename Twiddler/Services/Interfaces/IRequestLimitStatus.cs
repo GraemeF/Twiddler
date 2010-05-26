@@ -3,7 +3,7 @@ using System.ComponentModel;
 
 namespace Twiddler.Services.Interfaces
 {
-    public interface IRequestStatus : INotifyPropertyChanged
+    public interface IRequestLimitStatus : INotifyPropertyChanged
     {
         int HourlyLimit { get; set; }
         int RemainingHits { get; set; }

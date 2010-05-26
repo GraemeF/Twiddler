@@ -8,21 +8,21 @@ namespace Twiddler.Screens
     [PerRequest(typeof (IRequestMeterScreen))]
     public class RequestMeterScreen : Screen, IRequestMeterScreen
     {
-        private readonly IRequestStatus _status;
+        private readonly IRequestLimitStatus _limitStatus;
 
-        public RequestMeterScreen(IRequestStatus status)
+        public RequestMeterScreen(IRequestLimitStatus limitStatus)
         {
-            _status = status;
+            _limitStatus = limitStatus;
         }
 
         public int HourlyLimit
         {
-            get { return _status.HourlyLimit; }
+            get { return _limitStatus.HourlyLimit; }
         }
 
         public int RemainingHits
         {
-            get { return _status.RemainingHits; }
+            get { return _limitStatus.RemainingHits; }
         }
 
         public float UsedHitsFraction { get; private set; }

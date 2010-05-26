@@ -7,7 +7,7 @@ namespace Twiddler.Tests.Screens
 {
     public class RequestMeterTests
     {
-        private readonly Mock<IRequestStatus> _fakeRequestStatus = new Mock<IRequestStatus>();
+        private readonly Mock<IRequestLimitStatus> _fakeRequestStatus = new Mock<IRequestLimitStatus>();
 
         [Fact]
         public void GettingHourlyLimit__GetsHourlyLimitFromLimitStatus()
