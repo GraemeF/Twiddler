@@ -172,6 +172,7 @@
     <Compile Include="Screens\Interfaces\IRequestMeterScreen.cs" />
     <Compile Include="Services\Interfaces\IRequestStatus.cs" />
     <Compile Include="Screens\RequestMeterScreen.cs" />
+    <Compile Include="Services\RequestStatus.cs" />
     <Compile Include="Views\ShellView.xaml.cs">
       <DependentUpon>ShellView.xaml</DependentUpon>
       <SubType>Code</SubType>
