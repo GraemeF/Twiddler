@@ -1,9 +1,9 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Twiddler", "Twiddler\Twiddler.csproj", "{5DD421AA-A0AE-4052-8E61-B7A4B61ABAD4}"
-EndProject
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UnitTests", "UnitTests", "{8B4BD121-CE43-49D7-A5AC-24D9EF30CE8C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Twiddler", "Twiddler\Twiddler.csproj", "{5DD421AA-A0AE-4052-8E61-B7A4B61ABAD4}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Twiddler.Tests", "Twiddler.Tests\Twiddler.Tests.csproj", "{19E7A590-A4B6-4F18-8B74-4879F7F8CF96}"
 EndProject
