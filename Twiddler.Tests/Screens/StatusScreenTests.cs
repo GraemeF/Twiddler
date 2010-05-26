@@ -3,6 +3,7 @@ using Caliburn.Testability.Extensions;
 using Moq;
 using Twiddler.Commands.Interfaces;
 using Twiddler.Screens;
+using Twiddler.Screens.Interfaces;
 using Twiddler.Services.Interfaces;
 using Xunit;
 using Xunit.Extensions;
@@ -14,6 +15,7 @@ namespace Twiddler.Tests.Screens
         private readonly IAuthorizeCommand _authorizeCommand = new Mock<IAuthorizeCommand>().Object;
         private readonly IDeauthorizeCommand _deauthorizeCommand = new Mock<IDeauthorizeCommand>().Object;
         private readonly Mock<ITwitterClient> _fakeClient = new Mock<ITwitterClient>();
+        private readonly Mock<IRequestMeterScreen> _fakeRequestMeter = new Mock<IRequestMeterScreen>();
 
         [Theory]
         [InlineData(AuthorizationStatus.Unknown)]
@@ -72,6 +74,16 @@ namespace Twiddler.Tests.Screens
             Assert.Same(_deauthorizeCommand, test.DeauthorizeCommand);
         }
 
+        [Fact]
+        public void GettingRequestMeter_WhenInitialized_ReturnsInitializedRequestMeter()
+        {
+            StatusScreen test = BuildDefaultTestSubject();
+            test.Initialize();
+
+            Assert.Same(_fakeRequestMeter.Object, test.RequestMeter);
+            _fakeRequestMeter.Verify(x => x.Initialize());
+        }
+
         private void ClientAuthorizationStatusChangesTo(AuthorizationStatus status)
         {
             _fakeClient.Setup(x => x.AuthorizationStatus).Returns(status);
@@ -81,7 +93,7 @@ namespace Twiddler.Tests.Screens
 
         private StatusScreen BuildDefaultTestSubject()
         {
-            return new StatusScreen(_fakeClient.Object, _authorizeCommand, _deauthorizeCommand);
+            return new StatusScreen(_fakeClient.Object, _authorizeCommand, _deauthorizeCommand, _fakeRequestMeter.Object);
         }
     }
 }

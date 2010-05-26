@@ -98,6 +98,7 @@
     <Compile Include="Commands\AuthorizeCommandTests.cs" />
     <Compile Include="Commands\DeauthorizeCommandTests.cs" />
     <Compile Include="Models\TimelineTests.cs" />
+    <Compile Include="Screens\RequestMeterTests.cs" />
     <Compile Include="Services\UpdatingTwitterStoreTests.cs" />
     <Compile Include="New.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

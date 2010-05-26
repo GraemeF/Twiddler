@@ -8,18 +8,20 @@ using Twiddler.Services.Interfaces;
 namespace Twiddler.Screens
 {
     [PerRequest(typeof (IStatusScreen))]
-    public class StatusScreen : Screen, IStatusScreen
+    public class StatusScreen : ScreenConductor<IScreen>.WithCollection.AllScreensActive, IStatusScreen
     {
         private readonly ITwitterClient _client;
         private PropertyObserver<ITwitterClient> _observer;
 
         public StatusScreen(ITwitterClient client,
                             IAuthorizeCommand authorizeCommand,
-                            IDeauthorizeCommand deauthorizeCommand)
+                            IDeauthorizeCommand deauthorizeCommand,
+                            IRequestMeterScreen requestMeter) : base(true)
         {
             _client = client;
             AuthorizeCommand = authorizeCommand;
             DeauthorizeCommand = deauthorizeCommand;
+            RequestMeter = requestMeter;
         }
 
         public AuthorizationStatus Authorization
@@ -29,6 +31,7 @@ namespace Twiddler.Screens
 
         public IAuthorizeCommand AuthorizeCommand { get; private set; }
         public IDeauthorizeCommand DeauthorizeCommand { get; private set; }
+        public IRequestMeterScreen RequestMeter { get; private set; }
 
         protected override void OnInitialize()
         {
