@@ -1,4 +1,5 @@
-﻿using Caliburn.Core.IoC;
+﻿using System;
+using Caliburn.Core.IoC;
 using Caliburn.PresentationFramework.Screens;
 using MvvmFoundation.Wpf;
 using Twiddler.Screens.Interfaces;
@@ -27,7 +28,17 @@ namespace Twiddler.Screens
             get { return _limitStatus.RemainingHits; }
         }
 
-        public float UsedHitsFraction { get; private set; }
+        public float UsedHitsFraction
+        {
+            get
+            {
+                return
+                    Math.Max(0f,
+                             Math.Min(1f,
+                                      1f - RemainingHits/(float) HourlyLimit));
+            }
+        }
+
         public float UsedTimeFraction { get; private set; }
         public string RemainingTime { get; private set; }
 
@@ -37,10 +48,20 @@ namespace Twiddler.Screens
 
             _observer =
                 new PropertyObserver<IRequestLimitStatus>(_limitStatus).
-                    RegisterHandler(x => x.HourlyLimit,
-                                    y => NotifyOfPropertyChange(() => HourlyLimit)).
-                    RegisterHandler(x => x.RemainingHits,
-                                    y => NotifyOfPropertyChange(() => RemainingHits));
+                    RegisterHandler(x => x.HourlyLimit, y => HourlyLimitChanged()).
+                    RegisterHandler(x => x.RemainingHits, y => RemainingHitsChanged());
+        }
+
+        private void RemainingHitsChanged()
+        {
+            NotifyOfPropertyChange(() => RemainingHits);
+            NotifyOfPropertyChange(() => UsedHitsFraction);
+        }
+
+        private void HourlyLimitChanged()
+        {
+            NotifyOfPropertyChange(() => HourlyLimit);
+            NotifyOfPropertyChange(() => UsedHitsFraction);
         }
     }
 }

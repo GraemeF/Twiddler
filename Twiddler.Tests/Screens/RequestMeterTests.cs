@@ -4,12 +4,18 @@ using Moq;
 using Twiddler.Screens;
 using Twiddler.Services.Interfaces;
 using Xunit;
+using Xunit.Extensions;
 
 namespace Twiddler.Tests.Screens
 {
     public class RequestMeterTests
     {
         private readonly Mock<IRequestLimitStatus> _fakeRequestStatus = new Mock<IRequestLimitStatus>();
+
+        public RequestMeterTests()
+        {
+            _fakeRequestStatus.SetupAllProperties();
+        }
 
         [Fact]
         public void GettingHourlyLimit__GetsHourlyLimitFromLimitStatus()
@@ -53,6 +59,23 @@ namespace Twiddler.Tests.Screens
             test.
                 AssertThatChangeNotificationIsRaisedBy(x => x.HourlyLimit).
                 When(() => PropertyChangesOnRequestStatus("HourlyLimit"));
+        }
+
+        [Theory]
+        [InlineData(-0, 1f)]
+        [InlineData(-1, 1f)]
+        [InlineData(75, 0.25f)]
+        [InlineData(25, 0.75f)]
+        [InlineData(100, 0f)]
+        [InlineData(101, 0f)]
+        public void GettingUsedHitsFraction__ReturnsFractionOfHourlyLimit(int remainingHits, float fraction)
+        {
+            RequestMeterScreen test = BuildDefaultTestSubject();
+
+            _fakeRequestStatus.Object.RemainingHits = remainingHits;
+            _fakeRequestStatus.Object.HourlyLimit = 100;
+
+            Assert.Equal(fraction, test.UsedHitsFraction);
         }
 
         private void PropertyChangesOnRequestStatus(string propertyName)
