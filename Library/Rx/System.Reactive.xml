@@ -426,7 +426,8 @@
         </member>
         <member name="M:System.Linq.Observable.Aggregate``2(System.IObservable{``0},``1,System.Func{``1,``0,``1})">
             <summary>
-            Applies an accumulator function over an observable sequence. The specified seed value is used as the initial accumulator value.
+            Applies an accumulator function over an observable sequence. 
+            The specified seed value is prepended to the sequence once a message comes in.
             </summary>
         </member>
         <member name="M:System.Linq.Observable.Aggregate``1(System.IObservable{``0},System.Func{``0,``0,``0})">
@@ -1199,6 +1200,11 @@
             Converts a Begin/End invoke function pair into a asynchronous function.
             </summary>
         </member>
+        <member name="M:System.Linq.Observable.FromAsyncPattern``10(System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,System.AsyncCallback,System.Object,System.IAsyncResult})">
+            <summary>
+            Converts a Begin/End invoke function pair into a asynchronous function.
+            </summary>
+        </member>
         <member name="M:System.Linq.Observable.FromAsyncPattern``10(System.Func{``0,``1,``2,``3,``4,``5,``6,``7,``8,``9,System.AsyncCallback,System.Object,System.IAsyncResult},System.Action{System.IAsyncResult})">
             <summary>
             Converts a Begin/End invoke function pair into a asynchronous function.
@@ -1622,36 +1628,6 @@
             Generates an observable sequence of integral numbers within a specified range.
             </summary>
         </member>
-        <member name="M:System.Linq.Observable.Repeat``1(System.IObservable{``0},System.Concurrency.IScheduler)">
-            <summary>
-            Repeats the observable sequence indefinitely.
-            </summary>
-        </member>
-        <member name="M:System.Linq.Observable.Repeat``1(System.IObservable{``0},System.Int32,System.Concurrency.IScheduler)">
-            <summary>
-            Repeats the observable sequence repeatCount times.
-            </summary>
-        </member>
-        <member name="M:System.Linq.Observable.Retry``1(System.IObservable{``0},System.Concurrency.IScheduler)">
-            <summary>
-            Repeats the source observable sequence until it successfully terminates.
-            </summary>
-        </member>
-        <member name="M:System.Linq.Observable.Retry``1(System.IObservable{``0},System.Int32,System.Concurrency.IScheduler)">
-            <summary>
-            Repeats the source observable sequence the retryCount times or until it successfully terminates.
-            </summary>
-        </member>
-        <member name="M:System.Linq.Observable.Repeat``1(``0,System.Concurrency.IScheduler)">
-            <summary>
-            Generates an observable sequence that contains one repeated value.
-            </summary>
-        </member>
-        <member name="M:System.Linq.Observable.Repeat``1(``0,System.Int32,System.Concurrency.IScheduler)">
-            <summary>
-            Generates an observable sequence that contains one repeated value.
-            </summary>
-        </member>
         <member name="M:System.Linq.Observable.Repeat``1(System.IObservable{``0})">
             <summary>
             Repeats the observable sequence indefinitely.
@@ -1670,6 +1646,16 @@
         <member name="M:System.Linq.Observable.Retry``1(System.IObservable{``0},System.Int32)">
             <summary>
             Repeats the source observable sequence the retryCount times or until it successfully terminates.
+            </summary>
+        </member>
+        <member name="M:System.Linq.Observable.Repeat``1(``0,System.Concurrency.IScheduler)">
+            <summary>
+            Generates an observable sequence that contains one repeated value.
+            </summary>
+        </member>
+        <member name="M:System.Linq.Observable.Repeat``1(``0,System.Int32,System.Concurrency.IScheduler)">
+            <summary>
+            Generates an observable sequence that contains one repeated value.
             </summary>
         </member>
         <member name="M:System.Linq.Observable.Repeat``1(``0)">
@@ -1717,22 +1703,7 @@
             Concatenates two observable sequences.
             </summary>
         </member>
-        <member name="M:System.Linq.Observable.Concat``1(System.IObservable{``0},System.IObservable{``0},System.Concurrency.IScheduler)">
-            <summary>
-            Concatenates two observable sequences.
-            </summary>
-        </member>
-        <member name="M:System.Linq.Observable.Concat``1(System.Concurrency.IScheduler,System.IObservable{``0}[])">
-            <summary>
-            Concatenates all the observable sequences.
-            </summary>
-        </member>
         <member name="M:System.Linq.Observable.Concat``1(System.IObservable{``0}[])">
-            <summary>
-            Concatenates all the observable sequences.
-            </summary>
-        </member>
-        <member name="M:System.Linq.Observable.Concat``1(System.Collections.Generic.IEnumerable{System.IObservable{``0}},System.Concurrency.IScheduler)">
             <summary>
             Concatenates all the observable sequences.
             </summary>
@@ -1761,36 +1732,6 @@
         <member name="M:System.Linq.Observable.Catch``1(System.Collections.Generic.IEnumerable{System.IObservable{``0}})">
             <summary>
             Continues an observable sequence that is terminated by an exception with the next observable sequence.
-            </summary>
-        </member>
-        <member name="M:System.Linq.Observable.Catch``1(System.IObservable{``0},System.IObservable{``0},System.Concurrency.IScheduler)">
-            <summary>
-            Continues an observable sequence that is terminated by an exception with the next observable sequence.
-            </summary>
-        </member>
-        <member name="M:System.Linq.Observable.Catch``1(System.Concurrency.IScheduler,System.IObservable{``0}[])">
-            <summary>
-            Continues an observable sequence that is terminated by an exception with the next observable sequence.
-            </summary>
-        </member>
-        <member name="M:System.Linq.Observable.Catch``1(System.Collections.Generic.IEnumerable{System.IObservable{``0}},System.Concurrency.IScheduler)">
-            <summary>
-            Continues an observable sequence that is terminated by an exception with the next observable sequence.
-            </summary>
-        </member>
-        <member name="M:System.Linq.Observable.OnErrorResumeNext``1(System.IObservable{``0},System.IObservable{``0},System.Concurrency.IScheduler)">
-            <summary>
-            Continues an observable sequence that is terminated normally or by an exception with the next observable sequence.
-            </summary>
-        </member>
-        <member name="M:System.Linq.Observable.OnErrorResumeNext``1(System.Concurrency.IScheduler,System.IObservable{``0}[])">
-            <summary>
-            Continues an observable sequence that is terminated normally or by an exception with the next observable sequence.
-            </summary>
-        </member>
-        <member name="M:System.Linq.Observable.OnErrorResumeNext``1(System.Collections.Generic.IEnumerable{System.IObservable{``0}},System.Concurrency.IScheduler)">
-            <summary>
-            Continues an observable sequence that is terminated normally or by an exception with the next observable sequence.
             </summary>
         </member>
         <member name="M:System.Linq.Observable.OnErrorResumeNext``1(System.IObservable{``0},System.IObservable{``0})">
@@ -1841,17 +1782,17 @@
         </member>
         <member name="M:System.Linq.Observable.ForkJoin``3(System.IObservable{``0},System.IObservable{``1},System.Func{``0,``1,``2})">
             <summary>
-            Runs two observable sequences in parallel and combines their first values.
+            Runs two observable sequences in parallel and combines their last values.
             </summary>
         </member>
         <member name="M:System.Linq.Observable.ForkJoin``1(System.IObservable{``0}[])">
             <summary>
-            Runs all observable sequences in parallel and combines their first values.
+            Runs all observable sequences in parallel and combines their last values.
             </summary>
         </member>
         <member name="M:System.Linq.Observable.ForkJoin``1(System.Collections.Generic.IEnumerable{System.IObservable{``0}})">
             <summary>
-            Runs all observable sequences in parallel and combines their first values.
+            Runs all observable sequences in parallel and combines their last values.
             </summary>
         </member>
         <member name="M:System.Linq.Observable.TakeUntil``2(System.IObservable{``0},System.IObservable{``1})">
@@ -1940,6 +1881,12 @@
             The specified seed value is used as the initial accumulator value.
             </summary>
         </member>
+        <member name="M:System.Linq.Observable.Scan0``2(System.IObservable{``0},``1,System.Func{``1,``0,``1})">
+            <summary>
+            Applies an accumulator function over an observable sequence and returns each intermediate result.  
+            The specified seed value is prepended to the sequence once a message comes in.
+            </summary>
+        </member>
         <member name="M:System.Linq.Observable.Scan``1(System.IObservable{``0},System.Func{``0,``0,``0})">
             <summary>
             Applies an accumulator function over an observable sequence and returns each intermediate result.  
@@ -1988,6 +1935,16 @@
         <member name="M:System.Linq.Observable.Do``1(System.IObservable{``0},System.Action{``0},System.Action{System.Exception},System.Action)">
             <summary>
             Invokes the action for its side-effects on each value in the observable sequence.
+            </summary>
+        </member>
+        <member name="M:System.Linq.Observable.SkipLast``1(System.IObservable{``0},System.Int32)">
+            <summary>
+            Bypasses a specified number of values at the end of an observable sequence.
+            </summary>
+        </member>
+        <member name="M:System.Linq.Observable.TakeLast``1(System.IObservable{``0},System.Int32)">
+            <summary>
+            Returns a specified number of contiguous values from the end of an observable sequence.
             </summary>
         </member>
         <member name="M:System.Linq.Observable.Select``2(System.IObservable{``0},System.Func{``0,``1})">
@@ -2192,6 +2149,16 @@
         <member name="M:System.Linq.Observable.BufferWithTime``1(System.IObservable{``0},System.TimeSpan)">
             <summary>
             Projects each value of an observable sequence into a buffer.
+            </summary>
+        </member>
+        <member name="M:System.Linq.Observable.BufferWithTimeOrCount``1(System.IObservable{``0},System.TimeSpan,System.Int32,System.Concurrency.IScheduler)">
+            <summary>
+            Projects each value of an observable sequence into a buffer that's sent out when either it's full or a given amount of time has elapsed.
+            </summary>
+        </member>
+        <member name="M:System.Linq.Observable.BufferWithTimeOrCount``1(System.IObservable{``0},System.TimeSpan,System.Int32)">
+            <summary>
+            Projects each value of an observable sequence into a buffer that's sent out when either it's full or a given amount of time has elapsed.
             </summary>
         </member>
         <member name="M:System.Linq.Observable.TimeInterval``1(System.IObservable{``0},System.Concurrency.IScheduler)">

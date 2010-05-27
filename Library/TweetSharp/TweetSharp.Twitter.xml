@@ -30,541 +30,6 @@
             <param name="result">The result.</param>
             <returns></returns>
         </member>
-        <member name="T:TweetSharp.Twitter.Extensions.TwitterExtensions">
-            <summary>
-             Extensions for Twitter model instances.
-            </summary>
-        </member>
-        <member name="M:TweetSharp.Twitter.Extensions.TwitterExtensions.Since(System.Collections.Generic.IEnumerable{TweetSharp.Twitter.Model.TwitterUser},System.DateTime)">
-            <summary>
-            Filters overall query results created after a specified time.
-            Replaces the deprecated Twitter API "since_date" feature.
-            </summary>
-            <param name="users">The users.</param>
-            <param name="date">The date.</param>
-            <returns></returns>
-        </member>
-        <member name="M:TweetSharp.Twitter.Extensions.TwitterExtensions.Before(System.Collections.Generic.IEnumerable{TweetSharp.Twitter.Model.TwitterUser},System.DateTime)">
-            <summary>
-            Filters overall query results created before a specified time.
-            Replaces the deprecated Twitter API "since_date" feature.
-            </summary>
-            <param name="users">The users.</param>
-            <param name="date">The date.</param>
-            <returns></returns>
-        </member>
-        <member name="M:TweetSharp.Twitter.Extensions.TwitterExtensions.Since(System.Collections.Generic.IEnumerable{TweetSharp.Twitter.Model.TwitterStatus},System.DateTime)">
-            <summary>
-            Filters overall query results created after a specified time.
-            Replaces the deprecated Twitter API "since_date" feature.
-            </summary>
-            <param name="users">The users.</param>
-            <param name="date">The date.</param>
-            <returns></returns>
-        </member>
-        <member name="M:TweetSharp.Twitter.Extensions.TwitterExtensions.Before(System.Collections.Generic.IEnumerable{TweetSharp.Twitter.Model.TwitterStatus},System.DateTime)">
-            <summary>
-            Filters overall query results created before a specified time.
-            Replaces the deprecated Twitter API "since_date" feature.
-            </summary>
-            <param name="users">The users.</param>
-            <param name="date">The date.</param>
-            <returns></returns>
-        </member>
-        <member name="M:TweetSharp.Twitter.Extensions.TwitterExtensions.Since(System.Collections.Generic.IEnumerable{TweetSharp.Twitter.Model.TwitterDirectMessage},System.DateTime)">
-            <summary>
-            Filters overall query results created after a specified time.
-            Replaces the deprecated Twitter API "since_date" feature.
-            </summary>
-            <param name="users">The users.</param>
-            <param name="date">The date.</param>
-            <returns></returns>
-        </member>
-        <member name="M:TweetSharp.Twitter.Extensions.TwitterExtensions.Before(System.Collections.Generic.IEnumerable{TweetSharp.Twitter.Model.TwitterDirectMessage},System.DateTime)">
-            <summary>
-            Filters overall query results created before a specified time.
-            Replaces the deprecated Twitter API "since_date" feature.
-            </summary>
-            <param name="users">The users.</param>
-            <param name="date">The date.</param>
-            <returns></returns>
-        </member>
-        <member name="M:TweetSharp.Twitter.Extensions.TwitterExtensions.IsWithin(TweetSharp.Twitter.Model.TwitterGeoLocation,System.Double,TweetSharp.Twitter.Model.TwitterGeoLocation)">
-            <summary>
-            Determines whether the specified source is within range of another.
-            </summary>
-            <param name="source">The source.</param>
-            <param name="miles">The miles.</param>
-            <param name="target">The target.</param>
-            <returns>
-            	<c>true</c> if the specified source is within; otherwise, <c>false</c>.
-            </returns>
-        </member>
-        <member name="M:TweetSharp.Twitter.Extensions.TwitterExtensions.KilometresFrom(TweetSharp.Twitter.Model.TwitterGeoLocation,TweetSharp.Twitter.Model.TwitterGeoLocation)">
-            <summary>
-            Imposes a kilometres distance constraint between two <see cref="T:TweetSharp.Twitter.Model.TwitterGeoLocation"/> elements.
-            </summary>
-            <param name="origin">The origin.</param>
-            <param name="destination">The destination.</param>
-            <returns></returns>
-        </member>
-        <member name="M:TweetSharp.Twitter.Extensions.TwitterExtensions.KilometersFrom(TweetSharp.Twitter.Model.TwitterGeoLocation,TweetSharp.Twitter.Model.TwitterGeoLocation)">
-            <summary>
-            Imposes a kilometers distance constraint between two <see cref="T:TweetSharp.Twitter.Model.TwitterGeoLocation"/> elements.
-            </summary>
-            <param name="origin">The origin.</param>
-            <param name="destination">The destination.</param>
-            <returns></returns>
-        </member>
-        <member name="M:TweetSharp.Twitter.Extensions.TwitterExtensions.YardsFrom(TweetSharp.Twitter.Model.TwitterGeoLocation,TweetSharp.Twitter.Model.TwitterGeoLocation)">
-            <summary>
-            Imposes a yards distance constraint between two <see cref="T:TweetSharp.Twitter.Model.TwitterGeoLocation"/> elements.
-            </summary>
-            <param name="origin">The origin.</param>
-            <param name="destination">The destination.</param>
-            <returns></returns>
-        </member>
-        <member name="M:TweetSharp.Twitter.Extensions.TwitterExtensions.MilesFrom(TweetSharp.Twitter.Model.TwitterGeoLocation,TweetSharp.Twitter.Model.TwitterGeoLocation)">
-            <summary>
-            Imposes a miles distance constraint between two <see cref="T:TweetSharp.Twitter.Model.TwitterGeoLocation"/> elements.
-            </summary>
-            <param name="origin">The origin.</param>
-            <param name="destination">The destination.</param>
-            <returns></returns>
-        </member>
-        <member name="M:TweetSharp.Twitter.Extensions.TwitterExtensions.AsUsers(TweetSharp.Twitter.Model.TwitterResult)">
-            <summary>
-            This method attempts to cast an XML or JSON string into a <see cref="T:TweetSharp.Twitter.Model.TwitterUser"/> 
-            collection instance. 
-            </summary>
-            <param name="result">The XML or JSON input to convert</param>
-            <returns></returns>
-        </member>
-        <member name="M:TweetSharp.Twitter.Extensions.TwitterExtensions.AsUser(TweetSharp.Twitter.Model.TwitterResult)">
-            <summary>
-            This method attempts to cast an XML or JSON string into a <see cref="T:TweetSharp.Twitter.Model.TwitterUser"/>
-            instance.
-            </summary>
-            <param name="result">The XML or JSON input to convert</param>
-            <returns></returns>
-        </member>
-        <member name="M:TweetSharp.Twitter.Extensions.TwitterExtensions.AsList(TweetSharp.Twitter.Model.TwitterResult)">
-            <summary>
-            This method attempts to cast an XML or JSON string into a <see cref="T:TweetSharp.Twitter.Model.TwitterList"/>
-            instance.
-            </summary>
-            <param name="result">The XML or JSON input to convert</param>
-            <returns>A user instance, or null if the input cannot cast to a list</returns>
-        </member>
-        <member name="M:TweetSharp.Twitter.Extensions.TwitterExtensions.AsLists(TweetSharp.Twitter.Model.TwitterResult)">
-            <summary>
-            This method attempts to cast an XML or JSON string into a <see cref="T:TweetSharp.Twitter.Model.TwitterList"/> collection
-            instance. 
-            </summary>
-            <param name="result">The XML or JSON input to convert</param>
-            <returns></returns>
-        </member>
-        <member name="M:TweetSharp.Twitter.Extensions.TwitterExtensions.AsStatuses(TweetSharp.Twitter.Model.TwitterResult)">
-            <summary>
-            This method attempts to cast an XML or JSON string into a <see cref="T:TweetSharp.Twitter.Model.TwitterStatus"/> collection
-            instance. 
-            </summary>
-            <param name="result">The XML or JSON input to convert</param>
-            <returns>A status collection instance, or null if the input cannot cast to a status collection</returns>
-        </member>
-        <member name="M:TweetSharp.Twitter.Extensions.TwitterExtensions.AsWhereOnEarthLocations(TweetSharp.Twitter.Model.TwitterResult)">
-            <summary>
-            Casts the result into a collection of Where On Earth (WOE) locations.
-            </summary>
-            <param name="result">The result.</param>
-            <returns></returns>
-        </member>
-        <member name="M:TweetSharp.Twitter.Extensions.TwitterExtensions.AsStatus(TweetSharp.Twitter.Model.TwitterResult)">
-            <summary>
-            Casts the result as a single <see cref="T:TweetSharp.Twitter.Model.TwitterStatus"/>.
-            </summary>
-            <param name="result">The result.</param>
-            <returns></returns>
-        </member>
-        <member name="M:TweetSharp.Twitter.Extensions.TwitterExtensions.AsSavedSearch(TweetSharp.Twitter.Model.TwitterResult)">
-            <summary>
-            Casts the result as a single <see cref="T:TweetSharp.Twitter.Model.TwitterSavedSearch"/>.
-            </summary>
-            <param name="result">The result.</param>
-            <returns></returns>
-        </member>
-        <member name="M:TweetSharp.Twitter.Extensions.TwitterExtensions.AsSavedSearches(TweetSharp.Twitter.Model.TwitterResult)">
-            <summary>
-            This method attempts to cast an XML or JSON string into a <see cref="T:TweetSharp.Twitter.Model.TwitterSavedSearch"/> collection
-            instance.
-            </summary>
-            <param name="result">The XML or JSON input to convert</param>
-            <returns></returns>
-        </member>
-        <member name="M:TweetSharp.Twitter.Extensions.TwitterExtensions.AsFriendship(TweetSharp.Twitter.Model.TwitterResult)">
-            <summary>
-            Casts the result as a single <see cref="T:TweetSharp.Twitter.Model.TwitterFriendship"/>.
-            </summary>
-            <param name="result">The result.</param>
-            <returns></returns>
-        </member>
-        <member name="M:TweetSharp.Twitter.Extensions.TwitterExtensions.AsDirectMessages(TweetSharp.Twitter.Model.TwitterResult)">
-            <summary>
-            Casts the result as a collection of <see cref="T:TweetSharp.Twitter.Model.TwitterDirectMessage"/> instances.
-            </summary>
-            <param name="result">The result.</param>
-            <returns></returns>
-        </member>
-        <member name="M:TweetSharp.Twitter.Extensions.TwitterExtensions.AsDirectMessage(TweetSharp.Twitter.Model.TwitterResult)">
-            <summary>
-            Casts the result as a single <see cref="T:TweetSharp.Twitter.Model.TwitterDirectMessage"/>.
-            </summary>
-            <param name="result">The result.</param>
-            <returns></returns>
-        </member>
-        <member name="M:TweetSharp.Twitter.Extensions.TwitterExtensions.AsRateLimitStatus(TweetSharp.Twitter.Model.TwitterResult)">
-            <summary>
-            Casts the result as a single <see cref="T:TweetSharp.Twitter.Model.TwitterRateLimitStatus"/>.
-            </summary>
-            <param name="result">The result.</param>
-            <returns></returns>
-        </member>
-        <member name="M:TweetSharp.Twitter.Extensions.TwitterExtensions.AsError(TweetSharp.Twitter.Model.TwitterResult)">
-            <summary>
-            This method attempts to cast an XML or JSON string into a <see cref="T:TweetSharp.Twitter.Model.TwitterError"/>
-            instance. If this method is not successful, null is returned.
-            
-            Twitter is now returning two inconsistent schemas for errors.
-            One is a collection. In this case, only the first element is returned,
-            because we have only seen single entry collections to date.
-            
-            At some point, we assume the API will change across the board, and we
-            will change this deserialization method to follow suit.
-            </summary>
-            <param name="result">The XML or JSON input to convert</param>
-            <returns></returns>
-        </member>
-        <member name="M:TweetSharp.Twitter.Extensions.TwitterExtensions.AsSearchResult(TweetSharp.Twitter.Model.TwitterResult)">
-            <summary>
-            This method attempts to cast an XML or JSON string into a <see cref="T:TweetSharp.Twitter.Model.TwitterSearchResult"/>
-            instance. If this method is not successful, null is returned.
-            </summary>
-            <param name="result">The XML or JSON input to convert</param>
-            <returns></returns>
-        </member>
-        <member name="M:TweetSharp.Twitter.Extensions.TwitterExtensions.AsSearchTrends(TweetSharp.Twitter.Model.TwitterResult)">
-            <summary>
-            This method attempts to cast JSON string into a <see cref="T:TweetSharp.Twitter.Model.TwitterSearchTrends"/> instance. 
-            </summary>
-            <param name="result">The JSON input to convert</param>
-            <returns></returns>
-        </member>
-        <member name="M:TweetSharp.Twitter.Extensions.TwitterExtensions.AsLocalTrends(TweetSharp.Twitter.Model.TwitterResult)">
-            <summary>
-            Casts the result as a single <see cref="T:TweetSharp.Twitter.Model.TwitterLocalTrends"/>.
-            </summary>
-            <param name="result">The result.</param>
-            <returns></returns>
-        </member>
-        <member name="M:TweetSharp.Twitter.Extensions.TwitterExtensions.AsIds(TweetSharp.Twitter.Model.TwitterResult)">
-            <summary>
-            This method attempts to cast an XML or JSON string into a list of IDs.
-            If this method is not successful, an empty list is returned.
-            </summary>
-            <param name="result">The XML or JSON input to convert</param>
-            <returns></returns>
-        </member>
-        <member name="M:TweetSharp.Twitter.Extensions.TwitterExtensions.As``1(TweetSharp.Twitter.Model.TwitterResult)">
-            <summary>
-            This method attempts to cast an XML or JSON string into an arbitrary class instance.
-            </summary>
-            <param name="result">The XML or JSON input to convert</param>
-            <returns></returns>
-        </member>
-        <member name="M:TweetSharp.Twitter.Extensions.TwitterExtensions.AsToken(TweetSharp.Twitter.Model.TwitterResult)">
-            <summary>
-            This method attempts to cast a string response into an <see cref="T:TweetSharp.Model.OAuthToken"/>.
-            </summary>
-            <param name="result">The XML or JSON result to convert</param>
-            <returns></returns>
-        </member>
-        <member name="M:TweetSharp.Twitter.Extensions.TwitterExtensions.AsNextCursor(TweetSharp.Twitter.Model.TwitterResult)">
-            This method attempts to cast an XML or JSON string into an <see cref="T:System.Int64"/> to be used with the paging of friend/follower ids. 
-            If this method is not successful, 0 is returned.
-            <param name="result">The XML or JSON input to convert</param>
-            <returns></returns>
-        </member>
-        <member name="M:TweetSharp.Twitter.Extensions.TwitterExtensions.AsPreviousCursor(TweetSharp.Twitter.Model.TwitterResult)">
-            This method attempts to cast an XML or JSON string into an <see cref="T:System.Int64"/> to be used with the paging of friend/follower ids. 
-            If this method is not successful, 0 is returned.
-            <param name="result">The XML or JSON input to convert</param>
-            <returns></returns>
-        </member>
-        <member name="T:TweetSharp.Twitter.Fluent.ITwitterAccountEndSession">
-            <summary>
-            Node in the fluent expression tree for ending the session
-            </summary>
-        </member>
-        <member name="T:TweetSharp.Twitter.Fluent.ITwitterLeafNodeXmlJson">
-            <summary>
-            Represents a node that returns its results as XML or JSON
-            </summary>
-        </member>
-        <member name="T:TweetSharp.Twitter.Fluent.ITwitterLeafNodeXml">
-            <summary>
-            Interface for nodes that can return results as XML
-            </summary>
-        </member>
-        <member name="T:TweetSharp.Twitter.Fluent.ITwitterLeafNode">
-            <summary>
-            The interface describing a Twitter leaf node in the fluent expression tree.
-            </summary>
-        </member>
-        <member name="T:TweetSharp.Twitter.Fluent.ITwitterNode">
-            <summary>
-            The interface describing a Twitter node in the fluent expression tree.
-            </summary>
-        </member>
-        <member name="M:TweetSharp.Twitter.Fluent.ITwitterNode.Expect(System.Collections.Generic.IEnumerable{TweetSharp.Model.IModel})">
-            <summary>
-            Initiates a mocking query call.
-            </summary>
-            <param name="graph">The graph.</param>
-            <returns></returns>
-        </member>
-        <member name="M:TweetSharp.Twitter.Fluent.ITwitterNode.Expect(TweetSharp.Model.IModel[])">
-            <summary>
-            Initiates a mocking query call.
-            </summary>
-            <param name="graph">The graph.</param>
-            <returns></returns>
-        </member>
-        <member name="M:TweetSharp.Twitter.Fluent.ITwitterNode.Expect(System.Int32)">
-            <summary>
-            Initiates a mocking query call.
-            </summary>
-            <param name="statusCode">The status code.</param>
-            <returns></returns>
-        </member>
-        <member name="P:TweetSharp.Twitter.Fluent.ITwitterNode.Root">
-            <summary>
-            Gets or sets the query root.
-            </summary>
-            <value>The query root.</value>
-        </member>
-        <member name="P:TweetSharp.Twitter.Fluent.ITwitterNode.Configuration">
-            <summary>
-            Gets the query configuration.
-            </summary>
-            <value>The query configuration.</value>
-        </member>
-        <member name="M:TweetSharp.Twitter.Fluent.ITwitterLeafNode.AsUrl">
-            <summary>
-            Converts the query into a URL representation.
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:TweetSharp.Twitter.Fluent.ITwitterLeafNode.AuthenticateAs(System.String,System.String)">
-            <summary>
-            Authenticates as a user using real credentials.
-            This is facilitated by HTTP Basic Authorization, that
-            URL-encodes a username and password in the Authorization request header.
-            </summary>
-            <param name="username">The username.</param>
-            <param name="password">The password.</param>
-            <returns></returns>
-        </member>
-        <member name="M:TweetSharp.Twitter.Fluent.ITwitterLeafNode.AuthenticateWith(System.String,System.String)">
-            <summary>
-            Authenticates as a user using delegated token-based credentials.
-            This is facilitated by OAuth v1.0a, that passes encrypted
-            variables in the Authorization request header.
-            </summary>
-            <param name="token">The token.</param>
-            <param name="tokenSecret">The token secret.</param>
-            <returns></returns>
-        </member>
-        <member name="M:TweetSharp.Twitter.Fluent.ITwitterLeafNode.CallbackTo(TweetSharp.Twitter.Fluent.TwitterWebCallback)">
-            <summary>
-            Calling this method will establish the asynchronous callback used when the request receives a response.
-            </summary>
-            <param name="callback">The callback.</param>
-            <returns></returns>
-        </member>
-        <member name="M:TweetSharp.Twitter.Fluent.ITwitterLeafNode.RepeatEvery(System.TimeSpan)">
-            <summary>
-            Repeats an asynchronous query for the allotted time span.
-            </summary>
-            <param name="timeSpan">The time span.</param>
-            <returns></returns>
-        </member>
-        <member name="M:TweetSharp.Twitter.Fluent.ITwitterLeafNode.RepeatAfter(System.TimeSpan,System.Int32)">
-            <summary>
-            Repeats an asynchronous query for the allotted time span,
-            Up to the number of times specified.
-            </summary>
-            <param name="timeSpan">The time span.</param>
-            <param name="times">The times.</param>
-            <returns></returns>
-        </member>
-        <member name="M:TweetSharp.Twitter.Fluent.ITwitterLeafNodeXml.AsXml">
-            <summary>
-            Gets the results formatted as XML
-            </summary>
-            <returns>the xml formatted results</returns>
-        </member>
-        <member name="T:TweetSharp.Twitter.Fluent.ITwitterLeafNodeJson">
-            <summary>
-            Interface for nodes that return results formatted as JSON
-            </summary>
-        </member>
-        <member name="M:TweetSharp.Twitter.Fluent.ITwitterLeafNodeJson.AsJson">
-            <summary>
-            Gets the results formatted as JSON
-            </summary>
-            <returns>the JSON formatted results </returns>
-        </member>
-        <member name="T:TweetSharp.Twitter.Fluent.TwitterNodeBase">
-            <summary>
-            A base fluent query node that coordinates lower level calls.
-            </summary>
-        </member>
-        <member name="M:TweetSharp.Twitter.Fluent.TwitterNodeBase.#ctor(TweetSharp.Twitter.Fluent.IFluentTwitter)">
-            <summary>
-            Initializes a new instance of the <see cref="T:TweetSharp.Twitter.Fluent.TwitterNodeBase"/> class.
-            </summary>
-            <param name="root">The root.</param>
-        </member>
-        <member name="M:TweetSharp.Twitter.Fluent.TwitterNodeBase.Expect(System.Collections.Generic.IEnumerable{TweetSharp.Model.IModel})">
-            <summary>
-            Initiates a mocking query call.
-            </summary>
-            <param name="graph">The graph.</param>
-            <returns></returns>
-        </member>
-        <member name="M:TweetSharp.Twitter.Fluent.TwitterNodeBase.Expect(TweetSharp.Model.IModel[])">
-            <summary>
-            Initiates a mocking query call.
-            </summary>
-            <param name="graph">The graph.</param>
-            <returns></returns>
-        </member>
-        <member name="M:TweetSharp.Twitter.Fluent.TwitterNodeBase.Expect(System.Int32)">
-            <summary>
-            Initiates a mocking query call.
-            </summary>
-            <param name="statusCode">The status code.</param>
-            <returns></returns>
-        </member>
-        <member name="M:TweetSharp.Twitter.Fluent.TwitterNodeBase.ToString">
-            <summary>
-            Returns a <see cref="T:System.String"/> that represents this instance.
-            </summary>
-            <returns>
-            A <see cref="T:System.String"/> that represents this instance.
-            </returns>
-        </member>
-        <member name="P:TweetSharp.Twitter.Fluent.TwitterNodeBase.Root">
-            <summary>
-            Gets or sets the query root.
-            </summary>
-            <value>The query root.</value>
-        </member>
-        <member name="P:TweetSharp.Twitter.Fluent.TwitterNodeBase.Configuration">
-            <summary>
-            Gets the query configuration.
-            </summary>
-            <value>The query configuration.</value>
-        </member>
-        <member name="T:TweetSharp.Twitter.Fluent.ITwitterAccount">
-            <summary>
-            Fluent twitter node for the account endpoints
-            </summary>
-        </member>
-        <member name="T:TweetSharp.Twitter.Fluent.ITwitterAccountExtensions">
-            <summary>
-            Fluent interface methods for the Account endpoints
-            </summary>
-        </member>
-        <member name="M:TweetSharp.Twitter.Fluent.ITwitterAccountExtensions.VerifyCredentials(TweetSharp.Twitter.Fluent.ITwitterAccount)">
-            <summary>
-            Verifies that the provided credentials are valid
-            </summary>
-            <param name="instance"></param>
-            <returns></returns>
-        </member>
-        <member name="M:TweetSharp.Twitter.Fluent.ITwitterAccountExtensions.EndSession(TweetSharp.Twitter.Fluent.ITwitterAccount)">
-            <summary>
-            Causes Twitter to return a null cookie. Generally not needed for clients. 
-            </summary>
-            <param name="instance"></param>
-            <returns></returns>
-        </member>
-        <member name="M:TweetSharp.Twitter.Fluent.ITwitterAccountExtensions.UpdateDeliveryDeviceTo(TweetSharp.Twitter.Fluent.ITwitterAccount,TweetSharp.Twitter.Model.TwitterDeliveryDevice)">
-            <summary>
-            Changes the notification delivery device settings for the authenticating user
-            </summary>
-            <param name="instance"></param>
-            <param name="device">A <see cref="T:TweetSharp.Twitter.Model.TwitterDeliveryDevice"/> describing the device</param>
-            <returns></returns>
-        </member>
-        <member name="M:TweetSharp.Twitter.Fluent.ITwitterAccountExtensions.UpdateProfileColors(TweetSharp.Twitter.Fluent.ITwitterAccount)">
-            <summary>
-            Updates the website profile colors for the authenticating user
-            </summary>
-            <param name="instance"></param>
-            <returns></returns>
-        </member>
-        <member name="M:TweetSharp.Twitter.Fluent.ITwitterAccountExtensions.UpdateProfileImage(TweetSharp.Twitter.Fluent.ITwitterAccount,System.String)">
-            <summary>
-            Changes the profile image (avatar) for the authenticating uer
-            </summary>
-            <param name="instance"></param>
-            <param name="path">Path to the new avatar image</param>
-            <returns></returns>
-        </member>
-        <member name="M:TweetSharp.Twitter.Fluent.ITwitterAccountExtensions.UpdateProfileBackgroundImage(TweetSharp.Twitter.Fluent.ITwitterAccount,System.String)">
-            <summary>
-            Changes the website background image for the authenticated user
-            </summary>
-            <param name="instance"></param>
-            <param name="path">Path to the new background image file</param>
-            <returns></returns>
-        </member>
-        <member name="M:TweetSharp.Twitter.Fluent.ITwitterAccountExtensions.GetRateLimitStatus(TweetSharp.Twitter.Fluent.ITwitterAccount)">
-            <summary>
-            Gets the current rate limiting details for the authenticating user
-            </summary>
-            <param name="instance"></param>
-            <returns></returns>
-        </member>
-        <member name="M:TweetSharp.Twitter.Fluent.ITwitterAccountExtensions.UpdateProfile(TweetSharp.Twitter.Fluent.ITwitterAccount)">
-            <summary>
-            Update profile data for the authenticating user. 
-            </summary>
-            <param name="instance"></param>
-            <returns></returns>
-        </member>
-        <member name="T:TweetSharp.Twitter.Fluent.ITwitterAccountRateLimitStatus">
-            <summary>
-            Interface for nodes that query the rate limit status
-            </summary>
-        </member>
-        <member name="T:TweetSharp.Twitter.Fluent.ITwitterAccountUpdateDeliveryDevice">
-            <summary>
-            Fluent twitter node for the (account) update notification delivery device endpoint
-            </summary>
-        </member>
-        <member name="T:TweetSharp.Twitter.Fluent.ITwitterAccountUpdateLocation">
-            <summary>
-            Fluent twitter node for the (account) update location endpoint
-            </summary>
-        </member>
-        <member name="T:TweetSharp.Twitter.Fluent.ITwitterAccountUpdateProfileBackgroundImage">
-            <summary>
-            Fluent twitter node for the (account) update profile background image endpoint
-            </summary>
-        </member>
         <member name="T:TweetSharp.Twitter.Fluent.Extensions">
             <summary>
             Extension methods for Authentication
@@ -575,6 +40,36 @@
             <summary>
             Extention Methods for Messages
             </summary>
+        </member>
+        <member name="M:TweetSharp.Twitter.Fluent.Extensions.CreateCursor(TweetSharp.Twitter.Fluent.ITwitterFriendshipsIncoming)">
+            <summary>
+            Gets the default cursor used to return the first page of pending follower ids
+            </summary>
+            <param name="instance">The instance.</param>
+            <returns></returns>
+        </member>
+        <member name="M:TweetSharp.Twitter.Fluent.Extensions.GetCursor(TweetSharp.Twitter.Fluent.ITwitterFriendshipsIncoming,System.Int64)">
+            <summary>
+            Gets the cursor used to return corresponding the page of pending follower ids
+            </summary>
+            <param name="instance">The instance.</param>
+            <param name="cursor">The cursor of the page of pending follower ids to get.</param>
+            <returns></returns>
+        </member>
+        <member name="M:TweetSharp.Twitter.Fluent.Extensions.CreateCursor(TweetSharp.Twitter.Fluent.ITwitterFriendshipsOutgoing)">
+            <summary>
+            Gets the default cursor used to return the first page of pending friend ids
+            </summary>
+            <param name="instance">The instance.</param>
+            <returns></returns>
+        </member>
+        <member name="M:TweetSharp.Twitter.Fluent.Extensions.GetCursor(TweetSharp.Twitter.Fluent.ITwitterFriendshipsOutgoing,System.Int64)">
+            <summary>
+            Gets the cursor used to return corresponding the page of pending friend ids
+            </summary>
+            <param name="instance">The instance.</param>
+            <param name="cursor">The cursor of the page of pending friend ids to get.</param>
+            <returns></returns>
         </member>
         <member name="M:TweetSharp.Twitter.Fluent.Extensions.UpdateProfileBackgroundColor(TweetSharp.Twitter.Fluent.ITwitterAccountUpdateProfileColors,System.Drawing.Color)">
             <summary>
@@ -1232,36 +727,6 @@
             </summary>
             <param name="instance"></param>
             <param name="screenName">the screen name of the user whose followee status is being queried</param>
-            <returns></returns>
-        </member>
-        <member name="M:TweetSharp.Twitter.Fluent.Extensions.CreateCursor(TweetSharp.Twitter.Fluent.ITwitterFriendshipsIncoming)">
-            <summary>
-            Gets the default cursor used to return the first page of pending follower ids
-            </summary>
-            <param name="instance">The instance.</param>
-            <returns></returns>
-        </member>
-        <member name="M:TweetSharp.Twitter.Fluent.Extensions.GetCursor(TweetSharp.Twitter.Fluent.ITwitterFriendshipsIncoming,System.Int64)">
-            <summary>
-            Gets the cursor used to return corresponding the page of pending follower ids
-            </summary>
-            <param name="instance">The instance.</param>
-            <param name="cursor">The cursor of the page of pending follower ids to get.</param>
-            <returns></returns>
-        </member>
-        <member name="M:TweetSharp.Twitter.Fluent.Extensions.CreateCursor(TweetSharp.Twitter.Fluent.ITwitterFriendshipsOutgoing)">
-            <summary>
-            Gets the default cursor used to return the first page of pending friend ids
-            </summary>
-            <param name="instance">The instance.</param>
-            <returns></returns>
-        </member>
-        <member name="M:TweetSharp.Twitter.Fluent.Extensions.GetCursor(TweetSharp.Twitter.Fluent.ITwitterFriendshipsOutgoing,System.Int64)">
-            <summary>
-            Gets the cursor used to return corresponding the page of pending friend ids
-            </summary>
-            <param name="instance">The instance.</param>
-            <param name="cursor">The cursor of the page of pending friend ids to get.</param>
             <returns></returns>
         </member>
         <member name="M:TweetSharp.Twitter.Fluent.Extensions.CreateCursor(TweetSharp.Twitter.Fluent.ITwitterListsGet)">
@@ -2624,6 +2089,620 @@
             <param name="instance"></param>
             <param name="pageCount">the number of statuses per page to request</param>
             <returns></returns>
+        </member>
+        <member name="T:TweetSharp.Twitter.Fluent.SearchResultType">
+            <summary>
+            The type of search result requested in query.
+            <seealso href="http://apiwiki.twitter.com/Twitter-Search-API-Method%3A-search" />
+            </summary>
+        </member>
+        <member name="F:TweetSharp.Twitter.Fluent.SearchResultType.Mixed">
+            <summary>
+            Include both popular and real time results in the response.
+            </summary>
+        </member>
+        <member name="F:TweetSharp.Twitter.Fluent.SearchResultType.Recent">
+            <summary>
+            The current default value. Return only the most recent results in the response.
+            </summary>
+        </member>
+        <member name="F:TweetSharp.Twitter.Fluent.SearchResultType.Popular">
+            <summary>
+            Return only the most popular results in the response.
+            </summary>
+        </member>
+        <member name="T:TweetSharp.Twitter.Fluent.ITwitterFriendshipsIncoming">
+            <summary>
+            Node in the fluent expression tree for accessing the APIs to show pending follower requests
+            </summary>
+        </member>
+        <member name="T:TweetSharp.Twitter.Fluent.ITwitterLeafNodeXmlJson">
+            <summary>
+            Represents a node that returns its results as XML or JSON
+            </summary>
+        </member>
+        <member name="T:TweetSharp.Twitter.Fluent.ITwitterLeafNodeXml">
+            <summary>
+            Interface for nodes that can return results as XML
+            </summary>
+        </member>
+        <member name="T:TweetSharp.Twitter.Fluent.ITwitterLeafNode">
+            <summary>
+            The interface describing a Twitter leaf node in the fluent expression tree.
+            </summary>
+        </member>
+        <member name="T:TweetSharp.Twitter.Fluent.ITwitterNode">
+            <summary>
+            The interface describing a Twitter node in the fluent expression tree.
+            </summary>
+        </member>
+        <member name="M:TweetSharp.Twitter.Fluent.ITwitterNode.Expect(System.Collections.Generic.IEnumerable{TweetSharp.Model.IModel})">
+            <summary>
+            Initiates a mocking query call.
+            </summary>
+            <param name="graph">The graph.</param>
+            <returns></returns>
+        </member>
+        <member name="M:TweetSharp.Twitter.Fluent.ITwitterNode.Expect(TweetSharp.Model.IModel[])">
+            <summary>
+            Initiates a mocking query call.
+            </summary>
+            <param name="graph">The graph.</param>
+            <returns></returns>
+        </member>
+        <member name="M:TweetSharp.Twitter.Fluent.ITwitterNode.Expect(System.Int32)">
+            <summary>
+            Initiates a mocking query call.
+            </summary>
+            <param name="statusCode">The status code.</param>
+            <returns></returns>
+        </member>
+        <member name="P:TweetSharp.Twitter.Fluent.ITwitterNode.Root">
+            <summary>
+            Gets or sets the query root.
+            </summary>
+            <value>The query root.</value>
+        </member>
+        <member name="P:TweetSharp.Twitter.Fluent.ITwitterNode.Configuration">
+            <summary>
+            Gets the query configuration.
+            </summary>
+            <value>The query configuration.</value>
+        </member>
+        <member name="M:TweetSharp.Twitter.Fluent.ITwitterLeafNode.AsUrl">
+            <summary>
+            Converts the query into a URL representation.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:TweetSharp.Twitter.Fluent.ITwitterLeafNode.AuthenticateAs(System.String,System.String)">
+            <summary>
+            Authenticates as a user using real credentials.
+            This is facilitated by HTTP Basic Authorization, that
+            URL-encodes a username and password in the Authorization request header.
+            </summary>
+            <param name="username">The username.</param>
+            <param name="password">The password.</param>
+            <returns></returns>
+        </member>
+        <member name="M:TweetSharp.Twitter.Fluent.ITwitterLeafNode.AuthenticateWith(System.String,System.String)">
+            <summary>
+            Authenticates as a user using delegated token-based credentials.
+            This is facilitated by OAuth v1.0a, that passes encrypted
+            variables in the Authorization request header.
+            </summary>
+            <param name="token">The token.</param>
+            <param name="tokenSecret">The token secret.</param>
+            <returns></returns>
+        </member>
+        <member name="M:TweetSharp.Twitter.Fluent.ITwitterLeafNode.CallbackTo(TweetSharp.Twitter.Fluent.TwitterWebCallback)">
+            <summary>
+            Calling this method will establish the asynchronous callback used when the request receives a response.
+            </summary>
+            <param name="callback">The callback.</param>
+            <returns></returns>
+        </member>
+        <member name="M:TweetSharp.Twitter.Fluent.ITwitterLeafNode.RepeatEvery(System.TimeSpan)">
+            <summary>
+            Repeats an asynchronous query for the allotted time span.
+            </summary>
+            <param name="timeSpan">The time span.</param>
+            <returns></returns>
+        </member>
+        <member name="M:TweetSharp.Twitter.Fluent.ITwitterLeafNode.RepeatAfter(System.TimeSpan,System.Int32)">
+            <summary>
+            Repeats an asynchronous query for the allotted time span,
+            Up to the number of times specified.
+            </summary>
+            <param name="timeSpan">The time span.</param>
+            <param name="times">The times.</param>
+            <returns></returns>
+        </member>
+        <member name="M:TweetSharp.Twitter.Fluent.ITwitterLeafNodeXml.AsXml">
+            <summary>
+            Gets the results formatted as XML
+            </summary>
+            <returns>the xml formatted results</returns>
+        </member>
+        <member name="T:TweetSharp.Twitter.Fluent.ITwitterLeafNodeJson">
+            <summary>
+            Interface for nodes that return results formatted as JSON
+            </summary>
+        </member>
+        <member name="M:TweetSharp.Twitter.Fluent.ITwitterLeafNodeJson.AsJson">
+            <summary>
+            Gets the results formatted as JSON
+            </summary>
+            <returns>the JSON formatted results </returns>
+        </member>
+        <member name="T:TweetSharp.Twitter.Fluent.TwitterNodeBase">
+            <summary>
+            A base fluent query node that coordinates lower level calls.
+            </summary>
+        </member>
+        <member name="M:TweetSharp.Twitter.Fluent.TwitterNodeBase.#ctor(TweetSharp.Twitter.Fluent.IFluentTwitter)">
+            <summary>
+            Initializes a new instance of the <see cref="T:TweetSharp.Twitter.Fluent.TwitterNodeBase"/> class.
+            </summary>
+            <param name="root">The root.</param>
+        </member>
+        <member name="M:TweetSharp.Twitter.Fluent.TwitterNodeBase.Expect(System.Collections.Generic.IEnumerable{TweetSharp.Model.IModel})">
+            <summary>
+            Initiates a mocking query call.
+            </summary>
+            <param name="graph">The graph.</param>
+            <returns></returns>
+        </member>
+        <member name="M:TweetSharp.Twitter.Fluent.TwitterNodeBase.Expect(TweetSharp.Model.IModel[])">
+            <summary>
+            Initiates a mocking query call.
+            </summary>
+            <param name="graph">The graph.</param>
+            <returns></returns>
+        </member>
+        <member name="M:TweetSharp.Twitter.Fluent.TwitterNodeBase.Expect(System.Int32)">
+            <summary>
+            Initiates a mocking query call.
+            </summary>
+            <param name="statusCode">The status code.</param>
+            <returns></returns>
+        </member>
+        <member name="M:TweetSharp.Twitter.Fluent.TwitterNodeBase.ToString">
+            <summary>
+            Returns a <see cref="T:System.String"/> that represents this instance.
+            </summary>
+            <returns>
+            A <see cref="T:System.String"/> that represents this instance.
+            </returns>
+        </member>
+        <member name="P:TweetSharp.Twitter.Fluent.TwitterNodeBase.Root">
+            <summary>
+            Gets or sets the query root.
+            </summary>
+            <value>The query root.</value>
+        </member>
+        <member name="P:TweetSharp.Twitter.Fluent.TwitterNodeBase.Configuration">
+            <summary>
+            Gets the query configuration.
+            </summary>
+            <value>The query configuration.</value>
+        </member>
+        <member name="T:TweetSharp.Twitter.Fluent.ITwitterFriendshipsOutgoing">
+            <summary>
+            Node in the fluent expression tree for accessing the APIs to show pending friend requests
+            </summary>
+        </member>
+        <member name="T:TweetSharp.Twitter.Fluent.ITwitterFriendshipsShow">
+            <summary>
+            Node in the fluent expression tree for accessing the APIs to show follower relationships between users
+            </summary>
+        </member>
+        <member name="T:TweetSharp.Twitter.Model.Converters.TwitterGeoConverter">
+            <summary>
+            This converter exists to convert geo-spatial coordinates.
+            </summary>
+        </member>
+        <member name="M:TweetSharp.Twitter.Model.Converters.TwitterGeoConverter.WriteJson(Newtonsoft.Json.JsonWriter,System.Object,Newtonsoft.Json.JsonSerializer)">
+            <summary>
+            Writes the JSON.
+            </summary>
+            <param name="writer">The writer.</param>
+            <param name="value">The value.</param>
+            <param name="serializer">The serializer.</param>
+        </member>
+        <member name="M:TweetSharp.Twitter.Model.Converters.TwitterGeoConverter.ReadJson(Newtonsoft.Json.JsonReader,System.Type,System.Object,Newtonsoft.Json.JsonSerializer)">
+            <summary>
+            Reads the JSON.
+            </summary>
+            <param name="reader">The reader.</param>
+            <param name="objectType">Type of the object.</param>
+            <param name="existingValue">The existing value.</param>
+            <param name="serializer">The serializer.</param>
+            <returns></returns>
+        </member>
+        <member name="M:TweetSharp.Twitter.Model.Converters.TwitterGeoConverter.CanConvert(System.Type)">
+            <summary>
+            Determines whether this instance can convert the specified object type.
+            </summary>
+            <param name="objectType">Type of the object.</param>
+            <returns>
+            	<c>true</c> if this instance can convert the specified object type; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="T:TweetSharp.Twitter.Model.TwitterModelSerializer">
+            <summary>
+            A class that manages serialization and deserialization of Twitter API entities.
+            </summary>
+        </member>
+        <member name="P:TweetSharp.Twitter.Model.TwitterModelSerializer.Settings">
+            <summary>
+            Gets the JSON.NET serializer settings.
+            </summary>
+            <value>The settings.</value>
+        </member>
+        <member name="T:TweetSharp.Twitter.Extensions.TwitterExtensions">
+            <summary>
+             Extensions for Twitter model instances.
+            </summary>
+        </member>
+        <member name="M:TweetSharp.Twitter.Extensions.TwitterExtensions.IsWithin(TweetSharp.Twitter.Model.TwitterGeoLocation,System.Double,TweetSharp.Twitter.Model.TwitterGeoLocation)">
+            <summary>
+            Determines whether the specified source is within range of another.
+            </summary>
+            <param name="source">The source.</param>
+            <param name="miles">The miles.</param>
+            <param name="target">The target.</param>
+            <returns>
+            	<c>true</c> if the specified source is within; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:TweetSharp.Twitter.Extensions.TwitterExtensions.KilometresFrom(TweetSharp.Twitter.Model.TwitterGeoLocation,TweetSharp.Twitter.Model.TwitterGeoLocation)">
+            <summary>
+            Imposes a kilometres distance constraint between two <see cref="T:TweetSharp.Twitter.Model.TwitterGeoLocation"/> elements.
+            </summary>
+            <param name="origin">The origin.</param>
+            <param name="destination">The destination.</param>
+            <returns></returns>
+        </member>
+        <member name="M:TweetSharp.Twitter.Extensions.TwitterExtensions.KilometersFrom(TweetSharp.Twitter.Model.TwitterGeoLocation,TweetSharp.Twitter.Model.TwitterGeoLocation)">
+            <summary>
+            Imposes a kilometers distance constraint between two <see cref="T:TweetSharp.Twitter.Model.TwitterGeoLocation"/> elements.
+            </summary>
+            <param name="origin">The origin.</param>
+            <param name="destination">The destination.</param>
+            <returns></returns>
+        </member>
+        <member name="M:TweetSharp.Twitter.Extensions.TwitterExtensions.YardsFrom(TweetSharp.Twitter.Model.TwitterGeoLocation,TweetSharp.Twitter.Model.TwitterGeoLocation)">
+            <summary>
+            Imposes a yards distance constraint between two <see cref="T:TweetSharp.Twitter.Model.TwitterGeoLocation"/> elements.
+            </summary>
+            <param name="origin">The origin.</param>
+            <param name="destination">The destination.</param>
+            <returns></returns>
+        </member>
+        <member name="M:TweetSharp.Twitter.Extensions.TwitterExtensions.MilesFrom(TweetSharp.Twitter.Model.TwitterGeoLocation,TweetSharp.Twitter.Model.TwitterGeoLocation)">
+            <summary>
+            Imposes a miles distance constraint between two <see cref="T:TweetSharp.Twitter.Model.TwitterGeoLocation"/> elements.
+            </summary>
+            <param name="origin">The origin.</param>
+            <param name="destination">The destination.</param>
+            <returns></returns>
+        </member>
+        <member name="M:TweetSharp.Twitter.Extensions.TwitterExtensions.Since(System.Collections.Generic.IEnumerable{TweetSharp.Twitter.Model.TwitterUser},System.DateTime)">
+            <summary>
+            Filters overall query results created after a specified time.
+            Replaces the deprecated Twitter API "since_date" feature.
+            </summary>
+            <param name="users">The users.</param>
+            <param name="date">The date.</param>
+            <returns></returns>
+        </member>
+        <member name="M:TweetSharp.Twitter.Extensions.TwitterExtensions.Before(System.Collections.Generic.IEnumerable{TweetSharp.Twitter.Model.TwitterUser},System.DateTime)">
+            <summary>
+            Filters overall query results created before a specified time.
+            Replaces the deprecated Twitter API "since_date" feature.
+            </summary>
+            <param name="users">The users.</param>
+            <param name="date">The date.</param>
+            <returns></returns>
+        </member>
+        <member name="M:TweetSharp.Twitter.Extensions.TwitterExtensions.Since(System.Collections.Generic.IEnumerable{TweetSharp.Twitter.Model.TwitterStatus},System.DateTime)">
+            <summary>
+            Filters overall query results created after a specified time.
+            Replaces the deprecated Twitter API "since_date" feature.
+            </summary>
+            <param name="users">The users.</param>
+            <param name="date">The date.</param>
+            <returns></returns>
+        </member>
+        <member name="M:TweetSharp.Twitter.Extensions.TwitterExtensions.Before(System.Collections.Generic.IEnumerable{TweetSharp.Twitter.Model.TwitterStatus},System.DateTime)">
+            <summary>
+            Filters overall query results created before a specified time.
+            Replaces the deprecated Twitter API "since_date" feature.
+            </summary>
+            <param name="users">The users.</param>
+            <param name="date">The date.</param>
+            <returns></returns>
+        </member>
+        <member name="M:TweetSharp.Twitter.Extensions.TwitterExtensions.Since(System.Collections.Generic.IEnumerable{TweetSharp.Twitter.Model.TwitterDirectMessage},System.DateTime)">
+            <summary>
+            Filters overall query results created after a specified time.
+            Replaces the deprecated Twitter API "since_date" feature.
+            </summary>
+            <param name="users">The users.</param>
+            <param name="date">The date.</param>
+            <returns></returns>
+        </member>
+        <member name="M:TweetSharp.Twitter.Extensions.TwitterExtensions.Before(System.Collections.Generic.IEnumerable{TweetSharp.Twitter.Model.TwitterDirectMessage},System.DateTime)">
+            <summary>
+            Filters overall query results created before a specified time.
+            Replaces the deprecated Twitter API "since_date" feature.
+            </summary>
+            <param name="users">The users.</param>
+            <param name="date">The date.</param>
+            <returns></returns>
+        </member>
+        <member name="M:TweetSharp.Twitter.Extensions.TwitterExtensions.AsUsers(TweetSharp.Twitter.Model.TwitterResult)">
+            <summary>
+            This method attempts to cast an XML or JSON string into a <see cref="T:TweetSharp.Twitter.Model.TwitterUser"/> 
+            collection instance. 
+            </summary>
+            <param name="result">The XML or JSON input to convert</param>
+            <returns></returns>
+        </member>
+        <member name="M:TweetSharp.Twitter.Extensions.TwitterExtensions.AsUser(TweetSharp.Twitter.Model.TwitterResult)">
+            <summary>
+            This method attempts to cast an XML or JSON string into a <see cref="T:TweetSharp.Twitter.Model.TwitterUser"/>
+            instance.
+            </summary>
+            <param name="result">The XML or JSON input to convert</param>
+            <returns></returns>
+        </member>
+        <member name="M:TweetSharp.Twitter.Extensions.TwitterExtensions.AsList(TweetSharp.Twitter.Model.TwitterResult)">
+            <summary>
+            This method attempts to cast an XML or JSON string into a <see cref="T:TweetSharp.Twitter.Model.TwitterList"/>
+            instance.
+            </summary>
+            <param name="result">The XML or JSON input to convert</param>
+            <returns>A user instance, or null if the input cannot cast to a list</returns>
+        </member>
+        <member name="M:TweetSharp.Twitter.Extensions.TwitterExtensions.AsLists(TweetSharp.Twitter.Model.TwitterResult)">
+            <summary>
+            This method attempts to cast an XML or JSON string into a <see cref="T:TweetSharp.Twitter.Model.TwitterList"/> collection
+            instance. 
+            </summary>
+            <param name="result">The XML or JSON input to convert</param>
+            <returns></returns>
+        </member>
+        <member name="M:TweetSharp.Twitter.Extensions.TwitterExtensions.AsStatuses(TweetSharp.Twitter.Model.TwitterResult)">
+            <summary>
+            This method attempts to cast an XML or JSON string into a <see cref="T:TweetSharp.Twitter.Model.TwitterStatus"/> collection
+            instance. 
+            </summary>
+            <param name="result">The XML or JSON input to convert</param>
+            <returns>A status collection instance, or null if the input cannot cast to a status collection</returns>
+        </member>
+        <member name="M:TweetSharp.Twitter.Extensions.TwitterExtensions.AsWhereOnEarthLocations(TweetSharp.Twitter.Model.TwitterResult)">
+            <summary>
+            Casts the result into a collection of Where On Earth (WOE) locations.
+            </summary>
+            <param name="result">The result.</param>
+            <returns></returns>
+        </member>
+        <member name="M:TweetSharp.Twitter.Extensions.TwitterExtensions.AsStatus(TweetSharp.Twitter.Model.TwitterResult)">
+            <summary>
+            Casts the result as a single <see cref="T:TweetSharp.Twitter.Model.TwitterStatus"/>.
+            </summary>
+            <param name="result">The result.</param>
+            <returns></returns>
+        </member>
+        <member name="M:TweetSharp.Twitter.Extensions.TwitterExtensions.AsSavedSearch(TweetSharp.Twitter.Model.TwitterResult)">
+            <summary>
+            Casts the result as a single <see cref="T:TweetSharp.Twitter.Model.TwitterSavedSearch"/>.
+            </summary>
+            <param name="result">The result.</param>
+            <returns></returns>
+        </member>
+        <member name="M:TweetSharp.Twitter.Extensions.TwitterExtensions.AsSavedSearches(TweetSharp.Twitter.Model.TwitterResult)">
+            <summary>
+            This method attempts to cast an XML or JSON string into a <see cref="T:TweetSharp.Twitter.Model.TwitterSavedSearch"/> collection
+            instance.
+            </summary>
+            <param name="result">The XML or JSON input to convert</param>
+            <returns></returns>
+        </member>
+        <member name="M:TweetSharp.Twitter.Extensions.TwitterExtensions.AsFriendship(TweetSharp.Twitter.Model.TwitterResult)">
+            <summary>
+            Casts the result as a single <see cref="T:TweetSharp.Twitter.Model.TwitterFriendship"/>.
+            </summary>
+            <param name="result">The result.</param>
+            <returns></returns>
+        </member>
+        <member name="M:TweetSharp.Twitter.Extensions.TwitterExtensions.AsDirectMessages(TweetSharp.Twitter.Model.TwitterResult)">
+            <summary>
+            Casts the result as a collection of <see cref="T:TweetSharp.Twitter.Model.TwitterDirectMessage"/> instances.
+            </summary>
+            <param name="result">The result.</param>
+            <returns></returns>
+        </member>
+        <member name="M:TweetSharp.Twitter.Extensions.TwitterExtensions.AsDirectMessage(TweetSharp.Twitter.Model.TwitterResult)">
+            <summary>
+            Casts the result as a single <see cref="T:TweetSharp.Twitter.Model.TwitterDirectMessage"/>.
+            </summary>
+            <param name="result">The result.</param>
+            <returns></returns>
+        </member>
+        <member name="M:TweetSharp.Twitter.Extensions.TwitterExtensions.AsRateLimitStatus(TweetSharp.Twitter.Model.TwitterResult)">
+            <summary>
+            Casts the result as a single <see cref="T:TweetSharp.Twitter.Model.TwitterRateLimitStatus"/>.
+            </summary>
+            <param name="result">The result.</param>
+            <returns></returns>
+        </member>
+        <member name="M:TweetSharp.Twitter.Extensions.TwitterExtensions.AsError(TweetSharp.Twitter.Model.TwitterResult)">
+            <summary>
+            This method attempts to cast an XML or JSON string into a <see cref="T:TweetSharp.Twitter.Model.TwitterError"/>
+            instance. If this method is not successful, null is returned.
+            
+            Twitter is now returning two inconsistent schemas for errors.
+            One is a collection. In this case, only the first element is returned,
+            because we have only seen single entry collections to date.
+            
+            At some point, we assume the API will change across the board, and we
+            will change this deserialization method to follow suit.
+            </summary>
+            <param name="result">The XML or JSON input to convert</param>
+            <returns></returns>
+        </member>
+        <member name="M:TweetSharp.Twitter.Extensions.TwitterExtensions.AsSearchResult(TweetSharp.Twitter.Model.TwitterResult)">
+            <summary>
+            This method attempts to cast an XML or JSON string into a <see cref="T:TweetSharp.Twitter.Model.TwitterSearchResult"/>
+            instance. If this method is not successful, null is returned.
+            </summary>
+            <param name="result">The XML or JSON input to convert</param>
+            <returns></returns>
+        </member>
+        <member name="M:TweetSharp.Twitter.Extensions.TwitterExtensions.AsSearchTrends(TweetSharp.Twitter.Model.TwitterResult)">
+            <summary>
+            This method attempts to cast JSON string into a <see cref="T:TweetSharp.Twitter.Model.TwitterSearchTrends"/> instance. 
+            </summary>
+            <param name="result">The JSON input to convert</param>
+            <returns></returns>
+        </member>
+        <member name="M:TweetSharp.Twitter.Extensions.TwitterExtensions.AsLocalTrends(TweetSharp.Twitter.Model.TwitterResult)">
+            <summary>
+            Casts the result as a single <see cref="T:TweetSharp.Twitter.Model.TwitterLocalTrends"/>.
+            </summary>
+            <param name="result">The result.</param>
+            <returns></returns>
+        </member>
+        <member name="M:TweetSharp.Twitter.Extensions.TwitterExtensions.AsIds(TweetSharp.Twitter.Model.TwitterResult)">
+            <summary>
+            This method attempts to cast an XML or JSON string into a list of IDs.
+            If this method is not successful, an empty list is returned.
+            </summary>
+            <param name="result">The XML or JSON input to convert</param>
+            <returns></returns>
+        </member>
+        <member name="M:TweetSharp.Twitter.Extensions.TwitterExtensions.As``1(TweetSharp.Twitter.Model.TwitterResult)">
+            <summary>
+            This method attempts to cast an XML or JSON string into an arbitrary class instance.
+            </summary>
+            <param name="result">The XML or JSON input to convert</param>
+            <returns></returns>
+        </member>
+        <member name="M:TweetSharp.Twitter.Extensions.TwitterExtensions.AsToken(TweetSharp.Twitter.Model.TwitterResult)">
+            <summary>
+            This method attempts to cast a string response into an <see cref="T:TweetSharp.Model.OAuthToken"/>.
+            </summary>
+            <param name="result">The XML or JSON result to convert</param>
+            <returns></returns>
+        </member>
+        <member name="M:TweetSharp.Twitter.Extensions.TwitterExtensions.AsNextCursor(TweetSharp.Twitter.Model.TwitterResult)">
+            This method attempts to cast an XML or JSON string into an <see cref="T:System.Int64"/> to be used with the paging of friend/follower ids. 
+            If this method is not successful, 0 is returned.
+            <param name="result">The XML or JSON input to convert</param>
+            <returns></returns>
+        </member>
+        <member name="M:TweetSharp.Twitter.Extensions.TwitterExtensions.AsPreviousCursor(TweetSharp.Twitter.Model.TwitterResult)">
+            This method attempts to cast an XML or JSON string into an <see cref="T:System.Int64"/> to be used with the paging of friend/follower ids. 
+            If this method is not successful, 0 is returned.
+            <param name="result">The XML or JSON input to convert</param>
+            <returns></returns>
+        </member>
+        <member name="T:TweetSharp.Twitter.Fluent.ITwitterAccountEndSession">
+            <summary>
+            Node in the fluent expression tree for ending the session
+            </summary>
+        </member>
+        <member name="T:TweetSharp.Twitter.Fluent.ITwitterAccount">
+            <summary>
+            Fluent twitter node for the account endpoints
+            </summary>
+        </member>
+        <member name="T:TweetSharp.Twitter.Fluent.ITwitterAccountExtensions">
+            <summary>
+            Fluent interface methods for the Account endpoints
+            </summary>
+        </member>
+        <member name="M:TweetSharp.Twitter.Fluent.ITwitterAccountExtensions.VerifyCredentials(TweetSharp.Twitter.Fluent.ITwitterAccount)">
+            <summary>
+            Verifies that the provided credentials are valid
+            </summary>
+            <param name="instance"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TweetSharp.Twitter.Fluent.ITwitterAccountExtensions.EndSession(TweetSharp.Twitter.Fluent.ITwitterAccount)">
+            <summary>
+            Causes Twitter to return a null cookie. Generally not needed for clients. 
+            </summary>
+            <param name="instance"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TweetSharp.Twitter.Fluent.ITwitterAccountExtensions.UpdateDeliveryDeviceTo(TweetSharp.Twitter.Fluent.ITwitterAccount,TweetSharp.Twitter.Model.TwitterDeliveryDevice)">
+            <summary>
+            Changes the notification delivery device settings for the authenticating user
+            </summary>
+            <param name="instance"></param>
+            <param name="device">A <see cref="T:TweetSharp.Twitter.Model.TwitterDeliveryDevice"/> describing the device</param>
+            <returns></returns>
+        </member>
+        <member name="M:TweetSharp.Twitter.Fluent.ITwitterAccountExtensions.UpdateProfileColors(TweetSharp.Twitter.Fluent.ITwitterAccount)">
+            <summary>
+            Updates the website profile colors for the authenticating user
+            </summary>
+            <param name="instance"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TweetSharp.Twitter.Fluent.ITwitterAccountExtensions.UpdateProfileImage(TweetSharp.Twitter.Fluent.ITwitterAccount,System.String)">
+            <summary>
+            Changes the profile image (avatar) for the authenticating uer
+            </summary>
+            <param name="instance"></param>
+            <param name="path">Path to the new avatar image</param>
+            <returns></returns>
+        </member>
+        <member name="M:TweetSharp.Twitter.Fluent.ITwitterAccountExtensions.UpdateProfileBackgroundImage(TweetSharp.Twitter.Fluent.ITwitterAccount,System.String)">
+            <summary>
+            Changes the website background image for the authenticated user
+            </summary>
+            <param name="instance"></param>
+            <param name="path">Path to the new background image file</param>
+            <returns></returns>
+        </member>
+        <member name="M:TweetSharp.Twitter.Fluent.ITwitterAccountExtensions.GetRateLimitStatus(TweetSharp.Twitter.Fluent.ITwitterAccount)">
+            <summary>
+            Gets the current rate limiting details for the authenticating user
+            </summary>
+            <param name="instance"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TweetSharp.Twitter.Fluent.ITwitterAccountExtensions.UpdateProfile(TweetSharp.Twitter.Fluent.ITwitterAccount)">
+            <summary>
+            Update profile data for the authenticating user. 
+            </summary>
+            <param name="instance"></param>
+            <returns></returns>
+        </member>
+        <member name="T:TweetSharp.Twitter.Fluent.ITwitterAccountRateLimitStatus">
+            <summary>
+            Interface for nodes that query the rate limit status
+            </summary>
+        </member>
+        <member name="T:TweetSharp.Twitter.Fluent.ITwitterAccountUpdateDeliveryDevice">
+            <summary>
+            Fluent twitter node for the (account) update notification delivery device endpoint
+            </summary>
+        </member>
+        <member name="T:TweetSharp.Twitter.Fluent.ITwitterAccountUpdateLocation">
+            <summary>
+            Fluent twitter node for the (account) update location endpoint
+            </summary>
+        </member>
+        <member name="T:TweetSharp.Twitter.Fluent.ITwitterAccountUpdateProfileBackgroundImage">
+            <summary>
+            Fluent twitter node for the (account) update profile background image endpoint
+            </summary>
         </member>
         <member name="T:TweetSharp.Twitter.Fluent.ITwitterAccountUpdateProfileColors">
             <summary>
@@ -4242,11 +4321,6 @@
             for the existence of the friend/follower relationship between users. 
             </summary>
         </member>
-        <member name="T:TweetSharp.Twitter.Fluent.ITwitterFriendshipsIncoming">
-            <summary>
-            Node in the fluent expression tree for accessing the APIs to show pending follower requests
-            </summary>
-        </member>
         <member name="T:TweetSharp.Twitter.Fluent.ITwitterFriendships">
             <summary>
             Fluent twitter node for the friendships endpoints
@@ -4432,16 +4506,6 @@
             </summary>
             <param name="instance"></param>
             <returns></returns>
-        </member>
-        <member name="T:TweetSharp.Twitter.Fluent.ITwitterFriendshipsOutgoing">
-            <summary>
-            Node in the fluent expression tree for accessing the APIs to show pending friend requests
-            </summary>
-        </member>
-        <member name="T:TweetSharp.Twitter.Fluent.ITwitterFriendshipsShow">
-            <summary>
-            Node in the fluent expression tree for accessing the APIs to show follower relationships between users
-            </summary>
         </member>
         <member name="T:TweetSharp.Twitter.Fluent.ITwitterHelpDowntimeSchedule">
             <summary>
@@ -5377,27 +5441,6 @@
             </summary>
             <param name="root">The root.</param>
         </member>
-        <member name="T:TweetSharp.Twitter.Fluent.SearchResultType">
-            <summary>
-            The type of search result requested in query.
-            <seealso href="http://apiwiki.twitter.com/Twitter-Search-API-Method%3A-search" />
-            </summary>
-        </member>
-        <member name="F:TweetSharp.Twitter.Fluent.SearchResultType.Mixed">
-            <summary>
-            Include both popular and real time results in the response.
-            </summary>
-        </member>
-        <member name="F:TweetSharp.Twitter.Fluent.SearchResultType.Recent">
-            <summary>
-            The current default value. Return only the most recent results in the response.
-            </summary>
-        </member>
-        <member name="F:TweetSharp.Twitter.Fluent.SearchResultType.Popular">
-            <summary>
-            Return only the most popular results in the response.
-            </summary>
-        </member>
         <member name="T:TweetSharp.Twitter.Fluent.ITwitterSearch">
             <summary>
             Fluent twitter node for the search endpoints
@@ -6027,38 +6070,6 @@
             <returns></returns>
         </member>
         <member name="M:TweetSharp.Twitter.Model.Converters.TwitterDateTimeConverter.CanConvert(System.Type)">
-            <summary>
-            Determines whether this instance can convert the specified object type.
-            </summary>
-            <param name="objectType">Type of the object.</param>
-            <returns>
-            	<c>true</c> if this instance can convert the specified object type; otherwise, <c>false</c>.
-            </returns>
-        </member>
-        <member name="T:TweetSharp.Twitter.Model.Converters.TwitterGeoConverter">
-            <summary>
-            This converter exists to convert geo-spatial coordinates.
-            </summary>
-        </member>
-        <member name="M:TweetSharp.Twitter.Model.Converters.TwitterGeoConverter.WriteJson(Newtonsoft.Json.JsonWriter,System.Object,Newtonsoft.Json.JsonSerializer)">
-            <summary>
-            Writes the JSON.
-            </summary>
-            <param name="writer">The writer.</param>
-            <param name="value">The value.</param>
-            <param name="serializer">The serializer.</param>
-        </member>
-        <member name="M:TweetSharp.Twitter.Model.Converters.TwitterGeoConverter.ReadJson(Newtonsoft.Json.JsonReader,System.Type,System.Object,Newtonsoft.Json.JsonSerializer)">
-            <summary>
-            Reads the JSON.
-            </summary>
-            <param name="reader">The reader.</param>
-            <param name="objectType">Type of the object.</param>
-            <param name="existingValue">The existing value.</param>
-            <param name="serializer">The serializer.</param>
-            <returns></returns>
-        </member>
-        <member name="M:TweetSharp.Twitter.Model.Converters.TwitterGeoConverter.CanConvert(System.Type)">
             <summary>
             Determines whether this instance can convert the specified object type.
             </summary>
@@ -6758,17 +6769,6 @@
             Can be XML or JSON, depending on the endpoint used.
             </summary>
             <value></value>
-        </member>
-        <member name="T:TweetSharp.Twitter.Model.TwitterModelSerializer">
-            <summary>
-            A class that manages serialization and deserialization of Twitter API entities.
-            </summary>
-        </member>
-        <member name="P:TweetSharp.Twitter.Model.TwitterModelSerializer.Settings">
-            <summary>
-            Gets the JSON.NET serializer settings.
-            </summary>
-            <value>The settings.</value>
         </member>
         <member name="T:TweetSharp.Twitter.Model.TwitterRateLimitStatus">
             <summary>
