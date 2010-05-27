@@ -1,4 +1,8 @@
-﻿using Moq;
+﻿using System;
+using System.ComponentModel;
+using System.Linq.Expressions;
+using Caliburn.Testability.Extensions;
+using Moq;
 using Twiddler.Screens;
 using Twiddler.Services.Interfaces;
 using Xunit;
@@ -29,6 +33,36 @@ namespace Twiddler.Tests.Screens
             _fakeRequestStatus.Setup(x => x.RemainingHits).Returns(remainingHits);
 
             Assert.Equal(remainingHits, test.RemainingHits);
+        }
+
+        [Fact]
+        public void RemainingHits_WhenChangedOnLimitStatus_RaisesPropertyChanged()
+        {
+            RequestMeterScreen test = BuildDefaultTestSubject();
+
+            AssertPropertyChangedIsRaised(test,
+                                          x => x.RemainingHits,
+                                          "RemainingHits");
+        }
+
+        [Fact]
+        public void RemainingTime_WhenChangedOnLimitStatus_RaisesPropertyChanged()
+        {
+            RequestMeterScreen test = BuildDefaultTestSubject();
+
+            AssertPropertyChangedIsRaised(test,
+                                          x => x.RemainingTime,
+                                          "RemainingTime");
+        }
+
+        private void AssertPropertyChangedIsRaised(RequestMeterScreen test,
+                                                   Expression<Func<RequestMeterScreen, object>> property,
+                                                   string propertyName)
+        {
+            test.
+                AssertThatChangeNotificationIsRaisedBy(property).
+                When(() => _fakeRequestStatus.Raise(x => x.PropertyChanged += null,
+                                                    new PropertyChangedEventArgs(propertyName)));
         }
 
         private RequestMeterScreen BuildDefaultTestSubject()

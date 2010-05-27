@@ -15,13 +15,15 @@ namespace Twiddler.Services
     {
         private readonly ITwitterClient _client;
         private readonly Factories.TweetFactory _tweetFactory;
+        private readonly IRequestLimitStatus _requestLimitStatus;
         private IFluentTwitter _request;
         private PropertyObserver<ITwitterClient> _statusObserver;
 
-        public TweetPoller(ITwitterClient client, Factories.TweetFactory tweetFactory)
+        public TweetPoller(ITwitterClient client, Factories.TweetFactory tweetFactory, IRequestLimitStatus requestLimitStatus)
         {
             _client = client;
             _tweetFactory = tweetFactory;
+            _requestLimitStatus = requestLimitStatus;
 
             _statusObserver = new PropertyObserver<ITwitterClient>(_client).
                 RegisterHandler(x => x.AuthorizationStatus,
@@ -95,10 +97,20 @@ namespace Twiddler.Services
 
         private void GotTweets(object sender, TwitterResult result, object userstate)
         {
+            UpdateLimit(result.RateLimitStatus);
+
             if (!result.SkippedDueToRateLimiting)
                 NewTweets(this, new NewTweetsEventArgs(result.
                                                            AsStatuses().
                                                            Select(x => _tweetFactory(x))));
+        }
+
+        private void UpdateLimit(TwitterRateLimitStatus status)
+        {
+            _requestLimitStatus.HourlyLimit = status.HourlyLimit;
+            _requestLimitStatus.PeriodEndTime = status.ResetTime;
+            _requestLimitStatus.PeriodDuration = 1.Hour();
+            _requestLimitStatus.RemainingHits = status.RemainingHits;
         }
     }
 }
