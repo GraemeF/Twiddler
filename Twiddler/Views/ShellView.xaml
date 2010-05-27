@@ -7,7 +7,9 @@
         MinWidth="300">
     <DockPanel VerticalAlignment="Stretch">
         <ContentControl cal:View.Model="{Binding Status}"
-                        DockPanel.Dock="Top" />
-        <ContentControl cal:View.Model="{Binding Timeline}" />
+		                DockPanel.Dock="Top"
+		                Margin="4" />
+        <ContentControl cal:View.Model="{Binding Timeline}"
+		                Margin="4" />
     </DockPanel>
 </Window>
