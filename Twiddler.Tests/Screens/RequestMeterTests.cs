@@ -1,6 +1,4 @@
-﻿using System;
-using System.ComponentModel;
-using System.Linq.Expressions;
+﻿using System.ComponentModel;
 using Caliburn.Testability.Extensions;
 using Moq;
 using Twiddler.Screens;
@@ -39,30 +37,28 @@ namespace Twiddler.Tests.Screens
         public void RemainingHits_WhenChangedOnLimitStatus_RaisesPropertyChanged()
         {
             RequestMeterScreen test = BuildDefaultTestSubject();
+            test.Initialize();
 
-            AssertPropertyChangedIsRaised(test,
-                                          x => x.RemainingHits,
-                                          "RemainingHits");
+            test.
+                AssertThatChangeNotificationIsRaisedBy(x => x.RemainingHits).
+                When(() => PropertyChangesOnRequestStatus("RemainingHits"));
         }
 
         [Fact]
-        public void RemainingTime_WhenChangedOnLimitStatus_RaisesPropertyChanged()
+        public void HourlyLimit_WhenChangedOnLimitStatus_RaisesPropertyChanged()
         {
             RequestMeterScreen test = BuildDefaultTestSubject();
+            test.Initialize();
 
-            AssertPropertyChangedIsRaised(test,
-                                          x => x.RemainingTime,
-                                          "RemainingTime");
+            test.
+                AssertThatChangeNotificationIsRaisedBy(x => x.HourlyLimit).
+                When(() => PropertyChangesOnRequestStatus("HourlyLimit"));
         }
 
-        private void AssertPropertyChangedIsRaised(RequestMeterScreen test,
-                                                   Expression<Func<RequestMeterScreen, object>> property,
-                                                   string propertyName)
+        private void PropertyChangesOnRequestStatus(string propertyName)
         {
-            test.
-                AssertThatChangeNotificationIsRaisedBy(property).
-                When(() => _fakeRequestStatus.Raise(x => x.PropertyChanged += null,
-                                                    new PropertyChangedEventArgs(propertyName)));
+            _fakeRequestStatus.Raise(x => x.PropertyChanged += null,
+                                     new PropertyChangedEventArgs(propertyName));
         }
 
         private RequestMeterScreen BuildDefaultTestSubject()
