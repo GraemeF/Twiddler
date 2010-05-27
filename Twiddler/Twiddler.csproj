@@ -160,6 +160,8 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Screens\Interfaces\IRequestMeterScreen.cs" />
+    <Compile Include="Services\Clock.cs" />
+    <Compile Include="Services\Interfaces\IClock.cs" />
     <Compile Include="Services\Interfaces\IRequestLimitStatus.cs" />
     <Compile Include="Screens\RequestMeterScreen.cs" />
     <Compile Include="Services\RequestLimitStatus.cs" />

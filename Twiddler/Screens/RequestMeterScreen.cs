@@ -10,12 +10,14 @@ namespace Twiddler.Screens
     [PerRequest(typeof (IRequestMeterScreen))]
     public class RequestMeterScreen : Screen, IRequestMeterScreen
     {
+        private readonly IClock _clock;
         private readonly IRequestLimitStatus _limitStatus;
         private PropertyObserver<IRequestLimitStatus> _observer;
 
-        public RequestMeterScreen(IRequestLimitStatus limitStatus)
+        public RequestMeterScreen(IRequestLimitStatus limitStatus, IClock clock)
         {
             _limitStatus = limitStatus;
+            _clock = clock;
         }
 
         public int HourlyLimit
@@ -39,8 +41,23 @@ namespace Twiddler.Screens
             }
         }
 
-        public float UsedTimeFraction { get; private set; }
+        public float UsedTimeFraction
+        {
+            get
+            {
+                return
+                    Math.Max(0f,
+                             Math.Min(1f,
+                                      1f - (float) (GetRemainingSeconds()/_limitStatus.PeriodDuration.TotalSeconds)));
+            }
+        }
+
         public string RemainingTime { get; private set; }
+
+        private double GetRemainingSeconds()
+        {
+            return (_limitStatus.PeriodEndTime - _clock.Now).TotalSeconds;
+        }
 
         protected override void OnInitialize()
         {
