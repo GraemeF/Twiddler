@@ -1,11 +1,10 @@
-using System;
+using System.Collections.Generic;
 using Twiddler.Models;
 
 namespace Twiddler.Services.Interfaces
 {
     public interface ITweetRequester
     {
-        void Request();
-        IObservable<Tweet> Tweets { get; }
+        IEnumerable<Tweet> RequestTweets();
     }
 }

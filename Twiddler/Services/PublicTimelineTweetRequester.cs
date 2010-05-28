@@ -32,14 +32,9 @@ namespace Twiddler.Services
 
         #region ITweetRequester Members
 
-        public void Request()
+        public IEnumerable<Tweet> RequestTweets()
         {
-            CreateRequest().Request();
-        }
-
-        public IObservable<Tweet> Tweets
-        {
-            get { return _tweets; }
+            return GotTweets(CreateRequest().Request());
         }
 
         #endregion
@@ -50,18 +45,17 @@ namespace Twiddler.Services
                 _client.
                     MakeRequestFor().
                     Statuses().
-                    OnPublicTimeline().
-                    CallbackTo(GotTweets);
+                    OnPublicTimeline();
         }
 
-        private void GotTweets(object sender, TwitterResult result, object userstate)
+        private IEnumerable<Tweet> GotTweets(TwitterResult result)
         {
             UpdateLimit(result.RateLimitStatus);
 
             if (!result.SkippedDueToRateLimiting)
             {
                 foreach (Tweet tweet in result.AsStatuses().Select(x => _tweetFactory(x)))
-                    _tweets.OnNext(tweet);
+                    yield return tweet;
             }
         }
 

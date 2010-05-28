@@ -1,6 +1,6 @@
 ﻿using Twiddler.Models;
 
-namespace Twiddler.Services
+namespace Twiddler.Services.Interfaces
 {
     public interface ITweetSink
     {
