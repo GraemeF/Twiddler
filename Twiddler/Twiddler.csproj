@@ -161,6 +161,8 @@
     </Compile>
     <Compile Include="Screens\Interfaces\IRequestMeterScreen.cs" />
     <Compile Include="Services\Clock.cs" />
+    <Compile Include="Services\FriendsTimelineTweetRequester.cs" />
+    <Compile Include="Services\HomeTimelineTweetRequester.cs" />
     <Compile Include="Services\Interfaces\IClock.cs" />
     <Compile Include="Services\Interfaces\IRequestLimitStatus.cs" />
     <Compile Include="Screens\RequestMeterScreen.cs" />
@@ -168,6 +170,8 @@
     <Compile Include="Services\Interfaces\ITweetSink.cs" />
     <Compile Include="Services\RequestConductor.cs" />
     <Compile Include="Services\RequestLimitStatus.cs" />
+    <Compile Include="Services\TweetRequester.cs" />
+    <Compile Include="Services\UserTimelineTweetRequester.cs" />
     <Compile Include="Views\RequestMeterView.xaml.cs">
       <DependentUpon>RequestMeterView.xaml</DependentUpon>
     </Compile>
