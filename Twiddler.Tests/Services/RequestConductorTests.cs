@@ -25,14 +25,17 @@ namespace Twiddler.Tests.Services
 
         private void ClientAuthorizationStatusChangesTo(AuthorizationStatus authorizationStatus)
         {
-            _fakeClient.Setup(x => x.AuthorizationStatus).Returns(authorizationStatus);
+            _fakeClient.
+                Setup(x => x.AuthorizationStatus).
+                Returns(authorizationStatus);
+
             _fakeClient.Raise(x => x.PropertyChanged += null,
                               new PropertyChangedEventArgs("AuthorizationStatus"));
         }
 
         private RequestConductor BuildDefaultTestSubject()
         {
-            return new RequestConductor(_fakeClient.Object);
+            return new RequestConductor(_fakeClient.Object, new[] {_fakeRequester.Object});
         }
     }
 }
