@@ -10,15 +10,14 @@ namespace Twiddler.Services
     public class UpdatingTwitterStore : IUpdatingTweetStore
     {
         private readonly Subject<TweetId> _newTweets = new Subject<TweetId>();
-        private readonly ITweetSource _source;
+        private readonly IRequestConductor _requestConductor;
         private readonly ITweetStore _store;
+        private readonly Subject<Tweet> _tweets = new Subject<Tweet>();
 
-        public UpdatingTwitterStore(ITweetSource source, ITweetStore store)
+        public UpdatingTwitterStore(IRequestConductor requestConductor, ITweetStore store)
         {
-            _source = source;
+            _requestConductor = requestConductor;
             _store = store;
-
-            _source.Tweets.Subscribe(NewTweet);
         }
 
         #region IUpdatingTweetStore Members
@@ -28,9 +27,16 @@ namespace Twiddler.Services
             get { return _newTweets; }
         }
 
+        public IObservable<Tweet> Tweets
+        {
+            get { return _tweets; }
+        }
+
         public void AddTweet(Tweet tweet)
         {
             _store.AddTweet(tweet);
+            _newTweets.OnNext(tweet.Id);
+            _tweets.OnNext(tweet);
         }
 
         public Tweet GetTweet(TweetId id)
@@ -39,11 +45,5 @@ namespace Twiddler.Services
         }
 
         #endregion
-
-        private void NewTweet(Tweet tweet)
-        {
-            _store.AddTweet(tweet);
-            _newTweets.OnNext(tweet.Id);
-        }
     }
 }

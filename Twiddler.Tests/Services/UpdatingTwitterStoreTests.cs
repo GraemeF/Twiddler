@@ -10,14 +10,9 @@ namespace Twiddler.Tests.Services
 {
     public class UpdatingTwitterStoreTests
     {
+        private readonly Mock<IRequestConductor> _fakeRequestConductor = new Mock<IRequestConductor>();
         private readonly Mock<ITweetStore> _fakeStore = new Mock<ITweetStore>();
-        private readonly Mock<ITweetSource> _stubSource = new Mock<ITweetSource>();
         private readonly Subject<Tweet> _tweets = new Subject<Tweet>();
-
-        public UpdatingTwitterStoreTests()
-        {
-            _stubSource.Setup(x => x.Tweets).Returns(_tweets);
-        }
 
         [Fact]
         public void GettingTweets__ReturnsObservableTweetIdsFromSource()
@@ -76,7 +71,7 @@ namespace Twiddler.Tests.Services
 
         private UpdatingTwitterStore BuildDefaultTestSubject()
         {
-            return new UpdatingTwitterStore(_stubSource.Object, _fakeStore.Object);
+            return new UpdatingTwitterStore(_fakeRequestConductor.Object, _fakeStore.Object);
         }
     }
 }

@@ -1,28 +1,33 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using Caliburn.Core.IoC;
 using TweetSharp.Extensions;
 using TweetSharp.Twitter.Extensions;
 using TweetSharp.Twitter.Fluent;
 using TweetSharp.Twitter.Model;
+using Twiddler.Models;
 using Twiddler.Services.Interfaces;
 
 namespace Twiddler.Services
 {
     [PerRequest("Public Timeline", typeof (ITweetRequester))]
-    public class TweetRequester : ITweetRequester
+    public class PublicTimelineTweetRequester : ITweetRequester
     {
         private readonly ITwitterClient _client;
         private readonly IRequestLimitStatus _requestLimitStatus;
         private readonly Factories.TweetFactory _tweetFactory;
+        private readonly Subject<Tweet> _tweets;
 
-        public TweetRequester(ITwitterClient client,
-                              Factories.TweetFactory tweetFactory,
-                              IRequestLimitStatus requestLimitStatus)
+        public PublicTimelineTweetRequester(ITwitterClient client,
+                                            Factories.TweetFactory tweetFactory,
+                                            IRequestLimitStatus requestLimitStatus)
         {
             _client = client;
             _tweetFactory = tweetFactory;
             _requestLimitStatus = requestLimitStatus;
+
+            _tweets = new Subject<Tweet>();
         }
 
         #region ITweetRequester Members
@@ -32,20 +37,21 @@ namespace Twiddler.Services
             CreateRequest().Request();
         }
 
-        public event EventHandler<NewTweetsEventArgs> NewTweets = delegate { };
+        public IObservable<Tweet> Tweets
+        {
+            get { return _tweets; }
+        }
 
         #endregion
 
-        private ITwitterPublicTimeline CreateRequest()
+        private ITwitterLeafNode CreateRequest()
         {
-            ITwitterPublicTimeline request = _client.
-                MakeRequestFor().
-                Statuses().
-                OnPublicTimeline();
-
-            request.CallbackTo(GotTweets);
-
-            return request;
+            return
+                _client.
+                    MakeRequestFor().
+                    Statuses().
+                    OnPublicTimeline().
+                    CallbackTo(GotTweets);
         }
 
         private void GotTweets(object sender, TwitterResult result, object userstate)
@@ -53,9 +59,10 @@ namespace Twiddler.Services
             UpdateLimit(result.RateLimitStatus);
 
             if (!result.SkippedDueToRateLimiting)
-                NewTweets(this, new NewTweetsEventArgs(result.
-                                                           AsStatuses().
-                                                           Select(x => _tweetFactory(x))));
+            {
+                foreach (Tweet tweet in result.AsStatuses().Select(x => _tweetFactory(x)))
+                    _tweets.OnNext(tweet);
+            }
         }
 
         private void UpdateLimit(TwitterRateLimitStatus status)

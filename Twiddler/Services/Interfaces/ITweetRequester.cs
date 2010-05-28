@@ -1,10 +1,11 @@
 using System;
+using Twiddler.Models;
 
 namespace Twiddler.Services.Interfaces
 {
     public interface ITweetRequester
     {
         void Request();
-        event EventHandler<NewTweetsEventArgs> NewTweets;
+        IObservable<Tweet> Tweets { get; }
     }
 }

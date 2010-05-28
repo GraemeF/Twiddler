@@ -2,9 +2,8 @@ using Twiddler.Models;
 
 namespace Twiddler.Services.Interfaces
 {
-    public interface ITweetStore
+    public interface ITweetStore : ITweetSink
     {
-        void AddTweet(Tweet tweet);
         Tweet GetTweet(TweetId id);
     }
 }

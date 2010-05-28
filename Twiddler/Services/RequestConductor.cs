@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using Caliburn.Core.IoC;
 using MvvmFoundation.Wpf;
+using Twiddler.Models;
 using Twiddler.Services.Interfaces;
 
 namespace Twiddler.Services
 {
+    [PerRequest(typeof (IRequestConductor))]
     public class RequestConductor : IRequestConductor
     {
         private readonly ITwitterClient _client;
@@ -30,6 +33,8 @@ namespace Twiddler.Services
             Dispose(true);
             GC.SuppressFinalize(this);
         }
+
+        public IObservable<Tweet> Tweets { get; private set; }
 
         #endregion
 

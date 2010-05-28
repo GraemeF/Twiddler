@@ -165,6 +165,8 @@
     <Compile Include="Services\Interfaces\IRequestLimitStatus.cs" />
     <Compile Include="Screens\RequestMeterScreen.cs" />
     <Compile Include="Services\IRequestConductor.cs" />
+    <Compile Include="Services\ITweetSink.cs" />
+    <Compile Include="Services\ITweetPipeline.cs" />
     <Compile Include="Services\RequestConductor.cs" />
     <Compile Include="Services\RequestLimitStatus.cs" />
     <Compile Include="Views\RequestMeterView.xaml.cs">
@@ -204,7 +206,6 @@
     <Compile Include="Models\Tweet.cs" />
     <Compile Include="Services\Interfaces\ITwitterClient.cs" />
     <Compile Include="Models\Interfaces\ITwitterCredentials.cs" />
-    <Compile Include="Services\NewTweetsEventArgs.cs" />
     <Compile Include="OAuthDialog.xaml.cs">
       <DependentUpon>OAuthDialog.xaml</DependentUpon>
     </Compile>
@@ -227,8 +228,7 @@
     <Compile Include="Screens\Interfaces\ITimelineScreen.cs" />
     <Compile Include="Screens\ShellScreen.cs" />
     <Compile Include="Screens\TimelineScreen.cs" />
-    <Compile Include="Services\TweetRequester.cs" />
-    <Compile Include="Services\TweetSource.cs" />
+    <Compile Include="Services\PublicTimelineTweetRequester.cs" />
     <Compile Include="Services\TwitterClient.cs" />
     <Compile Include="Services\UpdatingTwitterStore.cs" />
     <Compile Include="Views\LoadingTweetView.xaml.cs">
