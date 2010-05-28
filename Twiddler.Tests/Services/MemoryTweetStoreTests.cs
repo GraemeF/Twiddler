@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Twiddler.Models;
 using Twiddler.Services;
 using Xunit;
@@ -9,13 +8,16 @@ namespace Twiddler.Tests.Services
     public class MemoryTweetStoreTests
     {
         [Fact]
-        public void AddTweet_GivenADuplicatedTweet_Throws()
+        public void AddTweet_GivenADuplicatedTweet_UpdatesStoredTweet()
         {
             var test = new MemoryTweetStore();
 
             test.AddTweet(New.Tweet);
-            Assert.Throws(typeof (ArgumentException),
-                          () => test.AddTweet(New.Tweet));
+
+            Tweet updatedTweet = New.Tweet;
+            test.AddTweet(updatedTweet);
+
+            Assert.Same(updatedTweet, test.GetTweet(updatedTweet.Id));
         }
 
         [Fact]

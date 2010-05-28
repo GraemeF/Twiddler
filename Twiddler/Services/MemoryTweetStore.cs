@@ -14,7 +14,7 @@ namespace Twiddler.Services
 
         public void AddTweet(Tweet tweet)
         {
-            _tweets.Add(tweet.Id, tweet);
+            _tweets[tweet.Id] = tweet;
         }
 
         public Tweet GetTweet(TweetId id)
