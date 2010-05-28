@@ -11,16 +11,16 @@ namespace Twiddler.Services
     public class TweetSource : ITweetSource
     {
         private readonly IObservable<IEvent<NewTweetsEventArgs>> _newTweetsObserver;
-        private readonly ITweetPoller _poller;
+        private readonly ITweetRequester _requester;
 
-        public TweetSource(ITweetPoller poller)
+        public TweetSource(ITweetRequester requester)
         {
-            _poller = poller;
+            _requester = requester;
 
             _newTweetsObserver =
                 Observable.FromEvent((EventHandler<NewTweetsEventArgs> ev) => new EventHandler<NewTweetsEventArgs>(ev),
-                                     ev => _poller.NewTweets += ev,
-                                     ev => _poller.NewTweets -= ev);
+                                     ev => _requester.NewTweets += ev,
+                                     ev => _requester.NewTweets -= ev);
 
             Tweets = _newTweetsObserver.SelectMany(x => x.EventArgs.Tweets);
         }

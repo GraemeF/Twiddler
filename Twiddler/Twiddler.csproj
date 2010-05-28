@@ -197,7 +197,7 @@
     <Compile Include="Screens\TweetScreen.cs" />
     <Compile Include="Services\Interfaces\AuthorizationStatus.cs" />
     <Compile Include="Services\Interfaces\ITweetSource.cs" />
-    <Compile Include="Services\Interfaces\ITweetPoller.cs" />
+    <Compile Include="Services\Interfaces\ITweetRequester.cs" />
     <Compile Include="Models\Timeline.cs" />
     <Compile Include="Models\Tweet.cs" />
     <Compile Include="Services\Interfaces\ITwitterClient.cs" />
@@ -225,7 +225,7 @@
     <Compile Include="Screens\Interfaces\ITimelineScreen.cs" />
     <Compile Include="Screens\ShellScreen.cs" />
     <Compile Include="Screens\TimelineScreen.cs" />
-    <Compile Include="Services\TweetPoller.cs" />
+    <Compile Include="Services\TweetRequester.cs" />
     <Compile Include="Services\TweetSource.cs" />
     <Compile Include="Services\TwitterClient.cs" />
     <Compile Include="Services\UpdatingTwitterStore.cs" />

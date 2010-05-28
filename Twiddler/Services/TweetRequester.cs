@@ -10,8 +10,8 @@ using Twiddler.Services.Interfaces;
 
 namespace Twiddler.Services
 {
-    [PerRequest(typeof (ITweetPoller))]
-    public class TweetPoller : ITweetPoller
+    [PerRequest(typeof (ITweetRequester))]
+    public class TweetRequester : ITweetRequester
     {
         private readonly ITwitterClient _client;
         private readonly Factories.TweetFactory _tweetFactory;
@@ -19,7 +19,7 @@ namespace Twiddler.Services
         private IFluentTwitter _request;
         private PropertyObserver<ITwitterClient> _statusObserver;
 
-        public TweetPoller(ITwitterClient client, Factories.TweetFactory tweetFactory, IRequestLimitStatus requestLimitStatus)
+        public TweetRequester(ITwitterClient client, Factories.TweetFactory tweetFactory, IRequestLimitStatus requestLimitStatus)
         {
             _client = client;
             _tweetFactory = tweetFactory;
@@ -31,7 +31,7 @@ namespace Twiddler.Services
             PollIfAuthorized();
         }
 
-        #region ITweetPoller Members
+        #region ITweetRequester Members
 
         public event EventHandler<NewTweetsEventArgs> NewTweets = delegate { };
 
@@ -84,7 +84,7 @@ namespace Twiddler.Services
             }
         }
 
-        ~TweetPoller()
+        ~TweetRequester()
         {
             Dispose(false);
         }
