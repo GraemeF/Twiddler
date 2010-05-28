@@ -164,6 +164,8 @@
     <Compile Include="Services\Interfaces\IClock.cs" />
     <Compile Include="Services\Interfaces\IRequestLimitStatus.cs" />
     <Compile Include="Screens\RequestMeterScreen.cs" />
+    <Compile Include="Services\IRequestConductor.cs" />
+    <Compile Include="Services\RequestConductor.cs" />
     <Compile Include="Services\RequestLimitStatus.cs" />
     <Compile Include="Views\RequestMeterView.xaml.cs">
       <DependentUpon>RequestMeterView.xaml</DependentUpon>
