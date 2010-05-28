@@ -17,7 +17,7 @@ namespace Twiddler.Models
             _store = store;
             Tweets = new ObservableCollection<TweetId>();
 
-            _subscription = _store.NewTweets.Subscribe(x => Tweets.Add(x));
+            _subscription = _store.Tweets.Subscribe(x => Tweets.Add(x));
         }
 
         #region ITimeline Members

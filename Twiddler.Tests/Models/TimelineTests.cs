@@ -13,7 +13,7 @@ namespace Twiddler.Tests.Models
 
         public TimelineTests()
         {
-            _stubStore.Setup(x => x.NewTweets).Returns(_tweets);
+            _stubStore.Setup(x => x.Tweets).Returns(_tweets);
         }
 
         [Fact]
