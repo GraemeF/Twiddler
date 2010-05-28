@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Caliburn.Core.IoC;
 using MvvmFoundation.Wpf;
 using Twiddler.Models;
@@ -12,23 +13,14 @@ namespace Twiddler.Services
     {
         private readonly ITwitterClient _client;
         private readonly IEnumerable<ITweetRequester> _tweetRequesters;
-        private readonly ITweetSink _tweetSink;
         private PropertyObserver<ITwitterClient> _statusObserver;
+        private ITweetSink _tweetSink;
 
-        public RequestConductor(ITwitterClient client, IEnumerable<ITweetRequester> tweetRequesters,
-                                ITweetSink tweetSink)
+        public RequestConductor(ITwitterClient client, IEnumerable<ITweetRequester> tweetRequesters)
         {
             _client = client;
             _tweetRequesters = tweetRequesters;
-            _tweetSink = tweetSink;
-
-            _statusObserver = new PropertyObserver<ITwitterClient>(_client).
-                RegisterHandler(x => x.AuthorizationStatus,
-                                y => PollIfAuthorized());
-            PollIfAuthorized();
         }
-
-        public IObservable<Tweet> Tweets { get; private set; }
 
         #region IRequestConductor Members
 
@@ -36,6 +28,16 @@ namespace Twiddler.Services
         {
             Dispose(true);
             GC.SuppressFinalize(this);
+        }
+
+        public void Start(ITweetSink tweetSink)
+        {
+            _tweetSink = tweetSink;
+
+            _statusObserver = new PropertyObserver<ITwitterClient>(_client).
+                RegisterHandler(x => x.AuthorizationStatus,
+                                y => PollIfAuthorized());
+            PollIfAuthorized();
         }
 
         #endregion
@@ -54,11 +56,8 @@ namespace Twiddler.Services
 
         private void EnsurePolling()
         {
-            foreach (ITweetRequester requester in _tweetRequesters)
-            {
-                foreach (Tweet tweet in requester.RequestTweets())
-                    _tweetSink.AddTweet(tweet);
-            }
+            foreach (Tweet tweet in _tweetRequesters.SelectMany(requester => requester.RequestTweets()))
+                _tweetSink.AddTweet(tweet);
         }
 
         ~RequestConductor()

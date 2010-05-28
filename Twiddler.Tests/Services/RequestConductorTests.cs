@@ -15,9 +15,23 @@ namespace Twiddler.Tests.Services
         private readonly Mock<ITweetSink> _fakeSink = new Mock<ITweetSink>();
 
         [Fact]
-        public void Constructor_WhenAuthorized_BeginsRequesting()
+        public void Start_WhenAuthorized_BeginsRequesting()
         {
             RequestConductor test = BuildDefaultTestSubject();
+
+            ClientAuthorizationStatusChangesTo(AuthorizationStatus.Authorized);
+
+            test.Start(_fakeSink.Object);
+
+            _fakeRequester.Verify(x => x.RequestTweets());
+        }
+
+        [Fact]
+        public void Start_WhenAuthorizationFollows_BeginsRequesting()
+        {
+            RequestConductor test = BuildDefaultTestSubject();
+
+            test.Start(_fakeSink.Object);
 
             ClientAuthorizationStatusChangesTo(AuthorizationStatus.Authorized);
             GC.KeepAlive(test);
@@ -26,15 +40,15 @@ namespace Twiddler.Tests.Services
         }
 
         [Fact]
-        public void Constructor_WhenTweetsArriveFromRequestor_AddsTweetsToSink()
+        public void Start_WhenTweetsArriveFromRequestor_AddsTweetsToSink()
         {
             Tweet tweet = New.Tweet;
             _fakeRequester.Setup(x => x.RequestTweets()).Returns(new[] {tweet});
 
-            RequestConductor test = BuildDefaultTestSubject();
-
             ClientAuthorizationStatusChangesTo(AuthorizationStatus.Authorized);
-            GC.KeepAlive(test);
+
+            RequestConductor test = BuildDefaultTestSubject();
+            test.Start(_fakeSink.Object);
 
             _fakeSink.Verify(x => x.AddTweet(tweet));
         }
@@ -51,7 +65,7 @@ namespace Twiddler.Tests.Services
 
         private RequestConductor BuildDefaultTestSubject()
         {
-            return new RequestConductor(_fakeClient.Object, new[] {_fakeRequester.Object}, _fakeSink.Object);
+            return new RequestConductor(_fakeClient.Object, new[] {_fakeRequester.Object});
         }
     }
 }

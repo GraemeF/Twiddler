@@ -17,6 +17,8 @@ namespace Twiddler.Services
         {
             _requestConductor = requestConductor;
             _store = store;
+
+            _requestConductor.Start(this);
         }
 
         #region IUpdatingTweetStore Members
