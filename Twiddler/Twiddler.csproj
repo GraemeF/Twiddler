@@ -168,6 +168,7 @@
     <Compile Include="Screens\RequestMeterScreen.cs" />
     <Compile Include="Services\Interfaces\IRequestConductor.cs" />
     <Compile Include="Services\Interfaces\ITweetSink.cs" />
+    <Compile Include="Services\MentionsTweetRequester.cs" />
     <Compile Include="Services\RequestConductor.cs" />
     <Compile Include="Services\RequestLimitStatus.cs" />
     <Compile Include="Services\TweetRequester.cs" />
@@ -231,7 +232,7 @@
     <Compile Include="Screens\Interfaces\ITimelineScreen.cs" />
     <Compile Include="Screens\ShellScreen.cs" />
     <Compile Include="Screens\TimelineScreen.cs" />
-    <Compile Include="Services\PublicTimelineTweetRequester.cs" />
+    <Compile Include="Services\RetweetsOfMeTweetRequester.cs" />
     <Compile Include="Services\TwitterClient.cs" />
     <Compile Include="Services\UpdatingTwitterStore.cs" />
     <Compile Include="Views\LoadingTweetView.xaml.cs">
