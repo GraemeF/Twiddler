@@ -4,6 +4,10 @@
              xmlns:cal="clr-namespace:Caliburn.PresentationFramework.Views;assembly=Caliburn.PresentationFramework"
              xmlns:scm="clr-namespace:System.ComponentModel;assembly=WindowsBase">
 	<UserControl.Resources>
+		<ItemsPanelTemplate x:Key="ItemsWrapPanel">
+			<WrapPanel IsItemsHost="True"
+			           Orientation="Horizontal" />
+		</ItemsPanelTemplate>
 		<CollectionViewSource x:Key="SortedTweets"
 		                      Source="{Binding Screens}">
 			<CollectionViewSource.SortDescriptions>
@@ -12,7 +16,9 @@
 			</CollectionViewSource.SortDescriptions>
 		</CollectionViewSource>
 	</UserControl.Resources>
-	<ListBox ItemsSource="{Binding Source={StaticResource SortedTweets}}">
+	<ListBox ItemsSource="{Binding Source={StaticResource SortedTweets}}"
+	         ItemsPanel="{DynamicResource ItemsWrapPanel}"
+	         ScrollViewer.HorizontalScrollBarVisibility="Disabled">
 		<ListBox.ItemTemplate>
 			<DataTemplate>
 				<ContentControl cal:View.Model="{Binding}"
