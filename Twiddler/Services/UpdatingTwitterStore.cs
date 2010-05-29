@@ -28,10 +28,14 @@ namespace Twiddler.Services
             get { return _tweets; }
         }
 
-        public void AddTweet(Tweet tweet)
+        public bool AddTweet(Tweet tweet)
         {
-            _store.AddTweet(tweet);
-            _tweets.OnNext(tweet.Id);
+            if (_store.AddTweet(tweet))
+            {
+                _tweets.OnNext(tweet.Id);
+                return true;
+            }
+            return false;
         }
 
         public Tweet GetTweet(TweetId id)

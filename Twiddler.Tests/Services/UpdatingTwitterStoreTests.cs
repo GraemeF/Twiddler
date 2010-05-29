@@ -1,3 +1,4 @@
+using System;
 using Moq;
 using Twiddler.Models;
 using Twiddler.Services;
@@ -12,7 +13,7 @@ namespace Twiddler.Tests.Services
         private readonly Mock<ITweetStore> _fakeStore = new Mock<ITweetStore>();
 
         [Fact]
-        public void AddTweet__AddsTweetToStore()
+        public void AddTweet_GivenANewTweet_AddsTweetToStore()
         {
             UpdatingTwitterStore test = BuildDefaultTestSubject();
 
@@ -20,6 +21,43 @@ namespace Twiddler.Tests.Services
             test.AddTweet(tweet);
 
             _fakeStore.Verify(x => x.AddTweet(tweet));
+        }
+
+        [Fact]
+        public void AddTweet_GivenANewTweet_PublishesTweet()
+        {
+            UpdatingTwitterStore test = BuildDefaultTestSubject();
+            TweetId? publishedTweetId = null;
+            test.Tweets.Subscribe(x => publishedTweetId = x);
+
+            Tweet tweet = New.Tweet;
+
+            _fakeStore.
+                Setup(x => x.AddTweet(tweet)).
+                Returns(true);
+
+            test.AddTweet(tweet);
+
+            Assert.Equal(tweet.Id, publishedTweetId);
+        }
+
+        [Fact]
+        public void AddTweet_GivenATweetThatHasAlreadyBeenAdded_DoesNotPublishTweet()
+        {
+            UpdatingTwitterStore test = BuildDefaultTestSubject();
+
+            TweetId? publishedTweetId = null;
+            test.Tweets.Subscribe(x => publishedTweetId = x);
+
+            Tweet tweet = New.Tweet;
+
+            _fakeStore.
+                Setup(x => x.AddTweet(tweet)).
+                Returns(false);
+
+            test.AddTweet(tweet);
+
+            Assert.False(publishedTweetId.HasValue);
         }
 
         [Fact]

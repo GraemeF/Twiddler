@@ -1,5 +1,4 @@
 using System.Collections.Concurrent;
-using System.Collections.Generic;
 using Caliburn.Core.IoC;
 using Twiddler.Models;
 using Twiddler.Services.Interfaces;
@@ -13,9 +12,9 @@ namespace Twiddler.Services
 
         #region ITweetStore Members
 
-        public void AddTweet(Tweet tweet)
+        public bool AddTweet(Tweet tweet)
         {
-            _tweets[tweet.Id] = tweet;
+            return _tweets.TryAdd(tweet.Id, tweet);
         }
 
         public Tweet GetTweet(TweetId id)
