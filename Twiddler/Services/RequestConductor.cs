@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Caliburn.Core.IoC;
 using MvvmFoundation.Wpf;
+using TweetSharp.Extensions;
 using Twiddler.Models;
 using Twiddler.Services.Interfaces;
 
@@ -14,6 +16,7 @@ namespace Twiddler.Services
         private readonly ITwitterClient _client;
         private readonly IEnumerable<ITweetRequester> _tweetRequesters;
         private PropertyObserver<ITwitterClient> _statusObserver;
+        private IDisposable _subscription;
         private ITweetSink _tweetSink;
 
         public RequestConductor(ITwitterClient client, IEnumerable<ITweetRequester> tweetRequesters)
@@ -52,11 +55,21 @@ namespace Twiddler.Services
 
         private void EnsureNotPolling()
         {
+            if (_subscription != null)
+            {
+                _subscription.Dispose();
+                _subscription = null;
+            }
         }
 
         private void EnsurePolling()
         {
-            new TaskFactory().StartNew(() => Parallel.ForEach(_tweetRequesters, MakeRequest));
+            if (_subscription == null)
+                _subscription = Observable.
+                    Interval(1.Minute()).
+                    StartWith(0L).
+                    Subscribe(x => new TaskFactory().
+                                       StartNew(() => Parallel.ForEach(_tweetRequesters, MakeRequest)));
         }
 
         private void MakeRequest(ITweetRequester tweetRequester)
