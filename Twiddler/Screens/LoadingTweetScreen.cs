@@ -11,23 +11,24 @@ namespace Twiddler.Screens
     [PerRequest(typeof (ILoadingTweetScreen))]
     public class LoadingTweetScreen : ScreenConductor<ITweetScreen>, ILoadingTweetScreen
     {
-        private readonly TweetId _id;
         private readonly IUpdatingTweetStore _store;
         private readonly Factories.TweetScreenFactory _tweetScreenFactory;
 
         public LoadingTweetScreen(IUpdatingTweetStore store, TweetId id, Factories.TweetScreenFactory tweetScreenFactory)
         {
             _store = store;
-            _id = id;
+            Id = id;
             _tweetScreenFactory = tweetScreenFactory;
         }
+
+        public TweetId Id { get; private set; }
 
         protected override void OnInitialize()
         {
             base.OnInitialize();
 
             Observable.
-                Start(() => _store.GetTweet(_id)).
+                Start(() => _store.GetTweet(Id)).
                 Subscribe(PopulateWithTweet);
         }
 

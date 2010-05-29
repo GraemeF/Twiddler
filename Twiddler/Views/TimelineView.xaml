@@ -1,13 +1,23 @@
 ﻿<UserControl x:Class="Twiddler.Views.TimelineView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:cal="clr-namespace:Caliburn.PresentationFramework.Views;assembly=Caliburn.PresentationFramework">
-    <ListBox ItemsSource="{Binding Screens}">
-        <ListBox.ItemTemplate>
-            <DataTemplate>
-                <ContentControl cal:View.Model="{Binding}"
-                                Margin="2" />
-            </DataTemplate>
-        </ListBox.ItemTemplate>
-    </ListBox>
+             xmlns:cal="clr-namespace:Caliburn.PresentationFramework.Views;assembly=Caliburn.PresentationFramework"
+             xmlns:scm="clr-namespace:System.ComponentModel;assembly=WindowsBase">
+	<UserControl.Resources>
+		<CollectionViewSource x:Key="SortedTweets"
+		                      Source="{Binding Screens}">
+			<CollectionViewSource.SortDescriptions>
+				<scm:SortDescription PropertyName="Id"
+				                     Direction="Descending" />
+			</CollectionViewSource.SortDescriptions>
+		</CollectionViewSource>
+	</UserControl.Resources>
+	<ListBox ItemsSource="{Binding Source={StaticResource SortedTweets}}">
+		<ListBox.ItemTemplate>
+			<DataTemplate>
+				<ContentControl cal:View.Model="{Binding}"
+				                Margin="2" />
+			</DataTemplate>
+		</ListBox.ItemTemplate>
+	</ListBox>
 </UserControl>

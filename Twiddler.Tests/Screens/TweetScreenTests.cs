@@ -29,7 +29,7 @@ namespace Twiddler.Tests.Screens
         {
             var test = new TweetScreen(_tweet);
 
-            Assert.Equal(_tweet.CreatedDate.ToString(), test.CreatedDate);
+            Assert.Equal(_tweet.CreatedDate, test.CreatedDate);
         }
     }
 }
