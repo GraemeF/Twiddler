@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Threading;
 using Moq;
 using Twiddler.Models;
 using Twiddler.Services;
@@ -22,6 +23,7 @@ namespace Twiddler.Tests.Services
             ClientAuthorizationStatusChangesTo(AuthorizationStatus.Authorized);
 
             test.Start(_fakeSink.Object);
+            Thread.Sleep(1000);
 
             _fakeRequester.Verify(x => x.RequestTweets());
         }
@@ -35,6 +37,8 @@ namespace Twiddler.Tests.Services
 
             ClientAuthorizationStatusChangesTo(AuthorizationStatus.Authorized);
             GC.KeepAlive(test);
+
+            Thread.Sleep(1000);
 
             _fakeRequester.Verify(x => x.RequestTweets());
         }

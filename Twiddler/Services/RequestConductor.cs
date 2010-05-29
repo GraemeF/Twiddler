@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.Threading.Tasks;
 using Caliburn.Core.IoC;
 using MvvmFoundation.Wpf;
 using Twiddler.Models;
@@ -56,8 +56,15 @@ namespace Twiddler.Services
 
         private void EnsurePolling()
         {
-            foreach (Tweet tweet in _tweetRequesters.SelectMany(requester => requester.RequestTweets()))
+            new TaskFactory().StartNew(() => Parallel.ForEach(_tweetRequesters, MakeRequest));
+        }
+
+        private void MakeRequest(ITweetRequester tweetRequester)
+        {
+            foreach (Tweet tweet in tweetRequester.RequestTweets())
+            {
                 _tweetSink.AddTweet(tweet);
+            }
         }
 
         ~RequestConductor()
