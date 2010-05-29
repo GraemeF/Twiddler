@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Linq;
 using Caliburn.Core.IoC;
 using Caliburn.PresentationFramework.Screens;
 using MvvmFoundation.Wpf;
+using TweetSharp.Extensions;
 using Twiddler.Screens.Interfaces;
 using Twiddler.Services.Interfaces;
 
@@ -11,8 +13,10 @@ namespace Twiddler.Screens
     public class RequestMeterScreen : Screen, IRequestMeterScreen
     {
         private readonly IClock _clock;
+        private readonly IObservable<long> _elapsedSeconds = Observable.Interval(1.Second());
         private readonly IRequestLimitStatus _limitStatus;
         private PropertyObserver<IRequestLimitStatus> _observer;
+        private IDisposable _timePassingSubscription;
 
         public RequestMeterScreen(IRequestLimitStatus limitStatus, IClock clock)
         {
@@ -67,6 +71,21 @@ namespace Twiddler.Screens
                 new PropertyObserver<IRequestLimitStatus>(_limitStatus).
                     RegisterHandler(x => x.HourlyLimit, y => HourlyLimitChanged()).
                     RegisterHandler(x => x.RemainingHits, y => RemainingHitsChanged());
+
+            _timePassingSubscription = _elapsedSeconds.Subscribe(x => TimePassed());
+        }
+
+        protected override void OnShutdown()
+        {
+            _timePassingSubscription.Dispose();
+            _timePassingSubscription = null;
+
+            base.OnShutdown();
+        }
+
+        private void TimePassed()
+        {
+            NotifyOfPropertyChange(() => UsedTimeFraction);
         }
 
         private void RemainingHitsChanged()
