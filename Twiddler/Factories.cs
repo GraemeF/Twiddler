@@ -10,13 +10,13 @@ namespace Twiddler
     {
         #region Delegates
 
+        public delegate ILoadingTweetScreen LoadingTweetScreenFactory(TweetId id);
+
         public delegate IFluentTwitter RequestFactory(ITwitterClient client);
 
         public delegate Tweet TweetFactory(TwitterStatus status);
 
         public delegate ITweetScreen TweetScreenFactory(Tweet tweet);
-
-        public delegate ILoadingTweetScreen LoadingTweetScreenFactory(TweetId id);
 
         public delegate User UserFactory(TwitterUser user);
 
@@ -40,7 +40,9 @@ namespace Twiddler
                            Id = new UserId(user.Id),
                            Name = user.Name,
                            ProfileImageUrl = user.ProfileImageUrl,
-                           ScreenName = user.ScreenName
+                           ScreenName = user.ScreenName,
+                           FollowersCount = user.FollowersCount,
+                           IsVerified = user.IsVerified.GetValueOrDefault()
                        };
         }
     }
