@@ -1,14 +1,19 @@
-﻿using Moq;
+﻿using System;
+using Moq;
 using TweetSharp.Twitter.Model;
 using Twiddler.Screens;
 using Twiddler.Screens.Interfaces;
+using Twiddler.Services.Interfaces;
 using Xunit;
 
 namespace Twiddler.Tests.Screens
 {
     public class TweetScreenTests
     {
-        private readonly Mock<ILinkScreen> _fakeLinkScreen = new Mock<ILinkScreen>();
+        private readonly Mock<ILinkThumbnailScreenFactory> _fakeThumbnailFactory =
+            new Mock<ILinkThumbnailScreenFactory>();
+
+        private readonly Mock<ILinkThumbnailScreen> _fakeThumbnailScreen = new Mock<ILinkThumbnailScreen>();
         private readonly TwitterStatus _tweet = New.Tweet;
 
         [Fact]
@@ -21,7 +26,7 @@ namespace Twiddler.Tests.Screens
 
         private TweetScreen BuildDefaultTestSubject()
         {
-            return new TweetScreen(_tweet, x => _fakeLinkScreen.Object);
+            return new TweetScreen(_tweet, _fakeThumbnailFactory.Object);
         }
 
         [Fact]
@@ -43,14 +48,17 @@ namespace Twiddler.Tests.Screens
         [Fact]
         public void GettingLinks_WhenTweetContainsALink_ReturnsCollectionWithOpenedLinkScreen()
         {
+            _fakeThumbnailFactory.
+                Setup(x => x.CreateScreenForLink(It.IsAny<Uri>())).
+                Returns(_fakeThumbnailScreen.Object);
+
             var test =
                 new TweetScreen(new TwitterStatus
                                     {Text = "This tweet contains a link to http://link.one.com"},
-                                x => _fakeLinkScreen.Object);
+                                _fakeThumbnailFactory.Object);
             test.Initialize();
 
-            _fakeLinkScreen.Verify(x => x.Initialize());
-            Assert.Contains(_fakeLinkScreen.Object, test.Links);
+            Assert.Contains(_fakeThumbnailScreen.Object, test.Links);
         }
     }
 }

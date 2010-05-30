@@ -4,20 +4,21 @@ using Caliburn.PresentationFramework;
 using Caliburn.PresentationFramework.Screens;
 using TweetSharp.Twitter.Model;
 using Twiddler.Screens.Interfaces;
+using Twiddler.Services.Interfaces;
 
 namespace Twiddler.Screens
 {
     [PerRequest(typeof (ITweetScreen))]
-    public class TweetScreen : ScreenConductor<IScreen>, ITweetScreen
+    public class TweetScreen : ScreenConductor<ILinkThumbnailScreen>, ITweetScreen
     {
-        private readonly Factories.LinkScreenFactory _linkScreenFactory;
+        private readonly ILinkThumbnailScreenFactory _linkThumbnailScreenFactory;
         private readonly TwitterStatus _tweet;
 
-        public TweetScreen(TwitterStatus tweet, Factories.LinkScreenFactory linkScreenFactory)
+        public TweetScreen(TwitterStatus tweet, ILinkThumbnailScreenFactory linkThumbnailScreenFactory)
         {
             _tweet = tweet;
-            _linkScreenFactory = linkScreenFactory;
-            Links = new BindableCollection<ILinkScreen>();
+            _linkThumbnailScreenFactory = linkThumbnailScreenFactory;
+            Links = new BindableCollection<ILinkThumbnailScreen>();
         }
 
         public string Status
@@ -35,12 +36,11 @@ namespace Twiddler.Screens
             get { return _tweet.CreatedDate; }
         }
 
-        public BindableCollection<ILinkScreen> Links { get; private set; }
+        public BindableCollection<ILinkThumbnailScreen> Links { get; private set; }
 
         protected override void OnInitialize()
         {
             base.OnInitialize();
-
             OpenLinksFromTweet();
         }
 
@@ -54,15 +54,13 @@ namespace Twiddler.Screens
 
         private void OpenLink(Uri uri)
         {
-            Links.Add(CreateInitializedLink(uri));
-        }
+            ILinkThumbnailScreen linkScreen = _linkThumbnailScreenFactory.CreateScreenForLink(uri);
 
-        private ILinkScreen CreateInitializedLink(Uri uri)
-        {
-            ILinkScreen linkScreen = _linkScreenFactory(uri);
-            this.OpenScreen(linkScreen);
-
-            return linkScreen;
+            if (linkScreen != null)
+            {
+                this.OpenScreen(linkScreen);
+                Links.Add(linkScreen);
+            }
         }
     }
 }

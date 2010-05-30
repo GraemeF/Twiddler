@@ -121,7 +121,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\LinkView.xaml">
+    <Page Include="Views\ImageThumbnailView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -163,10 +163,15 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Screens\Interfaces\ILinkThumbnailScreen.cs" />
+    <Compile Include="Screens\Interfaces\IImageThumbnailScreen.cs" />
+    <Compile Include="Screens\ImageThumbnailScreen.cs" />
+    <Compile Include="Models\ImageLocations.cs" />
+    <Compile Include="Services\Interfaces\IImageUriDecoder.cs" />
+    <Compile Include="Services\Interfaces\ILinkThumbnailScreenFactory.cs" />
     <Compile Include="Models\Extensions.cs" />
     <Compile Include="Screens\Interfaces\ILinkScreen.cs" />
     <Compile Include="Screens\Interfaces\IRequestMeterScreen.cs" />
-    <Compile Include="Screens\LinkScreen.cs" />
     <Compile Include="Services\Clock.cs" />
     <Compile Include="Services\FriendsTimelineTweetRequester.cs" />
     <Compile Include="Services\HomeTimelineTweetRequester.cs" />
@@ -175,13 +180,16 @@
     <Compile Include="Screens\RequestMeterScreen.cs" />
     <Compile Include="Services\Interfaces\IRequestConductor.cs" />
     <Compile Include="Services\Interfaces\ITweetSink.cs" />
+    <Compile Include="Services\TwitpicDecoder.cs" />
+    <Compile Include="Services\YfrogDecoder.cs" />
+    <Compile Include="Services\LinkThumbnailScreenFactory.cs" />
     <Compile Include="Services\MentionsTweetRequester.cs" />
     <Compile Include="Services\RequestConductor.cs" />
     <Compile Include="Services\RequestLimitStatus.cs" />
     <Compile Include="Services\TweetRequester.cs" />
     <Compile Include="Services\UserTimelineTweetRequester.cs" />
-    <Compile Include="Views\LinkView.xaml.cs">
-      <DependentUpon>LinkView.xaml</DependentUpon>
+    <Compile Include="Views\ImageThumbnailView.xaml.cs">
+      <DependentUpon>ImageThumbnailView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\RequestMeterView.xaml.cs">
       <DependentUpon>RequestMeterView.xaml</DependentUpon>

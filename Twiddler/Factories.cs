@@ -1,5 +1,4 @@
-﻿using System;
-using TweetSharp.Twitter.Model;
+﻿using TweetSharp.Twitter.Model;
 using Twiddler.Models;
 using Twiddler.Screens.Interfaces;
 
@@ -9,7 +8,7 @@ namespace Twiddler
     {
         #region Delegates
 
-        public delegate ILinkScreen LinkScreenFactory(Uri uri);
+        public delegate IImageThumbnailScreen ImageThumbnailScreenFactory(ImageLocations imageLocations);
 
         public delegate ILoadingTweetScreen LoadingTweetScreenFactory(TweetId id);
 
