@@ -14,36 +14,22 @@ namespace Twiddler
 
         public delegate IFluentTwitter RequestFactory(ITwitterClient client);
 
-        public delegate Tweet TweetFactory(TwitterStatus status);
+        public delegate TwitterStatus TweetFactory(TwitterStatus status);
 
-        public delegate ITweetScreen TweetScreenFactory(Tweet tweet);
+        public delegate ITweetScreen TweetScreenFactory(TwitterStatus tweet);
 
-        public delegate User UserFactory(TwitterUser user);
+        public delegate TwitterUser UserFactory(TwitterUser user);
 
         #endregion
 
-        public static Tweet CreateTweetFromTwitterStatus(TwitterStatus status)
+        public static TwitterStatus CreateTweetFromTwitterStatus(TwitterStatus status)
         {
-            return new Tweet
-                       {
-                           Id = new TweetId(status.Id),
-                           Status = status.Text,
-                           User = CreateUserFromTwitterUser(status.User),
-                           CreatedDate = status.CreatedDate
-                       };
+            return status;
         }
 
-        private static User CreateUserFromTwitterUser(TwitterUser user)
+        private static TwitterUser CreateUserFromTwitterUser(TwitterUser user)
         {
-            return new User
-                       {
-                           Id = new UserId(user.Id),
-                           Name = user.Name,
-                           ProfileImageUrl = user.ProfileImageUrl,
-                           ScreenName = user.ScreenName,
-                           FollowersCount = user.FollowersCount,
-                           IsVerified = user.IsVerified.GetValueOrDefault()
-                       };
+            return user;
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿using Twiddler.Models;
+﻿using TweetSharp.Twitter.Model;
 using Twiddler.Screens;
 using Xunit;
 
@@ -6,14 +6,14 @@ namespace Twiddler.Tests.Screens
 {
     public class TweetScreenTests
     {
-        private readonly Tweet _tweet = New.Tweet;
+        private readonly TwitterStatus _tweet = New.Tweet;
 
         [Fact]
         public void GettingStatus__ReturnsTweetStatus()
         {
             var test = new TweetScreen(_tweet);
 
-            Assert.Equal(_tweet.Status, test.Status);
+            Assert.Equal(_tweet.Text, test.Status);
         }
 
         [Fact]

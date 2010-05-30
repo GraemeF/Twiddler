@@ -2,7 +2,7 @@
 using System.ComponentModel;
 using System.Threading;
 using Moq;
-using Twiddler.Models;
+using TweetSharp.Twitter.Model;
 using Twiddler.Services;
 using Twiddler.Services.Interfaces;
 using Xunit;
@@ -46,7 +46,7 @@ namespace Twiddler.Tests.Services
         [Fact]
         public void Start_WhenTweetsArriveFromRequestor_AddsTweetsToSink()
         {
-            Tweet tweet = New.Tweet;
+            TwitterStatus tweet = New.Tweet;
             _fakeRequester.Setup(x => x.RequestTweets()).Returns(new[] {tweet});
 
             ClientAuthorizationStatusChangesTo(AuthorizationStatus.Authorized);

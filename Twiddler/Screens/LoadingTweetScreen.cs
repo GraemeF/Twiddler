@@ -2,6 +2,7 @@ using System;
 using System.Linq;
 using Caliburn.Core.IoC;
 using Caliburn.PresentationFramework.Screens;
+using TweetSharp.Twitter.Model;
 using Twiddler.Models;
 using Twiddler.Screens.Interfaces;
 using Twiddler.Services.Interfaces;
@@ -32,7 +33,7 @@ namespace Twiddler.Screens
                 Subscribe(PopulateWithTweet);
         }
 
-        private void PopulateWithTweet(Tweet tweet)
+        private void PopulateWithTweet(TwitterStatus tweet)
         {
             OpenScreen(_tweetScreenFactory(tweet), delegate { });
         }

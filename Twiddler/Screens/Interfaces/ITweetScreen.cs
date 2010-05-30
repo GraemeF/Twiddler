@@ -1,9 +1,9 @@
 ﻿using Caliburn.PresentationFramework.Screens;
-using Twiddler.Models;
+using TweetSharp.Twitter.Model;
 
 namespace Twiddler.Screens.Interfaces
 {
-    public interface ITweetScreen : IScreen<Tweet>
+    public interface ITweetScreen : IScreen<TwitterStatus>
     {
     }
 }

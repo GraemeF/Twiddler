@@ -1,4 +1,4 @@
-﻿using Twiddler.Models;
+﻿using TweetSharp.Twitter.Model;
 
 namespace Twiddler.Services.Interfaces
 {
@@ -9,6 +9,6 @@ namespace Twiddler.Services.Interfaces
         /// </summary>
         /// <param name="tweet">Tweet to add.</param>
         /// <returns>True if the tweet was added, false if it was already there.</returns>
-        bool AddTweet(Tweet tweet);
+        bool AddTweet(TwitterStatus tweet);
     }
 }

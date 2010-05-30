@@ -159,6 +159,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Models\Extensions.cs" />
     <Compile Include="Screens\Interfaces\IRequestMeterScreen.cs" />
     <Compile Include="Services\Clock.cs" />
     <Compile Include="Services\FriendsTimelineTweetRequester.cs" />
@@ -193,7 +194,6 @@
     <Compile Include="Services\MemoryTweetStore.cs" />
     <Compile Include="Services\Interfaces\ITweetStore.cs" />
     <Compile Include="Models\TweetId.cs" />
-    <Compile Include="Models\User.cs" />
     <Compile Include="Models\UserId.cs" />
     <Compile Include="PropertyHelper.cs" />
     <Compile Include="Commands\Interfaces\IDeauthorizeCommand.cs" />
@@ -207,7 +207,6 @@
     <Compile Include="Services\Interfaces\ITweetSource.cs" />
     <Compile Include="Services\Interfaces\ITweetRequester.cs" />
     <Compile Include="Models\Timeline.cs" />
-    <Compile Include="Models\Tweet.cs" />
     <Compile Include="Services\Interfaces\ITwitterClient.cs" />
     <Compile Include="Models\Interfaces\ITwitterCredentials.cs" />
     <Compile Include="OAuthDialog.xaml.cs">

@@ -4,7 +4,6 @@ using TweetSharp.Extensions;
 using TweetSharp.Twitter.Extensions;
 using TweetSharp.Twitter.Fluent;
 using TweetSharp.Twitter.Model;
-using Twiddler.Models;
 using Twiddler.Services.Interfaces;
 
 namespace Twiddler.Services
@@ -26,7 +25,7 @@ namespace Twiddler.Services
 
         #region ITweetRequester Members
 
-        public IEnumerable<Tweet> RequestTweets()
+        public IEnumerable<TwitterStatus> RequestTweets()
         {
             return GotTweets(CreateRequest().Request());
         }
@@ -35,13 +34,13 @@ namespace Twiddler.Services
 
         protected abstract ITwitterLeafNode CreateRequest();
 
-        private IEnumerable<Tweet> GotTweets(TwitterResult result)
+        private IEnumerable<TwitterStatus> GotTweets(TwitterResult result)
         {
             if (result.RateLimitStatus != null)
                 UpdateLimit(result.RateLimitStatus);
 
             if (result.SkippedDueToRateLimiting)
-                return new Tweet[] {};
+                return new TwitterStatus[] {};
 
             return
                 result.

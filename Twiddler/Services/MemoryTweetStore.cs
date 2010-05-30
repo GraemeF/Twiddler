@@ -1,5 +1,6 @@
 using System.Collections.Concurrent;
 using Caliburn.Core.IoC;
+using TweetSharp.Twitter.Model;
 using Twiddler.Models;
 using Twiddler.Services.Interfaces;
 
@@ -8,16 +9,16 @@ namespace Twiddler.Services
     [Singleton(typeof (ITweetStore))]
     public class MemoryTweetStore : ITweetStore
     {
-        private readonly ConcurrentDictionary<TweetId, Tweet> _tweets = new ConcurrentDictionary<TweetId, Tweet>();
+        private readonly ConcurrentDictionary<TweetId, TwitterStatus> _tweets = new ConcurrentDictionary<TweetId, TwitterStatus>();
 
         #region ITweetStore Members
 
-        public bool AddTweet(Tweet tweet)
+        public bool AddTweet(TwitterStatus tweet)
         {
-            return _tweets.TryAdd(tweet.Id, tweet);
+            return _tweets.TryAdd(tweet.GetTweetId(), tweet);
         }
 
-        public Tweet GetTweet(TweetId id)
+        public TwitterStatus GetTweet(TweetId id)
         {
             return _tweets[id];
         }

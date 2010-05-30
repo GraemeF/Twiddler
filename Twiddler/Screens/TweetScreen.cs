@@ -1,27 +1,28 @@
 ﻿using System;
 using Caliburn.Core.IoC;
 using Caliburn.PresentationFramework.Screens;
+using TweetSharp.Twitter.Model;
 using Twiddler.Models;
 using Twiddler.Screens.Interfaces;
 
 namespace Twiddler.Screens
 {
     [PerRequest(typeof (ITweetScreen))]
-    public class TweetScreen : Screen<Tweet>, ITweetScreen
+    public class TweetScreen : Screen<TwitterStatus>, ITweetScreen
     {
-        private readonly Tweet _tweet;
+        private readonly TwitterStatus _tweet;
 
-        public TweetScreen(Tweet tweet)
+        public TweetScreen(TwitterStatus tweet)
         {
             _tweet = tweet;
         }
 
         public string Status
         {
-            get { return _tweet.Status; }
+            get { return _tweet.Text; }
         }
 
-        public User User
+        public TwitterUser User
         {
             get { return _tweet.User; }
         }

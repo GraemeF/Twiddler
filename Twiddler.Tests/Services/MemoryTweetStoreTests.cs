@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using TweetSharp.Twitter.Model;
 using Twiddler.Models;
 using Twiddler.Services;
 using Xunit;
@@ -30,10 +31,10 @@ namespace Twiddler.Tests.Services
         {
             var test = new MemoryTweetStore();
 
-            Tweet tweet = New.Tweet;
+            TwitterStatus tweet = New.Tweet;
             test.AddTweet(tweet);
 
-            Assert.Same(tweet, test.GetTweet(tweet.Id));
+            Assert.Same(tweet, test.GetTweet(tweet.GetTweetId()));
         }
 
         [Fact]

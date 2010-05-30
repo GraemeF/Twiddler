@@ -22,10 +22,14 @@ namespace Twiddler.Models
 
         #endregion
 
+        #region IComparable<TweetId> Members
+
         public int CompareTo(TweetId other)
         {
             return _id.CompareTo(other._id);
         }
+
+        #endregion
 
         public override bool Equals(Object obj)
         {
