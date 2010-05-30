@@ -12,24 +12,8 @@ namespace Twiddler
 
         public delegate ILoadingTweetScreen LoadingTweetScreenFactory(TweetId id);
 
-        public delegate IFluentTwitter RequestFactory(ITwitterClient client);
-
-        public delegate TwitterStatus TweetFactory(TwitterStatus status);
-
         public delegate ITweetScreen TweetScreenFactory(TwitterStatus tweet);
 
-        public delegate TwitterUser UserFactory(TwitterUser user);
-
         #endregion
-
-        public static TwitterStatus CreateTweetFromTwitterStatus(TwitterStatus status)
-        {
-            return status;
-        }
-
-        private static TwitterUser CreateUserFromTwitterUser(TwitterUser user)
-        {
-            return user;
-        }
     }
 }

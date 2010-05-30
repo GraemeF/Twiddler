@@ -12,14 +12,11 @@ namespace Twiddler.Services
     {
         protected readonly ITwitterClient Client;
         private readonly IRequestLimitStatus _requestLimitStatus;
-        private readonly Factories.TweetFactory _tweetFactory;
 
         protected TweetRequester(ITwitterClient client,
-                                 Factories.TweetFactory tweetFactory,
                                  IRequestLimitStatus requestLimitStatus)
         {
             Client = client;
-            _tweetFactory = tweetFactory;
             _requestLimitStatus = requestLimitStatus;
         }
 
@@ -44,8 +41,7 @@ namespace Twiddler.Services
 
             return
                 result.
-                    AsStatuses().
-                    Select(x => _tweetFactory(x));
+                    AsStatuses();
         }
 
         private void UpdateLimit(TwitterRateLimitStatus status)

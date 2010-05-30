@@ -8,9 +8,8 @@ namespace Twiddler.Services
     public class RetweetsOfMeTweetRequester : TweetRequester
     {
         public RetweetsOfMeTweetRequester(ITwitterClient client,
-                                          Factories.TweetFactory tweetFactory,
                                           IRequestLimitStatus requestLimitStatus) :
-                                              base(client, tweetFactory, requestLimitStatus)
+                                              base(client, requestLimitStatus)
         {
         }
 

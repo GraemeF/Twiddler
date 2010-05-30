@@ -18,8 +18,6 @@ namespace Twiddler
         {
             var builder = new ContainerBuilder();
 
-            builder.RegisterInstance<Factories.TweetFactory>(Factories.CreateTweetFromTwitterStatus);
-
             return builder;
         }
 
