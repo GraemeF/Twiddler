@@ -121,6 +121,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Views\LinkView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\LoadingTweetView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -176,6 +180,9 @@
     <Compile Include="Services\RequestLimitStatus.cs" />
     <Compile Include="Services\TweetRequester.cs" />
     <Compile Include="Services\UserTimelineTweetRequester.cs" />
+    <Compile Include="Views\LinkView.xaml.cs">
+      <DependentUpon>LinkView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\RequestMeterView.xaml.cs">
       <DependentUpon>RequestMeterView.xaml</DependentUpon>
     </Compile>

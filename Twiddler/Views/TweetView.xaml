@@ -1,6 +1,7 @@
 ﻿<UserControl x:Class="Twiddler.Views.TweetView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:cal="clr-namespace:Caliburn.PresentationFramework.Views;assembly=Caliburn.PresentationFramework">
 	<Border BorderThickness="4"
 	        CornerRadius="4"
 	        BorderBrush="#FF6C99CE"
@@ -12,29 +13,40 @@
 				       Height="50"
 				       HorizontalAlignment="Left" />
 			</StackPanel>
-			<DockPanel Margin="4">
-				<DockPanel DockPanel.Dock="Bottom">
-					<TextBlock Text="{Binding CreatedDate}"
-					           FontStyle="Italic"
-					           TextAlignment="Right"
-                               VerticalAlignment="Bottom"
-					           FontSize="8"
-					           DockPanel.Dock="Right" />
-					<TextBlock Text="{Binding User.Name}"
-					           DockPanel.Dock="Left"
-					           HorizontalAlignment="Left"
-					           FontWeight="Bold" />
-					<TextBlock Text="{Binding User.FollowersCount}"
-					           Margin="2,0,0,0"
-					           DockPanel.Dock="Left"
-					           HorizontalAlignment="Left"
-					           FontSize="10"
-					           FontStyle="Italic" />
+			<DockPanel>
+				<ItemsControl ItemsSource="{Binding Screens}"
+				              DockPanel.Dock="Right">
+					<ItemsControl.ItemTemplate>
+						<DataTemplate>
+							<ContentControl cal:View.Model="{Binding}"
+							                Margin="2" />
+						</DataTemplate>
+					</ItemsControl.ItemTemplate>
+				</ItemsControl>
+				<DockPanel Margin="4">
+					<DockPanel DockPanel.Dock="Bottom">
+						<TextBlock Text="{Binding CreatedDate}"
+						           FontStyle="Italic"
+						           TextAlignment="Right"
+						           VerticalAlignment="Bottom"
+						           FontSize="8"
+						           DockPanel.Dock="Right" />
+						<TextBlock Text="{Binding User.Name}"
+						           DockPanel.Dock="Left"
+						           HorizontalAlignment="Left"
+						           FontWeight="Bold" />
+						<TextBlock Text="{Binding User.FollowersCount}"
+						           Margin="2,0,0,0"
+						           DockPanel.Dock="Left"
+						           HorizontalAlignment="Left"
+						           FontSize="10"
+						           FontStyle="Italic" />
+					</DockPanel>
+					<TextBlock Text="{Binding Status}"
+					           MaxWidth="300"
+					           TextWrapping="Wrap"
+					           TextAlignment="Justify" />
 				</DockPanel>
-				<TextBlock Text="{Binding Status}"
-				           MaxWidth="300"
-				           TextWrapping="Wrap"
-				           TextAlignment="Justify" />
 			</DockPanel>
 		</StackPanel>
 	</Border>

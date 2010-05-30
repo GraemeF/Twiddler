@@ -60,7 +60,7 @@ namespace Twiddler.Screens
         private ILinkScreen CreateInitializedLink(Uri uri)
         {
             ILinkScreen linkScreen = _linkScreenFactory(uri);
-            linkScreen.Initialize();
+            this.OpenScreen(linkScreen);
 
             return linkScreen;
         }
