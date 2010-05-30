@@ -1,14 +1,15 @@
-﻿using TweetSharp.Twitter.Fluent;
+﻿using System;
 using TweetSharp.Twitter.Model;
 using Twiddler.Models;
 using Twiddler.Screens.Interfaces;
-using Twiddler.Services.Interfaces;
 
 namespace Twiddler
 {
     public static class Factories
     {
         #region Delegates
+
+        public delegate ILinkScreen LinkScreenFactory(Uri uri);
 
         public delegate ILoadingTweetScreen LoadingTweetScreenFactory(TweetId id);
 

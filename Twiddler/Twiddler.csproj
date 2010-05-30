@@ -160,7 +160,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Models\Extensions.cs" />
+    <Compile Include="Screens\Interfaces\ILinkScreen.cs" />
     <Compile Include="Screens\Interfaces\IRequestMeterScreen.cs" />
+    <Compile Include="Screens\LinkScreen.cs" />
     <Compile Include="Services\Clock.cs" />
     <Compile Include="Services\FriendsTimelineTweetRequester.cs" />
     <Compile Include="Services\HomeTimelineTweetRequester.cs" />

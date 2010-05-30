@@ -86,6 +86,7 @@
     <Compile Include="Commands\AuthorizeCommandTests.cs" />
     <Compile Include="Commands\DeauthorizeCommandTests.cs" />
     <Compile Include="Models\TimelineTests.cs" />
+    <Compile Include="Screens\LinkScreenTests.cs" />
     <Compile Include="Screens\LoadingTweetScreenTests.cs" />
     <Compile Include="Screens\RequestMeterTests.cs" />
     <Compile Include="Services\RequestConductorTests.cs" />
