@@ -7,6 +7,7 @@ using Twiddler.Services.Interfaces;
 namespace Twiddler.Services
 {
     [PerRequest(typeof (ICredentialsStore))]
+    [NoCoverage]
     public class SettingsCredentialsStore : ICredentialsStore
     {
         #region ICredentialsStore Members
