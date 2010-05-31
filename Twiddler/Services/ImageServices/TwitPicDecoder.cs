@@ -9,8 +9,8 @@ namespace Twiddler.Services.ImageServices
     [PerRequest("twitpic.com", typeof (IImageUriDecoder))]
     public class TwitPicDecoder : IImageUriDecoder
     {
-        private static readonly Uri linkBase = new Uri("http://twitpic.com/");
-        private static readonly Uri thumbBase = new Uri(linkBase, "show/mini/");
+        private static readonly Uri LinkBase = new Uri("http://twitpic.com/");
+        private static readonly Uri ThumbBase = new Uri(LinkBase, "show/mini/");
 
         #region IImageUriDecoder Members
 
@@ -26,9 +26,9 @@ namespace Twiddler.Services.ImageServices
 
             return new ImageLocations
                        {
-                           Link = new Uri(linkBase, imageId),
+                           Link = new Uri(LinkBase, imageId),
                            FullSize = null,
-                           Thumbnail = new Uri(thumbBase, imageId)
+                           Thumbnail = new Uri(ThumbBase, imageId)
                        };
         }
 

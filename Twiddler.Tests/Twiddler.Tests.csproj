@@ -106,6 +106,7 @@
     <Compile Include="Screens\RequestMeterTests.cs" />
     <Compile Include="Services\ClockTests.cs" />
     <Compile Include="Services\ImageServices\TwitPicDecoderTests.cs" />
+    <Compile Include="Services\ImageServices\YFrogDecoderTests.cs" />
     <Compile Include="Services\LinkThumbnailScreenFactoryTests.cs" />
     <Compile Include="Services\RequestConductorTests.cs" />
     <Compile Include="Services\UpdatingTwitterStoreTests.cs" />
