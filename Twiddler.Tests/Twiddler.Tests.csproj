@@ -106,12 +106,14 @@
       <Name>Twiddler</Name>
     </ProjectReference>
   </ItemGroup>
+  <PropertyGroup>
+    <!-- Give the correct path to the library stuff -->
+    <LibraryPath Condition=" '$(LibraryPath)' == '' ">..\Library\</LibraryPath>
+    <ReportsPath Condition=" '$(ReportsPath)' == '' ">..\Reports\</ReportsPath>
+  </PropertyGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
+  <Import Project="$(LibraryPath)\Extensions.targets" />
+  <ItemGroup>
+    <GallioTestedAssembly Include="$(OutDir)Twiddler.exe" />
+  </ItemGroup>
 </Project>

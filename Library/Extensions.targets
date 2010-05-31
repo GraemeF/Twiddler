@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+	<PropertyGroup>
+		<ApplicationBuild>$(CCNetLabel)</ApplicationBuild>
+		<ApplicationVersion Condition="'$(ApplicationVersion)'=='' And '$(ApplicationBuild)'==''">1.0.0.0</ApplicationVersion>
+		<SimulatePublish Condition="'$(SimulatePublish)'==''">false</SimulatePublish>
+		<GenerateAssemblyVersion Condition=" '$(GenerateAssemblyVersion)' == '' ">true</GenerateAssemblyVersion>
+		<MSBuildCommunityTasksPath Condition=" '$(MSBuildCommunityTasksPath)' == '' ">MSBuildCommunityTasks</MSBuildCommunityTasksPath>
+	</PropertyGroup>
+
+	<UsingTask TaskName="Tasks.UpdateAssemblyFileVersion"
+			   AssemblyFile="WriteAssemblyFileVersion.dll"/>
+
+	<Import Project="$(MSBuildCommunityTasksPath)\MSBuild.Community.Tasks.Targets"/>
+	<Import Project="UnitTests.targets" />
+	<Import Project="AcceptanceTests.targets" />
+
+	<Target Name="CreateApplicationVersion"
+			Condition="$(ApplicationVersion)=='' And $(ApplicationBuild)!=''">
+
+		<SvnVersion LocalPath=".">
+			<Output TaskParameter="Revision"
+					PropertyName="Revision" />
+		</SvnVersion>
+
+		<Message Text="Revision: $(Revision)" />
+
+		<CreateProperty
+			Value="$(ApplicationBuild).$(Revision)">
+			<Output
+				TaskParameter="Value"
+				PropertyName="ApplicationVersion" />
+		</CreateProperty>
+
+	</Target>
+
+	<Target Name="CreateDummyApplicationVersion">
+
+		<CreateProperty
+			Value="1.0.0.0">
+			<Output
+				TaskParameter="Value"
+				PropertyName="DummyApplicationVersion" />
+		</CreateProperty>
+
+	</Target>
+
+	<Target Name="CleanAssemblyFileVersion"
+			Condition=" $(ApplicationVersion)!='' And $(CleanAssemblyFileVersion)=='true' And Exists('$(IntermediateOutputPath)AssemblyFileVersion.g.cs') ">
+		<Delete Files="$(IntermediateOutputPath)AssemblyFileVersion.g.cs" />
+	</Target>
+
+	<Target Name ="UpdateVersionNumber"
+			Condition="$(ApplicationVersion)!=''"
+			Inputs="$(MSBuildAllProjects);
+                @(Compile);
+                @(ManifestResourceWithNoCulture);
+                $(ApplicationIcon);
+                $(AssemblyOriginatorKeyFile);
+                @(ManifestNonResxWithNoCultureOnDisk);
+                @(CompiledLicenseFile);
+                @(EmbeddedDocumentation);                
+                @(CustomAdditionalCompileInputs)"
+			Outputs="$(IntermediateOutputPath)AssemblyFileVersion.g.cs"
+			DependsOnTargets="UpdateDummyVersionNumber; CreateApplicationVersion; CleanAssemblyFileVersion">
+
+		<UpdateAssemblyFileVersion
+			Version="$(ApplicationVersion)"
+			Filename="$(IntermediateOutputPath)AssemblyFileVersion.g.cs"
+			WriteTimeStamp="false"
+			WriteAssemblyVersion="$(GenerateAssemblyVersion)" />
+	</Target>
+
+	<Target Name ="UpdateDummyVersionNumber"
+			Condition="'$(ApplicationVersion)'=='' And !Exists('$(IntermediateOutputPath)AssemblyFileVersion.g.cs')"
+			Inputs="$(MSBuildAllProjects);
+                @(Compile);
+                @(ManifestResourceWithNoCulture);
+                $(ApplicationIcon);
+                $(AssemblyOriginatorKeyFile);
+                @(ManifestNonResxWithNoCultureOnDisk);
+                @(CompiledLicenseFile);
+                @(EmbeddedDocumentation);                
+                @(CustomAdditionalCompileInputs)"
+			Outputs="$(IntermediateOutputPath)AssemblyFileVersion.g.cs"
+			DependsOnTargets="CreateDummyApplicationVersion; CreateAssemblyFileVersionFiles">
+
+		<UpdateAssemblyFileVersion
+			Version="$(DummyApplicationVersion)"
+			Filename="$(IntermediateOutputPath)AssemblyFileVersion.g.cs"
+			WriteTimeStamp="false"
+			WriteAssemblyVersion="$(GenerateAssemblyVersion)" />
+	</Target>
+
+	<Target Name ="CreateAssemblyFileVersionFiles"
+			Condition="'$(ApplicationVersion)'=='' And !Exists('$(IntermediateOutputPath)AssemblyFileVersion.g.cs')"
+			Inputs="$(MSBuildAllProjects);
+                @(Compile);
+                @(ManifestResourceWithNoCulture);
+                $(ApplicationIcon);
+                $(AssemblyOriginatorKeyFile);
+                @(ManifestNonResxWithNoCultureOnDisk);
+                @(CompiledLicenseFile);
+                @(EmbeddedDocumentation);                
+                @(CustomAdditionalCompileInputs)"
+			Outputs="$(IntermediateOutputPath)AssemblyFileVersion.g.cs"
+			DependsOnTargets="CreateApplicationVersion">
+
+		<WriteLinesToFile
+			File="$(IntermediateOutputPath)AssemblyFileVersion.g.cs"
+			Lines="// This is a generated empty versioning file."
+			Overwrite="true" />
+	</Target>
+
+	<Target Name="IncludeVersionNumber"
+			DependsOnTargets="UpdateDummyVersionNumber; UpdateVersionNumber">
+		<CreateItem
+			Include="$(IntermediateOutputPath)AssemblyFileVersion.g.cs">
+			<Output
+				TaskParameter="Include"
+				ItemName="Compile"/>
+		</CreateItem>
+	</Target>
+
+	<Target Name ="BeforeCompile"
+			DependsOnTargets="IncludeVersionNumber"/>
+
+	<Target Name ="AfterBuild"
+			DependsOnTargets="GenerateUnitTestReports"/>
+
+</Project>

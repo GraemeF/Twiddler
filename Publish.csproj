@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<Project DefaultTargets="FullPublish"
+		 xmlns="http://schemas.microsoft.com/developer/msbuild/2003"
+		 ToolsVersion="3.5">
+	<PropertyGroup>
+		<ApplicationBuild>$(CCNetLabel)</ApplicationBuild>
+		<PublishDir Condition="'$(PublishDir)'==''">Publish</PublishDir>
+		<NCoverExplorerPath Condition="'$(NCoverExplorerPath)'==''">Library\NCoverExplorer\NCoverExplorer.console.exe</NCoverExplorerPath>
+		<SimulatePublish Condition="'$(SimulatePublish)'==''">false</SimulatePublish>
+		<InnerTarget Condition="'$(InnerTarget)'==''">Build</InnerTarget>
+		<LibraryPath>Library\</LibraryPath>
+		<Revision>1244</Revision>
+	</PropertyGroup>
+	<UsingTask TaskName="FormatVersion"
+			   AssemblyFile="$(MSBuildBinPath)\microsoft.build.tasks.dll" />
+	<Target Name="CreateApplicationVersion"
+			Condition="$(ApplicationVersion)=='' And $(ApplicationBuild)!=''">
+		<CreateProperty Value="$(ApplicationBuild).$(Revision)">
+			<Output TaskParameter="Value"
+					PropertyName="ApplicationVersion" />
+		</CreateProperty>
+	</Target>
+	<Target Name="MSBuildSelfExtractingExe"
+			DependsOnTargets="CreateApplicationVersion">
+		<Message Text="Application vesion is $(ApplicationVersion)" />
+		<MSBuild Projects="Twiddler.sln"
+				 Targets="$(InnerTarget)"
+				 Properties="ApplicationVersion=$(ApplicationVersion)"
+				 StopOnFirstFailure="true"
+				 BuildInParallel="true" />
+	</Target>	
+	<Target Name="MergeCodeCoverageReports"
+			DependsOnTargets="MSBuildSelfExtractingExe">
+		<Exec Command='"$(NCoverExplorerPath)" Reports\*.coverage.xml /s:Reports\ncover-fullreport.xml /h:Reports\Coverage\ /r:FullCoverageReport /m:100 /fc /p:"Twiddler"' />
+	</Target>
+	<PropertyGroup>
+		<FullPublishDependsOn>
+			MergeCodeCoverageReports;
+			MSBuildSelfExtractingExe
+		</FullPublishDependsOn>
+	</PropertyGroup>
+	<Target Name="FullPublish"
+			DependsOnTargets="$(FullPublishDependsOn)" />
+</Project>

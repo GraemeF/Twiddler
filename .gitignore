@@ -4,3 +4,4 @@ obj
 *.suo
 Thumbs.db
 _ReSharper.*
+Reports/
