@@ -24,6 +24,7 @@ namespace Twiddler
     ///     }
     /// }
     /// </example>
+    [NoCoverage]
     public static class PropertyHelper
     {
         private static Action GetPropertyChangedAction(PropertyChangedEventHandler handler,

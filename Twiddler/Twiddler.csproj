@@ -163,6 +163,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="NoCoverageAttribute.cs" />
     <Compile Include="Screens\Interfaces\ILinkThumbnailScreen.cs" />
     <Compile Include="Screens\Interfaces\IImageThumbnailScreen.cs" />
     <Compile Include="Screens\ImageThumbnailScreen.cs" />

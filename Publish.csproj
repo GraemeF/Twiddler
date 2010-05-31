@@ -31,7 +31,7 @@
 	</Target>	
 	<Target Name="MergeCodeCoverageReports"
 			DependsOnTargets="MSBuildSelfExtractingExe">
-		<Exec Command='"$(NCoverExplorerPath)" Reports\*.coverage.xml /s:Reports\ncover-fullreport.xml /h:Reports\Coverage\ /r:FullCoverageReport /m:100 /fc /p:"Twiddler"' />
+		<Exec Command='"$(NCoverExplorerPath)" Reports\*.coverage.xml /s:Reports\ncover-fullreport.xml /h:Reports\Coverage\ /r:FullCoverageReport /m:50 /fc /p:"Twiddler"' />
 	</Target>
 	<PropertyGroup>
 		<FullPublishDependsOn>

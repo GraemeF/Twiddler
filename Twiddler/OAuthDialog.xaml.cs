@@ -33,9 +33,7 @@ using Twiddler.Properties;
 
 namespace Twiddler
 {
-    /// <summary>
-    /// Interaction logic for OAuthDialog.xaml
-    /// </summary>
+    [NoCoverage]
     public partial class OAuthDialog
     {
         private readonly string _consumerKey;

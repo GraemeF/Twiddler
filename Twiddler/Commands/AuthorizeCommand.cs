@@ -13,6 +13,7 @@ namespace Twiddler.Commands
 
         #region IAuthorizeCommand Members
 
+        [NoCoverage]
         public override void Execute(object parameter)
         {
             var dlg = new OAuthDialog();
