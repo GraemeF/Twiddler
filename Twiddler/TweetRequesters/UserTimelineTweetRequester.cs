@@ -1,13 +1,14 @@
-using Caliburn.Core.IoC;
+﻿using Caliburn.Core.IoC;
 using TweetSharp.Twitter.Fluent;
+using Twiddler.Services;
 using Twiddler.Services.Interfaces;
 
-namespace Twiddler.Services
+namespace Twiddler.TweetRequesters
 {
-    [PerRequest("Retweets of Me", typeof (ITweetRequester))]
-    public class RetweetsOfMeTweetRequester : TweetRequester
+    [PerRequest("User Timeline", typeof (ITweetRequester))]
+    public class UserTimelineTweetRequester : TweetRequester
     {
-        public RetweetsOfMeTweetRequester(ITwitterClient client,
+        public UserTimelineTweetRequester(ITwitterClient client,
                                           IRequestLimitStatus requestLimitStatus) :
                                               base(client, requestLimitStatus)
         {
@@ -19,7 +20,7 @@ namespace Twiddler.Services
                 Client.
                     MakeRequestFor().
                     Statuses().
-                    RetweetsOfMe();
+                    OnUserTimeline();
         }
     }
 }

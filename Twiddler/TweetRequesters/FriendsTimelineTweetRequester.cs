@@ -1,8 +1,9 @@
 ﻿using Caliburn.Core.IoC;
 using TweetSharp.Twitter.Fluent;
+using Twiddler.Services;
 using Twiddler.Services.Interfaces;
 
-namespace Twiddler.Services
+namespace Twiddler.TweetRequesters
 {
     [PerRequest("Friends Timeline", typeof (ITweetRequester))]
     public class FriendsTimelineTweetRequester : TweetRequester
