@@ -3,10 +3,10 @@ using Caliburn.Core.IoC;
 using Twiddler.Models;
 using Twiddler.Services.Interfaces;
 
-namespace Twiddler.Services
+namespace Twiddler.Services.ImageServices
 {
     [PerRequest("yfrog.com", typeof (IImageUriDecoder))]
-    public class YfrogDecoder : IImageUriDecoder
+    public class YFrogDecoder : IImageUriDecoder
     {
         #region IImageUriDecoder Members
 

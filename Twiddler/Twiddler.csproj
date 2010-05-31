@@ -182,7 +182,7 @@
     <Compile Include="Services\Interfaces\IRequestConductor.cs" />
     <Compile Include="Services\Interfaces\ITweetSink.cs" />
     <Compile Include="Services\ImageServices\TwitPicDecoder.cs" />
-    <Compile Include="Services\YfrogDecoder.cs" />
+    <Compile Include="Services\ImageServices\YFrogDecoder.cs" />
     <Compile Include="Services\LinkThumbnailScreenFactory.cs" />
     <Compile Include="TweetRequesters\MentionsTweetRequester.cs" />
     <Compile Include="Services\RequestConductor.cs" />
