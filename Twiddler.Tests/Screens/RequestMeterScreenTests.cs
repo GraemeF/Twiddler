@@ -10,13 +10,13 @@ using Xunit.Extensions;
 
 namespace Twiddler.Tests.Screens
 {
-    public class RequestMeterTests
+    public class RequestMeterScreenTests
     {
         private static readonly DateTime EndOfPeriod = new DateTime(2000, 1, 1);
         private readonly Mock<IClock> _fakeClock = new Mock<IClock>();
         private readonly Mock<IRequestLimitStatus> _fakeRequestStatus = new Mock<IRequestLimitStatus>();
 
-        public RequestMeterTests()
+        public RequestMeterScreenTests()
         {
             _fakeRequestStatus.SetupAllProperties();
             _fakeRequestStatus.Object.PeriodEndTime = EndOfPeriod;
