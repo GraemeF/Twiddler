@@ -1,7 +1,7 @@
 ﻿using System;
-using System.Diagnostics;
 using Caliburn.Core.IoC;
 using Caliburn.PresentationFramework.Screens;
+using Twiddler.Commands.Interfaces;
 using Twiddler.Models;
 using Twiddler.Screens.Interfaces;
 
@@ -10,20 +10,18 @@ namespace Twiddler.Screens
     [PerRequest(typeof (IImageThumbnailScreen))]
     public class ImageThumbnailScreen : Screen<Uri>, IImageThumbnailScreen
     {
-        public ImageThumbnailScreen(ImageLocations imageLocations)
+        public ImageThumbnailScreen(ImageLocations imageLocations, IOpenLinkCommand openLinkCommand)
         {
+            OpenLinkCommand = openLinkCommand;
             Link = imageLocations.Link;
             Thumbnail = imageLocations.Thumbnail;
             FullSize = imageLocations.FullSize;
         }
 
-        public Uri Link { get; set; }
-        public Uri Thumbnail { get; set; }
-        public Uri FullSize { get; set; }
+        public IOpenLinkCommand OpenLinkCommand { get; private set; }
 
-        public void OpenLink()
-        {
-            Process.Start(Link.ToString(), "");
-        }
+        public Uri Link { get; private set; }
+        public Uri Thumbnail { get; private set; }
+        public Uri FullSize { get; private set; }
     }
 }
