@@ -23,6 +23,7 @@ namespace Twiddler.Tests.Services
             ClientAuthorizationStatusChangesTo(AuthorizationStatus.Authorized);
 
             test.Start(_fakeSink.Object);
+            // TODO: Get rid of Sleep
             Thread.Sleep(1000);
 
             _fakeRequester.Verify(x => x.RequestTweets());
@@ -38,6 +39,7 @@ namespace Twiddler.Tests.Services
             ClientAuthorizationStatusChangesTo(AuthorizationStatus.Authorized);
             GC.KeepAlive(test);
 
+            // TODO: Get rid of Sleep
             Thread.Sleep(1000);
 
             _fakeRequester.Verify(x => x.RequestTweets());
