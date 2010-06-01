@@ -1,4 +1,6 @@
-﻿using Autofac;
+﻿using System.ComponentModel.Composition.Hosting;
+using System.Reflection;
+using Autofac;
 using Caliburn.Autofac;
 using Caliburn.PresentationFramework.ApplicationModel;
 using Microsoft.Practices.ServiceLocation;
@@ -17,6 +19,8 @@ namespace Twiddler
         private ContainerBuilder ConfigureContainer()
         {
             var builder = new ContainerBuilder();
+
+            builder.RegisterInstance(new CompositionContainer(new AssemblyCatalog(Assembly.GetExecutingAssembly())));
 
             return builder;
         }
