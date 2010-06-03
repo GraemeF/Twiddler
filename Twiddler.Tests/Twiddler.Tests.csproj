@@ -123,6 +123,10 @@
     <Compile Include="Services\TwitterClientTests.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Twiddler.Core\Twiddler.Core.csproj">
+      <Project>{159DA135-5F63-455B-A572-A3EBB99ACA4D}</Project>
+      <Name>Twiddler.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Twiddler\Twiddler.csproj">
       <Project>{5DD421AA-A0AE-4052-8E61-B7A4B61ABAD4}</Project>
       <Name>Twiddler</Name>

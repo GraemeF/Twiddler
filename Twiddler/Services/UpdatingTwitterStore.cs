@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using Caliburn.Core.IoC;
 using TweetSharp.Twitter.Model;
+using Twiddler.Core.Models;
+using Twiddler.Core.Services;
 using Twiddler.Models;
 using Twiddler.Services.Interfaces;
 

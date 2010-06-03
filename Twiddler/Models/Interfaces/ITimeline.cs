@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using Twiddler.Core.Models;
 
 namespace Twiddler.Models.Interfaces
 {

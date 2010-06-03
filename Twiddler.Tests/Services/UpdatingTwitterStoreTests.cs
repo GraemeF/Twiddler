@@ -1,6 +1,8 @@
 using System;
 using Moq;
 using TweetSharp.Twitter.Model;
+using Twiddler.Core.Models;
+using Twiddler.Core.Services;
 using Twiddler.Models;
 using Twiddler.Services;
 using Twiddler.Services.Interfaces;

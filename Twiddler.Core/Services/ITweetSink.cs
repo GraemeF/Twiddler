@@ -1,6 +1,6 @@
 ﻿using TweetSharp.Twitter.Model;
 
-namespace Twiddler.Services.Interfaces
+namespace Twiddler.Core.Services
 {
     public interface ITweetSink
     {

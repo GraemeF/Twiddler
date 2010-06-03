@@ -1,4 +1,5 @@
 ﻿using TweetSharp.Twitter.Model;
+using Twiddler.Core.Models;
 using Twiddler.Models;
 using Twiddler.Screens.Interfaces;
 

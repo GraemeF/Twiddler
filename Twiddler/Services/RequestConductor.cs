@@ -6,6 +6,7 @@ using Caliburn.Core.IoC;
 using MvvmFoundation.Wpf;
 using TweetSharp.Extensions;
 using TweetSharp.Twitter.Model;
+using Twiddler.Core.Services;
 using Twiddler.Services.Interfaces;
 
 namespace Twiddler.Services

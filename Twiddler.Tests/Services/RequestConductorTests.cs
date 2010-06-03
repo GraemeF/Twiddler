@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Threading;
 using Moq;
 using TweetSharp.Twitter.Model;
+using Twiddler.Core.Services;
 using Twiddler.Services;
 using Twiddler.Services.Interfaces;
 using Xunit;

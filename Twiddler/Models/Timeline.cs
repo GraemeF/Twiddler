@@ -1,6 +1,7 @@
 using System;
 using System.Collections.ObjectModel;
 using Caliburn.Core.IoC;
+using Twiddler.Core.Models;
 using Twiddler.Models.Interfaces;
 using Twiddler.Services.Interfaces;
 

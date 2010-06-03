@@ -4,7 +4,7 @@ using System.Collections.Specialized;
 using System.Linq;
 using Caliburn.Core.IoC;
 using Caliburn.PresentationFramework.Screens;
-using Twiddler.Models;
+using Twiddler.Core.Models;
 using Twiddler.Models.Interfaces;
 using Twiddler.Screens.Interfaces;
 

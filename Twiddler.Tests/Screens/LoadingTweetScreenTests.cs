@@ -1,6 +1,7 @@
 ﻿using System.Threading;
 using Moq;
 using TweetSharp.Twitter.Model;
+using Twiddler.Core.Models;
 using Twiddler.Models;
 using Twiddler.Screens;
 using Twiddler.Screens.Interfaces;

@@ -1,7 +1,7 @@
 using System;
 using System.Diagnostics;
 
-namespace Twiddler.Models
+namespace Twiddler.Core.Models
 {
     [DebuggerDisplay("Tweet:{_id}")]
     public struct TweetId : IComparable, IComparable<TweetId>

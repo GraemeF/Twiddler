@@ -1,4 +1,5 @@
 using System;
+using Twiddler.Core.Models;
 using Twiddler.Models;
 
 namespace Twiddler.Services.Interfaces

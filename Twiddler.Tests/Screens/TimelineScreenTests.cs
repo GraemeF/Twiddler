@@ -1,5 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using Moq;
+using Twiddler.Core.Models;
 using Twiddler.Models;
 using Twiddler.Models.Interfaces;
 using Twiddler.Screens;

@@ -54,9 +54,25 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Library\Caliburn\Bin\NET-3.5\release\Caliburn.PresentationFramework.dll</HintPath>
     </Reference>
+    <Reference Include="Esent.Interop, Version=1.6.0.0, Culture=neutral, PublicKeyToken=8dd49bbdae3f61af, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Library\RavenDB\Esent.Interop.dll</HintPath>
+    </Reference>
     <Reference Include="Hammock, Version=1.0.0.0, Culture=neutral, PublicKeyToken=c148cfba29ed1a4d, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Library\TweetSharp\Hammock.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.NRefactory, Version=3.0.0.3800, Culture=neutral, PublicKeyToken=efe927acf176eea2, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Library\RavenDB\ICSharpCode.NRefactory.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Library\RavenDB\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Lucene.Net, Version=2.9.2.1, Culture=neutral, PublicKeyToken=02f879aa45933051, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Library\RavenDB\Lucene.Net.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -65,6 +81,17 @@
     <Reference Include="MvvmFoundation.Wpf, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Library\MvvmFoundation\MvvmFoundation.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=3.5.0.0, Culture=neutral, PublicKeyToken=b9a188c8922137c6, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Library\RavenDB\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Raven.Client">
+      <HintPath>..\Library\RavenDB\Raven.Client.dll</HintPath>
+    </Reference>
+    <Reference Include="Raven.Database, Version=1.0.0.0, Culture=neutral, PublicKeyToken=37f41c7f99471593, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Library\RavenDB\Raven.Database.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
@@ -173,7 +200,6 @@
     <Compile Include="Models\ImageLocations.cs" />
     <Compile Include="Services\Interfaces\IImageUriDecoder.cs" />
     <Compile Include="Services\Interfaces\ILinkThumbnailScreenFactory.cs" />
-    <Compile Include="Models\Extensions.cs" />
     <Compile Include="Screens\Interfaces\ILinkScreen.cs" />
     <Compile Include="Screens\Interfaces\IRequestMeterScreen.cs" />
     <Compile Include="Services\Clock.cs" />
@@ -183,7 +209,6 @@
     <Compile Include="Services\Interfaces\IRequestLimitStatus.cs" />
     <Compile Include="Screens\RequestMeterScreen.cs" />
     <Compile Include="Services\Interfaces\IRequestConductor.cs" />
-    <Compile Include="Services\Interfaces\ITweetSink.cs" />
     <Compile Include="Services\ImageServices\TwitPicDecoder.cs" />
     <Compile Include="Services\ImageServices\YFrogDecoder.cs" />
     <Compile Include="Services\LinkThumbnailScreenFactory.cs" />
@@ -213,9 +238,6 @@
     <Compile Include="Screens\LoadingTweetScreen.cs" />
     <Compile Include="Services\Interfaces\IUpdatingTweetStore.cs" />
     <Compile Include="Services\MemoryTweetStore.cs" />
-    <Compile Include="Services\Interfaces\ITweetStore.cs" />
-    <Compile Include="Models\TweetId.cs" />
-    <Compile Include="Models\UserId.cs" />
     <Compile Include="PropertyHelper.cs" />
     <Compile Include="Commands\Interfaces\IDeauthorizeCommand.cs" />
     <Compile Include="Services\Interfaces\ICredentialsStore.cs" />
@@ -279,6 +301,16 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Twiddler.Core\Twiddler.Core.csproj">
+      <Project>{159DA135-5F63-455B-A572-A3EBB99ACA4D}</Project>
+      <Name>Twiddler.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Twiddler.TwitterStore\Twiddler.TwitterStore.csproj">
+      <Project>{624CE557-4EDF-47EE-835B-3CB1C6290FEF}</Project>
+      <Name>Twiddler.TwitterStore</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

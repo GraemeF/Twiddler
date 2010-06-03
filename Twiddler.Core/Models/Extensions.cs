@@ -1,6 +1,6 @@
 ﻿using TweetSharp.Twitter.Model;
 
-namespace Twiddler.Models
+namespace Twiddler.Core.Models
 {
     public static class Extensions
     {
