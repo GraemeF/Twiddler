@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using Caliburn.Core.IoC;
 using Caliburn.PresentationFramework.Screens;
@@ -36,13 +37,28 @@ namespace Twiddler.Screens
             OpenScreen(_placeholderScreen, delegate { });
 
             Observable.
-                Start(() => _store.GetTweet(Id)).
+                Start(() => GetTweet()).
                 Subscribe(PopulateWithTweet);
+        }
+
+        private TwitterStatus GetTweet()
+        {
+            try
+            {
+                return _store.GetTweet(Id);
+            }
+            catch (KeyNotFoundException)
+            {
+                return null;
+            }
         }
 
         private void PopulateWithTweet(TwitterStatus tweet)
         {
-            OpenScreen(_tweetScreenFactory(tweet), delegate { });
+            if (tweet != null)
+                OpenScreen(_tweetScreenFactory(tweet), delegate { });
+            else
+                this.ShutdownActiveScreen();
         }
     }
 }

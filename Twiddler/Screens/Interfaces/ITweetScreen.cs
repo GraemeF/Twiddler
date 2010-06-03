@@ -2,7 +2,7 @@
 
 namespace Twiddler.Screens.Interfaces
 {
-    public interface ITweetScreen : IScreenConductor
+    public interface ITweetScreen : IScreen
     {
     }
 }
