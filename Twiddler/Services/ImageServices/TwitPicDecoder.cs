@@ -1,12 +1,12 @@
 ﻿using System;
+using System.ComponentModel.Composition;
 using System.Linq;
-using Caliburn.Core.IoC;
 using Twiddler.Models;
 using Twiddler.Services.Interfaces;
 
 namespace Twiddler.Services.ImageServices
 {
-    [PerRequest("twitpic.com", typeof (IImageUriDecoder))]
+    [Export(typeof (IImageUriDecoder))]
     public class TwitPicDecoder : IImageUriDecoder
     {
         private static readonly Uri LinkBase = new Uri("http://twitpic.com/");

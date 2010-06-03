@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.Composition;
+using System.ComponentModel.Composition.Hosting;
 using System.Linq;
 using Caliburn.Core.IoC;
 using Twiddler.Screens.Interfaces;
@@ -11,20 +13,23 @@ namespace Twiddler.Services
     public class LinkThumbnailScreenFactory : ILinkThumbnailScreenFactory
     {
         private readonly Factories.ImageThumbnailScreenFactory _imageThumbnailScreenFactory;
-        private readonly IEnumerable<IImageUriDecoder> _imageUriDecoders;
 
-        public LinkThumbnailScreenFactory(IEnumerable<IImageUriDecoder> imageUriDecoders,
+        public LinkThumbnailScreenFactory(CompositionContainer compositionContainer,
                                           Factories.ImageThumbnailScreenFactory imageThumbnailScreenFactory)
         {
-            _imageUriDecoders = imageUriDecoders;
             _imageThumbnailScreenFactory = imageThumbnailScreenFactory;
+
+            compositionContainer.ComposeParts(this);
         }
+
+        [ImportMany(typeof (IImageUriDecoder))]
+        private IEnumerable<IImageUriDecoder> ImageUriDecoders { get; set; }
 
         #region ILinkThumbnailScreenFactory Members
 
         public ILinkThumbnailScreen CreateScreenForLink(Uri url)
         {
-            IImageUriDecoder decoder = _imageUriDecoders.FirstOrDefault(x => x.CanGetImageLocations(url));
+            IImageUriDecoder decoder = ImageUriDecoders.FirstOrDefault(x => x.CanGetImageLocations(url));
 
             return decoder != null
                        ? _imageThumbnailScreenFactory(decoder.GetImageLocations(url))
