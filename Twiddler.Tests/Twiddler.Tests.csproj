@@ -106,7 +106,7 @@
     <Compile Include="Models\TwitterCredentialsTests.cs" />
     <Compile Include="Screens\ImageThumbnailScreenTests.cs" />
     <Compile Include="Screens\LoadingTweetScreenTests.cs" />
-    <Compile Include="Screens\RequestMeterTests.cs" />
+    <Compile Include="Screens\RequestMeterScreenTests.cs" />
     <Compile Include="Services\ClockTests.cs" />
     <Compile Include="Services\ImageServices\TwitPicDecoderTests.cs" />
     <Compile Include="Services\ImageServices\YFrogDecoderTests.cs" />

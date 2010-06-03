@@ -10,7 +10,7 @@ using Twiddler.Services.Interfaces;
 namespace Twiddler.Screens
 {
     [PerRequest(typeof (IRequestMeterScreen))]
-    public class RequestMeterScreen : Screen, IRequestMeterScreen
+    public class RequestMeterScreen : Screen, IRequestMeterScreen, IDisposable
     {
         private readonly IClock _clock;
         private readonly IObservable<long> _elapsedSeconds = Observable.Interval(1.Second());
@@ -58,6 +58,15 @@ namespace Twiddler.Screens
 
         public string RemainingTime { get; private set; }
 
+        #region IDisposable Members
+
+        public void Dispose()
+        {
+            Dispose(true);
+        }
+
+        #endregion
+
         private double GetRemainingSeconds()
         {
             return (_limitStatus.PeriodEndTime - _clock.Now).TotalSeconds;
@@ -80,6 +89,11 @@ namespace Twiddler.Screens
             _timePassingSubscription.Dispose();
             _timePassingSubscription = null;
 
+            _observer.
+                UnregisterHandler(x => x.HourlyLimit).
+                UnregisterHandler(x => x.RemainingHits);
+            _observer = null;
+
             base.OnShutdown();
         }
 
@@ -98,6 +112,19 @@ namespace Twiddler.Screens
         {
             NotifyOfPropertyChange(() => HourlyLimit);
             NotifyOfPropertyChange(() => UsedHitsFraction);
+        }
+
+        ~RequestMeterScreen()
+        {
+            Dispose(false);
+            GC.SuppressFinalize(this);
+        }
+
+        private void Dispose(bool disposing)
+        {
+            if (disposing)
+                if (_timePassingSubscription != null)
+                    _timePassingSubscription.Dispose();
         }
     }
 }

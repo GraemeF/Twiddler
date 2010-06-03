@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using TweetSharp.Extensions;
 using TweetSharp.Twitter.Extensions;
 using TweetSharp.Twitter.Fluent;

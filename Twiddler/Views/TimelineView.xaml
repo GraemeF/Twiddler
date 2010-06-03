@@ -6,7 +6,7 @@
 	<UserControl.Resources>
 		<ItemsPanelTemplate x:Key="ItemsWrapPanel">
 			<WrapPanel IsItemsHost="True"
-			           Orientation="Horizontal" />
+			           Orientation="Vertical" />
 		</ItemsPanelTemplate>
 		<CollectionViewSource x:Key="SortedTweets"
 		                      Source="{Binding Screens}">
@@ -18,7 +18,7 @@
 	</UserControl.Resources>
 	<ListBox ItemsSource="{Binding Source={StaticResource SortedTweets}}"
 	         ItemsPanel="{DynamicResource ItemsWrapPanel}"
-	         ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+	         ScrollViewer.VerticalScrollBarVisibility="Disabled">
 		<ListBox.ItemTemplate>
 			<DataTemplate>
 				<ContentControl cal:View.Model="{Binding}"
