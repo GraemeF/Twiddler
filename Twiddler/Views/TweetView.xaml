@@ -2,52 +2,51 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:cal="clr-namespace:Caliburn.PresentationFramework.Views;assembly=Caliburn.PresentationFramework">
-	<Border BorderThickness="4"
+    <Border BorderThickness="4"
 	        CornerRadius="4"
 	        BorderBrush="#FF6C99CE"
 	        Background="#FFCEE6FF">
-		<StackPanel Orientation="Horizontal">
-			<StackPanel Margin="4">
-				<Image Source="{Binding User.ProfileImageUrl}"
+        <DockPanel>
+            <Image DockPanel.Dock="Left"
+                    Source="{Binding User.ProfileImageUrl}"
 				       Width="50"
 				       Height="50"
+                       Margin="4"
 				       HorizontalAlignment="Left" />
-			</StackPanel>
-			<DockPanel>
-				<ItemsControl ItemsSource="{Binding Screens}"
+            <DockPanel>
+                <ItemsControl ItemsSource="{Binding Screens}"
 				              DockPanel.Dock="Right">
-					<ItemsControl.ItemTemplate>
-						<DataTemplate>
-							<ContentControl cal:View.Model="{Binding}"
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <ContentControl cal:View.Model="{Binding}"
 							                Margin="2" />
-						</DataTemplate>
-					</ItemsControl.ItemTemplate>
-				</ItemsControl>
-				<DockPanel Margin="4">
-					<DockPanel DockPanel.Dock="Bottom">
-						<TextBlock Text="{Binding CreatedDate}"
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+                <DockPanel Margin="4">
+                    <DockPanel DockPanel.Dock="Bottom">
+                        <TextBlock Text="{Binding CreatedDate}"
 						           FontStyle="Italic"
 						           TextAlignment="Right"
 						           VerticalAlignment="Bottom"
 						           FontSize="8"
 						           DockPanel.Dock="Right" />
-						<TextBlock Text="{Binding User.Name}"
+                        <TextBlock Text="{Binding User.Name}"
 						           DockPanel.Dock="Left"
 						           HorizontalAlignment="Left"
 						           FontWeight="Bold" />
-						<TextBlock Text="{Binding User.FollowersCount}"
+                        <TextBlock Text="{Binding User.FollowersCount}"
 						           Margin="2,0,0,0"
 						           DockPanel.Dock="Left"
 						           HorizontalAlignment="Left"
 						           FontSize="10"
 						           FontStyle="Italic" />
-					</DockPanel>
-					<TextBlock Text="{Binding Status}"
-					           MaxWidth="300"
-					           TextWrapping="Wrap"
+                    </DockPanel>
+                    <TextBlock Text="{Binding Status}"
+					           TextWrapping="Wrap" HorizontalAlignment="Left"
 					           TextAlignment="Justify" />
-				</DockPanel>
-			</DockPanel>
-		</StackPanel>
-	</Border>
+                </DockPanel>
+            </DockPanel>
+        </DockPanel>
+    </Border>
 </UserControl>

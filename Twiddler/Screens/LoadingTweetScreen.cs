@@ -10,13 +10,18 @@ using Twiddler.Services.Interfaces;
 namespace Twiddler.Screens
 {
     [PerRequest(typeof (ILoadingTweetScreen))]
-    public class LoadingTweetScreen : ScreenConductor<ITweetScreen>, ILoadingTweetScreen
+    public class LoadingTweetScreen : ScreenConductor<IScreen>, ILoadingTweetScreen
     {
+        private readonly ITweetPlaceholderScreen _placeholderScreen;
         private readonly IUpdatingTweetStore _store;
         private readonly Factories.TweetScreenFactory _tweetScreenFactory;
 
-        public LoadingTweetScreen(IUpdatingTweetStore store, TweetId id, Factories.TweetScreenFactory tweetScreenFactory)
+        public LoadingTweetScreen(ITweetPlaceholderScreen placeholderScreen,
+                                  IUpdatingTweetStore store,
+                                  TweetId id,
+                                  Factories.TweetScreenFactory tweetScreenFactory)
         {
+            _placeholderScreen = placeholderScreen;
             _store = store;
             Id = id;
             _tweetScreenFactory = tweetScreenFactory;
@@ -27,6 +32,8 @@ namespace Twiddler.Screens
         protected override void OnInitialize()
         {
             base.OnInitialize();
+
+            OpenScreen(_placeholderScreen, delegate { });
 
             Observable.
                 Start(() => _store.GetTweet(Id)).
