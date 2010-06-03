@@ -1,3 +1,4 @@
+using System.Linq;
 using Caliburn.Core.IoC;
 using Caliburn.PresentationFramework.Screens;
 using MvvmFoundation.Wpf;
@@ -41,7 +42,7 @@ namespace Twiddler.Screens
                 RegisterHandler(x => x.AuthorizationStatus,
                                 y => NotifyOfPropertyChange(() => Authorization));
 
-            _client.CheckAuthorization();
+            Observable.Start(_client.CheckAuthorization);
         }
     }
 }

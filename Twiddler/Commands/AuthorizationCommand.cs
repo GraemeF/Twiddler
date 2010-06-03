@@ -7,8 +7,8 @@ namespace Twiddler.Commands
 {
     public abstract class AuthorizationCommand : ICommand
     {
-        private readonly AuthorizationStatus _executableStatus;
         protected readonly ITwitterClient Client;
+        private readonly AuthorizationStatus _executableStatus;
         private PropertyObserver<ITwitterClient> _observer;
 
         protected AuthorizationCommand(ITwitterClient client, AuthorizationStatus executableStatus)
@@ -18,7 +18,7 @@ namespace Twiddler.Commands
 
             _observer = new PropertyObserver<ITwitterClient>(Client).
                 RegisterHandler(x => x.AuthorizationStatus,
-                                y => CanExecuteChanged(this, EventArgs.Empty));
+                                y => OnCanExecuteChanged());
         }
 
         #region ICommand Members
@@ -33,5 +33,10 @@ namespace Twiddler.Commands
         public event EventHandler CanExecuteChanged = delegate { };
 
         #endregion
+
+        private void OnCanExecuteChanged()
+        {
+            Caliburn.PresentationFramework.Invocation.Execute.OnUIThread(() => CanExecuteChanged(this, EventArgs.Empty));
+        }
     }
 }
