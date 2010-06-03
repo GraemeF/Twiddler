@@ -24,6 +24,19 @@ namespace Twiddler.Tests.Screens
         }
 
         [Fact]
+        public void Shutdown__UnsubscribesFromRequestStatusChanges()
+        {
+            RequestMeterScreen test = BuildDefaultTestSubject();
+
+            test.Initialize();
+            test.Shutdown();
+
+            test.PropertyChanged += (sender, args) => Assert.True(false);
+
+            PropertyChangesOnRequestStatus("RemainingHits");
+        }
+
+        [Fact]
         public void GettingHourlyLimit__GetsHourlyLimitFromLimitStatus()
         {
             RequestMeterScreen test = BuildDefaultTestSubject();
