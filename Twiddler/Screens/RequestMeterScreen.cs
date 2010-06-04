@@ -52,11 +52,20 @@ namespace Twiddler.Screens
                 return
                     Math.Max(0f,
                              Math.Min(1f,
-                                      1f - (float) (GetRemainingSeconds()/_limitStatus.PeriodDuration.TotalSeconds)));
+                                      1f - (float) (GetRemainingTime().TotalSeconds/
+                                                    _limitStatus.PeriodDuration.TotalSeconds)));
             }
         }
 
-        public string RemainingTime { get; private set; }
+        public string RemainingTime
+        {
+            get { return FormatTimeSpan(GetRemainingTime()); }
+        }
+
+        public string PeriodDuration
+        {
+            get { return FormatTimeSpan(_limitStatus.PeriodDuration); }
+        }
 
         #region IDisposable Members
 
@@ -67,9 +76,14 @@ namespace Twiddler.Screens
 
         #endregion
 
-        private double GetRemainingSeconds()
+        private string FormatTimeSpan(TimeSpan timeSpan)
         {
-            return (_limitStatus.PeriodEndTime - _clock.Now).TotalSeconds;
+            return string.Concat((int) Math.Ceiling(timeSpan.TotalMinutes), "m");
+        }
+
+        private TimeSpan GetRemainingTime()
+        {
+            return _limitStatus.PeriodEndTime - _clock.Now;
         }
 
         protected override void OnInitialize()
@@ -81,7 +95,38 @@ namespace Twiddler.Screens
                     RegisterHandler(x => x.HourlyLimit, y => HourlyLimitChanged()).
                     RegisterHandler(x => x.RemainingHits, y => RemainingHitsChanged());
 
+            UpdateHourlyLimit();
+            UpdateRemainingTime();
+            UpdateRemainingHits();
+            UpdatePeriodDuration();
+
             _timePassingSubscription = _elapsedSeconds.Subscribe(x => TimePassed());
+            TimePassed();
+        }
+
+        private void UpdatePeriodDuration()
+        {
+            NotifyOfPropertyChange(() => RemainingTime);
+            NotifyOfPropertyChange(() => UsedTimeFraction);
+        }
+
+        private void UpdateRemainingHits()
+        {
+            NotifyOfPropertyChange(() => RemainingHits);
+            NotifyOfPropertyChange(() => UsedHitsFraction);
+        }
+
+        private void UpdateRemainingTime()
+        {
+            NotifyOfPropertyChange(() => RemainingTime);
+            NotifyOfPropertyChange(() => UsedTimeFraction);
+        }
+
+        private void UpdateHourlyLimit()
+        {
+            NotifyOfPropertyChange(() => HourlyLimit);
+            NotifyOfPropertyChange(() => RemainingHits);
+            NotifyOfPropertyChange(() => UsedHitsFraction);
         }
 
         protected override void OnShutdown()
@@ -99,19 +144,17 @@ namespace Twiddler.Screens
 
         private void TimePassed()
         {
-            NotifyOfPropertyChange(() => UsedTimeFraction);
+            UpdateRemainingTime();
         }
 
         private void RemainingHitsChanged()
         {
-            NotifyOfPropertyChange(() => RemainingHits);
-            NotifyOfPropertyChange(() => UsedHitsFraction);
+            UpdateRemainingHits();
         }
 
         private void HourlyLimitChanged()
         {
-            NotifyOfPropertyChange(() => HourlyLimit);
-            NotifyOfPropertyChange(() => UsedHitsFraction);
+            UpdateHourlyLimit();
         }
 
         ~RequestMeterScreen()

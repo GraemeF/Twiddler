@@ -48,6 +48,31 @@ namespace Twiddler.Tests.Screens
         }
 
         [Fact]
+        public void GettingPeriodDuration__GetsFormattedPeriodDurationFromLimitStatus()
+        {
+            TimeSpan duration = 1.Hour() + 23.Minutes();
+            _fakeRequestStatus.
+                Setup(x => x.PeriodDuration).
+                Returns(duration);
+
+            RequestMeterScreen test = BuildDefaultTestSubject();
+            test.Initialize();
+
+            Assert.Equal("83m", test.PeriodDuration);
+        }
+
+        [Fact]
+        public void GettingRemainingTime__GetsFormattedRemainingTimeFromLimitStatus()
+        {
+            TimeLeftInPeriodIs(4.Minutes() + 11.Seconds());
+
+            RequestMeterScreen test = BuildDefaultTestSubject();
+            test.Initialize();
+
+            Assert.Equal("5m", test.RemainingTime);
+        }
+
+        [Fact]
         public void GettingRemainingHits__GetsRemainingHitsFromLimitStatus()
         {
             RequestMeterScreen test = BuildDefaultTestSubject();
@@ -108,11 +133,16 @@ namespace Twiddler.Tests.Screens
         {
             RequestMeterScreen test = BuildDefaultTestSubject();
 
-            _fakeClock.
-                Setup(x => x.Now).
-                Returns(EndOfPeriod - remainingMinutes.Minutes());
+            TimeLeftInPeriodIs(remainingMinutes.Minutes());
 
             Assert.Equal(fraction, test.UsedTimeFraction);
+        }
+
+        private void TimeLeftInPeriodIs(TimeSpan remainingTime)
+        {
+            _fakeClock.
+                Setup(x => x.Now).
+                Returns(EndOfPeriod - remainingTime);
         }
 
         private void PropertyChangesOnRequestStatus(string propertyName)
