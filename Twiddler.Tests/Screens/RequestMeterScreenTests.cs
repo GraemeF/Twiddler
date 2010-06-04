@@ -73,6 +73,17 @@ namespace Twiddler.Tests.Screens
         }
 
         [Fact]
+        public void GettingRemainingTime_WhenClockHasPassedTheEndTime_ReturnsZero()
+        {
+            TimeLeftInPeriodIs(-4.Minutes());
+
+            RequestMeterScreen test = BuildDefaultTestSubject();
+            test.Initialize();
+
+            Assert.Equal("0m", test.RemainingTime);
+        }
+
+        [Fact]
         public void GettingRemainingHits__GetsRemainingHitsFromLimitStatus()
         {
             RequestMeterScreen test = BuildDefaultTestSubject();

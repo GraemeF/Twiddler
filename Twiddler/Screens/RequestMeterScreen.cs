@@ -83,7 +83,10 @@ namespace Twiddler.Screens
 
         private TimeSpan GetRemainingTime()
         {
-            return _limitStatus.PeriodEndTime - _clock.Now;
+            TimeSpan remainingTime = _limitStatus.PeriodEndTime - _clock.Now;
+            return remainingTime < TimeSpan.Zero
+                       ? TimeSpan.Zero
+                       : remainingTime;
         }
 
         protected override void OnInitialize()
