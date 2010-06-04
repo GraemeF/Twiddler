@@ -5,8 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d">
     <Border>
-        <Button Width="50"
-                Height="50" 
+        <Button MaxWidth="50"
+                MaxHeight="50" 
                 Command="{Binding OpenLinkCommand}" 
                 CommandParameter="{Binding Link}">
             <Image Source="{Binding Thumbnail}" />
