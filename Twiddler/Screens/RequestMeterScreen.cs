@@ -95,22 +95,23 @@ namespace Twiddler.Screens
 
             _observer =
                 new PropertyObserver<IRequestLimitStatus>(_limitStatus).
-                    RegisterHandler(x => x.HourlyLimit, y => HourlyLimitChanged()).
-                    RegisterHandler(x => x.RemainingHits, y => RemainingHitsChanged());
+                    RegisterHandler(x => x.PeriodDuration, y => UpdatePeriodDuration()).
+                    RegisterHandler(x => x.HourlyLimit, y => UpdateHourlyLimit()).
+                    RegisterHandler(x => x.RemainingHits, y => UpdateRemainingHits());
 
             UpdateHourlyLimit();
             UpdateRemainingTime();
             UpdateRemainingHits();
             UpdatePeriodDuration();
 
-            _timePassingSubscription = _elapsedSeconds.Subscribe(x => TimePassed());
-            TimePassed();
+            _timePassingSubscription = _elapsedSeconds.Subscribe(x => UpdateRemainingTime());
         }
 
         private void UpdatePeriodDuration()
         {
             NotifyOfPropertyChange(() => RemainingTime);
             NotifyOfPropertyChange(() => UsedTimeFraction);
+            NotifyOfPropertyChange(() => PeriodDuration);
         }
 
         private void UpdateRemainingHits()
@@ -143,21 +144,6 @@ namespace Twiddler.Screens
             _observer = null;
 
             base.OnShutdown();
-        }
-
-        private void TimePassed()
-        {
-            UpdateRemainingTime();
-        }
-
-        private void RemainingHitsChanged()
-        {
-            UpdateRemainingHits();
-        }
-
-        private void HourlyLimitChanged()
-        {
-            UpdateHourlyLimit();
         }
 
         ~RequestMeterScreen()
