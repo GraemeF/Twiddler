@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Caliburn.Core.IoC;
 using MvvmFoundation.Wpf;
 using TweetSharp.Extensions;
-using TweetSharp.Twitter.Model;
+using Twiddler.Models;
 using Twiddler.Services.Interfaces;
 
 namespace Twiddler.Services
@@ -74,7 +74,7 @@ namespace Twiddler.Services
 
         private void MakeRequest(ITweetRequester tweetRequester)
         {
-            foreach (TwitterStatus tweet in tweetRequester.RequestTweets())
+            foreach (Tweet tweet in tweetRequester.RequestTweets())
             {
                 _tweetSink.AddTweet(tweet);
             }

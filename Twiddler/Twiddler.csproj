@@ -170,6 +170,8 @@
     </Compile>
     <Compile Include="Commands\Interfaces\IOpenLinkCommand.cs" />
     <Compile Include="Commands\OpenLinkCommand.cs" />
+    <Compile Include="Models\Tweet.cs" />
+    <Compile Include="Models\User.cs" />
     <Compile Include="NoCoverageAttribute.cs" />
     <Compile Include="Screens\Interfaces\ILinkThumbnailScreen.cs" />
     <Compile Include="Screens\Interfaces\IImageThumbnailScreen.cs" />
@@ -179,7 +181,6 @@
     <Compile Include="Screens\TweetPlaceholderScreen.cs" />
     <Compile Include="Services\Interfaces\IImageUriDecoder.cs" />
     <Compile Include="Services\Interfaces\ILinkThumbnailScreenFactory.cs" />
-    <Compile Include="Models\Extensions.cs" />
     <Compile Include="Screens\Interfaces\ILinkScreen.cs" />
     <Compile Include="Screens\Interfaces\IRequestMeterScreen.cs" />
     <Compile Include="Services\Clock.cs" />

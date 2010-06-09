@@ -41,7 +41,7 @@ namespace Twiddler.Screens
                 Subscribe(PopulateWithTweet);
         }
 
-        private TwitterStatus GetTweet()
+        private Tweet GetTweet()
         {
             try
             {
@@ -53,7 +53,7 @@ namespace Twiddler.Screens
             }
         }
 
-        private void PopulateWithTweet(TwitterStatus tweet)
+        private void PopulateWithTweet(Tweet tweet)
         {
             if (tweet != null)
                 OpenScreen(_tweetScreenFactory(tweet), delegate { });

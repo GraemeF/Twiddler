@@ -1,31 +1,31 @@
 ﻿using System;
-using TweetSharp.Twitter.Model;
+using Twiddler.Models;
 
 namespace Twiddler.Tests
 {
     public class New
     {
-        public static TwitterStatus Tweet
+        public static Tweet Tweet
         {
             get
             {
-                return new TwitterStatus
+                return new Tweet
                            {
-                               Text = "Unspecified Status",
-                               Id = 1,
+                               Status = "Unspecified Status",
+                               Id = new TweetId("1"),
                                User = User,
                                CreatedDate = DateTime.Now.AddMinutes(-5.0)
                            };
             }
         }
 
-        public static TwitterUser User
+        public static User User
         {
             get
             {
-                return new TwitterUser
+                return new User
                            {
-                               Id = 2,
+                               Id = new UserId("2"),
                                Name = "Unspecified Name",
                                ProfileImageUrl = "http://unspecified.url/",
                                ScreenName = "Unspecified Screen Name"

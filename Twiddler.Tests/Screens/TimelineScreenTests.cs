@@ -34,7 +34,7 @@ namespace Twiddler.Tests.Screens
             var test = new TimelineScreen(_fakeTimeline.Object, x => mockScreen.Object);
             test.Initialize();
 
-            _tweets.Add(new TweetId(5));
+            _tweets.Add(new TweetId("5"));
 
             Assert.Contains(mockScreen.Object, test.Screens);
             mockScreen.Verify(x => x.Initialize());

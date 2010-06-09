@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using TweetSharp.Twitter.Model;
 using Twiddler.Models;
 using Twiddler.Services;
 using Xunit;
@@ -31,10 +30,10 @@ namespace Twiddler.Tests.Services
         {
             var test = new MemoryTweetStore();
 
-            TwitterStatus tweet = New.Tweet;
+            Tweet tweet = New.Tweet;
             test.AddTweet(tweet);
 
-            Assert.Same(tweet, test.GetTweet(tweet.GetTweetId()));
+            Assert.Same(tweet, test.GetTweet(tweet.Id));
         }
 
         [Fact]
@@ -43,7 +42,7 @@ namespace Twiddler.Tests.Services
             var test = new MemoryTweetStore();
 
             Assert.Throws(typeof (KeyNotFoundException),
-                          () => test.GetTweet(new TweetId(456)));
+                          () => test.GetTweet(new TweetId("456")));
         }
     }
 }

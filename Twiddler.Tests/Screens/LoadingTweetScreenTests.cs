@@ -1,6 +1,5 @@
 ﻿using System.Threading;
 using Moq;
-using TweetSharp.Twitter.Model;
 using Twiddler.Models;
 using Twiddler.Screens;
 using Twiddler.Screens.Interfaces;
@@ -13,7 +12,7 @@ namespace Twiddler.Tests.Screens
     {
         private readonly Mock<IUpdatingTweetStore> _fakeStore = new Mock<IUpdatingTweetStore>();
         private readonly Mock<ITweetPlaceholderScreen> _fakeTweetPlaceholderScreen = new Mock<ITweetPlaceholderScreen>();
-        private readonly TwitterStatus _tweet = New.Tweet;
+        private readonly Tweet _tweet = New.Tweet;
         private Mock<ITweetScreen> _fakeTweetScreen;
 
         public LoadingTweetScreenTests()
@@ -28,7 +27,7 @@ namespace Twiddler.Tests.Screens
         {
             LoadingTweetScreen test = BuildDefaultTestSubject();
 
-            Assert.Equal(_tweet.GetTweetId(), test.Id);
+            Assert.Equal(_tweet.Id, test.Id);
         }
 
         [Fact]
@@ -38,7 +37,7 @@ namespace Twiddler.Tests.Screens
 
             InitializeAndWaitUntilStoreIsAskedForTweet(test);
 
-            _fakeStore.Verify(x => x.GetTweet(_tweet.GetTweetId()));
+            _fakeStore.Verify(x => x.GetTweet(_tweet.Id));
         }
 
         [Fact]
@@ -57,7 +56,7 @@ namespace Twiddler.Tests.Screens
             LoadingTweetScreen test = BuildDefaultTestSubject();
 
             _fakeStore.
-                Setup(x => x.GetTweet(_tweet.GetTweetId())).
+                Setup(x => x.GetTweet(_tweet.Id)).
                 Returns(_tweet);
 
             InitializeAndWaitUntilStoreIsAskedForTweet(test);
@@ -71,7 +70,7 @@ namespace Twiddler.Tests.Screens
             _fakeTweetScreen = new Mock<ITweetScreen>();
             return new LoadingTweetScreen(_fakeTweetPlaceholderScreen.Object,
                                           _fakeStore.Object,
-                                          _tweet.GetTweetId(),
+                                          _tweet.Id,
                                           x => _fakeTweetScreen.Object);
         }
 

@@ -4,9 +4,9 @@ namespace Twiddler.Models
 {
     public struct UserId
     {
-        private readonly int _id;
+        private readonly string _id;
 
-        public UserId(int id)
+        public UserId(string id)
         {
             _id = id;
         }
