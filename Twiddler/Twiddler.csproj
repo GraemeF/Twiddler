@@ -181,6 +181,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Views\TweetPlaceholderView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\TweetView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -198,6 +202,8 @@
     <Compile Include="Screens\Interfaces\IImageThumbnailScreen.cs" />
     <Compile Include="Screens\ImageThumbnailScreen.cs" />
     <Compile Include="Models\ImageLocations.cs" />
+    <Compile Include="Screens\Interfaces\ITweetPlaceholderScreen.cs" />
+    <Compile Include="Screens\TweetPlaceholderScreen.cs" />
     <Compile Include="Services\Interfaces\IImageUriDecoder.cs" />
     <Compile Include="Services\Interfaces\ILinkThumbnailScreenFactory.cs" />
     <Compile Include="Screens\Interfaces\ILinkScreen.cs" />
@@ -285,6 +291,9 @@
     </Compile>
     <Compile Include="Views\TimelineView.xaml.cs">
       <DependentUpon>TimelineView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\TweetPlaceholderView.xaml.cs">
+      <DependentUpon>TweetPlaceholderView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\TweetView.xaml.cs">
       <DependentUpon>TweetView.xaml</DependentUpon>

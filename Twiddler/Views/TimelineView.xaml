@@ -3,27 +3,28 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:cal="clr-namespace:Caliburn.PresentationFramework.Views;assembly=Caliburn.PresentationFramework"
              xmlns:scm="clr-namespace:System.ComponentModel;assembly=WindowsBase">
-	<UserControl.Resources>
-		<ItemsPanelTemplate x:Key="ItemsWrapPanel">
-			<WrapPanel IsItemsHost="True"
-			           Orientation="Horizontal" />
-		</ItemsPanelTemplate>
-		<CollectionViewSource x:Key="SortedTweets"
+    <UserControl.Resources>
+        <ItemsPanelTemplate x:Key="ItemsWrapPanel">
+            <WrapPanel IsItemsHost="True"
+			           Orientation="Vertical" />
+        </ItemsPanelTemplate>
+        <CollectionViewSource x:Key="SortedTweets"
 		                      Source="{Binding Screens}">
-			<CollectionViewSource.SortDescriptions>
-				<scm:SortDescription PropertyName="Id"
+            <CollectionViewSource.SortDescriptions>
+                <scm:SortDescription PropertyName="Id"
 				                     Direction="Descending" />
-			</CollectionViewSource.SortDescriptions>
-		</CollectionViewSource>
-	</UserControl.Resources>
-	<ListBox ItemsSource="{Binding Source={StaticResource SortedTweets}}"
+            </CollectionViewSource.SortDescriptions>
+        </CollectionViewSource>
+    </UserControl.Resources>
+    <ListBox ItemsSource="{Binding Source={StaticResource SortedTweets}}"
 	         ItemsPanel="{DynamicResource ItemsWrapPanel}"
-	         ScrollViewer.HorizontalScrollBarVisibility="Disabled">
-		<ListBox.ItemTemplate>
-			<DataTemplate>
-				<ContentControl cal:View.Model="{Binding}"
+             HorizontalContentAlignment="Stretch"
+	         ScrollViewer.VerticalScrollBarVisibility="Disabled">
+        <ListBox.ItemTemplate>
+            <DataTemplate>
+                <ContentControl cal:View.Model="{Binding}"
 				                Margin="2" />
-			</DataTemplate>
-		</ListBox.ItemTemplate>
-	</ListBox>
+            </DataTemplate>
+        </ListBox.ItemTemplate>
+    </ListBox>
 </UserControl>

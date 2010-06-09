@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using System.Threading;
 using Caliburn.Testability.Extensions;
 using Moq;
 using Twiddler.Commands.Interfaces;
@@ -37,7 +38,8 @@ namespace Twiddler.Tests.Screens
         {
             StatusScreen test = BuildDefaultTestSubject();
             test.Initialize();
-
+            Thread.Sleep(1000);
+            
             _fakeClient.Verify(x => x.CheckAuthorization());
         }
 

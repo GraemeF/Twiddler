@@ -6,13 +6,14 @@
 	        CornerRadius="4"
 	        BorderBrush="#FF6C99CE"
 	        Background="#FFCEE6FF">
-		<StackPanel Orientation="Horizontal">
-			<StackPanel Margin="4">
-				<Image Source="{Binding User.ProfileImageUrl}"
-				       Width="50"
-				       Height="50"
-				       HorizontalAlignment="Left" />
-			</StackPanel>
+        <StackPanel>
+		<DockPanel>
+			<Image DockPanel.Dock="Left"
+			       Source="{Binding User.ProfileImageUrl}"
+			       Width="50"
+			       Height="50"
+			       Margin="4"
+			       HorizontalAlignment="Left" />
 			<DockPanel>
 				<ItemsControl ItemsSource="{Binding Screens}"
 				              DockPanel.Dock="Right">
@@ -43,11 +44,15 @@
 						           FontStyle="Italic" />
 					</DockPanel>
 					<TextBlock Text="{Binding Status}"
-					           MaxWidth="300"
 					           TextWrapping="Wrap"
+					           HorizontalAlignment="Left"
 					           TextAlignment="Justify" />
 				</DockPanel>
-			</DockPanel>
-		</StackPanel>
-	</Border>
+            </DockPanel>
+        </DockPanel>
+            <StackPanel DockPanel.Dock="Bottom">
+                <ContentControl cal:View.Model="{Binding InReplyToTweet}" />
+            </StackPanel>
+        </StackPanel>
+    </Border>
 </UserControl>

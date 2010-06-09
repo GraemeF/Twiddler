@@ -10,17 +10,30 @@ using Xunit.Extensions;
 
 namespace Twiddler.Tests.Screens
 {
-    public class RequestMeterTests
+    public class RequestMeterScreenTests
     {
         private static readonly DateTime EndOfPeriod = new DateTime(2000, 1, 1);
         private readonly Mock<IClock> _fakeClock = new Mock<IClock>();
         private readonly Mock<IRequestLimitStatus> _fakeRequestStatus = new Mock<IRequestLimitStatus>();
 
-        public RequestMeterTests()
+        public RequestMeterScreenTests()
         {
             _fakeRequestStatus.SetupAllProperties();
             _fakeRequestStatus.Object.PeriodEndTime = EndOfPeriod;
             _fakeRequestStatus.Setup(x => x.PeriodDuration).Returns(100.Minutes());
+        }
+
+        [Fact]
+        public void Shutdown__UnsubscribesFromRequestStatusChanges()
+        {
+            RequestMeterScreen test = BuildDefaultTestSubject();
+
+            test.Initialize();
+            test.Shutdown();
+
+            test.PropertyChanged += (sender, args) => Assert.True(false);
+
+            PropertyChangesOnRequestStatus("RemainingHits");
         }
 
         [Fact]
@@ -32,6 +45,42 @@ namespace Twiddler.Tests.Screens
             _fakeRequestStatus.Object.HourlyLimit = hourlyLimit;
 
             Assert.Equal(hourlyLimit, test.HourlyLimit);
+        }
+
+        [Fact]
+        public void GettingPeriodDuration__GetsFormattedPeriodDurationFromLimitStatus()
+        {
+            TimeSpan duration = 1.Hour() + 23.Minutes();
+            _fakeRequestStatus.
+                Setup(x => x.PeriodDuration).
+                Returns(duration);
+
+            RequestMeterScreen test = BuildDefaultTestSubject();
+            test.Initialize();
+
+            Assert.Equal("83m", test.PeriodDuration);
+        }
+
+        [Fact]
+        public void GettingRemainingTime__GetsFormattedRemainingTimeFromLimitStatus()
+        {
+            TimeLeftInPeriodIs(4.Minutes() + 11.Seconds());
+
+            RequestMeterScreen test = BuildDefaultTestSubject();
+            test.Initialize();
+
+            Assert.Equal("5m", test.RemainingTime);
+        }
+
+        [Fact]
+        public void GettingRemainingTime_WhenClockHasPassedTheEndTime_ReturnsZero()
+        {
+            TimeLeftInPeriodIs(-4.Minutes());
+
+            RequestMeterScreen test = BuildDefaultTestSubject();
+            test.Initialize();
+
+            Assert.Equal("0m", test.RemainingTime);
         }
 
         [Fact]
@@ -95,11 +144,16 @@ namespace Twiddler.Tests.Screens
         {
             RequestMeterScreen test = BuildDefaultTestSubject();
 
-            _fakeClock.
-                Setup(x => x.Now).
-                Returns(EndOfPeriod - remainingMinutes.Minutes());
+            TimeLeftInPeriodIs(remainingMinutes.Minutes());
 
             Assert.Equal(fraction, test.UsedTimeFraction);
+        }
+
+        private void TimeLeftInPeriodIs(TimeSpan remainingTime)
+        {
+            _fakeClock.
+                Setup(x => x.Now).
+                Returns(EndOfPeriod - remainingTime);
         }
 
         private void PropertyChangesOnRequestStatus(string propertyName)

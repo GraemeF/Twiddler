@@ -13,8 +13,16 @@ namespace Twiddler.Tests.Screens
     public class LoadingTweetScreenTests
     {
         private readonly Mock<IUpdatingTweetStore> _fakeStore = new Mock<IUpdatingTweetStore>();
+        private readonly Mock<ITweetPlaceholderScreen> _fakeTweetPlaceholderScreen = new Mock<ITweetPlaceholderScreen>();
         private readonly TwitterStatus _tweet = New.Tweet;
         private Mock<ITweetScreen> _fakeTweetScreen;
+
+        public LoadingTweetScreenTests()
+        {
+            _fakeTweetPlaceholderScreen.
+                Setup(x => x.CanShutdown()).
+                Returns(true);
+        }
 
         [Fact]
         public void GettingId__ReturnsTweetId()
@@ -35,6 +43,16 @@ namespace Twiddler.Tests.Screens
         }
 
         [Fact]
+        public void Initialize__OpensPlaceholderScreen()
+        {
+            LoadingTweetScreen test = BuildDefaultTestSubject();
+
+            test.Initialize();
+
+            Assert.Same(_fakeTweetPlaceholderScreen.Object, test.ActiveScreen);
+        }
+
+        [Fact]
         public void Initialize_WhenStoreReturnsTweet_OpensTweetScreen()
         {
             LoadingTweetScreen test = BuildDefaultTestSubject();
@@ -52,7 +70,8 @@ namespace Twiddler.Tests.Screens
         private LoadingTweetScreen BuildDefaultTestSubject()
         {
             _fakeTweetScreen = new Mock<ITweetScreen>();
-            return new LoadingTweetScreen(_fakeStore.Object,
+            return new LoadingTweetScreen(_fakeTweetPlaceholderScreen.Object,
+                                          _fakeStore.Object,
                                           _tweet.GetTweetId(),
                                           x => _fakeTweetScreen.Object);
         }

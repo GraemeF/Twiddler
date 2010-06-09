@@ -26,7 +26,7 @@ namespace Twiddler.Tests.Screens
 
         private TweetScreen BuildDefaultTestSubject()
         {
-            return new TweetScreen(_tweet, _fakeThumbnailFactory.Object);
+            return new TweetScreen(_tweet, _fakeThumbnailFactory.Object, null);
         }
 
         [Fact]
@@ -46,6 +46,29 @@ namespace Twiddler.Tests.Screens
         }
 
         [Fact]
+        public void GettingInReplyToTweet_WhenTheTweetIsNotAReply_IsNull()
+        {
+            TweetScreen test = BuildDefaultTestSubject();
+            test.Initialize();
+
+            Assert.Null(test.InReplyToTweet);
+        }
+
+        [Fact]
+        public void GettingInReplyToTweet_WhenTheTweetIsAReply_IsALoadingTweetScreen()
+        {
+            var mockScreen = new Mock<ILoadingTweetScreen>();
+
+            var test = new TweetScreen(new TwitterStatus
+                                           {InReplyToStatusId = 4},
+                                       _fakeThumbnailFactory.Object,
+                                       x => mockScreen.Object);
+            test.Initialize();
+
+            Assert.Same(mockScreen.Object, test.InReplyToTweet);
+        }
+
+        [Fact]
         public void GettingLinks_WhenTweetContainsALink_ReturnsCollectionWithOpenedLinkScreen()
         {
             _fakeThumbnailFactory.
@@ -55,7 +78,8 @@ namespace Twiddler.Tests.Screens
             var test =
                 new TweetScreen(new TwitterStatus
                                     {Text = "This tweet contains a link to http://link.one.com"},
-                                _fakeThumbnailFactory.Object);
+                                _fakeThumbnailFactory.Object,
+                                null);
             test.Initialize();
 
             Assert.Contains(_fakeThumbnailScreen.Object, test.Links);
