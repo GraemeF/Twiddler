@@ -197,9 +197,6 @@
     </Compile>
     <Compile Include="Commands\Interfaces\IOpenLinkCommand.cs" />
     <Compile Include="Commands\OpenLinkCommand.cs" />
-    <Compile Include="Models\Tweet.cs" />
-    <Compile Include="Models\User.cs" />
-    <Compile Include="NoCoverageAttribute.cs" />
     <Compile Include="Screens\Interfaces\ILinkThumbnailScreen.cs" />
     <Compile Include="Screens\Interfaces\IImageThumbnailScreen.cs" />
     <Compile Include="Screens\ImageThumbnailScreen.cs" />
@@ -246,7 +243,6 @@
     <Compile Include="Screens\LoadingTweetScreen.cs" />
     <Compile Include="Services\Interfaces\IUpdatingTweetStore.cs" />
     <Compile Include="Services\MemoryTweetStore.cs" />
-    <Compile Include="PropertyHelper.cs" />
     <Compile Include="Commands\Interfaces\IDeauthorizeCommand.cs" />
     <Compile Include="Services\Interfaces\ICredentialsStore.cs" />
     <Compile Include="Services\SettingsCredentialsStore.cs" />

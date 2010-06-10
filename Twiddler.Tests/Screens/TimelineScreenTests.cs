@@ -1,7 +1,5 @@
 ﻿using System.Collections.ObjectModel;
 using Moq;
-using Twiddler.Core.Models;
-using Twiddler.Models;
 using Twiddler.Models.Interfaces;
 using Twiddler.Screens;
 using Twiddler.Screens.Interfaces;
@@ -12,7 +10,7 @@ namespace Twiddler.Tests.Screens
     public class TimelineScreenTests
     {
         private readonly Mock<ITimeline> _fakeTimeline = new Mock<ITimeline>();
-        private readonly ObservableCollection<TweetId> _tweets = new ObservableCollection<TweetId>();
+        private readonly ObservableCollection<string> _tweets = new ObservableCollection<string>();
 
         public TimelineScreenTests()
         {
@@ -35,7 +33,7 @@ namespace Twiddler.Tests.Screens
             var test = new TimelineScreen(_fakeTimeline.Object, x => mockScreen.Object);
             test.Initialize();
 
-            _tweets.Add(new TweetId("5"));
+            _tweets.Add("5");
 
             Assert.Contains(mockScreen.Object, test.Screens);
             mockScreen.Verify(x => x.Initialize());

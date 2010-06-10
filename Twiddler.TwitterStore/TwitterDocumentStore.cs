@@ -1,9 +1,7 @@
-﻿using System.Globalization;
-using Caliburn.Core.IoC;
+﻿using Caliburn.Core.IoC;
 using Raven.Client;
-using TweetSharp.Twitter.Model;
-using Twiddler.Core.Models;
 using Twiddler.Core.Services;
+using Twiddler.Models;
 
 namespace Twiddler.TwitterStore
 {
@@ -19,22 +17,22 @@ namespace Twiddler.TwitterStore
 
         #region ITweetStore Members
 
-        public bool AddTweet(TwitterStatus tweet)
+        public bool AddTweet(Tweet tweet)
         {
             using (IDocumentSession session = _documentStore.OpenSession())
             {
-                session.Load<TwitterStatus>(tweet.Id.ToString(CultureInfo.InvariantCulture));
+                session.Load<Tweet>(tweet.Id);
 
                 session.Store(tweet);
             }
             return true;
         }
 
-        public TwitterStatus GetTweet(TweetId id)
+        public Tweet GetTweet(string id)
         {
             using (IDocumentSession session = _documentStore.OpenSession())
             {
-                return session.Load<TwitterStatus>(id.ToString());
+                return session.Load<Tweet>(id);
             }
         }
 

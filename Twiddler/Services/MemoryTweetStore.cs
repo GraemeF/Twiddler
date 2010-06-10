@@ -1,14 +1,13 @@
 using System.Collections.Concurrent;
-using Caliburn.Core.IoC;
+using Twiddler.Core.Services;
 using Twiddler.Models;
-using Twiddler.Services.Interfaces;
 
 namespace Twiddler.Services
 {
     //[Singleton(typeof (ITweetStore))]
     public class MemoryTweetStore : ITweetStore
     {
-        private readonly ConcurrentDictionary<TweetId, Tweet> _tweets = new ConcurrentDictionary<TweetId, Tweet>();
+        private readonly ConcurrentDictionary<string, Tweet> _tweets = new ConcurrentDictionary<string, Tweet>();
 
         #region ITweetStore Members
 
@@ -17,7 +16,7 @@ namespace Twiddler.Services
             return _tweets.TryAdd(tweet.Id, tweet);
         }
 
-        public Tweet GetTweet(TweetId id)
+        public Tweet GetTweet(string id)
         {
             return _tweets[id];
         }

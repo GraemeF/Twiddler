@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using Moq;
-using Twiddler.Core.Models;
 using Twiddler.Models;
 using Twiddler.Services.Interfaces;
 using Xunit;
@@ -10,7 +9,7 @@ namespace Twiddler.Tests.Models
     public class TimelineTests
     {
         private readonly Mock<IUpdatingTweetStore> _stubStore = new Mock<IUpdatingTweetStore>();
-        private readonly Subject<TweetId> _tweets = new Subject<TweetId>();
+        private readonly Subject<string> _tweets = new Subject<string>();
 
         public TimelineTests()
         {
@@ -22,7 +21,7 @@ namespace Twiddler.Tests.Models
         {
             Timeline test = BuildDefaultTestSubject();
 
-            var tweet = new TweetId("5");
+            string tweet = "5";
             _tweets.OnNext(tweet);
 
             Assert.Contains(tweet, test.Tweets);
@@ -39,7 +38,7 @@ namespace Twiddler.Tests.Models
             Timeline test = BuildDefaultTestSubject();
             test.Dispose();
 
-            var tweet = new TweetId("5");
+            string tweet = "5";
             _tweets.OnNext(tweet);
 
             Assert.Empty(test.Tweets);

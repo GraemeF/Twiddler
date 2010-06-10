@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Caliburn.Core.IoC;
+using Twiddler.Core.Services;
 using Twiddler.Models;
 using Twiddler.Services.Interfaces;
 
@@ -11,7 +12,7 @@ namespace Twiddler.Services
     {
         private readonly IRequestConductor _requestConductor;
         private readonly ITweetStore _store;
-        private readonly Subject<TweetId> _tweets = new Subject<TweetId>();
+        private readonly Subject<string> _tweets = new Subject<string>();
 
         public UpdatingTwitterStore(IRequestConductor requestConductor, ITweetStore store)
         {
@@ -23,7 +24,7 @@ namespace Twiddler.Services
 
         #region IUpdatingTweetStore Members
 
-        public IObservable<TweetId> Tweets
+        public IObservable<string> Tweets
         {
             get { return _tweets; }
         }
@@ -38,7 +39,7 @@ namespace Twiddler.Services
             return false;
         }
 
-        public Tweet GetTweet(TweetId id)
+        public Tweet GetTweet(string id)
         {
             return _store.GetTweet(id);
         }

@@ -67,7 +67,7 @@ namespace Twiddler.Screens
         {
             if (_tweet.InReplyToStatusId != null)
             {
-                ILoadingTweetScreen screen = _loadingTweetScreenFactory(new TweetId(_tweet.InReplyToStatusId));
+                ILoadingTweetScreen screen = _loadingTweetScreenFactory(_tweet.InReplyToStatusId);
                 screen.Initialize();
                 this.OpenScreen(screen);
                 InReplyToTweet = screen;

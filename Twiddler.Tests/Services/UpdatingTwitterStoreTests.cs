@@ -1,5 +1,6 @@
 using System;
 using Moq;
+using Twiddler.Core.Services;
 using Twiddler.Models;
 using Twiddler.Services;
 using Twiddler.Services.Interfaces;
@@ -27,7 +28,7 @@ namespace Twiddler.Tests.Services
         public void AddTweet_GivenANewTweet_PublishesTweet()
         {
             UpdatingTwitterStore test = BuildDefaultTestSubject();
-            TweetId? publishedTweetId = null;
+            string publishedTweetId = null;
             test.Tweets.Subscribe(x => publishedTweetId = x);
 
             Tweet tweet = New.Tweet;
@@ -46,7 +47,7 @@ namespace Twiddler.Tests.Services
         {
             UpdatingTwitterStore test = BuildDefaultTestSubject();
 
-            TweetId? publishedTweetId = null;
+            string publishedTweetId = null;
             test.Tweets.Subscribe(x => publishedTweetId = x);
 
             Tweet tweet = New.Tweet;
@@ -57,7 +58,7 @@ namespace Twiddler.Tests.Services
 
             test.AddTweet(tweet);
 
-            Assert.False(publishedTweetId.HasValue);
+            Assert.Null(publishedTweetId);
         }
 
         [Fact]

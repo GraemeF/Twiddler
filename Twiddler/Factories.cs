@@ -2,7 +2,6 @@ using System.Globalization;
 using System.Linq;
 using TweetSharp.Twitter.Fluent;
 using TweetSharp.Twitter.Model;
-using Twiddler.Core.Models;
 using Twiddler.Models;
 using Twiddler.Screens.Interfaces;
 using Twiddler.Services.Interfaces;
@@ -15,7 +14,7 @@ namespace Twiddler
 
         public delegate IImageThumbnailScreen ImageThumbnailScreenFactory(ImageLocations imageLocations);
 
-        public delegate ILoadingTweetScreen LoadingTweetScreenFactory(TweetId id);
+        public delegate ILoadingTweetScreen LoadingTweetScreenFactory(string id);
 
         public delegate IFluentTwitter RequestFactory(ITwitterClient client);
 
@@ -31,7 +30,7 @@ namespace Twiddler
         {
             return new Tweet
                        {
-                           Id = new TweetId(status.Id.ToString(CultureInfo.InvariantCulture)),
+                           Id = status.Id.ToString(CultureInfo.InvariantCulture),
                            Status = status.Text,
                            User = CreateUserFromTwitterUser(status.User),
                            CreatedDate = status.CreatedDate,
@@ -43,7 +42,7 @@ namespace Twiddler
         {
             return new User
                        {
-                           Id = new UserId(user.Id.ToString(CultureInfo.InvariantCulture)),
+                           Id = user.Id.ToString(CultureInfo.InvariantCulture),
                            Name = user.Name,
                            ProfileImageUrl = user.ProfileImageUrl,
                            ScreenName = user.ScreenName,

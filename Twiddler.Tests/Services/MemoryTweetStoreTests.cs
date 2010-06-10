@@ -42,7 +42,7 @@ namespace Twiddler.Tests.Services
             var test = new MemoryTweetStore();
 
             Assert.Throws(typeof (KeyNotFoundException),
-                          () => test.GetTweet(new TweetId("456")));
+                          () => test.GetTweet("456"));
         }
     }
 }

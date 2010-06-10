@@ -13,7 +13,7 @@ namespace Twiddler.Models
             Links = new Uri[] {};
         }
 
-        public TweetId Id { get; set; }
+        public string Id { get; set; }
         public User User { get; set; }
         public string Status { get; set; }
         public DateTime CreatedDate { get; set; }

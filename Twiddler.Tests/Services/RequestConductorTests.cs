@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Threading;
 using Moq;
+using Twiddler.Core.Services;
 using Twiddler.Models;
 using Twiddler.Services;
 using Twiddler.Services.Interfaces;

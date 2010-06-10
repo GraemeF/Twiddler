@@ -18,7 +18,7 @@ namespace Twiddler.Screens
 
         public LoadingTweetScreen(ITweetPlaceholderScreen placeholderScreen,
                                   IUpdatingTweetStore store,
-                                  TweetId id,
+                                  string id,
                                   Factories.TweetScreenFactory tweetScreenFactory)
         {
             _placeholderScreen = placeholderScreen;
@@ -27,7 +27,7 @@ namespace Twiddler.Screens
             _tweetScreenFactory = tweetScreenFactory;
         }
 
-        public TweetId Id { get; private set; }
+        public string Id { get; private set; }
 
         protected override void OnInitialize()
         {

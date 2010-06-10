@@ -4,7 +4,6 @@ using System.Collections.Specialized;
 using System.Linq;
 using Caliburn.Core.IoC;
 using Caliburn.PresentationFramework.Screens;
-using Twiddler.Core.Models;
 using Twiddler.Models.Interfaces;
 using Twiddler.Screens.Interfaces;
 
@@ -15,8 +14,8 @@ namespace Twiddler.Screens
     {
         private readonly Factories.LoadingTweetScreenFactory _screenFactory;
         private readonly ITimeline _timeline;
-        private IObservable<TweetId> _tweetAdded;
-        private IObservable<TweetId> _tweetRemoved;
+        private IObservable<string> _tweetAdded;
+        private IObservable<string> _tweetRemoved;
         private IObservable<IEvent<NotifyCollectionChangedEventArgs>> _tweetsChanged;
 
         public TimelineScreen(ITimeline timeline, Factories.LoadingTweetScreenFactory screenFactory) : base(false)
@@ -56,15 +55,15 @@ namespace Twiddler.Screens
                                      ev => _timeline.Tweets.CollectionChanged -= ev);
 
             _tweetAdded = _tweetsChanged.
-                SelectMany(c => c.EventArgs.NewItems.Cast<TweetId>().ToObservable());
+                SelectMany(c => c.EventArgs.NewItems.Cast<string>().ToObservable());
 
             _tweetRemoved = _tweetsChanged.
-                SelectMany(c => c.EventArgs.OldItems.Cast<TweetId>().ToObservable());
+                SelectMany(c => c.EventArgs.OldItems.Cast<string>().ToObservable());
 
             _tweetAdded.Subscribe(AddTweetScreen);
         }
 
-        private void AddTweetScreen(TweetId id)
+        private void AddTweetScreen(string id)
         {
             this.OpenScreen(_screenFactory(id));
         }
