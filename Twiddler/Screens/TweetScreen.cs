@@ -2,7 +2,6 @@
 using Caliburn.Core.IoC;
 using Caliburn.PresentationFramework;
 using Caliburn.PresentationFramework.Screens;
-using TweetSharp.Twitter.Model;
 using Twiddler.Models;
 using Twiddler.Screens.Interfaces;
 using Twiddler.Services.Interfaces;
@@ -55,7 +54,7 @@ namespace Twiddler.Screens
 
         private void OpenInReplyToTweet()
         {
-            if (_tweet.InReplyToStatusId!=null)
+            if (_tweet.InReplyToStatusId != null)
             {
                 ILoadingTweetScreen screen = _loadingTweetScreenFactory(new TweetId(_tweet.InReplyToStatusId));
                 screen.Initialize();
