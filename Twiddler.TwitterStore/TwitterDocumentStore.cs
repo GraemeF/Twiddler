@@ -10,6 +10,8 @@ namespace Twiddler.TwitterStore
     {
         private readonly IDocumentStore _documentStore;
 
+        private readonly object _mutex = new object();
+
         public TwitterDocumentStore(IDocumentStore documentStore)
         {
             _documentStore = documentStore;
@@ -19,26 +21,28 @@ namespace Twiddler.TwitterStore
 
         public bool AddTweet(Tweet tweet)
         {
-            using (IDocumentSession session = _documentStore.OpenSession())
-            {
-                var existingEntry = session.Load<Tweet>(tweet.Id);
-
-                if (existingEntry == null)
+            lock (_mutex)
+                using (IDocumentSession session = _documentStore.OpenSession())
                 {
-                    session.Store(tweet);
-                    session.SaveChanges();
-                    return true;
+                    var existingEntry = session.Load<Tweet>(tweet.Id);
+
+                    if (existingEntry == null)
+                    {
+                        session.Store(tweet);
+                        session.SaveChanges();
+                        return true;
+                    }
                 }
-            }
             return false;
         }
 
         public Tweet GetTweet(string id)
         {
-            using (IDocumentSession session = _documentStore.OpenSession())
-            {
-                return session.Load<Tweet>(id);
-            }
+            lock (_mutex)
+                using (IDocumentSession session = _documentStore.OpenSession())
+                {
+                    return session.Load<Tweet>(id);
+                }
         }
 
         #endregion
