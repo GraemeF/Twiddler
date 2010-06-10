@@ -2,6 +2,7 @@
 using Caliburn.Core.IoC;
 using Caliburn.PresentationFramework;
 using Caliburn.PresentationFramework.Screens;
+using MvvmFoundation.Wpf;
 using Twiddler.Models;
 using Twiddler.Screens.Interfaces;
 using Twiddler.Services.Interfaces;
@@ -14,6 +15,7 @@ namespace Twiddler.Screens
         private readonly ILinkThumbnailScreenFactory _linkThumbnailScreenFactory;
         private readonly Factories.LoadingTweetScreenFactory _loadingTweetScreenFactory;
         private readonly Tweet _tweet;
+        private PropertyObserver<Tweet> _tweetObserver;
 
         public TweetScreen(Tweet tweet,
                            ILinkThumbnailScreenFactory linkThumbnailScreenFactory,
@@ -45,11 +47,20 @@ namespace Twiddler.Screens
 
         public ILoadingTweetScreen InReplyToTweet { get; private set; }
 
+        public double Opacity
+        {
+            get { return _tweet.IsRead ? 0.5 : 1.0; }
+        }
+
         protected override void OnInitialize()
         {
             base.OnInitialize();
             OpenLinksFromTweet();
             OpenInReplyToTweet();
+
+            _tweetObserver = new PropertyObserver<Tweet>(_tweet).
+                RegisterHandler(x => x.IsRead,
+                                x => NotifyOfPropertyChange(() => Opacity));
         }
 
         private void OpenInReplyToTweet()

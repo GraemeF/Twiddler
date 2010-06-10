@@ -5,7 +5,8 @@
 	<Border BorderThickness="4"
 	        CornerRadius="4"
 	        BorderBrush="#FF6C99CE"
-	        Background="#FFCEE6FF">
+	        Background="#FFCEE6FF"
+            Opacity="{Binding Opacity}">
         <StackPanel>
 		<DockPanel>
 			<Image DockPanel.Dock="Left"

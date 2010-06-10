@@ -1,4 +1,5 @@
 using System;
+using Caliburn.Testability.Extensions;
 using Moq;
 using Twiddler.Models;
 using Twiddler.Screens;
@@ -87,6 +88,25 @@ namespace Twiddler.Tests.Screens
             test.Initialize();
 
             Assert.Contains(_fakeThumbnailScreen.Object, test.Links);
+        }
+
+        [Fact]
+        public void GettingOpacity_WhenTweetIsNotRead_ReturnsOpaque()
+        {
+            TweetScreen test = BuildDefaultTestSubject();
+            Assert.Equal(1.0, test.Opacity);
+        }
+
+        [Fact]
+        public void GettingOpacity_WhenTweetIsRead_ReturnsSemitransparent()
+        {
+            TweetScreen test = BuildDefaultTestSubject();
+            test.Initialize();
+
+            test.
+                AssertThatChangeNotificationIsRaisedBy(x => x.Opacity).
+                When(() => _tweet.MarkAsRead());
+            Assert.Equal(.5, test.Opacity);
         }
     }
 }
