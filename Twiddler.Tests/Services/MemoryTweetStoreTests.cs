@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Twiddler.Core.Models;
 using Twiddler.Models;
 using Twiddler.Services;
 using Xunit;

@@ -3,6 +3,7 @@ using Caliburn.Core.IoC;
 using TweetSharp.Twitter.Extensions;
 using TweetSharp.Twitter.Fluent;
 using TweetSharp.Twitter.Model;
+using Twiddler.Core;
 using Twiddler.Models;
 using Twiddler.Models.Interfaces;
 using Twiddler.Services.Interfaces;

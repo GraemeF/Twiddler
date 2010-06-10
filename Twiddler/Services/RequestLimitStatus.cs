@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using Caliburn.Core.IoC;
+using Twiddler.Core;
 using Twiddler.Services.Interfaces;
 
 namespace Twiddler.Services

@@ -1,7 +1,8 @@
 using System;
+using System.Collections.Generic;
 using Caliburn.Testability.Extensions;
 using Moq;
-using Twiddler.Models;
+using Twiddler.Core.Models;
 using Twiddler.Screens;
 using Twiddler.Screens.Interfaces;
 using Twiddler.Services.Interfaces;
@@ -81,7 +82,7 @@ namespace Twiddler.Tests.Screens
                     new Tweet
                         {
                             Status = "This tweet contains a link",
-                            Links = new[] {new Uri("http://link.one.com"),}
+                            Links = new List<Uri> {new Uri("http://link.one.com"),}
                         },
                     _fakeThumbnailFactory.Object,
                     null);

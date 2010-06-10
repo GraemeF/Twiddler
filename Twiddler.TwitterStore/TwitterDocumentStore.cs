@@ -1,7 +1,7 @@
 ﻿using Caliburn.Core.IoC;
 using Raven.Client;
+using Twiddler.Core.Models;
 using Twiddler.Core.Services;
-using Twiddler.Models;
 
 namespace Twiddler.TwitterStore
 {
@@ -21,11 +21,16 @@ namespace Twiddler.TwitterStore
         {
             using (IDocumentSession session = _documentStore.OpenSession())
             {
-                session.Load<Tweet>(tweet.Id);
+                var existingEntry = session.Load<Tweet>(tweet.Id);
 
-                session.Store(tweet);
+                if (existingEntry == null)
+                {
+                    session.Store(tweet);
+                    session.SaveChanges();
+                    return true;
+                }
             }
-            return true;
+            return false;
         }
 
         public Tweet GetTweet(string id)

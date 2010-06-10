@@ -3,7 +3,7 @@ using System.ComponentModel;
 using System.Linq.Expressions;
 using Caliburn.PresentationFramework.Invocation;
 
-namespace Twiddler
+namespace Twiddler.Core
 {
     /// <summary>
     /// INotifyPropertyChanged helper that does not require a base class. Adds an extension method to the event itself, and only requires implement INotifyPropertyChanged.

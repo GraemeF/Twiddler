@@ -1,4 +1,4 @@
-namespace Twiddler.Models
+namespace Twiddler.Core.Models
 {
     public class User
     {

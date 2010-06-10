@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using Caliburn.Core.IoC;
 using Twiddler.Commands.Interfaces;
+using Twiddler.Core;
 
 namespace Twiddler.Commands
 {

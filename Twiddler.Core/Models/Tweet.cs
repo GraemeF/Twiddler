@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 
-namespace Twiddler.Models
+namespace Twiddler.Core.Models
 {
     public class Tweet : INotifyPropertyChanged
     {
@@ -10,7 +10,7 @@ namespace Twiddler.Models
 
         public Tweet()
         {
-            Links = new Uri[] {};
+            Links = new List<Uri>();
         }
 
         public string Id { get; set; }
@@ -18,7 +18,7 @@ namespace Twiddler.Models
         public string Status { get; set; }
         public DateTime CreatedDate { get; set; }
         public string InReplyToStatusId { get; set; }
-        public IEnumerable<Uri> Links { get; set; }
+        public List<Uri> Links { get; set; }
 
         public bool IsRead
         {

@@ -82,7 +82,6 @@ namespace Twiddler
         private static void RegisterDocumentStore(ContainerBuilder builder)
         {
             var documentStore = new DocumentStore {Url = "http://localhost:8080"};
-            documentStore.Conventions.DocumentKeyGenerator = GenerateTweetKey;
             
             documentStore.Initialize();
 

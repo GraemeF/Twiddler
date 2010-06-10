@@ -1,5 +1,6 @@
 ﻿using System.Threading;
 using Moq;
+using Twiddler.Core.Models;
 using Twiddler.Models;
 using Twiddler.Screens;
 using Twiddler.Screens.Interfaces;

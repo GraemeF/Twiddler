@@ -2,6 +2,7 @@ using System.Globalization;
 using System.Linq;
 using TweetSharp.Twitter.Fluent;
 using TweetSharp.Twitter.Model;
+using Twiddler.Core.Models;
 using Twiddler.Models;
 using Twiddler.Screens.Interfaces;
 using Twiddler.Services.Interfaces;

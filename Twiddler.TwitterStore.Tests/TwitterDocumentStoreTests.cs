@@ -1,6 +1,6 @@
 ﻿using Moq;
 using Raven.Client;
-using Twiddler.Models;
+using Twiddler.Core.Models;
 using Twiddler.Tests;
 using Xunit;
 

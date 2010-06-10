@@ -1,4 +1,5 @@
 ﻿using Caliburn.Testability.Extensions;
+using Twiddler.Core.Models;
 using Twiddler.Models;
 using Xunit;
 

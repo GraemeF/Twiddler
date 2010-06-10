@@ -29,6 +29,7 @@ using TweetSharp.Model;
 using TweetSharp.Twitter.Extensions;
 using TweetSharp.Twitter.Fluent;
 using TweetSharp.Twitter.Model;
+using Twiddler.Core;
 using Twiddler.Properties;
 
 namespace Twiddler

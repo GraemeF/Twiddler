@@ -1,4 +1,4 @@
-using Twiddler.Models;
+using Twiddler.Core.Models;
 
 namespace Twiddler.Core.Services
 {

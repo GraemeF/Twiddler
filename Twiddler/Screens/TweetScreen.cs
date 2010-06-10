@@ -3,6 +3,7 @@ using Caliburn.Core.IoC;
 using Caliburn.PresentationFramework;
 using Caliburn.PresentationFramework.Screens;
 using MvvmFoundation.Wpf;
+using Twiddler.Core.Models;
 using Twiddler.Models;
 using Twiddler.Screens.Interfaces;
 using Twiddler.Services.Interfaces;

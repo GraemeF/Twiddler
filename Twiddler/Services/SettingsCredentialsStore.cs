@@ -1,4 +1,5 @@
 ﻿using Caliburn.Core.IoC;
+using Twiddler.Core;
 using Twiddler.Models;
 using Twiddler.Models.Interfaces;
 using Twiddler.Properties;
