@@ -1,10 +1,10 @@
 using System.Collections.Generic;
-using TweetSharp.Twitter.Model;
+using Twiddler.Models;
 
 namespace Twiddler.Services.Interfaces
 {
     public interface ITweetRequester
     {
-        IEnumerable<TwitterStatus> RequestTweets();
+        IEnumerable<Tweet> RequestTweets();
     }
 }

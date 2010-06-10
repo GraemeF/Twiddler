@@ -1,8 +1,10 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using TweetSharp.Extensions;
 using TweetSharp.Twitter.Extensions;
 using TweetSharp.Twitter.Fluent;
 using TweetSharp.Twitter.Model;
+using Twiddler.Models;
 using Twiddler.Services.Interfaces;
 
 namespace Twiddler.Services
@@ -11,17 +13,20 @@ namespace Twiddler.Services
     {
         protected readonly ITwitterClient Client;
         private readonly IRequestLimitStatus _requestLimitStatus;
+        private readonly Factories.TweetFactory _tweetFactory;
 
         protected TweetRequester(ITwitterClient client,
-                                 IRequestLimitStatus requestLimitStatus)
+                                 IRequestLimitStatus requestLimitStatus,
+                                 Factories.TweetFactory tweetFactory)
         {
             Client = client;
             _requestLimitStatus = requestLimitStatus;
+            _tweetFactory = tweetFactory;
         }
 
         #region ITweetRequester Members
 
-        public IEnumerable<TwitterStatus> RequestTweets()
+        public IEnumerable<Tweet> RequestTweets()
         {
             return GotTweets(CreateRequest().Request());
         }
@@ -30,17 +35,18 @@ namespace Twiddler.Services
 
         protected abstract ITwitterLeafNode CreateRequest();
 
-        private IEnumerable<TwitterStatus> GotTweets(TwitterResult result)
+        private IEnumerable<Tweet> GotTweets(TwitterResult result)
         {
             if (result.RateLimitStatus != null)
                 UpdateLimit(result.RateLimitStatus);
 
             if (result.SkippedDueToRateLimiting)
-                return new TwitterStatus[] {};
+                return new Tweet[] {};
 
             return
                 result.
-                    AsStatuses();
+                    AsStatuses().
+                    Select(twitterStatus => _tweetFactory(twitterStatus));
         }
 
         private void UpdateLimit(TwitterRateLimitStatus status)

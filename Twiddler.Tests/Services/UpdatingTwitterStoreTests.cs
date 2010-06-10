@@ -1,8 +1,5 @@
 using System;
 using Moq;
-using TweetSharp.Twitter.Model;
-using Twiddler.Core.Models;
-using Twiddler.Core.Services;
 using Twiddler.Models;
 using Twiddler.Services;
 using Twiddler.Services.Interfaces;
@@ -20,7 +17,7 @@ namespace Twiddler.Tests.Services
         {
             UpdatingTwitterStore test = BuildDefaultTestSubject();
 
-            TwitterStatus tweet = New.Tweet;
+            Tweet tweet = New.Tweet;
             test.AddTweet(tweet);
 
             _fakeStore.Verify(x => x.AddTweet(tweet));
@@ -33,7 +30,7 @@ namespace Twiddler.Tests.Services
             TweetId? publishedTweetId = null;
             test.Tweets.Subscribe(x => publishedTweetId = x);
 
-            TwitterStatus tweet = New.Tweet;
+            Tweet tweet = New.Tweet;
 
             _fakeStore.
                 Setup(x => x.AddTweet(tweet)).
@@ -41,7 +38,7 @@ namespace Twiddler.Tests.Services
 
             test.AddTweet(tweet);
 
-            Assert.Equal(tweet.GetTweetId(), publishedTweetId);
+            Assert.Equal(tweet.Id, publishedTweetId);
         }
 
         [Fact]
@@ -52,7 +49,7 @@ namespace Twiddler.Tests.Services
             TweetId? publishedTweetId = null;
             test.Tweets.Subscribe(x => publishedTweetId = x);
 
-            TwitterStatus tweet = New.Tweet;
+            Tweet tweet = New.Tweet;
 
             _fakeStore.
                 Setup(x => x.AddTweet(tweet)).
@@ -68,10 +65,10 @@ namespace Twiddler.Tests.Services
         {
             UpdatingTwitterStore test = BuildDefaultTestSubject();
 
-            TwitterStatus tweet = New.Tweet;
-            _fakeStore.Setup(x => x.GetTweet(tweet.GetTweetId())).Returns(tweet);
+            Tweet tweet = New.Tweet;
+            _fakeStore.Setup(x => x.GetTweet(tweet.Id)).Returns(tweet);
 
-            Assert.Same(tweet, test.GetTweet(tweet.GetTweetId()));
+            Assert.Same(tweet, test.GetTweet(tweet.Id));
         }
 
         private UpdatingTwitterStore BuildDefaultTestSubject()

@@ -22,7 +22,7 @@ namespace Twiddler.Tests.Models
         {
             Timeline test = BuildDefaultTestSubject();
 
-            var tweet = new TweetId(5);
+            var tweet = new TweetId("5");
             _tweets.OnNext(tweet);
 
             Assert.Contains(tweet, test.Tweets);
@@ -39,7 +39,7 @@ namespace Twiddler.Tests.Models
             Timeline test = BuildDefaultTestSubject();
             test.Dispose();
 
-            var tweet = new TweetId(5);
+            var tweet = new TweetId("5");
             _tweets.OnNext(tweet);
 
             Assert.Empty(test.Tweets);

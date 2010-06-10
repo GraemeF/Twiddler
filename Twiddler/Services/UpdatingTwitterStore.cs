@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using Caliburn.Core.IoC;
-using TweetSharp.Twitter.Model;
-using Twiddler.Core.Models;
-using Twiddler.Core.Services;
 using Twiddler.Models;
 using Twiddler.Services.Interfaces;
 
@@ -31,17 +28,17 @@ namespace Twiddler.Services
             get { return _tweets; }
         }
 
-        public bool AddTweet(TwitterStatus tweet)
+        public bool AddTweet(Tweet tweet)
         {
             if (_store.AddTweet(tweet))
             {
-                _tweets.OnNext(tweet.GetTweetId());
+                _tweets.OnNext(tweet.Id);
                 return true;
             }
             return false;
         }
 
-        public TwitterStatus GetTweet(TweetId id)
+        public Tweet GetTweet(TweetId id)
         {
             return _store.GetTweet(id);
         }

@@ -6,3 +6,4 @@ Thumbs.db
 _ReSharper.*
 Reports/
 /*.cache
+/*.db

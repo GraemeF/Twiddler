@@ -2,8 +2,7 @@
 using Caliburn.Core.IoC;
 using Caliburn.PresentationFramework;
 using Caliburn.PresentationFramework.Screens;
-using TweetSharp.Twitter.Model;
-using Twiddler.Core.Models;
+using MvvmFoundation.Wpf;
 using Twiddler.Models;
 using Twiddler.Screens.Interfaces;
 using Twiddler.Services.Interfaces;
@@ -15,9 +14,10 @@ namespace Twiddler.Screens
     {
         private readonly ILinkThumbnailScreenFactory _linkThumbnailScreenFactory;
         private readonly Factories.LoadingTweetScreenFactory _loadingTweetScreenFactory;
-        private readonly TwitterStatus _tweet;
+        private readonly Tweet _tweet;
+        private PropertyObserver<Tweet> _tweetObserver;
 
-        public TweetScreen(TwitterStatus tweet,
+        public TweetScreen(Tweet tweet,
                            ILinkThumbnailScreenFactory linkThumbnailScreenFactory,
                            Factories.LoadingTweetScreenFactory loadingTweetScreenFactory)
             : base(false)
@@ -30,10 +30,10 @@ namespace Twiddler.Screens
 
         public string Status
         {
-            get { return _tweet.Text; }
+            get { return _tweet.Status; }
         }
 
-        public TwitterUser User
+        public User User
         {
             get { return _tweet.User; }
         }
@@ -47,18 +47,27 @@ namespace Twiddler.Screens
 
         public ILoadingTweetScreen InReplyToTweet { get; private set; }
 
+        public double Opacity
+        {
+            get { return _tweet.IsRead ? 0.5 : 1.0; }
+        }
+
         protected override void OnInitialize()
         {
             base.OnInitialize();
             OpenLinksFromTweet();
             OpenInReplyToTweet();
+
+            _tweetObserver = new PropertyObserver<Tweet>(_tweet).
+                RegisterHandler(x => x.IsRead,
+                                x => NotifyOfPropertyChange(() => Opacity));
         }
 
         private void OpenInReplyToTweet()
         {
-            if (_tweet.InReplyToStatusId.HasValue)
+            if (_tweet.InReplyToStatusId != null)
             {
-                ILoadingTweetScreen screen = _loadingTweetScreenFactory(new TweetId(_tweet.InReplyToStatusId.Value));
+                ILoadingTweetScreen screen = _loadingTweetScreenFactory(new TweetId(_tweet.InReplyToStatusId));
                 screen.Initialize();
                 this.OpenScreen(screen);
                 InReplyToTweet = screen;
@@ -68,7 +77,7 @@ namespace Twiddler.Screens
 
         private void OpenLinksFromTweet()
         {
-            foreach (Uri textLink in _tweet.TextLinks)
+            foreach (Uri textLink in _tweet.Links)
             {
                 OpenLink(textLink);
             }

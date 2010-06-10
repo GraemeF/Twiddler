@@ -1,10 +1,9 @@
-using TweetSharp.Twitter.Model;
-using Twiddler.Core.Models;
+using Twiddler.Models;
 
 namespace Twiddler.Core.Services
 {
     public interface ITweetStore : ITweetSink
     {
-        TwitterStatus GetTweet(TweetId id);
+        Tweet GetTweet(TweetId id);
     }
 }

@@ -197,6 +197,8 @@
     </Compile>
     <Compile Include="Commands\Interfaces\IOpenLinkCommand.cs" />
     <Compile Include="Commands\OpenLinkCommand.cs" />
+    <Compile Include="Models\Tweet.cs" />
+    <Compile Include="Models\User.cs" />
     <Compile Include="NoCoverageAttribute.cs" />
     <Compile Include="Screens\Interfaces\ILinkThumbnailScreen.cs" />
     <Compile Include="Screens\Interfaces\IImageThumbnailScreen.cs" />

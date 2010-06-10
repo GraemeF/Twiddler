@@ -1,6 +1,7 @@
-﻿using System;
+using System;
+using Caliburn.Testability.Extensions;
 using Moq;
-using TweetSharp.Twitter.Model;
+using Twiddler.Models;
 using Twiddler.Screens;
 using Twiddler.Screens.Interfaces;
 using Twiddler.Services.Interfaces;
@@ -14,14 +15,14 @@ namespace Twiddler.Tests.Screens
             new Mock<ILinkThumbnailScreenFactory>();
 
         private readonly Mock<ILinkThumbnailScreen> _fakeThumbnailScreen = new Mock<ILinkThumbnailScreen>();
-        private readonly TwitterStatus _tweet = New.Tweet;
+        private readonly Tweet _tweet = New.Tweet;
 
         [Fact]
         public void GettingStatus__ReturnsTweetStatus()
         {
             TweetScreen test = BuildDefaultTestSubject();
 
-            Assert.Equal(_tweet.Text, test.Status);
+            Assert.Equal(_tweet.Status, test.Status);
         }
 
         private TweetScreen BuildDefaultTestSubject()
@@ -59,8 +60,8 @@ namespace Twiddler.Tests.Screens
         {
             var mockScreen = new Mock<ILoadingTweetScreen>();
 
-            var test = new TweetScreen(new TwitterStatus
-                                           {InReplyToStatusId = 4},
+            var test = new TweetScreen(new Tweet
+                                           {InReplyToStatusId = "4"},
                                        _fakeThumbnailFactory.Object,
                                        x => mockScreen.Object);
             test.Initialize();
@@ -76,13 +77,36 @@ namespace Twiddler.Tests.Screens
                 Returns(_fakeThumbnailScreen.Object);
 
             var test =
-                new TweetScreen(new TwitterStatus
-                                    {Text = "This tweet contains a link to http://link.one.com"},
-                                _fakeThumbnailFactory.Object,
-                                null);
+                new TweetScreen(
+                    new Tweet
+                        {
+                            Status = "This tweet contains a link",
+                            Links = new[] {new Uri("http://link.one.com"),}
+                        },
+                    _fakeThumbnailFactory.Object,
+                    null);
             test.Initialize();
 
             Assert.Contains(_fakeThumbnailScreen.Object, test.Links);
+        }
+
+        [Fact]
+        public void GettingOpacity_WhenTweetIsNotRead_ReturnsOpaque()
+        {
+            TweetScreen test = BuildDefaultTestSubject();
+            Assert.Equal(1.0, test.Opacity);
+        }
+
+        [Fact]
+        public void GettingOpacity_WhenTweetIsRead_ReturnsSemitransparent()
+        {
+            TweetScreen test = BuildDefaultTestSubject();
+            test.Initialize();
+
+            test.
+                AssertThatChangeNotificationIsRaisedBy(x => x.Opacity).
+                When(() => _tweet.MarkAsRead());
+            Assert.Equal(.5, test.Opacity);
         }
     }
 }
