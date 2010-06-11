@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition.Hosting;
-using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -81,8 +80,8 @@ namespace Twiddler
 
         private static void RegisterDocumentStore(ContainerBuilder builder)
         {
-            var documentStore = new DocumentStore {Url = "http://localhost:8080"};
-            
+            var documentStore = new DocumentStore {DataDirectory = GetDataDirectory()};
+
             documentStore.Initialize();
 
             builder.
@@ -90,9 +89,9 @@ namespace Twiddler
                 OwnedByLifetimeScope();
         }
 
-        private static string GenerateTweetKey(object arg)
+        private static string GetDataDirectory()
         {
-            return ((TweetSharp.Twitter.Model.TwitterStatus) arg).Id.ToString(CultureInfo.InvariantCulture);
+            return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Twiddler");
         }
 
         protected override object CreateRootModel()
