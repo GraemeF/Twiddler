@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using Caliburn.Core.IoC;
 using Twiddler.Core.Models;
 using Twiddler.Core.Services;
-using Twiddler.Models;
 using Twiddler.Services.Interfaces;
 
 namespace Twiddler.Services

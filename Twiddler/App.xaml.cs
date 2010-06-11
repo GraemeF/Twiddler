@@ -8,8 +8,6 @@ using Autofac;
 using Caliburn.Autofac;
 using Caliburn.PresentationFramework.ApplicationModel;
 using Microsoft.Practices.ServiceLocation;
-using Raven.Client;
-using Raven.Client.Document;
 using Twiddler.Screens.Interfaces;
 
 namespace Twiddler
@@ -37,7 +35,6 @@ namespace Twiddler
                 Select(GetAssembly).
                 Where(assembly => assembly != null);
         }
-
 
         private static Assembly GetAssembly(string file)
         {
@@ -73,25 +70,8 @@ namespace Twiddler
 
             builder.RegisterInstance(new CompositionContainer(new AssemblyCatalog(Assembly.GetExecutingAssembly())));
             builder.RegisterInstance<Factories.TweetFactory>(Factories.CreateTweetFromTwitterStatus);
-            RegisterDocumentStore(builder);
 
             return builder;
-        }
-
-        private static void RegisterDocumentStore(ContainerBuilder builder)
-        {
-            var documentStore = new DocumentStore {DataDirectory = GetDataDirectory()};
-
-            documentStore.Initialize();
-
-            builder.
-                RegisterInstance<IDocumentStore>(documentStore).
-                OwnedByLifetimeScope();
-        }
-
-        private static string GetDataDirectory()
-        {
-            return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Twiddler");
         }
 
         protected override object CreateRootModel()

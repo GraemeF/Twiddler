@@ -2,6 +2,7 @@
 using Raven.Client;
 using Twiddler.Core.Models;
 using Twiddler.Core.Services;
+using Twiddler.TwitterStore.Interfaces;
 
 namespace Twiddler.TwitterStore
 {
@@ -12,9 +13,9 @@ namespace Twiddler.TwitterStore
 
         private readonly object _mutex = new object();
 
-        public TwitterDocumentStore(IDocumentStore documentStore)
+        public TwitterDocumentStore(IDocumentStoreFactory documentStoreFactory)
         {
-            _documentStore = documentStore;
+            _documentStore = documentStoreFactory.CreateDocumentStore();
         }
 
         #region ITweetStore Members

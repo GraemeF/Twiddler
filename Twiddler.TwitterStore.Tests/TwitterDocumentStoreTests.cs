@@ -2,26 +2,32 @@
 using Raven.Client;
 using Twiddler.Core.Models;
 using Twiddler.Tests;
+using Twiddler.TwitterStore.Interfaces;
 using Xunit;
 
 namespace Twiddler.TwitterStore.Tests
 {
     public class TwitterDocumentStoreTests
     {
-        private Mock<IDocumentSession> _fakeDocumentSession;
-        private Mock<IDocumentStore> _fakeDocumentStore;
+        private readonly Mock<IDocumentSession> _fakeDocumentSession = new Mock<IDocumentSession>();
+        private readonly Mock<IDocumentStore> _fakeDocumentStore = new Mock<IDocumentStore>();
+        private readonly Mock<IDocumentStoreFactory> _fakeDocumentStoreFactory = new Mock<IDocumentStoreFactory>();
 
-        [Fact]
-        public void AddTweet_GivenTweet_AddsTweetToDocumentStore()
+        public TwitterDocumentStoreTests()
         {
-            _fakeDocumentStore = new Mock<IDocumentStore>();
-            _fakeDocumentSession = new Mock<IDocumentSession>();
-
-            var test = new TwitterDocumentStore(_fakeDocumentStore.Object);
+            _fakeDocumentStoreFactory.
+                Setup(x => x.CreateDocumentStore()).
+                Returns(_fakeDocumentStore.Object);
 
             _fakeDocumentStore.
                 Setup(x => x.OpenSession()).
                 Returns(_fakeDocumentSession.Object);
+        }
+
+        [Fact]
+        public void AddTweet_GivenTweet_AddsTweetToDocumentStore()
+        {
+            var test = new TwitterDocumentStore(_fakeDocumentStoreFactory.Object);
 
             Tweet tweet = New.Tweet;
             test.AddTweet(tweet);
