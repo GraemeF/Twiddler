@@ -4,9 +4,9 @@ using System.Threading;
 using Moq;
 using Twiddler.Core.Models;
 using Twiddler.Core.Services;
-using Twiddler.Models;
 using Twiddler.Services;
 using Twiddler.Services.Interfaces;
+using Twiddler.TestData;
 using Xunit;
 
 namespace Twiddler.Tests.Services

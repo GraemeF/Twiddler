@@ -16,7 +16,8 @@ namespace Twiddler.TwitterStore
 
         public IDocumentStore CreateDocumentStore()
         {
-            var documentStore = new DocumentStore {DataDirectory = GetDataDirectory()};
+            //var documentStore = new DocumentStore {DataDirectory = GetDataDirectory()};
+            var documentStore = new DocumentStore {Url = "http://localhost:8080"};
 
             documentStore.Initialize();
             CreateIndices(documentStore);

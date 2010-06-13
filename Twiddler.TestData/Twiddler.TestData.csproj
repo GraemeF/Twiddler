@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{383F4925-ED95-4E87-8C06-277933604D4B}</ProjectGuid>
+    <ProjectGuid>{E4B17188-072A-479D-88B9-621A3B56DF5C}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Twiddler.TwitterStore.Tests</RootNamespace>
-    <AssemblyName>Twiddler.TwitterStore.Tests</AssemblyName>
+    <RootNamespace>Twiddler.TestData</RootNamespace>
+    <AssemblyName>Twiddler.TestData</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -31,12 +31,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Moq">
-      <HintPath>..\Library\Moq\Moq.dll</HintPath>
-    </Reference>
-    <Reference Include="Raven.Client">
-      <HintPath>..\Library\RavenDB\Raven.Client.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -44,40 +38,16 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="TweetSharp">
-      <HintPath>..\Library\TweetSharp\TweetSharp.dll</HintPath>
-    </Reference>
-    <Reference Include="TweetSharp.Twitter">
-      <HintPath>..\Library\TweetSharp\TweetSharp.Twitter.dll</HintPath>
-    </Reference>
-    <Reference Include="xunit">
-      <HintPath>..\Library\xUnit.net\xunit.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="TwitterDocumentStoreTests.cs" />
+    <Compile Include="TweetBuilder.cs" />
+    <Compile Include="New.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Twiddler.Core\Twiddler.Core.csproj">
       <Project>{159DA135-5F63-455B-A572-A3EBB99ACA4D}</Project>
       <Name>Twiddler.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Twiddler.TestData\Twiddler.TestData.csproj">
-      <Project>{E4B17188-072A-479D-88B9-621A3B56DF5C}</Project>
-      <Name>Twiddler.TestData</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Twiddler.Tests\Twiddler.Tests.csproj">
-      <Project>{19E7A590-A4B6-4F18-8B74-4879F7F8CF96}</Project>
-      <Name>Twiddler.Tests</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Twiddler.TwitterStore\Twiddler.TwitterStore.csproj">
-      <Project>{624CE557-4EDF-47EE-835B-3CB1C6290FEF}</Project>
-      <Name>Twiddler.TwitterStore</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Twiddler\Twiddler.csproj">
-      <Project>{5DD421AA-A0AE-4052-8E61-B7A4B61ABAD4}</Project>
-      <Name>Twiddler</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

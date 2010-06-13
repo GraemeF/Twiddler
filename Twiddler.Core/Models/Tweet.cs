@@ -24,7 +24,7 @@ namespace Twiddler.Core.Models
         public bool IsRead
         {
             get { return _isRead; }
-            private set
+            set
             {
                 if (_isRead != value)
                 {
@@ -37,7 +37,7 @@ namespace Twiddler.Core.Models
         public bool IsArchived
         {
             get { return _isArchived; }
-            private set
+            set
             {
                 if (_isArchived != value)
                 {

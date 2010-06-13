@@ -1,23 +1,12 @@
-﻿using System;
-using Twiddler.Core.Models;
-using Twiddler.Models;
+﻿using Twiddler.Core.Models;
 
-namespace Twiddler.Tests
+namespace Twiddler.TestData
 {
     public class New
     {
-        public static Tweet Tweet
+        public static TweetBuilder Tweet
         {
-            get
-            {
-                return new Tweet
-                           {
-                               Status = "Unspecified Status",
-                               Id = "1",
-                               User = User,
-                               CreatedDate = DateTime.Now.AddMinutes(-5.0)
-                           };
-            }
+            get { return new TweetBuilder(); }
         }
 
         public static User User

@@ -1,7 +1,7 @@
 ﻿using Moq;
 using Raven.Client;
 using Twiddler.Core.Models;
-using Twiddler.Tests;
+using Twiddler.TestData;
 using Twiddler.TwitterStore.Interfaces;
 using Xunit;
 

@@ -1,10 +1,10 @@
 ﻿using System.Threading;
 using Moq;
 using Twiddler.Core.Models;
-using Twiddler.Models;
 using Twiddler.Screens;
 using Twiddler.Screens.Interfaces;
 using Twiddler.Services.Interfaces;
+using Twiddler.TestData;
 using Xunit;
 
 namespace Twiddler.Tests.Screens

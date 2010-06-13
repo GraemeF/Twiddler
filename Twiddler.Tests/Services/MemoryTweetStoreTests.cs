@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Twiddler.Core.Models;
-using Twiddler.Models;
 using Twiddler.Services;
+using Twiddler.TestData;
 using Xunit;
 
 namespace Twiddler.Tests.Services
