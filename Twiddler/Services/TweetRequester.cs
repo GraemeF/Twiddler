@@ -5,7 +5,6 @@ using TweetSharp.Twitter.Extensions;
 using TweetSharp.Twitter.Fluent;
 using TweetSharp.Twitter.Model;
 using Twiddler.Core.Models;
-using Twiddler.Models;
 using Twiddler.Services.Interfaces;
 
 namespace Twiddler.Services
@@ -41,7 +40,10 @@ namespace Twiddler.Services
             if (result.RateLimitStatus != null)
                 UpdateLimit(result.RateLimitStatus);
 
-            if (result.SkippedDueToRateLimiting)
+            if (result.SkippedDueToRateLimiting ||
+                result.IsNetworkError ||
+                result.IsServiceError ||
+                result.IsTwitterError)
                 return new Tweet[] {};
 
             return
