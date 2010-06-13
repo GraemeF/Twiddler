@@ -6,6 +6,7 @@ namespace Twiddler.Core.Models
 {
     public class Tweet : INotifyPropertyChanged
     {
+        private bool _isArchived;
         private bool _isRead;
 
         public Tweet()
@@ -33,11 +34,29 @@ namespace Twiddler.Core.Models
             }
         }
 
+        public bool IsArchived
+        {
+            get { return _isArchived; }
+            private set
+            {
+                if (_isArchived != value)
+                {
+                    _isArchived = value;
+                    PropertyChanged.Raise(x => IsArchived);
+                }
+            }
+        }
+
         #region INotifyPropertyChanged Members
 
         public event PropertyChangedEventHandler PropertyChanged;
 
         #endregion
+
+        public void Archive()
+        {
+            IsArchived = true;
+        }
 
         public void MarkAsRead()
         {

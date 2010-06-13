@@ -1,6 +1,5 @@
 ﻿using Caliburn.Testability.Extensions;
 using Twiddler.Core.Models;
-using Twiddler.Models;
 using Xunit;
 
 namespace Twiddler.Tests.Models
@@ -22,6 +21,16 @@ namespace Twiddler.Tests.Models
             test.
                 AssertThatChangeNotificationIsRaisedBy(x => x.IsRead).
                 When(test.MarkAsRead);
+        }
+
+        [Fact]
+        public void Archive__UpdatesIsArchived()
+        {
+            var test = new Tweet();
+
+            test.
+                AssertThatChangeNotificationIsRaisedBy(x => x.IsArchived).
+                When(test.Archive);
         }
     }
 }
