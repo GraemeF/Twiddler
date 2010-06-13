@@ -28,6 +28,19 @@ namespace Twiddler.TwitterStore
 
         private void CreateIndices(IDocumentStore documentStore)
         {
+            try
+            {
+                documentStore.DatabaseCommands.
+                    PutIndex("TweetsByIsArchived",
+                             new IndexDefinition<Tweet>
+                                 {
+                                     Map = docs => from doc in docs
+                                                   select new {doc.IsArchived}
+                                 });
+            }
+            catch (InvalidOperationException)
+            {
+            }
         }
 
         private static string GetDataDirectory()
