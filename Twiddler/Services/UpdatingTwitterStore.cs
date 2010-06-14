@@ -12,7 +12,7 @@ namespace Twiddler.Services
     {
         private readonly IRequestConductor _requestConductor;
         private readonly ITweetStore _store;
-        private readonly Subject<string> _tweets = new Subject<string>();
+        private readonly Subject<string> _newTweets = new Subject<string>();
 
         public UpdatingTwitterStore(IRequestConductor requestConductor, ITweetStore store)
         {
@@ -24,16 +24,16 @@ namespace Twiddler.Services
 
         #region IUpdatingTweetStore Members
 
-        public IObservable<string> Tweets
+        public IObservable<string> NewTweets
         {
-            get { return _tweets; }
+            get { return _newTweets; }
         }
 
         public bool AddTweet(Tweet tweet)
         {
             if (_store.AddTweet(tweet))
             {
-                _tweets.OnNext(tweet.Id);
+                _newTweets.OnNext(tweet.Id);
                 return true;
             }
             return false;

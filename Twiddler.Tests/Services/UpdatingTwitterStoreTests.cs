@@ -30,7 +30,7 @@ namespace Twiddler.Tests.Services
         {
             UpdatingTwitterStore test = BuildDefaultTestSubject();
             string publishedTweetId = null;
-            test.Tweets.Subscribe(x => publishedTweetId = x);
+            test.NewTweets.Subscribe(x => publishedTweetId = x);
 
             Tweet tweet = New.Tweet;
 
@@ -49,7 +49,7 @@ namespace Twiddler.Tests.Services
             UpdatingTwitterStore test = BuildDefaultTestSubject();
 
             string publishedTweetId = null;
-            test.Tweets.Subscribe(x => publishedTweetId = x);
+            test.NewTweets.Subscribe(x => publishedTweetId = x);
 
             Tweet tweet = New.Tweet;
 
