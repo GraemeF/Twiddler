@@ -1,4 +1,6 @@
-﻿using Caliburn.Core.IoC;
+﻿using System.Collections.Generic;
+using System.Linq;
+using Caliburn.Core.IoC;
 using Raven.Client;
 using Twiddler.Core.Models;
 using Twiddler.Core.Services;
@@ -44,6 +46,16 @@ namespace Twiddler.TwitterStore
                 {
                     return session.Load<Tweet>(id);
                 }
+        }
+
+        public IEnumerable<Tweet> GetInboxTweets()
+        {
+            using (IDocumentSession session = _documentStore.OpenSession())
+            {
+                return session.
+                    Query<Tweet>("TweetsByIsArchived").
+                    Where(x => !x.IsArchived);
+            }
         }
 
         #endregion

@@ -4,6 +4,6 @@ namespace Twiddler.Services.Interfaces
 {
     public interface ITweetSource
     {
-        IObservable<string> NewTweets { get; }
+        IObservable<string> InboxTweets { get; }
     }
 }
