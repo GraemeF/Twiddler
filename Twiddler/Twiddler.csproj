@@ -210,6 +210,7 @@
     <Compile Include="Screens\Interfaces\ILinkScreen.cs" />
     <Compile Include="Screens\Interfaces\IRequestMeterScreen.cs" />
     <Compile Include="Services\Clock.cs" />
+    <Compile Include="Services\StoreTimeline.cs" />
     <Compile Include="TweetRequesters\FriendsTimelineTweetRequester.cs" />
     <Compile Include="TweetRequesters\HomeTimelineTweetRequester.cs" />
     <Compile Include="Services\Interfaces\IClock.cs" />
