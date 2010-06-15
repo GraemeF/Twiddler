@@ -1,11 +1,10 @@
 ﻿using System.Collections.Generic;
 using Moq;
-using Twiddler.Models;
 using Twiddler.Services;
 using Twiddler.Services.Interfaces;
 using Xunit;
 
-namespace Twiddler.Tests.Models
+namespace Twiddler.Tests.Services
 {
     public class SubscribingTimelineTests
     {
