@@ -3,6 +3,7 @@ using Moq;
 using Twiddler.Models.Interfaces;
 using Twiddler.Screens;
 using Twiddler.Screens.Interfaces;
+using Twiddler.Services.Interfaces;
 using Xunit;
 
 namespace Twiddler.Tests.Screens

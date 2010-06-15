@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Moq;
 using Twiddler.Models;
+using Twiddler.Services;
 using Twiddler.Services.Interfaces;
 using Xunit;
 
