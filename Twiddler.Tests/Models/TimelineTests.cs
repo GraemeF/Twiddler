@@ -8,7 +8,7 @@ namespace Twiddler.Tests.Models
 {
     public class TimelineTests
     {
-        private readonly Mock<IUpdatingTweetStore> _stubStore = new Mock<IUpdatingTweetStore>();
+        private readonly Mock<ISelfUpdatingTweetStore> _stubStore = new Mock<ISelfUpdatingTweetStore>();
         private readonly Subject<string> _tweets = new Subject<string>();
 
         public TimelineTests()

@@ -114,7 +114,7 @@
     <Compile Include="Services\ImageServices\YFrogDecoderTests.cs" />
     <Compile Include="Services\LinkThumbnailScreenFactoryTests.cs" />
     <Compile Include="Services\RequestConductorTests.cs" />
-    <Compile Include="Services\UpdatingTwitterStoreTests.cs" />
+    <Compile Include="Services\SelfUpdatingTwitterStoreTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Screens\ShellScreenTests.cs" />
     <Compile Include="Screens\StatusScreenTests.cs" />

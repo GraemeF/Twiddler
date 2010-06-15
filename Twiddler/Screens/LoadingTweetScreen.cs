@@ -14,11 +14,11 @@ namespace Twiddler.Screens
     public class LoadingTweetScreen : ScreenConductor<IScreen>, ILoadingTweetScreen
     {
         private readonly ITweetPlaceholderScreen _placeholderScreen;
-        private readonly IUpdatingTweetStore _store;
+        private readonly ISelfUpdatingTweetStore _store;
         private readonly Factories.TweetScreenFactory _tweetScreenFactory;
 
         public LoadingTweetScreen(ITweetPlaceholderScreen placeholderScreen,
-                                  IUpdatingTweetStore store,
+                                  ISelfUpdatingTweetStore store,
                                   string id,
                                   Factories.TweetScreenFactory tweetScreenFactory)
         {

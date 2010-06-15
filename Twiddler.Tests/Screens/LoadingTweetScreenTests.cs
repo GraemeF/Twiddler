@@ -11,7 +11,7 @@ namespace Twiddler.Tests.Screens
 {
     public class LoadingTweetScreenTests
     {
-        private readonly Mock<IUpdatingTweetStore> _fakeStore = new Mock<IUpdatingTweetStore>();
+        private readonly Mock<ISelfUpdatingTweetStore> _fakeStore = new Mock<ISelfUpdatingTweetStore>();
         private readonly Mock<ITweetPlaceholderScreen> _fakeTweetPlaceholderScreen = new Mock<ITweetPlaceholderScreen>();
         private readonly Tweet _tweet = New.Tweet;
         private Mock<ITweetScreen> _fakeTweetScreen;

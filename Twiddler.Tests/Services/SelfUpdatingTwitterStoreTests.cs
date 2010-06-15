@@ -9,7 +9,7 @@ using Xunit;
 
 namespace Twiddler.Tests.Services
 {
-    public class UpdatingTwitterStoreTests
+    public class SelfUpdatingTwitterStoreTests
     {
         private readonly Mock<IRequestConductor> _fakeRequestConductor = new Mock<IRequestConductor>();
         private readonly Mock<ITweetStore> _fakeStore = new Mock<ITweetStore>();
@@ -17,7 +17,7 @@ namespace Twiddler.Tests.Services
         [Fact]
         public void AddTweet_GivenANewTweet_AddsTweetToStore()
         {
-            UpdatingTwitterStore test = BuildDefaultTestSubject();
+            SelfUpdatingTwitterStore test = BuildDefaultTestSubject();
 
             Tweet tweet = New.Tweet;
             test.AddTweet(tweet);
@@ -28,7 +28,7 @@ namespace Twiddler.Tests.Services
         [Fact]
         public void AddTweet_GivenANewTweet_PublishesTweet()
         {
-            UpdatingTwitterStore test = BuildDefaultTestSubject();
+            SelfUpdatingTwitterStore test = BuildDefaultTestSubject();
             string publishedTweetId = null;
             test.InboxTweets.Subscribe(x => publishedTweetId = x);
 
@@ -46,7 +46,7 @@ namespace Twiddler.Tests.Services
         [Fact]
         public void AddTweet_GivenATweetThatHasAlreadyBeenAdded_DoesNotPublishTweet()
         {
-            UpdatingTwitterStore test = BuildDefaultTestSubject();
+            SelfUpdatingTwitterStore test = BuildDefaultTestSubject();
 
             string publishedTweetId = null;
             test.InboxTweets.Subscribe(x => publishedTweetId = x);
@@ -65,7 +65,7 @@ namespace Twiddler.Tests.Services
         [Fact]
         public void GetTweet__GetsTweetFromStore()
         {
-            UpdatingTwitterStore test = BuildDefaultTestSubject();
+            SelfUpdatingTwitterStore test = BuildDefaultTestSubject();
 
             Tweet tweet = New.Tweet;
             _fakeStore.Setup(x => x.GetTweet(tweet.Id)).Returns(tweet);
@@ -73,9 +73,9 @@ namespace Twiddler.Tests.Services
             Assert.Same(tweet, test.GetTweet(tweet.Id));
         }
 
-        private UpdatingTwitterStore BuildDefaultTestSubject()
+        private SelfUpdatingTwitterStore BuildDefaultTestSubject()
         {
-            return new UpdatingTwitterStore(_fakeRequestConductor.Object, _fakeStore.Object);
+            return new SelfUpdatingTwitterStore(_fakeRequestConductor.Object, _fakeStore.Object);
         }
     }
 }

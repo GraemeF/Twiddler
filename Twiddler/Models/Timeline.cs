@@ -9,10 +9,10 @@ namespace Twiddler.Models
     [PerRequest(typeof (ITimeline))]
     public class Timeline : ITimeline
     {
-        private readonly IUpdatingTweetStore _store;
+        private readonly ISelfUpdatingTweetStore _store;
         private readonly IDisposable _subscription;
 
-        public Timeline(IUpdatingTweetStore store)
+        public Timeline(ISelfUpdatingTweetStore store)
         {
             _store = store;
             Tweets = new ObservableCollection<string>();

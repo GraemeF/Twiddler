@@ -1,6 +1,4 @@
 using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.Linq;
 using Twiddler.Core.Models;
 using Twiddler.Core.Services;
 
@@ -21,11 +19,6 @@ namespace Twiddler.Services
         public Tweet GetTweet(string id)
         {
             return _tweets[id];
-        }
-
-        public IEnumerable<Tweet> GetInboxTweets()
-        {
-            return _tweets.Values.Where(x => !x.IsArchived);
         }
 
         #endregion
