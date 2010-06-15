@@ -103,7 +103,7 @@
     <Compile Include="Commands\ArchiveTweetCommandTests.cs" />
     <Compile Include="Commands\AuthorizeCommandTests.cs" />
     <Compile Include="Commands\DeauthorizeCommandTests.cs" />
-    <Compile Include="Models\TimelineTests.cs" />
+    <Compile Include="Models\SubscribingTimelineTests.cs" />
     <Compile Include="Models\TweetTests.cs" />
     <Compile Include="Models\TwitterCredentialsTests.cs" />
     <Compile Include="Screens\ImageThumbnailScreenTests.cs" />

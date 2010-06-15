@@ -7,12 +7,12 @@ using Twiddler.Services.Interfaces;
 namespace Twiddler.Models
 {
     [PerRequest(typeof (ITimeline))]
-    public class Timeline : ITimeline
+    public class SubscribingTimeline : ITimeline
     {
         private readonly ISelfUpdatingTweetStore _store;
         private readonly IDisposable _subscription;
 
-        public Timeline(ISelfUpdatingTweetStore store)
+        public SubscribingTimeline(ISelfUpdatingTweetStore store)
         {
             _store = store;
             Tweets = new ObservableCollection<string>();

@@ -6,12 +6,12 @@ using Xunit;
 
 namespace Twiddler.Tests.Models
 {
-    public class TimelineTests
+    public class SubscribingTimelineTests
     {
         private readonly Mock<ISelfUpdatingTweetStore> _stubStore = new Mock<ISelfUpdatingTweetStore>();
         private readonly Subject<string> _tweets = new Subject<string>();
 
-        public TimelineTests()
+        public SubscribingTimelineTests()
         {
             _stubStore.Setup(x => x.InboxTweets).Returns(_tweets);
         }
@@ -19,7 +19,7 @@ namespace Twiddler.Tests.Models
         [Fact]
         public void GettingTweets_WhenPollerPublishesATweet_ContainsATweet()
         {
-            Timeline test = BuildDefaultTestSubject();
+            SubscribingTimeline test = BuildDefaultTestSubject();
 
             string tweet = "5";
             _tweets.OnNext(tweet);
@@ -27,15 +27,15 @@ namespace Twiddler.Tests.Models
             Assert.Contains(tweet, test.Tweets);
         }
 
-        private Timeline BuildDefaultTestSubject()
+        private SubscribingTimeline BuildDefaultTestSubject()
         {
-            return new Timeline(_stubStore.Object);
+            return new SubscribingTimeline(_stubStore.Object);
         }
 
         [Fact]
         public void Dispose__UnsubscribesFromNewTweets()
         {
-            Timeline test = BuildDefaultTestSubject();
+            SubscribingTimeline test = BuildDefaultTestSubject();
             test.Dispose();
 
             string tweet = "5";

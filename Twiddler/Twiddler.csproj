@@ -255,7 +255,7 @@
     <Compile Include="Services\Interfaces\AuthorizationStatus.cs" />
     <Compile Include="Services\Interfaces\ITweetSource.cs" />
     <Compile Include="Services\Interfaces\ITweetRequester.cs" />
-    <Compile Include="Models\Timeline.cs" />
+    <Compile Include="Models\SubscribingTimeline.cs" />
     <Compile Include="Services\Interfaces\ITwitterClient.cs" />
     <Compile Include="Models\Interfaces\ITwitterCredentials.cs" />
     <Compile Include="OAuthDialog.xaml.cs">
