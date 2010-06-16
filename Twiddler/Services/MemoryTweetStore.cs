@@ -9,7 +9,7 @@ namespace Twiddler.Services
     {
         private readonly ConcurrentDictionary<string, Tweet> _tweets = new ConcurrentDictionary<string, Tweet>();
 
-        #region ITweetStore Members
+        #region ITweetResolver Members
 
         public bool AddTweet(Tweet tweet)
         {

@@ -7,7 +7,6 @@ using MvvmFoundation.Wpf;
 using TweetSharp.Extensions;
 using Twiddler.Core.Models;
 using Twiddler.Core.Services;
-using Twiddler.Models;
 using Twiddler.Services.Interfaces;
 
 namespace Twiddler.Services

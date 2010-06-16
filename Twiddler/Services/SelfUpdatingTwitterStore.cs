@@ -22,7 +22,7 @@ namespace Twiddler.Services
             _requestConductor.Start(this);
         }
 
-        #region IUpdatingTweetStore Members
+        #region ISelfUpdatingTweetStore Members
 
         public IObservable<Tweet> InboxTweets
         {
