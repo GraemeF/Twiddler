@@ -4,21 +4,22 @@ using System.Collections.Specialized;
 using System.Linq;
 using Caliburn.Core.IoC;
 using Caliburn.PresentationFramework.Screens;
+using Twiddler.Core.Models;
 using Twiddler.Screens.Interfaces;
 using Twiddler.Services.Interfaces;
 
 namespace Twiddler.Screens
 {
     [PerRequest(typeof (ITimelineScreen))]
-    public class TimelineScreen : ScreenConductor<ILoadingTweetScreen>.WithCollection.AllScreensActive, ITimelineScreen
+    public class TimelineScreen : ScreenConductor<IScreen>.WithCollection.AllScreensActive, ITimelineScreen
     {
-        private readonly Factories.LoadingTweetScreenFactory _screenFactory;
+        private readonly Factories.TweetScreenFactory _screenFactory;
         private readonly ITimeline _timeline;
-        private IObservable<string> _tweetAdded;
-        private IObservable<string> _tweetRemoved;
+        private IObservable<Tweet> _tweetAdded;
+        private IObservable<Tweet> _tweetRemoved;
         private IObservable<IEvent<NotifyCollectionChangedEventArgs>> _tweetsChanged;
 
-        public TimelineScreen(ITimeline timeline, Factories.LoadingTweetScreenFactory screenFactory) : base(false)
+        public TimelineScreen(ITimeline timeline, Factories.TweetScreenFactory screenFactory) : base(false)
         {
             _timeline = timeline;
             _screenFactory = screenFactory;
@@ -54,18 +55,22 @@ namespace Twiddler.Screens
                                      ev => _timeline.Tweets.CollectionChanged += ev,
                                      ev => _timeline.Tweets.CollectionChanged -= ev);
 
-            _tweetAdded = _tweetsChanged.
-                SelectMany(c => c.EventArgs.NewItems.Cast<string>().ToObservable());
+            _tweetAdded = _timeline.Tweets.
+                ToObservable().
+                Concat(_tweetsChanged.
+                           SelectMany(c => c.EventArgs.NewItems.
+                                               Cast<Tweet>().
+                                               ToObservable()));
 
             _tweetRemoved = _tweetsChanged.
-                SelectMany(c => c.EventArgs.OldItems.Cast<string>().ToObservable());
+                SelectMany(c => c.EventArgs.OldItems.Cast<Tweet>().ToObservable());
 
             _tweetAdded.Subscribe(AddTweetScreen);
         }
 
-        private void AddTweetScreen(string id)
+        private void AddTweetScreen(Tweet tweet)
         {
-            this.OpenScreen(_screenFactory(id));
+            this.OpenScreen(_screenFactory(tweet));
         }
     }
 }

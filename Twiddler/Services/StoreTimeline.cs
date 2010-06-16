@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using Caliburn.Core.IoC;
+using Twiddler.Core.Models;
 using Twiddler.Core.Services;
 using Twiddler.Services.Interfaces;
 
@@ -11,7 +12,7 @@ namespace Twiddler.Services
     {
         public StoreTimeline(ITweetStore tweetStore)
         {
-            Tweets = new ObservableCollection<string>();
+            Tweets = new ObservableCollection<Tweet>(tweetStore.GetInboxTweets());
         }
 
         #region ITimeline Members
@@ -21,7 +22,7 @@ namespace Twiddler.Services
             throw new NotImplementedException();
         }
 
-        public ObservableCollection<string> Tweets { get; private set; }
+        public ObservableCollection<Tweet> Tweets { get; private set; }
 
         #endregion
     }

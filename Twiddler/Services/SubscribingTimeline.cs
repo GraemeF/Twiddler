@@ -1,5 +1,6 @@
 using System;
 using System.Collections.ObjectModel;
+using Twiddler.Core.Models;
 using Twiddler.Services.Interfaces;
 
 namespace Twiddler.Services
@@ -13,14 +14,14 @@ namespace Twiddler.Services
         public SubscribingTimeline(ISelfUpdatingTweetStore store)
         {
             _store = store;
-            Tweets = new ObservableCollection<string>();
+            Tweets = new ObservableCollection<Tweet>();
 
             _subscription = _store.InboxTweets.Subscribe(x => Tweets.Add(x));
         }
 
         #region ITimeline Members
 
-        public ObservableCollection<string> Tweets { get; private set; }
+        public ObservableCollection<Tweet> Tweets { get; private set; }
 
         public void Dispose()
         {

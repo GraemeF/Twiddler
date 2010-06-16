@@ -29,8 +29,8 @@ namespace Twiddler.Tests.Services
         public void AddTweet_GivenANewTweet_PublishesTweet()
         {
             SelfUpdatingTwitterStore test = BuildDefaultTestSubject();
-            string publishedTweetId = null;
-            test.InboxTweets.Subscribe(x => publishedTweetId = x);
+            Tweet publishedTweet = null;
+            test.InboxTweets.Subscribe(x => publishedTweet = x);
 
             Tweet tweet = New.Tweet;
 
@@ -40,7 +40,7 @@ namespace Twiddler.Tests.Services
 
             test.AddTweet(tweet);
 
-            Assert.Equal(tweet.Id, publishedTweetId);
+            Assert.Same(tweet, publishedTweet);
         }
 
         [Fact]
@@ -48,8 +48,8 @@ namespace Twiddler.Tests.Services
         {
             SelfUpdatingTwitterStore test = BuildDefaultTestSubject();
 
-            string publishedTweetId = null;
-            test.InboxTweets.Subscribe(x => publishedTweetId = x);
+            Tweet publishedTweet = null;
+            test.InboxTweets.Subscribe(x => publishedTweet = x);
 
             Tweet tweet = New.Tweet;
 
@@ -59,7 +59,7 @@ namespace Twiddler.Tests.Services
 
             test.AddTweet(tweet);
 
-            Assert.Null(publishedTweetId);
+            Assert.Null(publishedTweet);
         }
 
         [Fact]

@@ -2,7 +2,7 @@ using Caliburn.PresentationFramework.Screens;
 
 namespace Twiddler.Screens.Interfaces
 {
-    public interface ITimelineScreen : IScreenCollection<ILoadingTweetScreen>
+    public interface ITimelineScreen : IScreenCollection<IScreen>
     {
     }
 }

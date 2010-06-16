@@ -10,7 +10,7 @@ namespace Twiddler.Services
     [Singleton(typeof (ISelfUpdatingTweetStore))]
     public class SelfUpdatingTwitterStore : ISelfUpdatingTweetStore
     {
-        private readonly Subject<string> _inboxTweets = new Subject<string>();
+        private readonly Subject<Tweet> _inboxTweets = new Subject<Tweet>();
         private readonly IRequestConductor _requestConductor;
         private readonly ITweetResolver _store;
 
@@ -24,7 +24,7 @@ namespace Twiddler.Services
 
         #region IUpdatingTweetStore Members
 
-        public IObservable<string> InboxTweets
+        public IObservable<Tweet> InboxTweets
         {
             get { return _inboxTweets; }
         }
@@ -33,7 +33,7 @@ namespace Twiddler.Services
         {
             if (_store.AddTweet(tweet))
             {
-                _inboxTweets.OnNext(tweet.Id);
+                _inboxTweets.OnNext(tweet);
                 return true;
             }
             return false;
