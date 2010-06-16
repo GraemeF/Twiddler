@@ -12,7 +12,7 @@ namespace Twiddler.Tests.Services
     public class SelfUpdatingTwitterStoreTests
     {
         private readonly Mock<IRequestConductor> _fakeRequestConductor = new Mock<IRequestConductor>();
-        private readonly Mock<ITweetStore> _fakeStore = new Mock<ITweetStore>();
+        private readonly Mock<ITweetResolver> _fakeStore = new Mock<ITweetResolver>();
 
         [Fact]
         public void AddTweet_GivenANewTweet_AddsTweetToStore()

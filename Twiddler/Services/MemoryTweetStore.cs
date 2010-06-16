@@ -5,7 +5,7 @@ using Twiddler.Core.Services;
 namespace Twiddler.Services
 {
     //[Singleton(typeof (ITweetStore))]
-    public class MemoryTweetStore : ITweetStore
+    public class MemoryTweetStore : ITweetResolver
     {
         private readonly ConcurrentDictionary<string, Tweet> _tweets = new ConcurrentDictionary<string, Tweet>();
 

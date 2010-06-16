@@ -12,9 +12,9 @@ namespace Twiddler.Services
     {
         private readonly Subject<string> _inboxTweets = new Subject<string>();
         private readonly IRequestConductor _requestConductor;
-        private readonly ITweetStore _store;
+        private readonly ITweetResolver _store;
 
-        public SelfUpdatingTwitterStore(IRequestConductor requestConductor, ITweetStore store)
+        public SelfUpdatingTwitterStore(IRequestConductor requestConductor, ITweetResolver store)
         {
             _requestConductor = requestConductor;
             _store = store;
