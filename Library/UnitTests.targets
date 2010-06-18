@@ -49,7 +49,7 @@
 				ReportDirectory="$(ReportsPath)"
 				ReportNameFormat="@(GallioTestFixtureAssembly->'%(Filename).Gallio.tests')"
 				ReportTypes="xml"
-				RunnerProperties="NCoverArguments='//at $(GallioTestedAssemblyCoverageOutput).trend //ea Twiddler.NoCoverageAttribute%3BMbUnit.Framework.TestFixtureAttribute%3BMbUnit.Framework.TestAttribute%3BSystem.Runtime.CompilerServices.CompilerGeneratedAttribute%3BSystem.CodeDom.Compiler.GeneratedCodeAttribute%3BSystem.Diagnostics.DebuggerNonUserCodeAttribute //x $(GallioTestedAssemblyCoverageOutput) //l $(OutDir)Coverage.Gallio.log //a $(GallioTestedAssemblyFilename)'">
+				RunnerProperties="NCoverArguments='//at $(GallioTestedAssemblyCoverageOutput).trend //ea Twiddler.Core.NoCoverageAttribute%3BMbUnit.Framework.TestFixtureAttribute%3BMbUnit.Framework.TestAttribute%3BSystem.Runtime.CompilerServices.CompilerGeneratedAttribute%3BSystem.CodeDom.Compiler.GeneratedCodeAttribute%3BSystem.Diagnostics.DebuggerNonUserCodeAttribute //x $(GallioTestedAssemblyCoverageOutput) //l $(OutDir)Coverage.Gallio.log //a $(GallioTestedAssemblyFilename)'">
 			<!--Gallio Assemblies="@(GallioTestFixtureAssembly)" RunnerType="NCover" RunnerProperties="NCoverArguments='//ea MbUnit.Framework.TestFixtureAttribute%3BMbUnit.Framework.TestAttribute //x @(GallioTestedAssembly->'$(ReportsPath)%(Filename).Gallio.coverage.xml') //l $(OutDir)Coverage.Gallio.log //a @(GallioTestedAssembly->'%(Filename)')'"-->
 			<!-- This tells MSBuild to store the output value of the task's ExitCode property
                  into the project's ExitCode property -->
