@@ -43,6 +43,22 @@ namespace Twiddler.Tests.Services
             StoreInboxTweetsChangesTo(new[] {tweet});
 
             Assert.True(eventRaised);
+            Assert.Contains(tweet, test.Tweets);
+        }
+
+        [Fact]
+        public void GettingTweets_WhenTweetsRemovedFromTheStore_DoesNotContainOldTweets()
+        {
+            StoreTimeline test = BuildDefaultTestSubject();
+            Tweet tweet = New.Tweet;
+            StoreInboxTweetsChangesTo(new[] {tweet});
+
+            bool eventRaised = false;
+            test.Tweets.CollectionChanged += (sender, args) => eventRaised = args.OldItems.Contains(tweet);
+
+            StoreInboxTweetsChangesTo(new Tweet[] {  });
+            Assert.True(eventRaised);
+            Assert.DoesNotContain(tweet, test.Tweets);
         }
 
         private void StoreInboxTweetsChangesTo(IEnumerable<Tweet> inboxTweets)

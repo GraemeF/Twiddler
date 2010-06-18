@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using Caliburn.Core.IoC;
@@ -36,8 +37,35 @@ namespace Twiddler.Services
 
         private void UpdateTweets()
         {
-            foreach (Tweet tweet in _tweetStore.GetInboxTweets())
+            IEnumerable<Tweet> inboxTweets = _tweetStore.GetInboxTweets();
+
+            RemoveMissingTweets(inboxTweets);
+
+            AddNewTweets(inboxTweets);
+        }
+
+        private void AddNewTweets(IEnumerable<Tweet> inboxTweets)
+        {
+            var addedTweets = 
+                inboxTweets.
+                    Where(inboxTweet => !Tweets.
+                                             Any(tweet => tweet.Id == inboxTweet.Id)).
+                    ToList();
+
+            foreach (Tweet tweet in addedTweets)
                 Tweets.Add(tweet);
+        }
+
+        private void RemoveMissingTweets(IEnumerable<Tweet> inboxTweets)
+        {
+            var removedTweets = 
+                Tweets.
+                    Where(tweet => !inboxTweets.
+                                        Any(inboxTweet => tweet.Id == inboxTweet.Id)).
+                    ToList();
+
+            foreach (Tweet tweet in removedTweets)
+                Tweets.Remove(tweet);
         }
     }
 }
