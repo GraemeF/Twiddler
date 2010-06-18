@@ -34,6 +34,7 @@ namespace Twiddler.TwitterStore
                     {
                         session.Store(tweet);
                         session.SaveChanges();
+                        Updated(this, EventArgs.Empty);
                     }
                 }
         }
