@@ -13,7 +13,7 @@ namespace Twiddler.Services
     public class StoreTimeline : ITimeline
     {
         private readonly ITweetStore _tweetStore;
-        private IDisposable _updateSubscription;
+        private readonly IDisposable _updateSubscription;
 
         public StoreTimeline(ITweetStore tweetStore)
         {
@@ -28,12 +28,19 @@ namespace Twiddler.Services
 
         public void Dispose()
         {
-            throw new NotImplementedException();
+            Dispose(true);
+            GC.SuppressFinalize(this);
         }
 
         public ObservableCollection<Tweet> Tweets { get; private set; }
 
         #endregion
+
+        private void Dispose(bool disposing)
+        {
+            if (disposing)
+                _updateSubscription.Dispose();
+        }
 
         private void UpdateTweets()
         {
@@ -46,7 +53,7 @@ namespace Twiddler.Services
 
         private void AddNewTweets(IEnumerable<Tweet> inboxTweets)
         {
-            var addedTweets = 
+            List<Tweet> addedTweets =
                 inboxTweets.
                     Where(inboxTweet => !Tweets.
                                              Any(tweet => tweet.Id == inboxTweet.Id)).
@@ -58,7 +65,7 @@ namespace Twiddler.Services
 
         private void RemoveMissingTweets(IEnumerable<Tweet> inboxTweets)
         {
-            var removedTweets = 
+            List<Tweet> removedTweets =
                 Tweets.
                     Where(tweet => !inboxTweets.
                                         Any(inboxTweet => tweet.Id == inboxTweet.Id)).
