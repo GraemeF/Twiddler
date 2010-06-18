@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Moq;
 using Twiddler.Core.Models;
 using Twiddler.Core.Services;
@@ -32,7 +33,7 @@ namespace Twiddler.Tests.Services
         }
 
         [Fact]
-        public void GettingTweets_WhenTheStoreIsUpdated_ContainsNewTweets()
+        public void GettingTweets_WhenNewTweetsAreAddedToTheStore_ContainsNewTweets()
         {
             StoreTimeline test = BuildDefaultTestSubject();
             Tweet tweet = New.Tweet;
@@ -44,7 +45,7 @@ namespace Twiddler.Tests.Services
             Assert.True(eventRaised);
         }
 
-        private void StoreInboxTweetsChangesTo(Tweet[] inboxTweets)
+        private void StoreInboxTweetsChangesTo(IEnumerable<Tweet> inboxTweets)
         {
             _fakeStore.
                 Setup(x => x.GetInboxTweets()).
