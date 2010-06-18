@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Caliburn.Core.IoC;
 using Raven.Client;
@@ -57,6 +58,8 @@ namespace Twiddler.TwitterStore
                     Where(x => !x.IsArchived);
             }
         }
+
+        public event EventHandler<EventArgs> Updated = delegate { };
 
         #endregion
     }
