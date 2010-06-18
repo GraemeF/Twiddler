@@ -9,24 +9,6 @@ namespace Twiddler.Tests.Services
     public class MemoryTweetStoreTests
     {
         [Fact]
-        public void AddTweet_GivenANewTweet_ReturnsTrue()
-        {
-            var test = new MemoryTweetStore();
-
-            Assert.True(test.AddTweet(New.Tweet));
-        }
-
-        [Fact]
-        public void AddTweet_GivenADuplicatedTweet_ReturnsFalse()
-        {
-            var test = new MemoryTweetStore();
-
-            test.AddTweet(New.Tweet);
-
-            Assert.False(test.AddTweet(New.Tweet));
-        }
-
-        [Fact]
         public void GetTweet_GivenAKnownTweet_ReturnsTheTweet()
         {
             var test = new MemoryTweetStore();

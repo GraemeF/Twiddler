@@ -104,7 +104,6 @@
     <Compile Include="Commands\AuthorizeCommandTests.cs" />
     <Compile Include="Commands\DeauthorizeCommandTests.cs" />
     <Compile Include="Services\StoreTimelineTests.cs" />
-    <Compile Include="Services\SubscribingTimelineTests.cs" />
     <Compile Include="Models\TweetTests.cs" />
     <Compile Include="Models\TwitterCredentialsTests.cs" />
     <Compile Include="Screens\ImageThumbnailScreenTests.cs" />
@@ -115,7 +114,7 @@
     <Compile Include="Services\ImageServices\YFrogDecoderTests.cs" />
     <Compile Include="Services\LinkThumbnailScreenFactoryTests.cs" />
     <Compile Include="Services\RequestConductorTests.cs" />
-    <Compile Include="Services\SelfUpdatingTwitterStoreTests.cs" />
+    <Compile Include="Services\TwitterStoreUpdaterTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Screens\ShellScreenTests.cs" />
     <Compile Include="Screens\StatusScreenTests.cs" />

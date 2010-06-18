@@ -4,6 +4,7 @@ using System.Linq;
 using Caliburn.Core.IoC;
 using Caliburn.PresentationFramework.Screens;
 using Twiddler.Core.Models;
+using Twiddler.Core.Services;
 using Twiddler.Screens.Interfaces;
 using Twiddler.Services.Interfaces;
 
@@ -13,11 +14,11 @@ namespace Twiddler.Screens
     public class LoadingTweetScreen : ScreenConductor<IScreen>, ILoadingTweetScreen
     {
         private readonly ITweetPlaceholderScreen _placeholderScreen;
-        private readonly ISelfUpdatingTweetStore _store;
+        private readonly ITweetStore _store;
         private readonly Factories.TweetScreenFactory _tweetScreenFactory;
 
         public LoadingTweetScreen(ITweetPlaceholderScreen placeholderScreen,
-                                  ISelfUpdatingTweetStore store,
+                                  ITweetStore store,
                                   string id,
                                   Factories.TweetScreenFactory tweetScreenFactory)
         {

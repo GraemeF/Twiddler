@@ -11,9 +11,9 @@ namespace Twiddler.Services
 
         #region ITweetResolver Members
 
-        public bool AddTweet(Tweet tweet)
+        public void AddTweet(Tweet tweet)
         {
-            return _tweets.TryAdd(tweet.Id, tweet);
+            _tweets.TryAdd(tweet.Id, tweet);
         }
 
         public Tweet GetTweet(string id)

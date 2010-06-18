@@ -8,13 +8,13 @@ using Twiddler.Services.Interfaces;
 namespace Twiddler.Services
 {
     [Singleton(typeof (ISelfUpdatingTweetStore))]
-    public class SelfUpdatingTwitterStore : ISelfUpdatingTweetStore
+    public class TwitterStoreUpdater : ISelfUpdatingTweetStore
     {
         private readonly Subject<Tweet> _inboxTweets = new Subject<Tweet>();
         private readonly IRequestConductor _requestConductor;
         private readonly ITweetResolver _store;
 
-        public SelfUpdatingTwitterStore(IRequestConductor requestConductor, ITweetResolver store)
+        public TwitterStoreUpdater(IRequestConductor requestConductor, ITweetResolver store)
         {
             _requestConductor = requestConductor;
             _store = store;
@@ -24,19 +24,9 @@ namespace Twiddler.Services
 
         #region ISelfUpdatingTweetStore Members
 
-        public IObservable<Tweet> InboxTweets
+        public void AddTweet(Tweet tweet)
         {
-            get { return _inboxTweets; }
-        }
-
-        public bool AddTweet(Tweet tweet)
-        {
-            if (_store.AddTweet(tweet))
-            {
-                _inboxTweets.OnNext(tweet);
-                return true;
-            }
-            return false;
+            _store.AddTweet(tweet);
         }
 
         public Tweet GetTweet(string id)

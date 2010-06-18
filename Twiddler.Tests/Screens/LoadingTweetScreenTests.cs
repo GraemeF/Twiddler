@@ -1,6 +1,7 @@
 ﻿using System.Threading;
 using Moq;
 using Twiddler.Core.Models;
+using Twiddler.Core.Services;
 using Twiddler.Screens;
 using Twiddler.Screens.Interfaces;
 using Twiddler.Services.Interfaces;
@@ -11,7 +12,7 @@ namespace Twiddler.Tests.Screens
 {
     public class LoadingTweetScreenTests
     {
-        private readonly Mock<ISelfUpdatingTweetStore> _fakeStore = new Mock<ISelfUpdatingTweetStore>();
+        private readonly Mock<ITweetStore> _fakeStore = new Mock<ITweetStore>();
         private readonly Mock<ITweetPlaceholderScreen> _fakeTweetPlaceholderScreen = new Mock<ITweetPlaceholderScreen>();
         private readonly Tweet _tweet = New.Tweet;
         private Mock<ITweetScreen> _fakeTweetScreen;

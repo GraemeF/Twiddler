@@ -23,7 +23,7 @@ namespace Twiddler.TwitterStore
 
         #region ITweetStore Members
 
-        public bool AddTweet(Tweet tweet)
+        public void AddTweet(Tweet tweet)
         {
             lock (_mutex)
                 using (IDocumentSession session = _documentStore.OpenSession())
@@ -34,10 +34,8 @@ namespace Twiddler.TwitterStore
                     {
                         session.Store(tweet);
                         session.SaveChanges();
-                        return true;
                     }
                 }
-            return false;
         }
 
         public Tweet GetTweet(string id)
