@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using Moq;
 using Twiddler.Core.Models;
 using Twiddler.Screens;
@@ -22,7 +23,7 @@ namespace Twiddler.Tests.Screens
         [Fact]
         public void GettingScreens_WhenThereAreNoTweets_IsEmpty()
         {
-            var test = new TimelineScreen(_fakeTimeline.Object, null);
+            var test = new TimelineScreen(new Lazy<ITimeline>(() => _fakeTimeline.Object), null);
 
             Assert.Empty(test.Screens);
         }
@@ -32,7 +33,7 @@ namespace Twiddler.Tests.Screens
         {
             var mockScreen = new Mock<ITweetScreen>();
 
-            var test = new TimelineScreen(_fakeTimeline.Object, x => mockScreen.Object);
+            var test = new TimelineScreen(new Lazy<ITimeline>(() => _fakeTimeline.Object), x => mockScreen.Object);
             test.Initialize();
 
             _tweets.Add(New.Tweet);

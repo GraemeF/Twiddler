@@ -14,12 +14,12 @@ namespace Twiddler.Screens
     public class TimelineScreen : ScreenConductor<IScreen>.WithCollection.AllScreensActive, ITimelineScreen
     {
         private readonly Factories.TweetScreenFactory _screenFactory;
-        private readonly ITimeline _timeline;
+        private readonly Lazy<ITimeline> _timeline;
         private IObservable<Tweet> _tweetAdded;
         private IObservable<Tweet> _tweetRemoved;
         private IObservable<IEvent<NotifyCollectionChangedEventArgs>> _tweetsChanged;
 
-        public TimelineScreen(ITimeline timeline, Factories.TweetScreenFactory screenFactory) : base(false)
+        public TimelineScreen(Lazy<ITimeline> timeline, Factories.TweetScreenFactory screenFactory) : base(false)
         {
             _timeline = timeline;
             _screenFactory = screenFactory;
@@ -52,10 +52,10 @@ namespace Twiddler.Screens
             _tweetsChanged =
                 Observable.FromEvent((EventHandler<NotifyCollectionChangedEventArgs> ev)
                                      => new NotifyCollectionChangedEventHandler(ev),
-                                     ev => _timeline.Tweets.CollectionChanged += ev,
-                                     ev => _timeline.Tweets.CollectionChanged -= ev);
+                                     ev => _timeline.Value.Tweets.CollectionChanged += ev,
+                                     ev => _timeline.Value.Tweets.CollectionChanged -= ev);
 
-            _tweetAdded = _timeline.Tweets.
+            _tweetAdded = _timeline.Value.Tweets.
                 ToObservable().
                 Concat(_tweetsChanged.
                            SelectMany(c => c.EventArgs.NewItems.

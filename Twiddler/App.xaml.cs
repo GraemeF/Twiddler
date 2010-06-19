@@ -9,6 +9,7 @@ using Caliburn.Autofac;
 using Caliburn.PresentationFramework.ApplicationModel;
 using Microsoft.Practices.ServiceLocation;
 using Twiddler.Screens.Interfaces;
+using Twiddler.Services.Interfaces;
 
 namespace Twiddler
 {
@@ -70,6 +71,10 @@ namespace Twiddler
 
             builder.RegisterInstance(new CompositionContainer(new AssemblyCatalog(Assembly.GetExecutingAssembly())));
             builder.RegisterInstance<Factories.TweetFactory>(Factories.CreateTweetFromTwitterStatus);
+
+            builder.
+                Register(x => new Lazy<ITimeline>(() => x.Resolve<ITimeline>())).
+                As<Lazy<ITimeline>>();
 
             return builder;
         }
