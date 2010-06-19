@@ -1,4 +1,5 @@
-﻿using Twiddler.Core.Models;
+﻿using System.Collections.Generic;
+using Twiddler.Core.Models;
 
 namespace Twiddler.Core.Services
 {
@@ -9,5 +10,7 @@ namespace Twiddler.Core.Services
         /// </summary>
         /// <param name="tweet">Tweet to add.</param>
         void Add(Tweet tweet);
+
+        void Add(IEnumerable<Tweet> tweets);
     }
 }

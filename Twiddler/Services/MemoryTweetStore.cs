@@ -1,4 +1,5 @@
 using System.Collections.Concurrent;
+using System.Collections.Generic;
 using Twiddler.Core.Models;
 using Twiddler.Core.Services;
 
@@ -14,6 +15,14 @@ namespace Twiddler.Services
         public void Add(Tweet tweet)
         {
             _tweets.TryAdd(tweet.Id, tweet);
+        }
+
+        public void Add(IEnumerable<Tweet> tweets)
+        {
+            foreach (Tweet tweet in tweets)
+            {
+                Add(tweet);
+            }
         }
 
         public Tweet GetTweet(string id)

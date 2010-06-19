@@ -39,6 +39,19 @@ namespace Twiddler.TwitterStore
                 }
         }
 
+        public void Add(IEnumerable<Tweet> tweets)
+        {
+            lock (_mutex)
+                using (IDocumentSession session = _documentStore.OpenSession())
+                {
+                    foreach (Tweet tweet in tweets)
+                        session.Store(tweet);
+
+                    session.SaveChanges();
+                }
+            Updated(this, EventArgs.Empty);
+        }
+
         public Tweet GetTweet(string id)
         {
             lock (_mutex)
@@ -54,7 +67,8 @@ namespace Twiddler.TwitterStore
             {
                 return session.
                     Query<Tweet>("TweetsByIsArchived").
-                    Where(x => !x.IsArchived);
+                    Where(x => !x.IsArchived).
+                    ToList();
             }
         }
 

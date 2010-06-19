@@ -4,6 +4,7 @@ using System.Collections.Specialized;
 using System.Linq;
 using Caliburn.Core.IoC;
 using Caliburn.PresentationFramework.Screens;
+using Twiddler.Core;
 using Twiddler.Core.Models;
 using Twiddler.Screens.Interfaces;
 using Twiddler.Services.Interfaces;
@@ -58,12 +59,14 @@ namespace Twiddler.Screens
             _tweetAdded = _timeline.Value.Tweets.
                 ToObservable().
                 Concat(_tweetsChanged.
-                           SelectMany(c => c.EventArgs.NewItems.
-                                               Cast<Tweet>().
+                           SelectMany(c => c.EventArgs.
+                                               SafeNewItems<Tweet>().
                                                ToObservable()));
 
             _tweetRemoved = _tweetsChanged.
-                SelectMany(c => c.EventArgs.OldItems.Cast<Tweet>().ToObservable());
+                SelectMany(c => c.EventArgs.
+                                    SafeOldItems<Tweet>().
+                                    ToObservable());
 
             _tweetAdded.Subscribe(AddTweetScreen);
         }

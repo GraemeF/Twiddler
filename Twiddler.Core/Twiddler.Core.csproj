@@ -52,6 +52,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CollectionExtensions.cs" />
     <Compile Include="Models\Tweet.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="NoCoverageAttribute.cs" />
