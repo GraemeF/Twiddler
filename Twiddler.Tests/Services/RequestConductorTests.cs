@@ -50,15 +50,15 @@ namespace Twiddler.Tests.Services
         [Fact]
         public void Start_WhenTweetsArriveFromRequestor_AddsTweetsToSink()
         {
-            Tweet tweet = New.Tweet;
-            _fakeRequester.Setup(x => x.RequestTweets()).Returns(new[] {tweet});
+            var tweets = new Tweet[] {New.Tweet};
+            _fakeRequester.Setup(x => x.RequestTweets()).Returns(tweets);
 
             ClientAuthorizationStatusChangesTo(AuthorizationStatus.Authorized);
 
             RequestConductor test = BuildDefaultTestSubject();
             test.Start(_fakeSink.Object);
 
-            _fakeSink.Verify(x => x.Add(tweet));
+            _fakeSink.Verify(x => x.Add(tweets));
         }
 
         private void ClientAuthorizationStatusChangesTo(AuthorizationStatus authorizationStatus)
