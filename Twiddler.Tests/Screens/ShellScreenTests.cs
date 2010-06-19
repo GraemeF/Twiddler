@@ -1,6 +1,7 @@
 ﻿using Moq;
 using Twiddler.Screens;
 using Twiddler.Screens.Interfaces;
+using Twiddler.Services.Interfaces;
 using Xunit;
 
 namespace Twiddler.Tests.Screens
@@ -9,11 +10,12 @@ namespace Twiddler.Tests.Screens
     {
         private readonly Mock<IStatusScreen> _fakeStatus = new Mock<IStatusScreen>();
         private readonly Mock<ITimelineScreen> _fakeTimeline = new Mock<ITimelineScreen>();
+        private Mock<ITwitterStoreUpdater> _fakeUpdater = new Mock<ITwitterStoreUpdater>();
 
         [Fact]
         public void GettingTimeline_WhenInitialized_ReturnsInitializedTimeline()
         {
-            var test = new ShellScreen(_fakeTimeline.Object, _fakeStatus.Object);
+            var test = BuildDefaultTestSubject();
             test.Initialize();
 
             _fakeTimeline.Verify(x => x.Initialize());
@@ -23,11 +25,25 @@ namespace Twiddler.Tests.Screens
         [Fact]
         public void GettingStatus_WhenInitialized_ReturnsInitializedStatus()
         {
-            var test = new ShellScreen(_fakeTimeline.Object, _fakeStatus.Object);
+            var test = BuildDefaultTestSubject();
             test.Initialize();
 
             _fakeStatus.Verify(x => x.Initialize());
             Assert.Same(_fakeStatus.Object, test.Status);
+        }
+
+        [Fact]
+        public void Initialize__StartsRequestingTweets()
+        {
+            var test = BuildDefaultTestSubject();
+            test.Initialize();
+
+            _fakeUpdater.Verify(x => x.Start());
+        }
+
+        private ShellScreen BuildDefaultTestSubject()
+        {
+            return new ShellScreen(_fakeTimeline.Object, _fakeStatus.Object, _fakeUpdater.Object);
         }
     }
 }

@@ -244,7 +244,7 @@
     <Compile Include="Commands\Interfaces\IAuthorizeCommand.cs" />
     <Compile Include="Screens\Interfaces\ILoadingTweetScreen.cs" />
     <Compile Include="Screens\LoadingTweetScreen.cs" />
-    <Compile Include="Services\Interfaces\ISelfUpdatingTweetStore.cs" />
+    <Compile Include="Services\Interfaces\ITwitterStoreUpdater.cs" />
     <Compile Include="Services\MemoryTweetStore.cs" />
     <Compile Include="Commands\Interfaces\IDeauthorizeCommand.cs" />
     <Compile Include="Services\Interfaces\ICredentialsStore.cs" />

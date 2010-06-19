@@ -1,10 +1,7 @@
-using System;
 using Moq;
-using Twiddler.Core.Models;
 using Twiddler.Core.Services;
 using Twiddler.Services;
 using Twiddler.Services.Interfaces;
-using Twiddler.TestData;
 using Xunit;
 
 namespace Twiddler.Tests.Services
@@ -15,25 +12,12 @@ namespace Twiddler.Tests.Services
         private readonly Mock<ITweetStore> _fakeStore = new Mock<ITweetStore>();
 
         [Fact]
-        public void AddTweet_GivenANewTweet_AddsTweetToStore()
+        public void Start__StartsRequestingTweetsForStore()
         {
             TwitterStoreUpdater test = BuildDefaultTestSubject();
+            test.Start();
 
-            Tweet tweet = New.Tweet;
-            test.AddTweet(tweet);
-
-            _fakeStore.Verify(x => x.AddTweet(tweet));
-        }
-
-        [Fact]
-        public void GetTweet__GetsTweetFromStore()
-        {
-            TwitterStoreUpdater test = BuildDefaultTestSubject();
-
-            Tweet tweet = New.Tweet;
-            _fakeStore.Setup(x => x.GetTweet(tweet.Id)).Returns(tweet);
-
-            Assert.Same(tweet, test.GetTweet(tweet.Id));
+            _fakeRequestConductor.Verify(x => x.Start(_fakeStore.Object));
         }
 
         private TwitterStoreUpdater BuildDefaultTestSubject()
