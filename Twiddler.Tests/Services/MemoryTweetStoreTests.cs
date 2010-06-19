@@ -14,7 +14,7 @@ namespace Twiddler.Tests.Services
             var test = new MemoryTweetStore();
 
             Tweet tweet = New.Tweet;
-            test.AddTweet(tweet);
+            test.Add(tweet);
 
             Assert.Same(tweet, test.GetTweet(tweet.Id));
         }

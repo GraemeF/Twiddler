@@ -8,6 +8,6 @@ namespace Twiddler.Core.Services
         /// Adds a tweet to the store.
         /// </summary>
         /// <param name="tweet">Tweet to add.</param>
-        void AddTweet(Tweet tweet);
+        void Add(Tweet tweet);
     }
 }

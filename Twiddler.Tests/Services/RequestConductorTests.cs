@@ -58,7 +58,7 @@ namespace Twiddler.Tests.Services
             RequestConductor test = BuildDefaultTestSubject();
             test.Start(_fakeSink.Object);
 
-            _fakeSink.Verify(x => x.AddTweet(tweet));
+            _fakeSink.Verify(x => x.Add(tweet));
         }
 
         private void ClientAuthorizationStatusChangesTo(AuthorizationStatus authorizationStatus)

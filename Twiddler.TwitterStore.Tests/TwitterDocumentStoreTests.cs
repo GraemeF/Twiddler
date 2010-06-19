@@ -25,25 +25,25 @@ namespace Twiddler.TwitterStore.Tests
         }
 
         [Fact]
-        public void AddTweet_GivenTweet_AddsTweetToDocumentStore()
+        public void Add_GivenTweet_AddsTweetToDocumentStore()
         {
             var test = new TwitterDocumentStore(_fakeDocumentStoreFactory.Object);
 
             Tweet tweet = New.Tweet;
-            test.AddTweet(tweet);
+            test.Add(tweet);
 
             _fakeDocumentSession.Verify(x => x.Store(tweet));
             _fakeDocumentSession.Verify(x => x.Dispose());
         }
 
         [Fact]
-        public void AddTweet_GivenTweet_RaisesUpdated()
+        public void Add_GivenTweet_RaisesUpdated()
         {
             var test = new TwitterDocumentStore(_fakeDocumentStoreFactory.Object);
 
             bool eventRaised = false;
             test.Updated += (sender, args) => eventRaised = true;
-            test.AddTweet(New.Tweet);
+            test.Add(New.Tweet);
 
             Assert.True(eventRaised);
         }

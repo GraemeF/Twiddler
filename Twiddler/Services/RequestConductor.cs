@@ -77,7 +77,7 @@ namespace Twiddler.Services
         {
             foreach (Tweet tweet in tweetRequester.RequestTweets())
             {
-                _tweetSink.AddTweet(tweet);
+                _tweetSink.Add(tweet);
             }
         }
 
