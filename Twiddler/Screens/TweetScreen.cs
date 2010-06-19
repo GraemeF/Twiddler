@@ -23,6 +23,7 @@ namespace Twiddler.Screens
             : base(false)
         {
             _tweet = tweet;
+            Id = _tweet.Id;
             _linkThumbnailScreenFactory = linkThumbnailScreenFactory;
             _loadingTweetScreenFactory = loadingTweetScreenFactory;
             Links = new BindableCollection<ILinkThumbnailScreen>();
@@ -42,6 +43,8 @@ namespace Twiddler.Screens
         {
             get { return _tweet.CreatedDate; }
         }
+
+        public string Id { get; private set; }
 
         public BindableCollection<ILinkThumbnailScreen> Links { get; private set; }
 
