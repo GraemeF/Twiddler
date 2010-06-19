@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace Twiddler.Core
 {
-    public static class CollectionExtensions
+    public static class CollectionChangedExtensions
     {
         public static IEnumerable<T> SafeNewItems<T>(this NotifyCollectionChangedEventArgs args)
         {
