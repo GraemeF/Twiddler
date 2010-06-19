@@ -12,7 +12,7 @@ using Twiddler.Services.Interfaces;
 namespace Twiddler.Screens
 {
     [PerRequest(typeof (ITimelineScreen))]
-    public class TimelineScreen : ScreenConductor<IScreen>.WithCollection.AllScreensActive, ITimelineScreen
+    public class TimelineScreen : ScreenConductor<ITweetScreen>.WithCollection.AllScreensActive, ITimelineScreen
     {
         private readonly Factories.TweetScreenFactory _screenFactory;
         private readonly Lazy<ITimeline> _timeline;
@@ -69,11 +69,17 @@ namespace Twiddler.Screens
                                     ToObservable());
 
             _tweetAdded.Subscribe(AddTweetScreen);
+            _tweetRemoved.Subscribe(RemoveTweetScreen);
         }
 
         private void AddTweetScreen(Tweet tweet)
         {
             this.OpenScreen(_screenFactory(tweet));
+        }
+
+        private void RemoveTweetScreen(Tweet tweet)
+        {
+            this.ShutdownScreen(Screens.First(x => x.Id == tweet.Id));
         }
     }
 }

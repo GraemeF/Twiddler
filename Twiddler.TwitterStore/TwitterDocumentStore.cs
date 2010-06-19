@@ -42,6 +42,7 @@ namespace Twiddler.TwitterStore
         public void Add(IEnumerable<Tweet> tweets)
         {
             lock (_mutex)
+            {
                 using (IDocumentSession session = _documentStore.OpenSession())
                 {
                     foreach (Tweet tweet in tweets)
@@ -49,7 +50,8 @@ namespace Twiddler.TwitterStore
 
                     session.SaveChanges();
                 }
-            Updated(this, EventArgs.Empty);
+                Updated(this, EventArgs.Empty);
+            }
         }
 
         public Tweet GetTweet(string id)

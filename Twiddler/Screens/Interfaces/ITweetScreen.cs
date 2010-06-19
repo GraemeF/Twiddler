@@ -4,5 +4,6 @@ namespace Twiddler.Screens.Interfaces
 {
     public interface ITweetScreen : IScreen
     {
+        string Id { get; }
     }
 }
