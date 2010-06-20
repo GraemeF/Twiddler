@@ -44,8 +44,6 @@ namespace Twiddler.Screens
             get { return _tweet.CreatedDate; }
         }
 
-        public string Id { get; private set; }
-
         public BindableCollection<ILinkThumbnailScreen> Links { get; private set; }
 
         public ILoadingTweetScreen InReplyToTweet { get; private set; }
@@ -54,6 +52,12 @@ namespace Twiddler.Screens
         {
             get { return _tweet.IsRead ? 0.5 : 1.0; }
         }
+
+        #region ITweetScreen Members
+
+        public string Id { get; private set; }
+
+        #endregion
 
         protected override void OnInitialize()
         {
@@ -72,7 +76,6 @@ namespace Twiddler.Screens
             {
                 ILoadingTweetScreen screen = _loadingTweetScreenFactory(_tweet.InReplyToStatusId);
                 screen.Initialize();
-                this.OpenScreen(screen);
                 InReplyToTweet = screen;
                 NotifyOfPropertyChange(() => InReplyToTweet);
             }

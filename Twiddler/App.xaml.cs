@@ -72,10 +72,6 @@ namespace Twiddler
             builder.RegisterInstance(new CompositionContainer(new AssemblyCatalog(Assembly.GetExecutingAssembly())));
             builder.RegisterInstance<Factories.TweetFactory>(Factories.CreateTweetFromTwitterStatus);
 
-            builder.
-                Register(x => new Lazy<ITimeline>(() => x.Resolve<ITimeline>())).
-                As<Lazy<ITimeline>>();
-
             return builder;
         }
 

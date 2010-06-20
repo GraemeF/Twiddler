@@ -36,6 +36,7 @@ namespace Twiddler.TwitterStore
                              new IndexDefinition<Tweet>
                                  {
                                      Map = docs => from doc in docs
+                                                   orderby doc.CreatedDate descending 
                                                    select new {doc.IsArchived}
                                  });
             }

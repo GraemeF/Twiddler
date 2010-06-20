@@ -35,8 +35,18 @@ namespace Twiddler
                            Status = status.Text,
                            User = CreateUserFromTwitterUser(status.User),
                            CreatedDate = status.CreatedDate,
-                           Links = status.TextLinks.ToList()
+                           Links = status.TextLinks.ToList(),
+                           InReplyToStatusId = GetInReplyToStatusId(status),
+                           IsArchived = false,
+                           IsRead = false
                        };
+        }
+
+        private static string GetInReplyToStatusId(TwitterStatus status)
+        {
+            return status.InReplyToStatusId.HasValue
+                       ? status.InReplyToStatusId.ToString()
+                       : null;
         }
 
         private static User CreateUserFromTwitterUser(TwitterUser user)

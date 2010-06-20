@@ -74,7 +74,9 @@ namespace Twiddler.Screens
 
         private void AddTweetScreen(Tweet tweet)
         {
-            this.OpenScreen(_screenFactory(tweet));
+            ITweetScreen screen = _screenFactory(tweet);
+            screen.Initialize();
+            this.OpenScreen(screen);
         }
 
         private void RemoveTweetScreen(Tweet tweet)
