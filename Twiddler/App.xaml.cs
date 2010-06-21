@@ -9,7 +9,6 @@ using Caliburn.Autofac;
 using Caliburn.PresentationFramework.ApplicationModel;
 using Microsoft.Practices.ServiceLocation;
 using Twiddler.Screens.Interfaces;
-using Twiddler.Services.Interfaces;
 
 namespace Twiddler
 {
