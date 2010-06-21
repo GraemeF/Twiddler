@@ -55,7 +55,7 @@ namespace Twiddler.Screens
         private void MarkSelectionAsRead()
         {
             if (_selection != null)
-                _selection.MarkAsRead();
+                _selection.MarkAsReadCommand.Execute(null);
         }
 
         private void UnsubscribeFromTweets()

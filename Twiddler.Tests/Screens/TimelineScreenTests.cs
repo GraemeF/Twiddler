@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Windows.Input;
 using Moq;
 using Twiddler.Core.Models;
 using Twiddler.Screens;
@@ -46,6 +47,10 @@ namespace Twiddler.Tests.Screens
         public void SettingSelection_WhenATweetWasSelected_MarksTweetAsRead()
         {
             var mockScreen = new Mock<ITweetScreen>();
+            var mockCommand = new Mock<ICommand>();
+            mockScreen.
+                Setup(x => x.MarkAsReadCommand).
+                Returns(mockCommand.Object);
 
             var test = new TimelineScreen(new Lazy<ITimeline>(() => _fakeTimeline.Object), x => mockScreen.Object);
             test.Initialize();
@@ -55,7 +60,7 @@ namespace Twiddler.Tests.Screens
             test.Selection = mockScreen.Object;
             test.Selection = null;
             
-            mockScreen.Verify(x => x.MarkAsRead());
+            mockCommand.Verify(x => x.Execute(null));
         }
     }
 }
