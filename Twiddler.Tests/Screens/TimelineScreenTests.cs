@@ -41,5 +41,21 @@ namespace Twiddler.Tests.Screens
             Assert.Contains(mockScreen.Object, test.Screens);
             mockScreen.Verify(x => x.Initialize());
         }
+
+        [Fact]
+        public void SettingSelection_WhenATweetWasSelected_MarksTweetAsRead()
+        {
+            var mockScreen = new Mock<ITweetScreen>();
+
+            var test = new TimelineScreen(new Lazy<ITimeline>(() => _fakeTimeline.Object), x => mockScreen.Object);
+            test.Initialize();
+
+            _tweets.Add(New.Tweet);
+
+            test.Selection = mockScreen.Object;
+            test.Selection = null;
+            
+            mockScreen.Verify(x => x.MarkAsRead());
+        }
     }
 }

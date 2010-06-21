@@ -57,6 +57,11 @@ namespace Twiddler.Screens
 
         public string Id { get; private set; }
 
+        public void MarkAsRead()
+        {
+            _tweet.MarkAsRead();
+        }
+
         #endregion
 
         protected override void OnInitialize()
@@ -84,9 +89,7 @@ namespace Twiddler.Screens
         private void OpenLinksFromTweet()
         {
             foreach (Uri textLink in _tweet.Links)
-            {
                 OpenLink(textLink);
-            }
         }
 
         private void OpenLink(Uri uri)

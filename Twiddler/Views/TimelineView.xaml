@@ -1,31 +1,19 @@
-﻿<UserControl x:Class="Twiddler.Views.TimelineView"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:cal="clr-namespace:Caliburn.PresentationFramework.Views;assembly=Caliburn.PresentationFramework"
-             xmlns:scm="clr-namespace:System.ComponentModel;assembly=WindowsBase">
-	<UserControl.Resources>
-		<ItemsPanelTemplate x:Key="ItemsWrapPanel">
-			<WrapPanel IsItemsHost="True"
-			           Orientation="Vertical" />
-		</ItemsPanelTemplate>
-		<CollectionViewSource x:Key="SortedTweets"
-		                      Source="{Binding Screens}">
-			<CollectionViewSource.SortDescriptions>
-				<scm:SortDescription PropertyName="Id"
-				                     Direction="Descending" />
-			</CollectionViewSource.SortDescriptions>
-		</CollectionViewSource>
-	</UserControl.Resources>
-	<ListBox ItemsSource="{Binding Source={StaticResource SortedTweets}}"
-	         ItemsPanel="{DynamicResource ItemsWrapPanel}"
-	         HorizontalContentAlignment="Stretch"
-	         ScrollViewer.VerticalScrollBarVisibility="Disabled" Background="{x:Null}" BorderBrush="{x:Null}">
-		<ListBox.ItemTemplate>
-			<DataTemplate>
-				<ContentControl cal:View.Model="{Binding}"
-				                Margin="2"
-				                Width="300" />
-			</DataTemplate>
-		</ListBox.ItemTemplate>
-	</ListBox>
+﻿<UserControl x:Class="Twiddler.Views.TimelineView" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:cal="clr-namespace:Caliburn.PresentationFramework.Views;assembly=Caliburn.PresentationFramework" xmlns:scm="clr-namespace:System.ComponentModel;assembly=WindowsBase">
+    <UserControl.Resources>
+        <ItemsPanelTemplate x:Key="ItemsWrapPanel">
+            <WrapPanel IsItemsHost="True" Orientation="Vertical" />
+        </ItemsPanelTemplate>
+        <CollectionViewSource x:Key="SortedTweets" Source="{Binding Screens}">
+            <CollectionViewSource.SortDescriptions>
+                <scm:SortDescription PropertyName="Id" Direction="Descending" />
+            </CollectionViewSource.SortDescriptions>
+        </CollectionViewSource>
+    </UserControl.Resources>
+    <ListBox ItemsSource="{Binding Source={StaticResource SortedTweets}}" ItemsPanel="{DynamicResource ItemsWrapPanel}" HorizontalContentAlignment="Stretch" ScrollViewer.VerticalScrollBarVisibility="Disabled" Background="{x:Null}" BorderBrush="{x:Null}" IsSynchronizedWithCurrentItem="True" SelectedItem="{Binding Selection}">
+        <ListBox.ItemTemplate>
+            <DataTemplate>
+                <ContentControl cal:View.Model="{Binding}" Margin="2" Width="300" />
+            </DataTemplate>
+        </ListBox.ItemTemplate>
+    </ListBox>
 </UserControl>

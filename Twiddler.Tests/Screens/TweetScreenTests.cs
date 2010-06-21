@@ -20,6 +20,16 @@ namespace Twiddler.Tests.Screens
         private readonly Tweet _tweet = New.Tweet;
 
         [Fact]
+        public void MarkAsRead__MarksTweetAsRead()
+        {
+            TweetScreen test = BuildDefaultTestSubject();
+
+            test.MarkAsRead();
+
+            Assert.True(_tweet.IsRead);
+        }
+
+        [Fact]
         public void GettingId__ReturnsTweetId()
         {
             TweetScreen test = BuildDefaultTestSubject();

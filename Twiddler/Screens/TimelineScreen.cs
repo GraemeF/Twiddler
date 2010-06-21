@@ -16,6 +16,7 @@ namespace Twiddler.Screens
     {
         private readonly Factories.TweetScreenFactory _screenFactory;
         private readonly Lazy<ITimeline> _timeline;
+        private ITweetScreen _selection;
         private IObservable<Tweet> _tweetAdded;
         private IObservable<Tweet> _tweetRemoved;
         private IObservable<IEvent<NotifyCollectionChangedEventArgs>> _tweetsChanged;
@@ -24,6 +25,20 @@ namespace Twiddler.Screens
         {
             _timeline = timeline;
             _screenFactory = screenFactory;
+        }
+
+        public ITweetScreen Selection
+        {
+            get { return _selection; }
+            set
+            {
+                if (_selection != value)
+                {
+                    MarkSelectionAsRead();
+                    _selection = value;
+                    NotifyOfPropertyChange(() => Selection);
+                }
+            }
         }
 
         #region ITimelineScreen Members
@@ -36,6 +51,12 @@ namespace Twiddler.Screens
         }
 
         #endregion
+
+        private void MarkSelectionAsRead()
+        {
+            if (_selection != null)
+                _selection.MarkAsRead();
+        }
 
         private void UnsubscribeFromTweets()
         {
