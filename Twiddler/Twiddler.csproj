@@ -201,6 +201,7 @@
     <Compile Include="Commands\Interfaces\IArchiveTweetCommand.cs" />
     <Compile Include="Commands\Interfaces\IMarkTweetAsReadCommand.cs" />
     <Compile Include="Commands\Interfaces\IOpenLinkCommand.cs" />
+    <Compile Include="Commands\MarkTweetAsReadCommand.cs" />
     <Compile Include="Commands\OpenLinkCommand.cs" />
     <Compile Include="Screens\Interfaces\ILinkThumbnailScreen.cs" />
     <Compile Include="Screens\Interfaces\IImageThumbnailScreen.cs" />

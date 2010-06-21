@@ -2,7 +2,7 @@
 
 namespace Twiddler.Commands.Interfaces
 {
-    public interface IMarkTweetAsReadCommand:ICommand
+    public interface IMarkTweetAsReadCommand : ICommand
     {
     }
 }

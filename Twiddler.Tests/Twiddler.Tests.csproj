@@ -99,6 +99,7 @@
     <Compile Include="Commands\ArchiveTweetCommandTests.cs" />
     <Compile Include="Commands\AuthorizeCommandTests.cs" />
     <Compile Include="Commands\DeauthorizeCommandTests.cs" />
+    <Compile Include="Commands\MarkTweetAsReadCommandTests.cs" />
     <Compile Include="Services\StoreTimelineTests.cs" />
     <Compile Include="Models\TweetTests.cs" />
     <Compile Include="Models\TwitterCredentialsTests.cs" />

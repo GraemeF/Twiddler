@@ -14,21 +14,20 @@ namespace Twiddler.Tests.Screens
 {
     public class TweetScreenTests
     {
+        private readonly Mock<IMarkTweetAsReadCommand> _fakeMarkAsReadCommand = new Mock<IMarkTweetAsReadCommand>();
+
         private readonly Mock<ILinkThumbnailScreenFactory> _fakeThumbnailFactory =
             new Mock<ILinkThumbnailScreenFactory>();
 
         private readonly Mock<ILinkThumbnailScreen> _fakeThumbnailScreen = new Mock<ILinkThumbnailScreen>();
         private readonly Tweet _tweet = New.Tweet;
-        private Mock<IMarkTweetAsReadCommand> _fakeMarkAsReadCommand=new Mock<IMarkTweetAsReadCommand>();
 
         [Fact]
         public void GettingMarkAsReadCommand__ReturnsCommand()
         {
             TweetScreen test = BuildDefaultTestSubject();
 
-            Assert.Same(_fakeMarkAsReadCommand.Object,test.MarkAsReadCommand);
-
-            Assert.True(_tweet.IsRead);
+            Assert.Same(_fakeMarkAsReadCommand.Object, test.MarkAsReadCommand);
         }
 
         [Fact]
