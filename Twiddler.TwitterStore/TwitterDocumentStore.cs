@@ -28,13 +28,9 @@ namespace Twiddler.TwitterStore
             lock (_mutex)
                 using (IDocumentSession session = _documentStore.OpenSession())
                 {
-                    var existingEntry = session.Load<Tweet>(tweet.Id)!=null;
-
-                        session.Store(tweet);
-                        session.SaveChanges();
-
-                        if (existingEntry == null)
-                            Updated(this, EventArgs.Empty);
+                    session.Store(tweet);
+                    session.SaveChanges();
+                    Updated(this, EventArgs.Empty);
                 }
         }
 
