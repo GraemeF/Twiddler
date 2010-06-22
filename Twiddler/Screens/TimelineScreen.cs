@@ -4,7 +4,6 @@ using System.Collections.Specialized;
 using System.Linq;
 using Caliburn.Core.IoC;
 using Caliburn.PresentationFramework.Screens;
-using Twiddler.Commands.Interfaces;
 using Twiddler.Core;
 using Twiddler.Core.Models;
 using Twiddler.Screens.Interfaces;
@@ -22,17 +21,11 @@ namespace Twiddler.Screens
         private IObservable<Tweet> _tweetRemoved;
         private IObservable<IEvent<NotifyCollectionChangedEventArgs>> _tweetsChanged;
 
-        public TimelineScreen(Lazy<ITimeline> timeline,
-                              Factories.TweetScreenFactory screenFactory,
-                              IMarkTweetAsReadCommand markAsReadCommand)
-            : base(false)
+        public TimelineScreen(Lazy<ITimeline> timeline, Factories.TweetScreenFactory screenFactory) : base(false)
         {
-            MarkAsReadCommand = markAsReadCommand;
             _timeline = timeline;
             _screenFactory = screenFactory;
         }
-
-        public IMarkTweetAsReadCommand MarkAsReadCommand { get; private set; }
 
         public ITweetScreen Selection
         {
@@ -62,7 +55,7 @@ namespace Twiddler.Screens
         private void MarkSelectionAsRead()
         {
             if (_selection != null)
-                MarkAsReadCommand.Execute(_selection.Tweet);
+                _selection.MarkAsReadCommand.Execute(null);
         }
 
         private void UnsubscribeFromTweets()

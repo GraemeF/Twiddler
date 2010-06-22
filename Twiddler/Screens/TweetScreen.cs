@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Windows.Input;
 using Caliburn.Core.IoC;
 using Caliburn.PresentationFramework;
 using Caliburn.PresentationFramework.Screens;
 using MvvmFoundation.Wpf;
+using Twiddler.Commands.Interfaces;
 using Twiddler.Core.Models;
 using Twiddler.Screens.Interfaces;
 using Twiddler.Services.Interfaces;
@@ -19,9 +21,11 @@ namespace Twiddler.Screens
 
         public TweetScreen(Tweet tweet,
                            ILinkThumbnailScreenFactory linkThumbnailScreenFactory,
-                           Factories.LoadingTweetScreenFactory loadingTweetScreenFactory)
+                           Factories.LoadingTweetScreenFactory loadingTweetScreenFactory,
+                           IMarkTweetAsReadCommand markAsReadCommand)
             : base(false)
         {
+            MarkAsReadCommand = markAsReadCommand;
             _tweet = tweet;
             Id = _tweet.Id;
             _linkThumbnailScreenFactory = linkThumbnailScreenFactory;
@@ -53,16 +57,18 @@ namespace Twiddler.Screens
             get { return _tweet.IsRead ? 0.5 : 1.0; }
         }
 
+        public ICommand MarkAsReadCommand { get; private set; }
+
         #region ITweetScreen Members
 
         public string Id { get; private set; }
-
-        #endregion
 
         public void MarkAsRead()
         {
             _tweet.MarkAsRead();
         }
+
+        #endregion
 
         protected override void OnInitialize()
         {
