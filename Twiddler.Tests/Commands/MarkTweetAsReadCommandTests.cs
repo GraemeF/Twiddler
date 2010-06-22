@@ -1,5 +1,7 @@
-﻿using Twiddler.Commands;
+﻿using Moq;
+using Twiddler.Commands;
 using Twiddler.Core.Models;
+using Twiddler.Core.Services;
 using Twiddler.TestData;
 using Xunit;
 
@@ -7,6 +9,7 @@ namespace Twiddler.Tests.Commands
 {
     public class MarkTweetAsReadCommandTests
     {
+        private readonly Mock<ITweetStore> _fakeStore = new Mock<ITweetStore>();
         private readonly Tweet _tweet = New.Tweet;
 
         [Fact]
@@ -17,6 +20,16 @@ namespace Twiddler.Tests.Commands
             test.Execute(null);
 
             Assert.True(_tweet.IsRead);
+        }
+
+        [Fact]
+        public void Execute_WhenTweetIsNotRead_SavesTweetToStore()
+        {
+            MarkTweetAsReadCommand test = BuildDefaultTestSubject();
+
+            test.Execute(null);
+
+            _fakeStore.Verify(x => x.Add(_tweet));
         }
 
         [Fact]
@@ -50,7 +63,7 @@ namespace Twiddler.Tests.Commands
 
         private MarkTweetAsReadCommand BuildDefaultTestSubject()
         {
-            return new MarkTweetAsReadCommand(_tweet);
+            return new MarkTweetAsReadCommand(_tweet, _fakeStore.Object);
         }
     }
 }

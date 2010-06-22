@@ -6,6 +6,7 @@ using Caliburn.PresentationFramework.Screens;
 using MvvmFoundation.Wpf;
 using Twiddler.Commands;
 using Twiddler.Core.Models;
+using Twiddler.Core.Services;
 using Twiddler.Screens.Interfaces;
 using Twiddler.Services.Interfaces;
 
@@ -21,12 +22,13 @@ namespace Twiddler.Screens
 
         public TweetScreen(Tweet tweet,
                            ILinkThumbnailScreenFactory linkThumbnailScreenFactory,
-                           Factories.LoadingTweetScreenFactory loadingTweetScreenFactory)
+                           Factories.LoadingTweetScreenFactory loadingTweetScreenFactory,
+                           ITweetStore store)
             : base(false)
         {
             _tweet = tweet;
             Id = _tweet.Id;
-            MarkAsReadCommand = new MarkTweetAsReadCommand(_tweet);
+            MarkAsReadCommand = new MarkTweetAsReadCommand(_tweet, store);
             _linkThumbnailScreenFactory = linkThumbnailScreenFactory;
             _loadingTweetScreenFactory = loadingTweetScreenFactory;
             Links = new BindableCollection<ILinkThumbnailScreen>();

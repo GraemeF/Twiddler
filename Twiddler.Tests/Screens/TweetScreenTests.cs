@@ -46,7 +46,7 @@ namespace Twiddler.Tests.Screens
 
         private TweetScreen BuildDefaultTestSubject()
         {
-            return new TweetScreen(_tweet, _fakeThumbnailFactory.Object, null);
+            return new TweetScreen(_tweet, _fakeThumbnailFactory.Object, null, null);
         }
 
         [Fact]
@@ -82,7 +82,8 @@ namespace Twiddler.Tests.Screens
             var test = new TweetScreen(new Tweet
                                            {InReplyToStatusId = "4"},
                                        _fakeThumbnailFactory.Object,
-                                       x => mockScreen.Object);
+                                       x => mockScreen.Object,
+                                       null);
             test.Initialize();
 
             Assert.Same(mockScreen.Object, test.InReplyToTweet);
@@ -103,6 +104,7 @@ namespace Twiddler.Tests.Screens
                             Links = new List<Uri> {new Uri("http://link.one.com"),}
                         },
                     _fakeThumbnailFactory.Object,
+                    null,
                     null);
             test.Initialize();
 
