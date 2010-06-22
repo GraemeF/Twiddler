@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using Caliburn.Testability.Extensions;
 using Moq;
-using Twiddler.Commands.Interfaces;
+using Twiddler.Commands;
 using Twiddler.Core.Models;
 using Twiddler.Screens;
 using Twiddler.Screens.Interfaces;
@@ -14,8 +14,6 @@ namespace Twiddler.Tests.Screens
 {
     public class TweetScreenTests
     {
-        private readonly Mock<IMarkTweetAsReadCommand> _fakeMarkAsReadCommand = new Mock<IMarkTweetAsReadCommand>();
-
         private readonly Mock<ILinkThumbnailScreenFactory> _fakeThumbnailFactory =
             new Mock<ILinkThumbnailScreenFactory>();
 
@@ -27,7 +25,7 @@ namespace Twiddler.Tests.Screens
         {
             TweetScreen test = BuildDefaultTestSubject();
 
-            Assert.Same(_fakeMarkAsReadCommand.Object, test.MarkAsReadCommand);
+            Assert.IsType<MarkTweetAsReadCommand>(test.MarkAsReadCommand);
         }
 
         [Fact]
@@ -48,7 +46,7 @@ namespace Twiddler.Tests.Screens
 
         private TweetScreen BuildDefaultTestSubject()
         {
-            return new TweetScreen(_tweet, _fakeThumbnailFactory.Object, null, _fakeMarkAsReadCommand.Object);
+            return new TweetScreen(_tweet, _fakeThumbnailFactory.Object, null);
         }
 
         [Fact]
@@ -84,8 +82,7 @@ namespace Twiddler.Tests.Screens
             var test = new TweetScreen(new Tweet
                                            {InReplyToStatusId = "4"},
                                        _fakeThumbnailFactory.Object,
-                                       x => mockScreen.Object,
-                                       _fakeMarkAsReadCommand.Object);
+                                       x => mockScreen.Object);
             test.Initialize();
 
             Assert.Same(mockScreen.Object, test.InReplyToTweet);
@@ -106,8 +103,7 @@ namespace Twiddler.Tests.Screens
                             Links = new List<Uri> {new Uri("http://link.one.com"),}
                         },
                     _fakeThumbnailFactory.Object,
-                    null,
-                    _fakeMarkAsReadCommand.Object);
+                    null);
             test.Initialize();
 
             Assert.Contains(_fakeThumbnailScreen.Object, test.Links);

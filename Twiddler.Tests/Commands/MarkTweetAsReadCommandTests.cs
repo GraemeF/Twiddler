@@ -7,7 +7,7 @@ namespace Twiddler.Tests.Commands
 {
     public class MarkTweetAsReadCommandTests
     {
-        private readonly Tweet tweet = New.Tweet;
+        private readonly Tweet _tweet = New.Tweet;
 
         [Fact]
         public void Execute_WhenTweetIsNotRead_MarksTweetAsRead()
@@ -16,7 +16,7 @@ namespace Twiddler.Tests.Commands
 
             test.Execute(null);
 
-            Assert.True(tweet.IsRead);
+            Assert.True(_tweet.IsRead);
         }
 
         [Fact]
@@ -43,14 +43,14 @@ namespace Twiddler.Tests.Commands
             bool eventRaised = false;
             test.CanExecuteChanged += (sender, args) => eventRaised = true;
 
-            tweet.MarkAsRead();
+            _tweet.MarkAsRead();
 
             Assert.True(eventRaised);
         }
 
         private MarkTweetAsReadCommand BuildDefaultTestSubject()
         {
-            return new MarkTweetAsReadCommand(tweet);
+            return new MarkTweetAsReadCommand(_tweet);
         }
     }
 }
