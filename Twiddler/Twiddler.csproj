@@ -76,9 +76,8 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Library\RavenDB\Lucene.Net.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Library\Caliburn\Bin\NET-3.5\release\Microsoft.Practices.ServiceLocation.dll</HintPath>
+    <Reference Include="Microsoft.Practices.ServiceLocation">
+      <HintPath>..\Library\Caliburn\Microsoft.Practices.ServiceLocation.dll</HintPath>
     </Reference>
     <Reference Include="MvvmFoundation.Wpf, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
