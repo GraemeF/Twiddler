@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.Linq;
+using System.Threading.Tasks;
 using Caliburn.Core.IoC;
 using Caliburn.PresentationFramework.Screens;
 using Twiddler.Core;
@@ -55,7 +56,7 @@ namespace Twiddler.Screens
         private void MarkSelectionAsRead()
         {
             if (_selection != null)
-                _selection.MarkAsReadCommand.Execute(null);
+                new TaskFactory().StartNew(() => _selection.MarkAsReadCommand.Execute(null));
         }
 
         private void UnsubscribeFromTweets()
