@@ -76,6 +76,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Library\RavenDB\Lucene.Net.dll</HintPath>
     </Reference>
+	  <Reference Include="Microsoft.Expression.Interactions, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+		  <SpecificVersion>False</SpecificVersion>
+		  <HintPath>..\Library\Expression Blend SDK\Microsoft.Expression.Interactions.dll</HintPath>
+	  </Reference>
     <Reference Include="Microsoft.Practices.ServiceLocation">
       <HintPath>..\Library\Caliburn\Microsoft.Practices.ServiceLocation.dll</HintPath>
     </Reference>
@@ -107,6 +111,7 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Library\Rx\System.Reactive.dll</HintPath>
     </Reference>
+    <Reference Include="System.Windows.Interactivity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
