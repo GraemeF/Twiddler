@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Threading;
 using System.Windows.Input;
 using Moq;
 using Twiddler.Core.Models;
@@ -59,7 +60,8 @@ namespace Twiddler.Tests.Screens
 
             test.Selection = mockScreen.Object;
             test.Selection = null;
-            
+            Thread.Sleep(1000);
+
             mockCommand.Verify(x => x.Execute(null));
         }
     }

@@ -55,8 +55,9 @@ namespace Twiddler.Screens
 
         private void MarkSelectionAsRead()
         {
-            if (_selection != null)
-                new TaskFactory().StartNew(() => _selection.MarkAsReadCommand.Execute(null));
+            ITweetScreen readTweet = _selection;
+            if (readTweet != null)
+                new TaskFactory().StartNew(() => readTweet.MarkAsReadCommand.Execute(null));
         }
 
         private void UnsubscribeFromTweets()
