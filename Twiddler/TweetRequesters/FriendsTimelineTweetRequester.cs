@@ -15,13 +15,14 @@ namespace Twiddler.TweetRequesters
         {
         }
 
-        protected override ITwitterLeafNode CreateRequest()
+        protected override ITwitterLeafNode CreateRequest(long since)
         {
             return
                 Client.
                     MakeRequestFor().
                     Statuses().
-                    OnFriendsTimeline();
+                    OnFriendsTimeline().
+                    Since(since);
         }
     }
 }

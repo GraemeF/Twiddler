@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using TweetSharp.Extensions;
 using TweetSharp.Twitter.Extensions;
@@ -15,6 +16,8 @@ namespace Twiddler.Services
         private readonly IRequestLimitStatus _requestLimitStatus;
         private readonly Factories.TweetFactory _tweetFactory;
 
+        private long _lastTweet;
+
         protected TweetRequester(ITwitterClient client,
                                  IRequestLimitStatus requestLimitStatus,
                                  Factories.TweetFactory tweetFactory)
@@ -28,12 +31,12 @@ namespace Twiddler.Services
 
         public IEnumerable<Tweet> RequestTweets()
         {
-            return GotTweets(CreateRequest().Request());
+            return GotTweets(CreateRequest(_lastTweet).Request());
         }
 
         #endregion
 
-        protected abstract ITwitterLeafNode CreateRequest();
+        protected abstract ITwitterLeafNode CreateRequest(long since);
 
         private IEnumerable<Tweet> GotTweets(TwitterResult result)
         {
@@ -46,9 +49,15 @@ namespace Twiddler.Services
                 result.IsTwitterError)
                 return new Tweet[] {};
 
+            IEnumerable<TwitterStatus> statuses = result.AsStatuses();
+
+            _lastTweet = Math.Max(_lastTweet,
+                                  statuses.Any()
+                                      ? statuses.Max(x => x.Id)
+                                      : 0L);
+
             return
-                result.
-                    AsStatuses().
+                statuses.
                     Select(twitterStatus => _tweetFactory(twitterStatus));
         }
 
