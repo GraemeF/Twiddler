@@ -538,6 +538,63 @@
             <returns>The normalized text, or null if none.  May be the same instance if <paramref name="text"/>
             was already normalized.</returns>
         </member>
+        <member name="T:Gallio.Common.Mathematics.ChiSquareTest">
+            <summary>
+            Implementation of a Chi-square test (http://en.wikipedia.org/wiki/Chi_square_test)
+            that calculates the "difference" between an expected and an actual statistical distribution.
+            </summary>
+        </member>
+        <member name="M:Gallio.Common.Mathematics.ChiSquareTest.#ctor(System.Double,System.Collections.Generic.ICollection{System.Double},System.Int32)">
+            <summary>
+            Runs a Chi-square test.
+            </summary>
+            <remarks>
+            <para>
+            Given the observed events (<paramref name="actual"/>) and the expected events (<paramref name="expected"/>), 
+            calculates the number of degrees of freedom, the chi-square value, and the significance probability.
+            </para>
+            <para>
+            A small value of the significance probability indicates a significant difference between the distributions.
+            </para>
+            </remarks>
+            <param name="expected"></param>
+            <param name="actual"></param>
+            <param name="numberOfConstraints"></param>
+        </member>
+        <member name="P:Gallio.Common.Mathematics.ChiSquareTest.DegreesOfFreedom">
+            <summary>
+            Gets the resulting number of degrees of freedom.
+            </summary>
+        </member>
+        <member name="P:Gallio.Common.Mathematics.ChiSquareTest.ChiSquareValue">
+            <summary>
+            Gets the resulting Chi-square value.
+            </summary>
+        </member>
+        <member name="P:Gallio.Common.Mathematics.ChiSquareTest.TwoTailedPValue">
+            <summary>
+            Gets the resulting significance probability.
+            </summary>
+        </member>
+        <member name="T:Gallio.Common.Mathematics.Gamma">
+            <summary>
+            Helper methods to calculate the Gamma function (http://en.wikipedia.org/wiki/Gamma_function).
+            </summary>
+        </member>
+        <member name="M:Gallio.Common.Mathematics.Gamma.IncompleteGamma(System.Double,System.Double)">
+            <summary>
+            Returns the incomplete Gamma function Q(a,x).
+            </summary>
+            <param name="a"></param>
+            <param name="x"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Gallio.Common.Mathematics.NamespaceDoc">
+            <summary>
+            The Gallio.Common.Math namespace provides advanced mathematical 
+            functions and helper classes not found in <see cref="T:System.Math"/>.
+            </summary>
+        </member>
         <member name="T:Gallio.Common.Messaging.IMessageExchangeLink">
             <summary>
             An interface implemented by the server and registered on the server remoting channel
@@ -979,6 +1036,15 @@
             <param name="enumeration">The input enumeration.</param>
             <param name="predicate">The predicate.</param>
             <returns>The first matching value or the default for the type if not found.</returns>
+        </member>
+        <member name="M:Gallio.Common.Collections.CollectionUtils.ConstantArray``1(``0,System.Int32)">
+            <summary>
+            Returns an array of the specified length, filled with the specifed constant value.
+            </summary>
+            <typeparam name="T">The type of the array.</typeparam>
+            <param name="value">The constant value.</param>
+            <param name="length">The length of the array.</param>
+            <returns>The resulting array.</returns>
         </member>
         <member name="T:Gallio.Common.Collections.CovariantList`2">
             <summary>
@@ -5114,6 +5180,11 @@
             <returns>The extension, or null if not known.</returns>
             <exception cref="T:System.ArgumentNullException">Thrown if <paramref name="mimeType"/> is null.</exception>
         </member>
+        <member name="P:Gallio.Common.Markup.MimeTypes.All">
+            <summary>
+            Gets all the registered mime types.
+            </summary>
+        </member>
         <member name="T:Gallio.Common.Markup.NullMarkupDocumentWriter">
             <summary>
             A markup document writer that does nothing.
@@ -6431,11 +6502,10 @@
             <returns>The source code location, or null if unknown.</returns>
             <exception cref="T:System.ArgumentNullException">Thrown if <paramref name="assemblyPath"/> is null.</exception>
         </member>
-        <member name="M:Gallio.Common.Reflection.Impl.CciDebugSymbolResolver.#ctor(System.Boolean)">
+        <member name="M:Gallio.Common.Reflection.Impl.CciDebugSymbolResolver.#ctor">
             <summary>
-            Creates a Mono debug symbol resolver.
+            Creates a Cci debug symbol resolver.
             </summary>
-            <param name="avoidLocks">If true, avoids taking a lock on the PDB files but may use more memory or storage.</param>
         </member>
         <member name="M:Gallio.Common.Reflection.Impl.CciDebugSymbolResolver.Dispose">
             <inheritdoc />
@@ -6448,13 +6518,12 @@
             Data structure that maps every method in a CCI <see cref="T:Microsoft.Cci.IModule"/> with its <see cref="T:Gallio.Common.Reflection.CodeLocation"/>
             </summary>
         </member>
-        <member name="M:Gallio.Common.Reflection.Impl.CciModuleCache.#ctor(Gallio.Common.IO.IFileSystem,System.String,System.Boolean)">
+        <member name="M:Gallio.Common.Reflection.Impl.CciModuleCache.#ctor(Gallio.Common.IO.IFileSystem,System.String)">
             <summary>
             Constructor.
             </summary>
             <param name="fileSystem">File system wrapper.</param>
             <param name="assemblyPath">The path of the assembly to scan.</param>
-            <param name="avoidLocks">If true, avoids taking a lock on the PDB files but may use more memory or storage.</param>
         </member>
         <member name="M:Gallio.Common.Reflection.Impl.CciModuleCache.GetMethodLocation(System.UInt32)">
             <summary>
@@ -6789,6 +6858,43 @@
             The Gallio.Common.Remoting namespace contains types for managing .Net remoting channels.
             </summary>
         </member>
+        <member name="T:Gallio.Common.Security.FnvHasher">
+            <summary>
+            Calculates a 32-bit hash code based on the FNV (Fowler-Noll-Vo) algorithm.
+            (http://en.wikipedia.org/wiki/Fowler_Noll_Vo_hash)
+            </summary>
+        </member>
+        <member name="M:Gallio.Common.Security.FnvHasher.ToValue">
+            <summary>
+            Returns the final hash code.
+            </summary>
+            <returns>The resulting 32-bit hash code.</returns>
+        </member>
+        <member name="M:Gallio.Common.Security.FnvHasher.#ctor">
+            <summary>
+            Default constructor.
+            </summary>
+        </member>
+        <member name="M:Gallio.Common.Security.FnvHasher.#ctor(System.Int32)">
+            <summary>
+            Constructor.
+            </summary>
+            <param name="salt">Salt value.</param>
+        </member>
+        <member name="M:Gallio.Common.Security.FnvHasher.Add(System.Object)">
+            <summary>
+            Adds the hash code of the specified object and combines it with the previous values.
+            </summary>
+            <param name="obj">The object to add.</param>
+            <returns>The builder itself for chaining syntax.</returns>
+        </member>
+        <member name="M:Gallio.Common.Security.FnvHasher.Add(System.Collections.IEnumerable)">
+            <summary>
+            Adds the hash code of the specified objects and combines them with the previous values.
+            </summary>
+            <param name="objects">An enumeration of objects to add.</param>
+            <returns>The builder itself for chaining syntax.</returns>
+        </member>
         <member name="T:Gallio.Common.Text.NamespaceDoc">
             <summary>
             The Gallio.Common.Text namespace contains types for managing text ranges, 
@@ -6969,6 +7075,75 @@
             <param name="text">The Xml text to normalize, or null if none.</param>
             <returns>The normalized Xml text, or null if <paramref name="text"/> was null.  The result will
             be the same instance as <paramref name="text"/> if it was already normalized.</returns>
+        </member>
+        <member name="T:Gallio.Common.Xml.Diffing.DiffType">
+            <summary>
+            Represents a type of XML diff.
+            </summary>
+        </member>
+        <member name="M:Gallio.Common.Xml.Diffing.DiffType.Equals(System.Object)">
+            <inheritdoc />
+        </member>
+        <member name="M:Gallio.Common.Xml.Diffing.DiffType.GetHashCode">
+            <inheritdoc />
+        </member>
+        <member name="M:Gallio.Common.Xml.Diffing.DiffType.Equals(Gallio.Common.Xml.Diffing.DiffType)">
+            <inheritdoc />
+        </member>
+        <member name="F:Gallio.Common.Xml.Diffing.DiffType.UnexpectedContent">
+            <summary>
+            Unexpected content.
+            </summary>
+        </member>
+        <member name="F:Gallio.Common.Xml.Diffing.DiffType.UnexpectedComment">
+            <summary>
+            Unexpected comment.
+            </summary>
+        </member>
+        <member name="F:Gallio.Common.Xml.Diffing.DiffType.UnexpectedElement">
+            <summary>
+            Unexpected element
+            </summary>
+        </member>
+        <member name="F:Gallio.Common.Xml.Diffing.DiffType.MissingElement">
+            <summary>
+            Missing element
+            </summary>
+        </member>
+        <member name="F:Gallio.Common.Xml.Diffing.DiffType.MismatchedContent">
+            <summary>
+            Mismatched content.
+            </summary>
+        </member>
+        <member name="F:Gallio.Common.Xml.Diffing.DiffType.MismatchedComment">
+            <summary>
+            Mismatched comment.
+            </summary>
+        </member>
+        <member name="F:Gallio.Common.Xml.Diffing.DiffType.MismatchedElement">
+            <summary>
+            Mismatched element.
+            </summary>
+        </member>
+        <member name="F:Gallio.Common.Xml.Diffing.DiffType.UnexpectedAttribute">
+            <summary>
+            Unexpected attribute.
+            </summary>
+        </member>
+        <member name="F:Gallio.Common.Xml.Diffing.DiffType.MissingAttribute">
+            <summary>
+            Missing attribute.
+            </summary>
+        </member>
+        <member name="F:Gallio.Common.Xml.Diffing.DiffType.MismatchedAttribute">
+            <summary>
+            Mismatched attribute.
+            </summary>
+        </member>
+        <member name="P:Gallio.Common.Xml.Diffing.DiffType.Description">
+            <summary>
+            Gets the description of the diff.
+            </summary>
         </member>
         <member name="T:Gallio.Common.Xml.NodeAttribute">
             <summary>
@@ -7279,15 +7454,15 @@
             A diff item representing one single difference between two XML fragments.
             </summary>
         </member>
-        <member name="M:Gallio.Common.Xml.Diffing.Diff.#ctor(System.String,Gallio.Common.Xml.Paths.IXmlPathStrict,Gallio.Common.Xml.Diffing.DiffTargets)">
+        <member name="M:Gallio.Common.Xml.Diffing.Diff.#ctor(Gallio.Common.Xml.Diffing.DiffType,Gallio.Common.Xml.Paths.IXmlPathStrict,Gallio.Common.Xml.Diffing.DiffTargets)">
             <summary>
             Constructs a diff item.
             </summary>
-            <param name="message">The message explaining the difference.</param>
+            <param name="diffType">The type of the diff.</param>
             <param name="path">The path of the difference.</param>
             <param name="targets">Indicates which XML fragment is targeted by the diff.</param>
-            <exception cref="T:System.ArgumentNullException">Thrown if <paramref name="message"/> or <paramref name="path"/> is null.</exception>
-            <exception cref="T:System.ArgumentException">Thrown if <paramref name="message"/> or <paramref name="path"/> is empty.</exception>
+            <exception cref="T:System.ArgumentNullException">Thrown if <paramref name="diffType"/> or <paramref name="path"/> is null.</exception>
+            <exception cref="T:System.ArgumentException">Thrown if <paramref name="diffType"/> or <paramref name="path"/> is empty.</exception>
         </member>
         <member name="M:Gallio.Common.Xml.Diffing.Diff.ToString">
             <inheritdoc />
@@ -7301,9 +7476,9 @@
             <returns>The resulting assertion failure.</returns>
             <exception cref="T:System.ArgumentNullException">Thrown if <paramref name="expected"/> or <paramref name="actual"/> is null.</exception>
         </member>
-        <member name="P:Gallio.Common.Xml.Diffing.Diff.Message">
+        <member name="P:Gallio.Common.Xml.Diffing.Diff.Type">
             <summary>
-            Gets a message explaining the difference.
+            Gets a type of the diff.
             </summary>
         </member>
         <member name="P:Gallio.Common.Xml.Diffing.Diff.Path">
@@ -7409,6 +7584,11 @@
         <member name="P:Gallio.Common.Xml.Diffing.DiffSet.IsEmpty">
             <summary>
             Gets a value indicating if the set is empty (i.e. no differences found)
+            </summary>
+        </member>
+        <member name="P:Gallio.Common.Xml.Diffing.DiffSet.Count">
+            <summary>
+            Gets the number of diffs in the collection.
             </summary>
         </member>
         <member name="T:Gallio.Common.Xml.Diffing.DiffSetBuilder">
@@ -7833,16 +8013,6 @@
         <member name="T:Gallio.Common.Xml.Diffing.OrderedItemType">
             <summary>
             The target diffed items.
-            </summary>
-        </member>
-        <member name="F:Gallio.Common.Xml.Diffing.OrderedItemType.Attribute">
-            <summary>
-            Attribute.
-            </summary>
-        </member>
-        <member name="F:Gallio.Common.Xml.Diffing.OrderedItemType.Element">
-            <summary>
-            Element
             </summary>
         </member>
         <member name="T:Gallio.Common.Xml.Diffing.DiffEngineForUnorderedAttributes">
@@ -8584,6 +8754,256 @@
             <summary>
             Gets the default instance.
             </summary>
+        </member>
+        <member name="T:Gallio.Framework.Data.Generation.SequentialInt32Generator">
+            <summary>
+            Generator of sequential <see cref="T:System.Int32"/> values.
+            </summary>
+        </member>
+        <member name="T:Gallio.Framework.Data.Generation.SequentialGenerator`1">
+            <summary>
+            Generic abstract generator of sequential numeric values.
+            </summary>
+            <typeparam name="T">The type of the value to generate.</typeparam>
+        </member>
+        <member name="T:Gallio.Framework.Data.Generation.Generator`1">
+            <summary>
+            Generic abstract generator of values.
+            </summary>
+            <typeparam name="T">The type of the values returned by the generator.</typeparam>
+        </member>
+        <member name="T:Gallio.Framework.Data.Generation.IGenerator">
+            <summary>
+            Generator of values.
+            </summary>
+        </member>
+        <member name="M:Gallio.Framework.Data.Generation.IGenerator.Run">
+            <summary>
+            Generates the sequence of values.
+            </summary>
+            <returns>An enumeration of generated values.</returns>
+        </member>
+        <member name="M:Gallio.Framework.Data.Generation.Generator`1.DoFilter(`0)">
+            <summary>
+            Filters the specified value.
+            </summary>
+            <param name="value">The value to be filtered.</param>
+            <returns>True if the value is accepted; false otherwise.</returns>
+        </member>
+        <member name="M:Gallio.Framework.Data.Generation.Generator`1.#ctor">
+            <summary>
+            Default constructor.
+            </summary>
+        </member>
+        <member name="M:Gallio.Framework.Data.Generation.Generator`1.Run">
+            <inheritdoc />
+        </member>
+        <member name="M:Gallio.Framework.Data.Generation.Generator`1.CheckProperty(System.Double,System.String)">
+            <summary>
+            Checks for the specified value to be not one of the following:
+            <list type="bullet">
+            <item><see cref="F:System.Double.MinValue"/></item>
+            <item><see cref="F:System.Double.MaxValue"/></item>
+            <item><see cref="F:System.Double.PositiveInfinity"/></item>
+            <item><see cref="F:System.Double.NegativeInfinity"/></item>
+            <item><see cref="F:System.Double.NaN"/></item>
+            </list>
+            </summary>
+            <param name="propertyValue">The <see cref="T:System.Double"/> property value to be checked.</param>
+            <param name="propertyName">A friendly name for the property.</param>
+            <exception cref="T:Gallio.Framework.Data.Generation.GenerationException">The specified property value is invalid.</exception>
+        </member>
+        <member name="M:Gallio.Framework.Data.Generation.Generator`1.CheckProperty(System.Decimal,System.String)">
+            <summary>
+            Checks for the specified value to be not one of the following:
+            <list type="bullet">
+            <item><see cref="F:System.Decimal.MinValue"/></item>
+            <item><see cref="F:System.Decimal.MaxValue"/></item>
+            </list>
+            </summary>
+            <param name="propertyValue">The <see cref="T:System.Decimal"/> property value to be checked.</param>
+            <param name="propertyName">A friendly name for the property.</param>
+            <exception cref="T:Gallio.Framework.Data.Generation.GenerationException">The specified property value is invalid.</exception>
+        </member>
+        <member name="M:Gallio.Framework.Data.Generation.Generator`1.CheckProperty(System.Int32,System.String)">
+            <summary>
+            Checks for the specified value to be not one of the following:
+            <list type="bullet">
+            <item><see cref="F:System.Int32.MinValue"/></item>
+            <item><see cref="F:System.Int32.MaxValue"/></item>
+            </list>
+            </summary>
+            <param name="propertyValue">The <see cref="T:System.Int32"/> property value to be checked.</param>
+            <param name="propertyName">A friendly name for the property.</param>
+            <exception cref="T:Gallio.Framework.Data.Generation.GenerationException">The specified property value is invalid.</exception>
+        </member>
+        <member name="P:Gallio.Framework.Data.Generation.Generator`1.Filter">
+            <summary>
+            Gets or sets the filter function that can be used
+            to reject or accept generated values.
+            </summary>
+        </member>
+        <member name="M:Gallio.Framework.Data.Generation.SequentialGenerator`1.#ctor">
+            <summary>
+            Default constructor.
+            </summary>
+        </member>
+        <member name="M:Gallio.Framework.Data.Generation.SequentialGenerator`1.Run">
+            <inheritdoc/>
+        </member>
+        <member name="M:Gallio.Framework.Data.Generation.SequentialGenerator`1.GetStartStepCountSequence">
+            <summary>
+            Returns the linear sequence constructed by using the <see cref="P:Gallio.Framework.Data.Generation.SequentialGenerator`1.Start"/>, <see cref="P:Gallio.Framework.Data.Generation.SequentialGenerator`1.Step"/>, and <see cref="P:Gallio.Framework.Data.Generation.SequentialGenerator`1.Count"/> properties.
+            </summary>
+            <returns>The sequence of values.</returns>
+        </member>
+        <member name="M:Gallio.Framework.Data.Generation.SequentialGenerator`1.GetStartEndCountSequence">
+            <summary>
+            Returns the linear sequence constructed by using the <see cref="P:Gallio.Framework.Data.Generation.SequentialGenerator`1.Start"/>, <see cref="P:Gallio.Framework.Data.Generation.SequentialGenerator`1.End"/>, and <see cref="P:Gallio.Framework.Data.Generation.SequentialGenerator`1.Count"/> properties.
+            </summary>
+            <returns>The sequence of values.</returns>
+        </member>
+        <member name="M:Gallio.Framework.Data.Generation.SequentialGenerator`1.GetStartEndStepSequence">
+            <summary>
+            Returns the linear sequence constructed by using the <see cref="P:Gallio.Framework.Data.Generation.SequentialGenerator`1.Start"/>, <see cref="P:Gallio.Framework.Data.Generation.SequentialGenerator`1.End"/>, and <see cref="P:Gallio.Framework.Data.Generation.SequentialGenerator`1.Step"/> properties.
+            </summary>
+            <returns>The sequence of values.</returns>
+        </member>
+        <member name="P:Gallio.Framework.Data.Generation.SequentialGenerator`1.Start">
+            <summary>
+            Gets or sets the starting point of the sequence.
+            </summary>
+        </member>
+        <member name="P:Gallio.Framework.Data.Generation.SequentialGenerator`1.End">
+            <summary>
+            Gets or sets the ending point of the sequence.
+            </summary>
+        </member>
+        <member name="P:Gallio.Framework.Data.Generation.SequentialGenerator`1.Step">
+            <summary>
+            Gets or sets the increment between each value of the sequence.
+            </summary>
+        </member>
+        <member name="P:Gallio.Framework.Data.Generation.SequentialGenerator`1.Count">
+            <summary>
+            Gets or sets the length of the sequence of values
+            created by the generator.
+            </summary>
+        </member>
+        <member name="P:Gallio.Framework.Data.Generation.SequentialGenerator`1.DefaultStep">
+            <summary>
+            Gets the default step.
+            </summary>
+        </member>
+        <member name="M:Gallio.Framework.Data.Generation.SequentialInt32Generator.#ctor">
+            <summary>
+            Default constructor.
+            </summary>
+        </member>
+        <member name="M:Gallio.Framework.Data.Generation.SequentialInt32Generator.GetStartStepCountSequence">
+            <inheritdoc />
+        </member>
+        <member name="M:Gallio.Framework.Data.Generation.SequentialInt32Generator.GetStartEndCountSequence">
+            <inheritdoc />
+        </member>
+        <member name="M:Gallio.Framework.Data.Generation.SequentialInt32Generator.GetStartEndStepSequence">
+            <inheritdoc />
+        </member>
+        <member name="P:Gallio.Framework.Data.Generation.SequentialInt32Generator.DefaultStep">
+            <summary>
+            Gets the default step.
+            </summary>
+        </member>
+        <member name="T:Gallio.Framework.Data.Generation.SequentialDoubleGenerator">
+            <summary>
+            Generator of sequential <see cref="T:System.Double"/> values.
+            </summary>
+        </member>
+        <member name="M:Gallio.Framework.Data.Generation.SequentialDoubleGenerator.#ctor">
+            <summary>
+            Default constructor.
+            </summary>
+        </member>
+        <member name="M:Gallio.Framework.Data.Generation.SequentialDoubleGenerator.GetStartStepCountSequence">
+            <inheritdoc />
+        </member>
+        <member name="M:Gallio.Framework.Data.Generation.SequentialDoubleGenerator.GetStartEndCountSequence">
+            <inheritdoc />
+        </member>
+        <member name="M:Gallio.Framework.Data.Generation.SequentialDoubleGenerator.GetStartEndStepSequence">
+            <inheritdoc />
+        </member>
+        <member name="P:Gallio.Framework.Data.Generation.SequentialDoubleGenerator.DefaultStep">
+            <summary>
+            Gets the default step.
+            </summary>
+        </member>
+        <member name="T:Gallio.Framework.Data.Generation.RandomInt32Generator">
+            <summary>
+            Generator of random <see cref="T:System.Int32"/> values within a given range.
+            </summary>
+        </member>
+        <member name="T:Gallio.Framework.Data.Generation.RandomGenerator`1">
+            <summary>
+            Generic abstract generator of random values within a given range.
+            </summary>
+            <typeparam name="T">The type of the value to generate.</typeparam>
+        </member>
+        <member name="F:Gallio.Framework.Data.Generation.RandomGenerator`1.InnerGenerator">
+            <summary>
+            A general purpose pseudo-random number generator.
+            </summary>
+        </member>
+        <member name="M:Gallio.Framework.Data.Generation.RandomGenerator`1.#ctor">
+            <summary>
+            Default constructor.
+            </summary>
+        </member>
+        <member name="M:Gallio.Framework.Data.Generation.RandomGenerator`1.Run">
+            <inheritdoc/>
+        </member>
+        <member name="M:Gallio.Framework.Data.Generation.RandomGenerator`1.GetSequence">
+            <summary>
+            Returns the sequence of random values.
+            </summary>
+            <returns>The sequence of values.</returns>
+        </member>
+        <member name="P:Gallio.Framework.Data.Generation.RandomGenerator`1.Minimum">
+            <summary>
+            Gets the lower bound of the range.
+            </summary>
+        </member>
+        <member name="P:Gallio.Framework.Data.Generation.RandomGenerator`1.Maximum">
+            <summary>
+            Gets the upper bound of the range.
+            </summary>
+        </member>
+        <member name="P:Gallio.Framework.Data.Generation.RandomGenerator`1.Count">
+            <summary>
+            Gets the length of the sequence of values
+            created by the generator.
+            </summary>
+        </member>
+        <member name="M:Gallio.Framework.Data.Generation.RandomInt32Generator.#ctor">
+            <summary>
+            Constructs a generator of random <see cref="T:System.Double"/> numbers.
+            </summary>
+        </member>
+        <member name="M:Gallio.Framework.Data.Generation.RandomInt32Generator.GetSequence">
+            <inheritdoc/>
+        </member>
+        <member name="T:Gallio.Framework.Data.Generation.RandomDoubleGenerator">
+            <summary>
+            Generator of random <see cref="T:System.Double"/> values within a given range.
+            </summary>
+        </member>
+        <member name="M:Gallio.Framework.Data.Generation.RandomDoubleGenerator.#ctor">
+            <summary>
+            Constructs a generator of random <see cref="T:System.Double"/> numbers.
+            </summary>
+        </member>
+        <member name="M:Gallio.Framework.Data.Generation.RandomDoubleGenerator.GetSequence">
+            <inheritdoc/>
         </member>
         <member name="T:Gallio.Framework.IComparisonSemantics">
             <summary>
@@ -9405,131 +9825,69 @@
             Perform the action when the test failed or was inconclusive.
             </summary>
         </member>
-        <member name="T:Gallio.Framework.Data.Generation.RandomStockStringsGenerator">
+        <member name="T:Gallio.Framework.Data.Generation.RandomStockStringGenerator">
             <summary>
             Generator of random <see cref="T:System.String"/> objects from a predefined list of string values.
             </summary>
         </member>
-        <member name="T:Gallio.Framework.Data.Generation.RandomStringsGenerator">
+        <member name="T:Gallio.Framework.Data.Generation.RandomStringGenerator">
             <summary>
             Generator of random <see cref="T:System.String"/> objects based on a regular expression filter mask.
             </summary>
         </member>
-        <member name="T:Gallio.Framework.Data.Generation.Generator`1">
-            <summary>
-            Generic abstract generator of values.
-            </summary>
-            <typeparam name="T">The type of the values returned by the generator.</typeparam>
-        </member>
-        <member name="T:Gallio.Framework.Data.Generation.IGenerator">
-            <summary>
-            Generator of values.
-            </summary>
-        </member>
-        <member name="M:Gallio.Framework.Data.Generation.IGenerator.Run">
-            <summary>
-            Generates the sequence of values.
-            </summary>
-            <returns>An enumeration of generated values.</returns>
-        </member>
-        <member name="M:Gallio.Framework.Data.Generation.Generator`1.DoFilter(`0)">
-            <summary>
-            Filters the specified value.
-            </summary>
-            <param name="value">The value to be filtered.</param>
-            <returns>True if the value is accepted; false otherwise.</returns>
-        </member>
-        <member name="M:Gallio.Framework.Data.Generation.Generator`1.#ctor">
-            <summary>
-            Default constructor.
-            </summary>
-        </member>
-        <member name="M:Gallio.Framework.Data.Generation.Generator`1.Run">
-            <inheritdoc />
-        </member>
-        <member name="M:Gallio.Framework.Data.Generation.Generator`1.CheckProperty(System.Decimal,System.String)">
-            <summary>
-            Checks for the specified value to be not one of the following:
-            <list type="bullet">
-            <item><see cref="F:System.Decimal.MinValue"/></item>
-            <item><see cref="F:System.Decimal.MaxValue"/></item>
-            </list>
-            </summary>
-            <param name="propertyValue">The <see cref="T:System.Decimal"/> property value to be checked.</param>
-            <param name="propertyName">A friendly name for the property.</param>
-            <exception cref="T:Gallio.Framework.Data.Generation.GenerationException">The specified property value is invalid.</exception>
-        </member>
-        <member name="M:Gallio.Framework.Data.Generation.Generator`1.CheckProperty(System.Int32,System.String)">
-            <summary>
-            Checks for the specified value to be not one of the following:
-            <list type="bullet">
-            <item><see cref="F:System.Int32.MinValue"/></item>
-            <item><see cref="F:System.Int32.MaxValue"/></item>
-            </list>
-            </summary>
-            <param name="propertyValue">The <see cref="T:System.Int32"/> property value to be checked.</param>
-            <param name="propertyName">A friendly name for the property.</param>
-            <exception cref="T:Gallio.Framework.Data.Generation.GenerationException">The specified property value is invalid.</exception>
-        </member>
-        <member name="P:Gallio.Framework.Data.Generation.Generator`1.Filter">
-            <summary>
-            Gets or sets the filter function that can be used
-            to reject or accept generated values.
-            </summary>
-        </member>
-        <member name="M:Gallio.Framework.Data.Generation.RandomStringsGenerator.#ctor">
+        <member name="M:Gallio.Framework.Data.Generation.RandomStringGenerator.#ctor">
             <summary>
             Constructs a generator of random <see cref="T:System.String"/> objects.
             </summary>
         </member>
-        <member name="M:Gallio.Framework.Data.Generation.RandomStringsGenerator.Run">
+        <member name="M:Gallio.Framework.Data.Generation.RandomStringGenerator.Run">
             <inheritdoc/>
         </member>
-        <member name="M:Gallio.Framework.Data.Generation.RandomStringsGenerator.GetNextString">
+        <member name="M:Gallio.Framework.Data.Generation.RandomStringGenerator.GetNextString">
             <summary>
             Generates the next random string.
             </summary>
             <returns>A random string.</returns>
         </member>
-        <member name="P:Gallio.Framework.Data.Generation.RandomStringsGenerator.Count">
+        <member name="P:Gallio.Framework.Data.Generation.RandomStringGenerator.Count">
             <summary>
             Gets or sets the length of the sequence of strings
             created by the generator.
             </summary>
         </member>
-        <member name="M:Gallio.Framework.Data.Generation.RandomStockStringsGenerator.#ctor">
+        <member name="M:Gallio.Framework.Data.Generation.RandomStockStringGenerator.#ctor">
             <summary>
             Constructs a generator of random <see cref="T:System.String"/> objects.
             </summary>
         </member>
-        <member name="M:Gallio.Framework.Data.Generation.RandomStockStringsGenerator.Run">
+        <member name="M:Gallio.Framework.Data.Generation.RandomStockStringGenerator.Run">
             <inheritdoc/>
         </member>
-        <member name="M:Gallio.Framework.Data.Generation.RandomStockStringsGenerator.GetNextString">
+        <member name="M:Gallio.Framework.Data.Generation.RandomStockStringGenerator.GetNextString">
             <inheritdoc/>
         </member>
-        <member name="P:Gallio.Framework.Data.Generation.RandomStockStringsGenerator.Values">
+        <member name="P:Gallio.Framework.Data.Generation.RandomStockStringGenerator.Values">
             <summary>
             Gets or sets the predefined string values.
             </summary>
         </member>
-        <member name="T:Gallio.Framework.Data.Generation.RandomRegexLiteStringsGenerator">
+        <member name="T:Gallio.Framework.Data.Generation.RandomRegexLiteStringGenerator">
             <summary>
             Generator of random <see cref="T:System.String"/> objects based on a regular expression filter mask.
             </summary>
         </member>
-        <member name="M:Gallio.Framework.Data.Generation.RandomRegexLiteStringsGenerator.#ctor">
+        <member name="M:Gallio.Framework.Data.Generation.RandomRegexLiteStringGenerator.#ctor">
             <summary>
             Constructs a generator of random <see cref="T:System.String"/> objects.
             </summary>
         </member>
-        <member name="M:Gallio.Framework.Data.Generation.RandomRegexLiteStringsGenerator.Run">
+        <member name="M:Gallio.Framework.Data.Generation.RandomRegexLiteStringGenerator.Run">
             <inheritdoc/>
         </member>
-        <member name="M:Gallio.Framework.Data.Generation.RandomRegexLiteStringsGenerator.GetNextString">
+        <member name="M:Gallio.Framework.Data.Generation.RandomRegexLiteStringGenerator.GetNextString">
             <inheritdoc/>
         </member>
-        <member name="P:Gallio.Framework.Data.Generation.RandomRegexLiteStringsGenerator.RegularExpressionPattern">
+        <member name="P:Gallio.Framework.Data.Generation.RandomRegexLiteStringGenerator.RegularExpressionPattern">
             <summary>
             Gets or sets regular expression pattern that serves as a filter mask.
             </summary>
@@ -9874,140 +10232,41 @@
             Gets the maximum number of times.
             </summary>
         </member>
-        <member name="T:Gallio.Framework.Data.Generation.SequentialNumbersGenerator">
+        <member name="T:Gallio.Framework.Data.Generation.SequentialDecimalGenerator">
             <summary>
             Generator of sequential <see cref="T:System.Decimal"/> values.
             </summary>
         </member>
-        <member name="T:Gallio.Framework.Data.Generation.SequentialGenerator`1">
-            <summary>
-            Generic abstract generator of sequential numeric values.
-            </summary>
-            <typeparam name="T">The type of the value to generate.</typeparam>
-        </member>
-        <member name="M:Gallio.Framework.Data.Generation.SequentialGenerator`1.#ctor">
+        <member name="M:Gallio.Framework.Data.Generation.SequentialDecimalGenerator.#ctor">
             <summary>
             Default constructor.
             </summary>
         </member>
-        <member name="M:Gallio.Framework.Data.Generation.SequentialGenerator`1.Run">
-            <inheritdoc/>
+        <member name="M:Gallio.Framework.Data.Generation.SequentialDecimalGenerator.GetStartStepCountSequence">
+            <inheritdoc />
         </member>
-        <member name="M:Gallio.Framework.Data.Generation.SequentialGenerator`1.GetStartStepCountSequence">
-            <summary>
-            Returns the linear sequence constructed by using the <see cref="P:Gallio.Framework.Data.Generation.SequentialGenerator`1.Start"/>, <see cref="P:Gallio.Framework.Data.Generation.SequentialGenerator`1.Step"/>, and <see cref="P:Gallio.Framework.Data.Generation.SequentialGenerator`1.Count"/> properties.
-            </summary>
-            <returns>The sequence of values.</returns>
+        <member name="M:Gallio.Framework.Data.Generation.SequentialDecimalGenerator.GetStartEndCountSequence">
+            <inheritdoc />
         </member>
-        <member name="M:Gallio.Framework.Data.Generation.SequentialGenerator`1.GetStartEndCountSequence">
-            <summary>
-            Returns the linear sequence constructed by using the <see cref="P:Gallio.Framework.Data.Generation.SequentialGenerator`1.Start"/>, <see cref="P:Gallio.Framework.Data.Generation.SequentialGenerator`1.End"/>, and <see cref="P:Gallio.Framework.Data.Generation.SequentialGenerator`1.Count"/> properties.
-            </summary>
-            <returns>The sequence of values.</returns>
+        <member name="M:Gallio.Framework.Data.Generation.SequentialDecimalGenerator.GetStartEndStepSequence">
+            <inheritdoc />
         </member>
-        <member name="M:Gallio.Framework.Data.Generation.SequentialGenerator`1.GetStartEndStepSequence">
-            <summary>
-            Returns the linear sequence constructed by using the <see cref="P:Gallio.Framework.Data.Generation.SequentialGenerator`1.Start"/>, <see cref="P:Gallio.Framework.Data.Generation.SequentialGenerator`1.End"/>, and <see cref="P:Gallio.Framework.Data.Generation.SequentialGenerator`1.Step"/> properties.
-            </summary>
-            <returns>The sequence of values.</returns>
-        </member>
-        <member name="P:Gallio.Framework.Data.Generation.SequentialGenerator`1.Start">
-            <summary>
-            Gets or sets the starting point of the sequence.
-            </summary>
-        </member>
-        <member name="P:Gallio.Framework.Data.Generation.SequentialGenerator`1.End">
-            <summary>
-            Gets or sets the ending point of the sequence.
-            </summary>
-        </member>
-        <member name="P:Gallio.Framework.Data.Generation.SequentialGenerator`1.Step">
-            <summary>
-            Gets or sets the increment between each value of the sequence.
-            </summary>
-        </member>
-        <member name="P:Gallio.Framework.Data.Generation.SequentialGenerator`1.Count">
-            <summary>
-            Gets or sets the length of the sequence of values
-            created by the generator.
-            </summary>
-        </member>
-        <member name="P:Gallio.Framework.Data.Generation.SequentialGenerator`1.DefaultStep">
+        <member name="P:Gallio.Framework.Data.Generation.SequentialDecimalGenerator.DefaultStep">
             <summary>
             Gets the default step.
             </summary>
         </member>
-        <member name="M:Gallio.Framework.Data.Generation.SequentialNumbersGenerator.#ctor">
-            <summary>
-            Default constructor.
-            </summary>
-        </member>
-        <member name="M:Gallio.Framework.Data.Generation.SequentialNumbersGenerator.GetStartStepCountSequence">
-            <inheritdoc />
-        </member>
-        <member name="M:Gallio.Framework.Data.Generation.SequentialNumbersGenerator.GetStartEndCountSequence">
-            <inheritdoc />
-        </member>
-        <member name="M:Gallio.Framework.Data.Generation.SequentialNumbersGenerator.GetStartEndStepSequence">
-            <inheritdoc />
-        </member>
-        <member name="P:Gallio.Framework.Data.Generation.SequentialNumbersGenerator.DefaultStep">
-            <summary>
-            Gets the default step.
-            </summary>
-        </member>
-        <member name="T:Gallio.Framework.Data.Generation.RandomNumbersGenerator">
+        <member name="T:Gallio.Framework.Data.Generation.RandomDecimalGenerator">
             <summary>
             Generator of random <see cref="T:System.Decimal"/> values within a given range.
             </summary>
         </member>
-        <member name="T:Gallio.Framework.Data.Generation.RandomGenerator`1">
-            <summary>
-            Generic abstract generator of random values within a given range.
-            </summary>
-            <typeparam name="T">The type of the value to generate.</typeparam>
-        </member>
-        <member name="F:Gallio.Framework.Data.Generation.RandomGenerator`1.InnerGenerator">
-            <summary>
-            A general purpose pseudo-random number generator.
-            </summary>
-        </member>
-        <member name="M:Gallio.Framework.Data.Generation.RandomGenerator`1.#ctor">
-            <summary>
-            Default constructor.
-            </summary>
-        </member>
-        <member name="M:Gallio.Framework.Data.Generation.RandomGenerator`1.Run">
-            <inheritdoc/>
-        </member>
-        <member name="M:Gallio.Framework.Data.Generation.RandomGenerator`1.GetSequence">
-            <summary>
-            Returns the sequence of random numbers.
-            </summary>
-            <returns>The sequence of values.</returns>
-        </member>
-        <member name="P:Gallio.Framework.Data.Generation.RandomGenerator`1.Minimum">
-            <summary>
-            Gets the lower bound of the range.
-            </summary>
-        </member>
-        <member name="P:Gallio.Framework.Data.Generation.RandomGenerator`1.Maximum">
-            <summary>
-            Gets the upper bound of the range.
-            </summary>
-        </member>
-        <member name="P:Gallio.Framework.Data.Generation.RandomGenerator`1.Count">
-            <summary>
-            Gets the length of the sequence of values
-            created by the generator.
-            </summary>
-        </member>
-        <member name="M:Gallio.Framework.Data.Generation.RandomNumbersGenerator.#ctor">
+        <member name="M:Gallio.Framework.Data.Generation.RandomDecimalGenerator.#ctor">
             <summary>
             Constructs a generator of random <see cref="T:System.Decimal"/> numbers.
             </summary>
         </member>
-        <member name="M:Gallio.Framework.Data.Generation.RandomNumbersGenerator.GetSequence">
+        <member name="M:Gallio.Framework.Data.Generation.RandomDecimalGenerator.GetSequence">
             <inheritdoc/>
         </member>
         <member name="T:Gallio.Common.Condition">
@@ -12697,9 +12956,9 @@
             <param name="source">The object to convert.</param>
             <returns>The result of the conversion.</returns>
         </member>
-        <member name="T:Gallio.Runtime.Conversions.CustomConversionRule">
+        <member name="T:Gallio.Runtime.Conversions.StringToEnumConversionRule">
             <summary>
-            Conversion rule for custom user conversions.
+            Converts a text representation of a <see cref="T:System.Enum"/> to its corresponding value.
             </summary>
         </member>
         <member name="T:Gallio.Runtime.Conversions.IConversionRule">
@@ -12725,7 +12984,7 @@
             convert the contents of a composite object from one type to another, never null.</param>
             <returns>The conversion cost.</returns>
         </member>
-        <member name="M:Gallio.Runtime.Conversions.IConversionRule.Convert(System.Object,System.Type,Gallio.Runtime.Conversions.IConverter)">
+        <member name="M:Gallio.Runtime.Conversions.IConversionRule.Convert(System.Object,System.Type,Gallio.Runtime.Conversions.IConverter,System.Boolean)">
             <summary>
             Converts the value <paramref name="sourceValue"/> to type <paramref name="targetType"/>.
             </summary>
@@ -12741,7 +13000,19 @@
             <param name="targetType">The target type, never null.</param>
             <param name="elementConverter">A converter that may be used to recursively
             convert the contents of a composite object from one type to another, never null.</param>
+            <param name="nullable"></param>
             <returns>The converted value.</returns>
+        </member>
+        <member name="M:Gallio.Runtime.Conversions.StringToEnumConversionRule.GetConversionCost(System.Type,System.Type,Gallio.Runtime.Conversions.IConverter)">
+            <inheritdoc />
+        </member>
+        <member name="M:Gallio.Runtime.Conversions.StringToEnumConversionRule.Convert(System.Object,System.Type,Gallio.Runtime.Conversions.IConverter,System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="T:Gallio.Runtime.Conversions.CustomConversionRule">
+            <summary>
+            Conversion rule for custom user conversions.
+            </summary>
         </member>
         <member name="M:Gallio.Runtime.Conversions.CustomConversionRule.#ctor(Gallio.Runtime.Conversions.Conversion)">
             <summary>
@@ -12752,7 +13023,7 @@
         <member name="M:Gallio.Runtime.Conversions.CustomConversionRule.GetConversionCost(System.Type,System.Type,Gallio.Runtime.Conversions.IConverter)">
             <inheritdoc />
         </member>
-        <member name="M:Gallio.Runtime.Conversions.CustomConversionRule.Convert(System.Object,System.Type,Gallio.Runtime.Conversions.IConverter)">
+        <member name="M:Gallio.Runtime.Conversions.CustomConversionRule.Convert(System.Object,System.Type,Gallio.Runtime.Conversions.IConverter,System.Boolean)">
             <inheritdoc />
         </member>
         <member name="T:Gallio.Runtime.Conversions.CustomConverters">
@@ -16173,11 +16444,10 @@
             Helpers for working with <see cref="T:Gallio.Common.Reflection.Impl.IDebugSymbolResolver"/>.
             </summary>
         </member>
-        <member name="M:Gallio.Common.Reflection.Impl.DebugSymbolUtils.CreateResolver(System.Boolean)">
+        <member name="M:Gallio.Common.Reflection.Impl.DebugSymbolUtils.CreateResolver">
             <summary>
             Creates a new debug symbol resolver appropriate for this platform.
             </summary>
-            <param name="avoidLocks">If true, avoids taking a lock on the PDB files but may use more memory or storage.</param>
             <returns>The debug symbol resolver.</returns>
         </member>
         <member name="M:Gallio.Common.Reflection.Impl.DebugSymbolUtils.GetSourceLocation(System.Type)">
@@ -16202,6 +16472,12 @@
             <summary>
             Gets the singleton debug symbol resolver used by these utilities.
             </summary>
+            <remarks>
+            Because this resolver is a singleton, it's important to remember that it will
+            remain in memory for the lifetime of the process.  If you only need to load
+            symbols for a short time and then discard them, use <see cref="M:Gallio.Common.Reflection.Impl.DebugSymbolUtils.CreateResolver"/>
+            to create a new resolver.
+            </remarks>
         </member>
         <member name="T:Gallio.Common.Reflection.Impl.DefaultXmlDocumentationResolver">
             <summary>
@@ -16270,11 +16546,10 @@
             Implementation of a debug symbol resolver for Mono.
             </summary>
         </member>
-        <member name="M:Gallio.Common.Reflection.Impl.MonoDebugSymbolResolver.#ctor(System.Boolean)">
+        <member name="M:Gallio.Common.Reflection.Impl.MonoDebugSymbolResolver.#ctor">
             <summary>
             Creates a Mono debug symbol resolver.
             </summary>
-            <param name="avoidLocks">If true, avoids taking a lock on the PDB files but may use more memory or storage.</param>
         </member>
         <member name="M:Gallio.Common.Reflection.Impl.MonoDebugSymbolResolver.Dispose">
             <inheritdoc />
@@ -18482,6 +18757,13 @@
             <remarks>
             https://connect.microsoft.com/VisualStudio/feedback/ViewFeedback.aspx?FeedbackID=522960
             </remarks>
+        </member>
+        <member name="M:Gallio.Common.Reflection.ReflectionUtils.IsNullable(System.Type)">
+            <summary>
+            Determines whether the specified type represents a nullable value.
+            </summary>
+            <param name="type">The type to evaluate.</param>
+            <returns>True if it is nullable; otherwise false.</returns>
         </member>
         <member name="T:Gallio.Common.Reflection.Reflector">
             <summary>
@@ -22970,7 +23252,7 @@
         </member>
         <member name="T:Gallio.Runner.Extensions.ITestRunnerExtension">
             <summary>
-            A test runner extension plugs augments the behavior oa <see cref="T:Gallio.Runner.ITestRunner"/>
+            A test runner extension plugs augments the behavior of a <see cref="T:Gallio.Runner.ITestRunner"/>
             by attaching new behaviors to its event handlers.
             </summary>
             <remarks>
@@ -23519,7 +23801,7 @@
         <member name="M:Gallio.Runtime.Conversions.ArrayToArrayConversionRule.GetConversionCost(System.Type,System.Type,Gallio.Runtime.Conversions.IConverter)">
             <inheritdoc />
         </member>
-        <member name="M:Gallio.Runtime.Conversions.ArrayToArrayConversionRule.Convert(System.Object,System.Type,Gallio.Runtime.Conversions.IConverter)">
+        <member name="M:Gallio.Runtime.Conversions.ArrayToArrayConversionRule.Convert(System.Object,System.Type,Gallio.Runtime.Conversions.IConverter,System.Boolean)">
             <inheritdoc />
         </member>
         <member name="T:Gallio.Runtime.Conversions.BaseConverter">
@@ -23703,7 +23985,7 @@
         <member name="M:Gallio.Runtime.Conversions.ConvertibleToConvertibleConversionRule.GetConversionCost(System.Type,System.Type,Gallio.Runtime.Conversions.IConverter)">
             <inheritdoc />
         </member>
-        <member name="M:Gallio.Runtime.Conversions.ConvertibleToConvertibleConversionRule.Convert(System.Object,System.Type,Gallio.Runtime.Conversions.IConverter)">
+        <member name="M:Gallio.Runtime.Conversions.ConvertibleToConvertibleConversionRule.Convert(System.Object,System.Type,Gallio.Runtime.Conversions.IConverter,System.Boolean)">
             <inheritdoc />
         </member>
         <member name="T:Gallio.Runtime.Conversions.Converter">
@@ -23747,7 +24029,7 @@
         <member name="M:Gallio.Runtime.Conversions.ObjectToStringConversionRule.GetConversionCost(System.Type,System.Type,Gallio.Runtime.Conversions.IConverter)">
             <inheritdoc />
         </member>
-        <member name="M:Gallio.Runtime.Conversions.ObjectToStringConversionRule.Convert(System.Object,System.Type,Gallio.Runtime.Conversions.IConverter)">
+        <member name="M:Gallio.Runtime.Conversions.ObjectToStringConversionRule.Convert(System.Object,System.Type,Gallio.Runtime.Conversions.IConverter,System.Boolean)">
             <inheritdoc />
         </member>
         <member name="T:Gallio.Runtime.Conversions.RuleBasedConverter">
@@ -23785,7 +24067,7 @@
         <member name="M:Gallio.Runtime.Conversions.StringToXmlDocumentConversionRule.GetConversionCost(System.Type,System.Type,Gallio.Runtime.Conversions.IConverter)">
             <inheritdoc />
         </member>
-        <member name="M:Gallio.Runtime.Conversions.StringToXmlDocumentConversionRule.Convert(System.Object,System.Type,Gallio.Runtime.Conversions.IConverter)">
+        <member name="M:Gallio.Runtime.Conversions.StringToXmlDocumentConversionRule.Convert(System.Object,System.Type,Gallio.Runtime.Conversions.IConverter,System.Boolean)">
             <inheritdoc />
         </member>
         <member name="T:Gallio.Runtime.Conversions.XPathNavigableToXPathNavigatorConversionRule">
@@ -23796,7 +24078,7 @@
         <member name="M:Gallio.Runtime.Conversions.XPathNavigableToXPathNavigatorConversionRule.GetConversionCost(System.Type,System.Type,Gallio.Runtime.Conversions.IConverter)">
             <inheritdoc />
         </member>
-        <member name="M:Gallio.Runtime.Conversions.XPathNavigableToXPathNavigatorConversionRule.Convert(System.Object,System.Type,Gallio.Runtime.Conversions.IConverter)">
+        <member name="M:Gallio.Runtime.Conversions.XPathNavigableToXPathNavigatorConversionRule.Convert(System.Object,System.Type,Gallio.Runtime.Conversions.IConverter,System.Boolean)">
             <inheritdoc />
         </member>
         <member name="T:Gallio.Runtime.Conversions.XPathNavigatorToStringConversionRule">
@@ -23807,7 +24089,7 @@
         <member name="M:Gallio.Runtime.Conversions.XPathNavigatorToStringConversionRule.GetConversionCost(System.Type,System.Type,Gallio.Runtime.Conversions.IConverter)">
             <inheritdoc />
         </member>
-        <member name="M:Gallio.Runtime.Conversions.XPathNavigatorToStringConversionRule.Convert(System.Object,System.Type,Gallio.Runtime.Conversions.IConverter)">
+        <member name="M:Gallio.Runtime.Conversions.XPathNavigatorToStringConversionRule.Convert(System.Object,System.Type,Gallio.Runtime.Conversions.IConverter,System.Boolean)">
             <inheritdoc />
         </member>
         <member name="T:Gallio.Runtime.Conversions.XPathNavigatorToXmlSerializableTypeConversionRule">
@@ -23819,7 +24101,7 @@
         <member name="M:Gallio.Runtime.Conversions.XPathNavigatorToXmlSerializableTypeConversionRule.GetConversionCost(System.Type,System.Type,Gallio.Runtime.Conversions.IConverter)">
             <inheritdoc />
         </member>
-        <member name="M:Gallio.Runtime.Conversions.XPathNavigatorToXmlSerializableTypeConversionRule.Convert(System.Object,System.Type,Gallio.Runtime.Conversions.IConverter)">
+        <member name="M:Gallio.Runtime.Conversions.XPathNavigatorToXmlSerializableTypeConversionRule.Convert(System.Object,System.Type,Gallio.Runtime.Conversions.IConverter,System.Boolean)">
             <inheritdoc />
         </member>
         <member name="T:Gallio.Runtime.Debugging.AttachDebuggerResult">
@@ -35614,7 +35896,7 @@
             those frameworks are just libraries that usually run on the 2.0.50727 runtime on the CLR.
             </para>
             </remarks>
-            <returns>The runtime version, eg. "v2.0.50727" or "v4.0.30128"</returns>
+            <returns>The runtime version, eg. "v2.0.50727" or "v4.0.30319"</returns>
         </member>
         <member name="P:Gallio.Common.Platform.DotNetRuntimeSupport.InstalledDotNet20RuntimeVersion">
             <summary>
@@ -35626,13 +35908,13 @@
             <summary>
             Gets the version of the installed .Net 4.0 runtime version, or null if not installed.
             </summary>
-            <returns>The runtime version, eg. "v4.0.30128"</returns>
+            <returns>The runtime version, eg. "v4.0.30319"</returns>
         </member>
         <member name="P:Gallio.Common.Platform.DotNetRuntimeSupport.MostRecentInstalledDotNetRuntimeVersion">
             <summary>
             Gets the version of the most recent installed .Net runtime version.
             </summary>
-            <returns>The runtime version, eg. "v4.0.30128"</returns>
+            <returns>The runtime version, eg. "v4.0.30319"</returns>
         </member>
         <member name="T:Gallio.Runtime.RuntimeException">
             <summary>
@@ -39718,6 +40000,11 @@
             </summary>
             <param name="step">Information about the step.</param>
             <exception cref="T:System.ArgumentNullException">Thrown if <paramref name="step"/> is null.</exception>
+        </member>
+        <member name="M:Gallio.Runner.Reports.Schema.TestStepRun.ToString">
+            <summary>
+            Returns the name of the test step run.
+            </summary>
         </member>
         <member name="P:Gallio.Runner.Reports.Schema.TestStepRun.Step">
             <summary>

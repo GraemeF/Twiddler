@@ -6,7 +6,8 @@
     <members>
         <member name="T:Gallio.UI.Common.Policies.IUnhandledExceptionPolicy">
             <summary>
-             Wrapper for static UnhandledExceptionPolicy class (to improve testability).
+             Wrapper for static <see cref="T:Gallio.Common.Policies.UnhandledExceptionPolicy">UnhandledExceptionPolicy</see> 
+             class (to improve testability).
             </summary>
         </member>
         <member name="M:Gallio.UI.Common.Policies.IUnhandledExceptionPolicy.Report(System.String,System.Exception)">
@@ -517,12 +518,19 @@
             <summary>
              Constructor providing a menu command.
             </summary>
+             <remarks>
+             When clicked, the command will be run synchronously.
+             </remarks>
             <param name="command">The command to use.</param>
         </member>
         <member name="M:Gallio.UI.Controls.CommandToolStripMenuItem.#ctor(Gallio.UI.Menus.MenuCommand,Gallio.UI.ProgressMonitoring.ITaskManager)">
             <summary>
             Constructor providing a command and task manager.
             </summary>
+            <remarks>
+            When clicked, the command will be queued with the 
+            supplied task manager.
+            </remarks>
             <param name="command">The command to use.</param>
             <param name="taskManager">The task manager to use.</param>
         </member>
@@ -606,6 +614,10 @@
             Wrapper for a field, that implements INotifyPropertyChanged.
             </summary>
             <typeparam name="T">The type to wrap.</typeparam>
+            <remarks>
+            All credit to Ayende:
+            http://ayende.com/Blog/archive/2009/08/08/an-easier-way-to-manage-inotifypropertychanged.aspx
+            </remarks>
         </member>
         <member name="M:Gallio.UI.DataBinding.Observable`1.#ctor">
             <summary>
@@ -634,6 +646,67 @@
             <summary>
             Event fired when the value changes.
             </summary>
+        </member>
+        <member name="T:Gallio.UI.DataBinding.ObservableList`1">
+            <summary>
+             List that raises an event when the contents are modified.
+            </summary>
+             <remarks>Wraps a List&lt;T&gt;.</remarks>
+            <typeparam name="T">The type of elements in the list.</typeparam>
+        </member>
+        <member name="M:Gallio.UI.DataBinding.ObservableList`1.GetEnumerator">
+            <inheritdoc />
+        </member>
+        <member name="M:Gallio.UI.DataBinding.ObservableList`1.System#Collections#IEnumerable#GetEnumerator">
+            <inheritdoc />
+        </member>
+        <member name="M:Gallio.UI.DataBinding.ObservableList`1.Add(`0)">
+            <inheritdoc />
+        </member>
+        <member name="M:Gallio.UI.DataBinding.ObservableList`1.Clear">
+            <inheritdoc />
+        </member>
+        <member name="M:Gallio.UI.DataBinding.ObservableList`1.Contains(`0)">
+            <inheritdoc />
+        </member>
+        <member name="M:Gallio.UI.DataBinding.ObservableList`1.CopyTo(`0[],System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:Gallio.UI.DataBinding.ObservableList`1.Remove(`0)">
+            <inheritdoc />
+        </member>
+        <member name="M:Gallio.UI.DataBinding.ObservableList`1.IndexOf(`0)">
+            <inheritdoc />
+        </member>
+        <member name="M:Gallio.UI.DataBinding.ObservableList`1.Insert(System.Int32,`0)">
+            <inheritdoc />
+        </member>
+        <member name="M:Gallio.UI.DataBinding.ObservableList`1.RemoveAt(System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="M:Gallio.UI.DataBinding.ObservableList`1.ToArray">
+            <summary>
+            Copies the elements of the list to a new array.
+            </summary>
+            <returns>An array containing copies of the elements of the list.</returns>
+        </member>
+        <member name="M:Gallio.UI.DataBinding.ObservableList`1.AddRange(System.Collections.Generic.IEnumerable{`0})">
+            <summary>
+            Adds the elements of the specified collection to the end of the list.
+            </summary>
+            <param name="collection"></param>
+        </member>
+        <member name="P:Gallio.UI.DataBinding.ObservableList`1.Count">
+            <inheritdoc />
+        </member>
+        <member name="P:Gallio.UI.DataBinding.ObservableList`1.IsReadOnly">
+            <inheritdoc />
+        </member>
+        <member name="P:Gallio.UI.DataBinding.ObservableList`1.Item(System.Int32)">
+            <inheritdoc />
+        </member>
+        <member name="E:Gallio.UI.DataBinding.ObservableList`1.PropertyChanged">
+            <inheritdoc />
         </member>
         <member name="T:Gallio.UI.ErrorReporting.ErrorDialog">
             <summary>
@@ -757,6 +830,64 @@
             </summary>
             <param name="mainForm">The main form.</param>
         </member>
+        <member name="T:Gallio.UI.Events.Event">
+            <summary>
+            Marker class for Events.
+            </summary>
+        </member>
+        <member name="T:Gallio.UI.Events.EventAggregator">
+            <inheritdoc />
+        </member>
+        <member name="T:Gallio.UI.Events.IEventAggregator">
+            <summary>
+            An event aggregator.
+            http://martinfowler.com/eaaDev/EventAggregator.html
+            </summary>
+        </member>
+        <member name="M:Gallio.UI.Events.IEventAggregator.Send``1(``0)">
+            <summary>
+             Send an event to all interested parties (synchronous).
+            </summary>
+            <param name="message">The message to send.</param>
+            <typeparam name="T">The type of event.</typeparam>
+        </member>
+        <member name="M:Gallio.UI.Events.EventAggregator.#ctor(Gallio.Runtime.Extensibility.IServiceLocator)">
+            <summary>
+             Ctor.
+            </summary>
+            <param name="serviceLocator">A service locator used to find registered handlers.</param>
+        </member>
+        <member name="M:Gallio.UI.Events.EventAggregator.Send``1(``0)">
+            <inheritdoc />
+        </member>
+        <member name="T:Gallio.UI.Events.EventHandlerProxy`1">
+            <summary>
+             Proxy event handler.
+            </summary>
+            <typeparam name="T">The type of event.</typeparam>
+        </member>
+        <member name="T:Gallio.UI.Events.Handles`1">
+            <summary>
+            Marker interface used by the EventAggregator to
+            locate classes interested in an event.
+            </summary>
+            <typeparam name="T">The type of event.</typeparam>
+        </member>
+        <member name="M:Gallio.UI.Events.Handles`1.Handle(`0)">
+            <summary>
+             Handle an <see cref="T:Gallio.UI.Events.Event"/>.
+            </summary>
+            <param name="event">The event to handle.</param>
+        </member>
+        <member name="M:Gallio.UI.Events.EventHandlerProxy`1.#ctor(Gallio.UI.Events.Handles{`0})">
+            <summary>
+             Ctor.
+            </summary>
+            <param name="target">The handler to proxy for.</param>
+        </member>
+        <member name="M:Gallio.UI.Events.EventHandlerProxy`1.Handle(`0)">
+            <inheritdoc />
+        </member>
         <member name="T:Gallio.UI.Menus.MenuCommand">
             <summary>
             Wraps an <see cref="T:Gallio.UI.ProgressMonitoring.ICommand">ICommand</see> and provides
@@ -800,16 +931,120 @@
              The image to use for the command.
             </summary>
         </member>
-        <member name="T:Gallio.UI.ProgressMonitoring.ToolStripStatusLabel">
+        <member name="T:Gallio.UI.ProgressMonitoring.ITaskQueue">
             <summary>
-             Impl of a tool strip status label for Gallio progress monitoring.
+             A task queue, for use by the <see cref="T:Gallio.UI.ProgressMonitoring.TaskManager"/>.
             </summary>
         </member>
-        <member name="M:Gallio.UI.ProgressMonitoring.ToolStripStatusLabel.ProgressChanged(Gallio.Runtime.ProgressMonitoring.ObservableProgressMonitor)">
+        <member name="M:Gallio.UI.ProgressMonitoring.ITaskQueue.AddTask(System.String,Gallio.UI.ProgressMonitoring.ICommand)">
             <summary>
-             Update the progress of the control.
+            Adds a task to the specified queue.
             </summary>
-            <param name="progressMonitor">The <see cref="T:Gallio.Runtime.ProgressMonitoring.ObservableProgressMonitor"/> to use.</param>
+            <param name="queueId">The id of the queue to use.</param>
+            <param name="command">An <see cref="T:Gallio.UI.ProgressMonitoring.ICommand"/> to queue.</param>
+        </member>
+        <member name="M:Gallio.UI.ProgressMonitoring.ITaskQueue.GetNextTask(System.String)">
+            <summary>
+            Get the next task for the specified queue.
+            </summary>
+            <param name="queueId">The id of the queue to use.</param>
+            <returns>An <see cref="T:Gallio.UI.ProgressMonitoring.ICommand"/>, or null if the queue is empty.</returns>
+        </member>
+        <member name="M:Gallio.UI.ProgressMonitoring.ITaskQueue.RemoveAllTasks(System.String)">
+            <summary>
+            Removes all tasks from the specified queue.
+            </summary>
+            <param name="queueId">The id of the queue to use.</param>
+        </member>
+        <member name="T:Gallio.UI.ProgressMonitoring.ITaskRunner">
+            <summary>
+             Takes care of running queued tasks.
+            </summary>
+        </member>
+        <member name="M:Gallio.UI.ProgressMonitoring.ITaskRunner.RunTask(System.String)">
+            <summary>
+             Run the next task for a named queue, if there is one.
+            </summary>
+            <param name="queueId">The id of the queue to use.</param>
+        </member>
+        <member name="T:Gallio.UI.ProgressMonitoring.TaskCancelled">
+            <summary>
+             Event fired when a task is cancelled.
+            </summary>
+        </member>
+        <member name="M:Gallio.UI.ProgressMonitoring.TaskCancelled.#ctor(System.String)">
+            <summary>
+             Ctor.
+            </summary>
+            <param name="queueId">The id of the queue.</param>
+        </member>
+        <member name="P:Gallio.UI.ProgressMonitoring.TaskCancelled.QueueId">
+            <summary>
+             The id of the queue.
+            </summary>
+        </member>
+        <member name="T:Gallio.UI.ProgressMonitoring.TaskCompleted">
+            <summary>
+             Event fired when a task is completed.
+            </summary>
+        </member>
+        <member name="M:Gallio.UI.ProgressMonitoring.TaskCompleted.#ctor(System.String)">
+            <summary>
+             Ctor.
+            </summary>
+            <param name="queueId">The id of the queue.</param>
+        </member>
+        <member name="P:Gallio.UI.ProgressMonitoring.TaskCompleted.QueueId">
+            <summary>
+             The id of the queue.
+            </summary>
+        </member>
+        <member name="T:Gallio.UI.ProgressMonitoring.TaskQueue">
+            <summary>
+            Manages multiple queues of tasks.
+            </summary>
+            <remarks>
+            Queue id is an arbitrary string, used as a key.
+            </remarks>
+        </member>
+        <member name="M:Gallio.UI.ProgressMonitoring.TaskQueue.#ctor">
+            <summary>
+             Ctor.
+            </summary>
+        </member>
+        <member name="M:Gallio.UI.ProgressMonitoring.TaskQueue.AddTask(System.String,Gallio.UI.ProgressMonitoring.ICommand)">
+            <summary>
+            Adds a task to the specified queue.
+            </summary>
+            <param name="queueId">The id of the queue to use.</param>
+            <param name="command">An <see cref="T:Gallio.UI.ProgressMonitoring.ICommand"/> to queue.</param>
+        </member>
+        <member name="M:Gallio.UI.ProgressMonitoring.TaskQueue.GetNextTask(System.String)">
+            <summary>
+            Get the next task for the specified queue.
+            </summary>
+            <param name="queueId">The id of the queue to use.</param>
+            <returns>An <see cref="T:Gallio.UI.ProgressMonitoring.ICommand"/>, or null if the queue is empty.</returns>
+        </member>
+        <member name="M:Gallio.UI.ProgressMonitoring.TaskQueue.RemoveAllTasks(System.String)">
+            <summary>
+            Removes all tasks from the specified queue.
+            </summary>
+            <param name="queueId">The id of the queue to use.</param>
+        </member>
+        <member name="T:Gallio.UI.ProgressMonitoring.TaskRunner">
+            <inheritdoc />
+        </member>
+        <member name="M:Gallio.UI.ProgressMonitoring.TaskRunner.#ctor(Gallio.UI.ProgressMonitoring.ITaskQueue,Gallio.UI.Events.IEventAggregator,Gallio.UI.Common.Policies.IUnhandledExceptionPolicy)">
+            <summary>
+             Ctor.
+            </summary>
+            <param name="taskQueue">The task queue to use.</param>
+            <param name="eventAggregator">An event aggregator.</param>
+            <param name="unhandledExceptionPolicy">An exception policy.</param>
+        </member>
+        <member name="M:Gallio.UI.ProgressMonitoring.TaskRunner.RunTask(System.String)">
+            <inheritdoc />
         </member>
         <member name="T:Gallio.UI.ProgressMonitoring.ICommand">
             <summary>
@@ -839,6 +1074,9 @@
              Empty the queue of tasks.
             </summary>
         </member>
+        <member name="M:Gallio.UI.ProgressMonitoring.ITaskManager.ClearQueue(System.String)">
+            <inheritdoc />
+        </member>
         <member name="M:Gallio.UI.ProgressMonitoring.ITaskManager.QueueTask(Gallio.UI.ProgressMonitoring.ICommand)">
             <summary>
              Add a task to the queue. If nothing is in the queue or 
@@ -846,35 +1084,8 @@
             </summary>
             <param name="command">The command to queue.</param>
         </member>
-        <member name="P:Gallio.UI.ProgressMonitoring.ITaskManager.ProgressMonitor">
-            <summary>
-             The underlying progress monitor for the running task.
-            </summary>
-        </member>
-        <member name="P:Gallio.UI.ProgressMonitoring.ITaskManager.TaskRunning">
-            <summary>
-             Returns true if a task is currently underway.
-            </summary>
-        </member>
-        <member name="E:Gallio.UI.ProgressMonitoring.ITaskManager.ProgressUpdate">
-            <summary>
-             Event fired when a progress update is received from a running task.
-            </summary>
-        </member>
-        <member name="E:Gallio.UI.ProgressMonitoring.ITaskManager.TaskStarted">
-            <summary>
-             Event fired when a task starts.
-            </summary>
-        </member>
-        <member name="E:Gallio.UI.ProgressMonitoring.ITaskManager.TaskCompleted">
-            <summary>
-             Event fired when a task completes.
-            </summary>
-        </member>
-        <member name="E:Gallio.UI.ProgressMonitoring.ITaskManager.TaskCanceled">
-            <summary>
-             Event fired if a task is canceled.
-            </summary>
+        <member name="M:Gallio.UI.ProgressMonitoring.ITaskManager.QueueTask(System.String,Gallio.UI.ProgressMonitoring.ICommand)">
+            <inheritdoc />
         </member>
         <member name="T:Gallio.UI.ProgressMonitoring.ProgressMonitorDialog">
             <summary>
@@ -913,13 +1124,17 @@
         <member name="T:Gallio.UI.ProgressMonitoring.TaskManager">
             <inheritdoc />
         </member>
-        <member name="M:Gallio.UI.ProgressMonitoring.TaskManager.#ctor(Gallio.UI.Common.Policies.IUnhandledExceptionPolicy)">
+        <member name="M:Gallio.UI.ProgressMonitoring.TaskManager.#ctor(Gallio.UI.ProgressMonitoring.ITaskQueue,Gallio.UI.ProgressMonitoring.ITaskRunner)">
             <summary>
              Default constructor.
             </summary>
-            <param name="unhandledExceptionPolicy">An unhandled exception policy.</param>
+            <param name="taskQueue">A task queue.</param>
+            <param name="taskRunner">A task runner.</param>
         </member>
         <member name="M:Gallio.UI.ProgressMonitoring.TaskManager.QueueTask(Gallio.UI.ProgressMonitoring.ICommand)">
+            <inheritdoc />
+        </member>
+        <member name="M:Gallio.UI.ProgressMonitoring.TaskManager.QueueTask(System.String,Gallio.UI.ProgressMonitoring.ICommand)">
             <inheritdoc />
         </member>
         <member name="M:Gallio.UI.ProgressMonitoring.TaskManager.BackgroundTask(Gallio.Common.Action)">
@@ -928,34 +1143,45 @@
         <member name="M:Gallio.UI.ProgressMonitoring.TaskManager.ClearQueue">
             <inheritdoc />
         </member>
-        <member name="E:Gallio.UI.ProgressMonitoring.TaskManager.ProgressUpdate">
+        <member name="M:Gallio.UI.ProgressMonitoring.TaskManager.ClearQueue(System.String)">
             <inheritdoc />
         </member>
-        <member name="P:Gallio.UI.ProgressMonitoring.TaskManager.ProgressMonitor">
-            <inheritdoc />
+        <member name="T:Gallio.UI.ProgressMonitoring.TaskStarted">
+            <summary>
+             Event fired when a task is started.
+            </summary>
         </member>
-        <member name="P:Gallio.UI.ProgressMonitoring.TaskManager.TaskRunning">
-            <inheritdoc />
+        <member name="M:Gallio.UI.ProgressMonitoring.TaskStarted.#ctor(System.String,Gallio.Runtime.ProgressMonitoring.ObservableProgressMonitor)">
+            <summary>
+             Ctor.
+            </summary>
+            <param name="queueId">The queue id.</param>
+            <param name="progressMonitor">A progress monitor.</param>
         </member>
-        <member name="E:Gallio.UI.ProgressMonitoring.TaskManager.TaskStarted">
-            <inheritdoc />
+        <member name="P:Gallio.UI.ProgressMonitoring.TaskStarted.QueueId">
+            <summary>
+             The id of the queue.
+            </summary>
         </member>
-        <member name="E:Gallio.UI.ProgressMonitoring.TaskManager.TaskCompleted">
-            <inheritdoc />
-        </member>
-        <member name="E:Gallio.UI.ProgressMonitoring.TaskManager.TaskCanceled">
-            <inheritdoc />
+        <member name="P:Gallio.UI.ProgressMonitoring.TaskStarted.ProgressMonitor">
+            <summary>
+             A progress monitor attached to the task.
+            </summary>
         </member>
         <member name="T:Gallio.UI.ProgressMonitoring.ToolStripProgressBar">
             <summary>
              Impl of a tool strip progress bar for Gallio progress monitoring.
             </summary>
         </member>
-        <member name="M:Gallio.UI.ProgressMonitoring.ToolStripProgressBar.ProgressChanged(Gallio.Runtime.ProgressMonitoring.ObservableProgressMonitor)">
+        <member name="P:Gallio.UI.ProgressMonitoring.ToolStripProgressBar.TotalWork">
             <summary>
-             Update the progress of the control.
+             Total work to do.
             </summary>
-            <param name="progressMonitor">The <see cref="T:Gallio.Runtime.ProgressMonitoring.ObservableProgressMonitor"/> to use.</param>
+        </member>
+        <member name="P:Gallio.UI.ProgressMonitoring.ToolStripProgressBar.CompletedWork">
+            <summary>
+             Total work to do.
+            </summary>
         </member>
         <member name="T:Gallio.UI.Reports.HtmlTestStepRunFormatter">
             <summary>
