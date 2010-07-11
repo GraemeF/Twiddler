@@ -1,10 +1,8 @@
-﻿using System.Threading;
-using Moq;
+﻿using Moq;
 using Twiddler.Core.Models;
 using Twiddler.Core.Services;
 using Twiddler.Screens;
 using Twiddler.Screens.Interfaces;
-using Twiddler.Services.Interfaces;
 using Twiddler.TestData;
 using Xunit;
 
@@ -16,12 +14,18 @@ namespace Twiddler.Tests.Screens
         private readonly Mock<ITweetPlaceholderScreen> _fakeTweetPlaceholderScreen = new Mock<ITweetPlaceholderScreen>();
         private readonly Tweet _tweet = New.Tweet;
         private Mock<ITweetScreen> _fakeTweetScreen;
+        private bool _storeAskedForTweet;
 
         public LoadingTweetScreenTests()
         {
             _fakeTweetPlaceholderScreen.
                 Setup(x => x.CanShutdown()).
                 Returns(true);
+
+            _fakeStore.
+                Setup(x => x.GetTweet(_tweet.Id)).
+                Callback(() => _storeAskedForTweet = true).
+                Returns(_tweet);
         }
 
         [Fact]
@@ -57,10 +61,6 @@ namespace Twiddler.Tests.Screens
         {
             LoadingTweetScreen test = BuildDefaultTestSubject();
 
-            _fakeStore.
-                Setup(x => x.GetTweet(_tweet.Id)).
-                Returns(_tweet);
-
             InitializeAndWaitUntilStoreIsAskedForTweet(test);
 
             _fakeTweetScreen.Verify(x => x.Initialize());
@@ -79,8 +79,7 @@ namespace Twiddler.Tests.Screens
         private void InitializeAndWaitUntilStoreIsAskedForTweet(LoadingTweetScreen test)
         {
             test.Initialize();
-            // TODO: Get rid of Sleep
-            Thread.Sleep(1000);
+            Wait.Until(() => _storeAskedForTweet);
         }
     }
 }

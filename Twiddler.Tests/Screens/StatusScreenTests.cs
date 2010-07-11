@@ -6,6 +6,7 @@ using Twiddler.Commands.Interfaces;
 using Twiddler.Screens;
 using Twiddler.Screens.Interfaces;
 using Twiddler.Services.Interfaces;
+using Twiddler.TestData;
 using Xunit;
 using Xunit.Extensions;
 
@@ -37,10 +38,15 @@ namespace Twiddler.Tests.Screens
         public void Initialize__ChecksAuthorization()
         {
             StatusScreen test = BuildDefaultTestSubject();
+            bool clientAuthorizationChecked = false;
+            _fakeClient.
+                Setup(x => x.CheckAuthorization()).
+                Callback(() => clientAuthorizationChecked = true);
+
             test.Initialize();
             Thread.Sleep(1000);
-            
-            _fakeClient.Verify(x => x.CheckAuthorization());
+
+            Wait.Until(() => clientAuthorizationChecked);
         }
 
         [Fact]

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.ObjectModel;
-using System.Threading;
 using System.Windows.Input;
 using Moq;
 using Twiddler.Core.Models;
@@ -49,9 +48,15 @@ namespace Twiddler.Tests.Screens
         {
             var mockScreen = new Mock<ITweetScreen>();
             var mockCommand = new Mock<ICommand>();
+            bool commandExecuted = false;
+
             mockScreen.
                 Setup(x => x.MarkAsReadCommand).
                 Returns(mockCommand.Object);
+
+            mockCommand.
+                Setup(x => x.Execute(null)).
+                Callback(() => commandExecuted = true);
 
             var test = new TimelineScreen(new Lazy<ITimeline>(() => _fakeTimeline.Object), x => mockScreen.Object);
             test.Initialize();
@@ -60,9 +65,8 @@ namespace Twiddler.Tests.Screens
 
             test.Selection = mockScreen.Object;
             test.Selection = null;
-            Thread.Sleep(1000);
 
-            mockCommand.Verify(x => x.Execute(null));
+            Wait.Until(() => commandExecuted);
         }
     }
 }
