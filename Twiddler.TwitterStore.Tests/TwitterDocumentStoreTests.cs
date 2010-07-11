@@ -47,5 +47,20 @@ namespace Twiddler.TwitterStore.Tests
 
             Assert.True(eventRaised);
         }
+
+        [Fact]
+        public void GetTweet_GivenTweetThatIsInTheStore_ReturnsTheTweet()
+        {
+            Tweet tweet = New.Tweet;
+            string id = "The tweet id";
+
+            var test = new TwitterDocumentStore(_fakeDocumentStoreFactory.Object);
+
+            _fakeDocumentSession.
+                Setup(x => x.Load<Tweet>(id)).
+                Returns(tweet);
+
+            Assert.Same(tweet, test.GetTweet(id));
+        }
     }
 }
