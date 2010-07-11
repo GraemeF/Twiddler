@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Threading;
+using MbUnit.Framework;
 using Moq;
 using Twiddler.Core.Models;
 using Twiddler.Core.Services;
@@ -20,6 +20,7 @@ namespace Twiddler.Tests.Services
         private readonly Mock<ITweetSink> _fakeSink = new Mock<ITweetSink>();
         private readonly IEnumerable<Tweet> _newTweets = new Tweet[] {New.Tweet};
         private readonly IEnumerable<Tweet> _requestedTweets = new Tweet[] {New.Tweet};
+        private bool _requestCompleted;
 
         public RequestConductorTests()
         {
@@ -29,6 +30,7 @@ namespace Twiddler.Tests.Services
 
             _fakeFilter.
                 Setup(x => x.RemoveKnownTweets(_requestedTweets)).
+                Callback(() => _requestCompleted = true).
                 Returns(_newTweets);
         }
 
@@ -40,8 +42,7 @@ namespace Twiddler.Tests.Services
             ClientAuthorizationStatusChangesTo(AuthorizationStatus.Authorized);
 
             test.Start(_fakeSink.Object);
-            // TODO: Get rid of Sleep
-            Thread.Sleep(1000);
+            Retry.Until(() => _requestCompleted);
 
             _fakeRequester.Verify(x => x.RequestTweets());
         }
@@ -56,8 +57,7 @@ namespace Twiddler.Tests.Services
             ClientAuthorizationStatusChangesTo(AuthorizationStatus.Authorized);
             GC.KeepAlive(test);
 
-            // TODO: Get rid of Sleep
-            Thread.Sleep(1000);
+            Retry.Until(() => _requestCompleted);
 
             _fakeRequester.Verify(x => x.RequestTweets());
         }
@@ -70,8 +70,7 @@ namespace Twiddler.Tests.Services
             RequestConductor test = BuildDefaultTestSubject();
             test.Start(_fakeSink.Object);
 
-            // TODO: Get rid of Sleep
-            Thread.Sleep(1000);
+            Retry.Until(() => _requestCompleted);
 
             _fakeSink.Verify(x => x.Add(_newTweets));
         }
