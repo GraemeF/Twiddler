@@ -14,17 +14,23 @@ namespace Twiddler.Tests.Services
     public class RequestConductorTests
     {
         private readonly Mock<ITwitterClient> _fakeClient = new Mock<ITwitterClient>();
+        private readonly Mock<INewTweetFilter> _fakeFilter = new Mock<INewTweetFilter>();
         private readonly Mock<ITweetRequester> _fakeRequester = new Mock<ITweetRequester>();
         private readonly Mock<ITweetSink> _fakeSink = new Mock<ITweetSink>();
-        private readonly IEnumerable<Tweet> _tweets = new Tweet[] {New.Tweet};
+        private readonly IEnumerable<Tweet> _newTweets = new Tweet[] {New.Tweet};
+        private readonly IEnumerable<Tweet> _requestedTweets = new Tweet[] {New.Tweet};
         private bool _requestCompleted;
 
         public RequestConductorTests()
         {
             _fakeRequester.
                 Setup(x => x.RequestTweets()).
+                Returns(_requestedTweets);
+
+            _fakeFilter.
+                Setup(x => x.RemoveKnownTweets(_requestedTweets)).
                 Callback(() => _requestCompleted = true).
-                Returns(_tweets);
+                Returns(_newTweets);
         }
 
         [Fact]
@@ -56,7 +62,7 @@ namespace Twiddler.Tests.Services
         }
 
         [Fact]
-        public void Start_WhenTweetsArriveFromRequestor_AddsTweetsToSink()
+        public void Start_WhenTweetsArriveFromRequestor_AddsNewTweetsToSink()
         {
             ClientAuthorizationStatusChangesTo(AuthorizationStatus.Authorized);
 
@@ -65,7 +71,7 @@ namespace Twiddler.Tests.Services
 
             Wait.Until(() => _requestCompleted);
 
-            _fakeSink.Verify(x => x.Add(_tweets));
+            _fakeSink.Verify(x => x.Add(_newTweets));
         }
 
         private void ClientAuthorizationStatusChangesTo(AuthorizationStatus authorizationStatus)
@@ -80,7 +86,7 @@ namespace Twiddler.Tests.Services
 
         private RequestConductor BuildDefaultTestSubject()
         {
-            return new RequestConductor(_fakeClient.Object, new[] {_fakeRequester.Object});
+            return new RequestConductor(_fakeClient.Object, new[] {_fakeRequester.Object}, _fakeFilter.Object);
         }
     }
 }
