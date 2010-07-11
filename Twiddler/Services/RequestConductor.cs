@@ -69,10 +69,10 @@ namespace Twiddler.Services
                     Interval(1.Minute()).
                     StartWith(0L).
                     Subscribe(x => new TaskFactory().
-                                       StartNew(() => Parallel.ForEach(_tweetRequesters, MakeRequest)));
+                                       StartNew(() => Parallel.ForEach(_tweetRequesters, RequestAndAddNewTweetsToStore)));
         }
 
-        private void MakeRequest(ITweetRequester tweetRequester)
+        private void RequestAndAddNewTweetsToStore(ITweetRequester tweetRequester)
         {
             _tweetSink.Add(tweetRequester.RequestTweets());
         }
