@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Threading;
 using Moq;
@@ -14,8 +15,22 @@ namespace Twiddler.Tests.Services
     public class RequestConductorTests
     {
         private readonly Mock<ITwitterClient> _fakeClient = new Mock<ITwitterClient>();
+        private readonly Mock<INewTweetFilter> _fakeFilter = new Mock<INewTweetFilter>();
         private readonly Mock<ITweetRequester> _fakeRequester = new Mock<ITweetRequester>();
         private readonly Mock<ITweetSink> _fakeSink = new Mock<ITweetSink>();
+        private readonly IEnumerable<Tweet> _newTweets = new Tweet[] {New.Tweet};
+        private readonly IEnumerable<Tweet> _requestedTweets = new Tweet[] {New.Tweet};
+
+        public RequestConductorTests()
+        {
+            _fakeRequester.
+                Setup(x => x.RequestTweets()).
+                Returns(_requestedTweets);
+
+            _fakeFilter.
+                Setup(x => x.RemoveKnownTweets(_requestedTweets)).
+                Returns(_newTweets);
+        }
 
         [Fact]
         public void Start_WhenAuthorized_BeginsRequesting()
@@ -48,17 +63,17 @@ namespace Twiddler.Tests.Services
         }
 
         [Fact]
-        public void Start_WhenTweetsArriveFromRequestor_AddsTweetsToSink()
+        public void Start_WhenTweetsArriveFromRequestor_AddsNewTweetsToSink()
         {
-            var tweets = new Tweet[] {New.Tweet};
-            _fakeRequester.Setup(x => x.RequestTweets()).Returns(tweets);
-
             ClientAuthorizationStatusChangesTo(AuthorizationStatus.Authorized);
 
             RequestConductor test = BuildDefaultTestSubject();
             test.Start(_fakeSink.Object);
 
-            _fakeSink.Verify(x => x.Add(tweets));
+            // TODO: Get rid of Sleep
+            Thread.Sleep(1000);
+
+            _fakeSink.Verify(x => x.Add(_newTweets));
         }
 
         private void ClientAuthorizationStatusChangesTo(AuthorizationStatus authorizationStatus)
@@ -73,7 +88,7 @@ namespace Twiddler.Tests.Services
 
         private RequestConductor BuildDefaultTestSubject()
         {
-            return new RequestConductor(_fakeClient.Object, new[] {_fakeRequester.Object});
+            return new RequestConductor(_fakeClient.Object, new[] {_fakeRequester.Object}, _fakeFilter.Object);
         }
     }
 }
