@@ -18,7 +18,7 @@ namespace Twiddler.Tests.Screens
             new Mock<ILinkThumbnailScreenFactory>();
 
         private readonly Mock<ILinkThumbnailScreen> _fakeThumbnailScreen = new Mock<ILinkThumbnailScreen>();
-        private readonly Tweet _tweet = New.Tweet;
+        private readonly Tweet _tweet = A.Tweet;
 
         [Fact]
         public void GettingMarkAsReadCommand__ReturnsCommand()

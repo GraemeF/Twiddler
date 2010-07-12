@@ -37,7 +37,7 @@ namespace Twiddler.Tests.Screens
             var test = new TimelineScreen(new Lazy<ITimeline>(() => _fakeTimeline.Object), x => mockScreen.Object);
             test.Initialize();
 
-            _tweets.Add(New.Tweet);
+            _tweets.Add(A.Tweet);
 
             Assert.Contains(mockScreen.Object, test.Screens);
             mockScreen.Verify(x => x.Initialize());
@@ -61,7 +61,7 @@ namespace Twiddler.Tests.Screens
             var test = new TimelineScreen(new Lazy<ITimeline>(() => _fakeTimeline.Object), x => mockScreen.Object);
             test.Initialize();
 
-            _tweets.Add(New.Tweet);
+            _tweets.Add(A.Tweet);
 
             test.Selection = mockScreen.Object;
             test.Selection = null;

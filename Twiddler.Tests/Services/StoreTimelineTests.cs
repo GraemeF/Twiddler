@@ -24,7 +24,7 @@ namespace Twiddler.Tests.Services
         [Fact]
         public void GettingTweets_WhenTheStoreHasInboxTweets_ContainsTweets()
         {
-            Tweet tweet = New.Tweet;
+            Tweet tweet = A.Tweet;
             StoreInboxTweetsChangesTo(new[] {tweet});
 
             StoreTimeline test = BuildDefaultTestSubject();
@@ -36,7 +36,7 @@ namespace Twiddler.Tests.Services
         public void GettingTweets_WhenNewTweetsAreAddedToTheStore_ContainsNewTweets()
         {
             StoreTimeline test = BuildDefaultTestSubject();
-            Tweet tweet = New.Tweet;
+            Tweet tweet = A.Tweet;
 
             bool eventRaised = false;
             test.Tweets.CollectionChanged += (sender, args) => eventRaised = args.NewItems.Contains(tweet);
@@ -52,13 +52,13 @@ namespace Twiddler.Tests.Services
             const string TestId = "123";
             StoreTimeline test = BuildDefaultTestSubject();
 
-            Tweet tweet = New.Tweet.IdentifiedBy(TestId);
+            Tweet tweet = A.Tweet.IdentifiedBy(TestId);
             StoreInboxTweetsChangesTo(new[] {tweet});
 
             bool eventRaised = false;
             test.Tweets.CollectionChanged += (sender, args) => eventRaised = true;
 
-            StoreInboxTweetsChangesTo(new Tweet[] {New.Tweet.IdentifiedBy(TestId)});
+            StoreInboxTweetsChangesTo(new Tweet[] {A.Tweet.IdentifiedBy(TestId)});
 
             Assert.False(eventRaised);
             Assert.Contains(tweet, test.Tweets);
@@ -68,7 +68,7 @@ namespace Twiddler.Tests.Services
         public void GettingTweets_WhenTweetsRemovedFromTheStore_DoesNotContainOldTweets()
         {
             StoreTimeline test = BuildDefaultTestSubject();
-            Tweet tweet = New.Tweet;
+            Tweet tweet = A.Tweet;
             StoreInboxTweetsChangesTo(new[] {tweet});
 
             bool eventRaised = false;

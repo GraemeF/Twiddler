@@ -8,7 +8,7 @@ namespace Twiddler.TestData
         private readonly DateTime _createdDate = DateTime.Now.AddMinutes(-5.0);
         private readonly string _inReplyToStatusId;
         private readonly bool _isRead;
-        private readonly User _user = New.User;
+        private readonly User _user = A.User;
         private string _id = "1";
         private bool _isArchived;
         private string _status = "Unspecified Status";

@@ -17,8 +17,8 @@ namespace Twiddler.Tests.Services
         {
             NewTweetFilter test = BuildDefaultTestSubject();
 
-            Tweet knownTweet = New.Tweet.IdentifiedBy("Known Id");
-            Tweet newTweet = New.Tweet.IdentifiedBy("New Id");
+            Tweet knownTweet = A.Tweet.IdentifiedBy("Known Id");
+            Tweet newTweet = A.Tweet.IdentifiedBy("New Id");
 
             _fakeResolver.
                 Setup(x => x.GetTweet(knownTweet.Id)).

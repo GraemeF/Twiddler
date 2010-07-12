@@ -10,7 +10,7 @@ namespace Twiddler.Tests.Commands
     public class MarkTweetAsReadCommandTests
     {
         private readonly Mock<ITweetStore> _fakeStore = new Mock<ITweetStore>();
-        private readonly Tweet _tweet = New.Tweet;
+        private readonly Tweet _tweet = A.Tweet;
 
         [Fact]
         public void Execute_WhenTweetIsNotRead_MarksTweetAsRead()

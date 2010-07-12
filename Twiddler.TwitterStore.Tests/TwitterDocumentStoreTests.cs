@@ -29,7 +29,7 @@ namespace Twiddler.TwitterStore.Tests
         {
             var test = new TwitterDocumentStore(_fakeDocumentStoreFactory.Object);
 
-            Tweet tweet = New.Tweet;
+            Tweet tweet = A.Tweet;
             test.Add(tweet);
 
             _fakeDocumentSession.Verify(x => x.Store(tweet));
@@ -43,7 +43,7 @@ namespace Twiddler.TwitterStore.Tests
 
             bool eventRaised = false;
             test.Updated += (sender, args) => eventRaised = true;
-            test.Add(New.Tweet);
+            test.Add(A.Tweet);
 
             Assert.True(eventRaised);
         }
@@ -51,7 +51,7 @@ namespace Twiddler.TwitterStore.Tests
         [Fact]
         public void GetTweet_GivenTweetThatIsInTheStore_ReturnsTheTweet()
         {
-            Tweet tweet = New.Tweet;
+            Tweet tweet = A.Tweet;
             string id = "The tweet id";
 
             var test = new TwitterDocumentStore(_fakeDocumentStoreFactory.Object);

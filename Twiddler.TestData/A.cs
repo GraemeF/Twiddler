@@ -2,7 +2,7 @@
 
 namespace Twiddler.TestData
 {
-    public class New
+    public class A
     {
         public static TweetBuilder Tweet
         {

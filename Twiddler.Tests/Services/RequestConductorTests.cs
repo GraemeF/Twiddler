@@ -17,8 +17,8 @@ namespace Twiddler.Tests.Services
         private readonly Mock<INewTweetFilter> _fakeFilter = new Mock<INewTweetFilter>();
         private readonly Mock<ITweetRequester> _fakeRequester = new Mock<ITweetRequester>();
         private readonly Mock<ITweetSink> _fakeSink = new Mock<ITweetSink>();
-        private readonly IEnumerable<Tweet> _newTweets = new Tweet[] {New.Tweet};
-        private readonly IEnumerable<Tweet> _requestedTweets = new Tweet[] {New.Tweet};
+        private readonly IEnumerable<Tweet> _newTweets = new Tweet[] {A.Tweet};
+        private readonly IEnumerable<Tweet> _requestedTweets = new Tweet[] {A.Tweet};
         private bool _requestCompleted;
 
         public RequestConductorTests()
