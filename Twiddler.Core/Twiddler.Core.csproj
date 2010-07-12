@@ -53,6 +53,7 @@
     <Compile Include="NoCoverageAttribute.cs" />
     <Compile Include="PropertyHelper.cs" />
     <Compile Include="Services\INewTweetFilter.cs" />
+    <Compile Include="Services\ITweetRating.cs" />
     <Compile Include="Services\ITweetSink.cs" />
     <Compile Include="Services\ITweetResolver.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
