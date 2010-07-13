@@ -207,6 +207,7 @@
     <Compile Include="Commands\Interfaces\IOpenLinkCommand.cs" />
     <Compile Include="Commands\MarkTweetAsReadCommand.cs" />
     <Compile Include="Commands\OpenLinkCommand.cs" />
+    <Compile Include="Models\Interfaces\IUserInfo.cs" />
     <Compile Include="Screens\Interfaces\ILinkThumbnailScreen.cs" />
     <Compile Include="Screens\Interfaces\IImageThumbnailScreen.cs" />
     <Compile Include="Screens\ImageThumbnailScreen.cs" />
@@ -220,6 +221,7 @@
     <Compile Include="Services\Clock.cs" />
     <Compile Include="Services\NewTweetFilter.cs" />
     <Compile Include="Services\StoreTimeline.cs" />
+    <Compile Include="Services\TweetRating.cs" />
     <Compile Include="TweetRequesters\FriendsTimelineTweetRequester.cs" />
     <Compile Include="TweetRequesters\HomeTimelineTweetRequester.cs" />
     <Compile Include="Services\Interfaces\IClock.cs" />
