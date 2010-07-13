@@ -3,6 +3,7 @@ using System.Linq;
 using TweetSharp.Twitter.Fluent;
 using TweetSharp.Twitter.Model;
 using Twiddler.Core.Models;
+using Twiddler.Core.Services;
 using Twiddler.Models;
 using Twiddler.Screens.Interfaces;
 using Twiddler.Services.Interfaces;
@@ -24,6 +25,8 @@ namespace Twiddler
         public delegate ITweetScreen TweetScreenFactory(Tweet tweet);
 
         public delegate User UserFactory(TwitterUser user);
+
+        public delegate ITweetRating TweetRatingFactory(Tweet tweet);
 
         #endregion
 

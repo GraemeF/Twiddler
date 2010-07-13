@@ -22,7 +22,12 @@ namespace Twiddler.Services
 
         public bool IsMention
         {
-            get { return _tweet.Mentions.Contains(_client.AuthenticatedUser.ScreenName); }
+            get
+            {
+                User authenticatedUser = _client.AuthenticatedUser;
+                return authenticatedUser != null
+                       && _tweet.Mentions.Contains(authenticatedUser.ScreenName);
+            }
         }
 
         public bool IsDirectMessage
