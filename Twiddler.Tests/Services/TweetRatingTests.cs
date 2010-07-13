@@ -1,6 +1,7 @@
 ﻿using Moq;
 using Twiddler.Core.Models;
 using Twiddler.Services;
+using Twiddler.Services.Interfaces;
 using Twiddler.TestData;
 using Xunit;
 
@@ -8,15 +9,8 @@ namespace Twiddler.Tests.Services
 {
     public class TweetRatingTests
     {
-        private const string TestScreenName = "MyScreenName";
-        private readonly Mock<IUserInfo> _userInfo;
+        private readonly User _user = A.User;
         private Tweet _tweet;
-
-        public TweetRatingTests()
-        {
-            _userInfo = new Mock<IUserInfo>();
-            _userInfo.Setup(x => x.ScreenName).Returns(TestScreenName);
-        }
 
         [Fact]
         public void GettingIsMention_WhenTheUserIsNotMentioned_ReturnsFalse()
@@ -30,7 +24,7 @@ namespace Twiddler.Tests.Services
         [Fact]
         public void GettingIsMention_WhenTheUserIsMentioned_ReturnsTrue()
         {
-            _tweet = A.Tweet.Mentioning(TestScreenName);
+            _tweet = A.Tweet.Mentioning(_user.ScreenName);
             TweetRating test = BuildDefaultTestSubject();
 
             Assert.True(test.IsMention);
@@ -38,7 +32,12 @@ namespace Twiddler.Tests.Services
 
         private TweetRating BuildDefaultTestSubject()
         {
-            return new TweetRating(_userInfo.Object, _tweet);
+            var fakeClient = new Mock<ITwitterClient>();
+            fakeClient.
+                Setup(x => x.AuthenticatedUser).
+                Returns(_user);
+
+            return new TweetRating(fakeClient.Object, _tweet);
         }
     }
 }
