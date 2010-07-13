@@ -70,6 +70,7 @@ namespace Twiddler
 
             builder.RegisterInstance(new CompositionContainer(new AssemblyCatalog(Assembly.GetExecutingAssembly())));
             builder.RegisterInstance<Factories.TweetFactory>(Factories.CreateTweetFromTwitterStatus);
+            builder.RegisterInstance<Factories.UserFactory>(Factories.CreateUserFromTwitterUser);
 
             return builder;
         }

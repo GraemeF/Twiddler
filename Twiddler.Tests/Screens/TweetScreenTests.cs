@@ -1,9 +1,11 @@
 using System;
 using System.Collections.Generic;
+using System.Windows;
 using Caliburn.Testability.Extensions;
 using Moq;
 using Twiddler.Commands;
 using Twiddler.Core.Models;
+using Twiddler.Core.Services;
 using Twiddler.Screens;
 using Twiddler.Screens.Interfaces;
 using Twiddler.Services.Interfaces;
@@ -18,6 +20,7 @@ namespace Twiddler.Tests.Screens
             new Mock<ILinkThumbnailScreenFactory>();
 
         private readonly Mock<ILinkThumbnailScreen> _fakeThumbnailScreen = new Mock<ILinkThumbnailScreen>();
+        private readonly Mock<ITweetRating> _fakeTweetRating = new Mock<ITweetRating>();
         private readonly Tweet _tweet = A.Tweet;
 
         [Fact]
@@ -46,7 +49,7 @@ namespace Twiddler.Tests.Screens
 
         private TweetScreen BuildDefaultTestSubject()
         {
-            return new TweetScreen(_tweet, _fakeThumbnailFactory.Object, null, null);
+            return new TweetScreen(_tweet, _fakeTweetRating.Object, _fakeThumbnailFactory.Object, null, null);
         }
 
         [Fact]
@@ -81,6 +84,7 @@ namespace Twiddler.Tests.Screens
 
             var test = new TweetScreen(new Tweet
                                            {InReplyToStatusId = "4"},
+                                       _fakeTweetRating.Object,
                                        _fakeThumbnailFactory.Object,
                                        x => mockScreen.Object,
                                        null);
@@ -103,12 +107,31 @@ namespace Twiddler.Tests.Screens
                             Status = "This tweet contains a link",
                             Links = new List<Uri> {new Uri("http://link.one.com"),}
                         },
+                    _fakeTweetRating.Object,
                     _fakeThumbnailFactory.Object,
                     null,
                     null);
             test.Initialize();
 
             Assert.Contains(_fakeThumbnailScreen.Object, test.Links);
+        }
+
+        [Fact]
+        public void GettingMentionVisibility_WhenTweetIsNotAMention_ReturnsCollapsed()
+        {
+            TweetScreen test = BuildDefaultTestSubject();
+            Assert.Equal(Visibility.Collapsed, test.MentionVisibility);
+        }
+
+        [Fact]
+        public void GettingMentionVisibility_WhenTweetIsAMention_ReturnsVisible()
+        {
+            TweetScreen test = BuildDefaultTestSubject();
+            _fakeTweetRating.
+                Setup(x => x.IsMention).
+                Returns(true);
+
+            Assert.Equal(Visibility.Visible, test.MentionVisibility);
         }
 
         [Fact]

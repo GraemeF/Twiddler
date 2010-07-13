@@ -50,7 +50,7 @@ namespace Twiddler
                        : null;
         }
 
-        private static User CreateUserFromTwitterUser(TwitterUser user)
+        public static User CreateUserFromTwitterUser(TwitterUser user)
         {
             return new User
                        {

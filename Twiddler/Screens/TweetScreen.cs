@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows;
 using System.Windows.Input;
 using Caliburn.Core.IoC;
 using Caliburn.PresentationFramework;
@@ -18,15 +19,18 @@ namespace Twiddler.Screens
         private readonly ILinkThumbnailScreenFactory _linkThumbnailScreenFactory;
         private readonly Factories.LoadingTweetScreenFactory _loadingTweetScreenFactory;
         private readonly Tweet _tweet;
+        private readonly ITweetRating _tweetRating;
         private PropertyObserver<Tweet> _tweetObserver;
 
         public TweetScreen(Tweet tweet,
+                           ITweetRating tweetRating,
                            ILinkThumbnailScreenFactory linkThumbnailScreenFactory,
                            Factories.LoadingTweetScreenFactory loadingTweetScreenFactory,
                            ITweetStore store)
             : base(false)
         {
             _tweet = tweet;
+            _tweetRating = tweetRating;
             Id = _tweet.Id;
             MarkAsReadCommand = new MarkTweetAsReadCommand(_tweet, store);
             _linkThumbnailScreenFactory = linkThumbnailScreenFactory;
@@ -56,6 +60,16 @@ namespace Twiddler.Screens
         public double Opacity
         {
             get { return _tweet.IsRead ? 0.5 : 1.0; }
+        }
+
+        public Visibility MentionVisibility
+        {
+            get
+            {
+                return _tweetRating.IsMention
+                           ? Visibility.Visible
+                           : Visibility.Collapsed;
+            }
         }
 
         #region ITweetScreen Members
