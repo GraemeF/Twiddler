@@ -20,6 +20,7 @@ namespace Twiddler.Core.Models
         public DateTime CreatedDate { get; set; }
         public string InReplyToStatusId { get; set; }
         public List<Uri> Links { get; set; }
+        public List<string> Mentions { get; set; }
 
         public bool IsRead
         {

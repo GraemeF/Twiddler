@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using Twiddler.Core.Models;
 
 namespace Twiddler.TestData
@@ -11,6 +13,8 @@ namespace Twiddler.TestData
         private readonly User _user = A.User;
         private string _id = "1";
         private bool _isArchived;
+        private List<Uri> _links = new List<Uri>();
+        private List<string> _mentions = new List<string>();
         private string _status = "Unspecified Status";
 
         internal TweetBuilder(TweetBuilder basedOn)
@@ -22,6 +26,8 @@ namespace Twiddler.TestData
             _isRead = basedOn._isRead;
             _status = basedOn._status;
             _user = basedOn._user;
+            _links = basedOn._links.ToList();
+            _mentions = basedOn._mentions.ToList();
         }
 
         public TweetBuilder()
@@ -38,7 +44,9 @@ namespace Twiddler.TestData
                            IsArchived = builder._isArchived,
                            IsRead = builder._isRead,
                            Status = builder._status,
-                           User = builder._user
+                           User = builder._user,
+                           Links = new List<Uri>(builder._links),
+                           Mentions = new List<string>(builder._mentions)
                        };
         }
 
@@ -50,6 +58,16 @@ namespace Twiddler.TestData
         public TweetBuilder WithStatus(string status)
         {
             return new TweetBuilder(this) {_status = status};
+        }
+
+        public TweetBuilder LinkingTo(Uri link)
+        {
+            return new TweetBuilder(this) {_links = new List<Uri>(_links) {link}};
+        }
+
+        public TweetBuilder Mentioning(string screenName)
+        {
+            return new TweetBuilder(this) {_mentions = new List<string>(_mentions) {screenName}};
         }
 
         public TweetBuilder Archived()

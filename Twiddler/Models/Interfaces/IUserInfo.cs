@@ -2,6 +2,6 @@
 {
     public interface IUserInfo
     {
-        string UserId { get; }
+        string ScreenName { get; }
     }
 }

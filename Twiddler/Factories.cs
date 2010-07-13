@@ -36,6 +36,7 @@ namespace Twiddler
                            User = CreateUserFromTwitterUser(status.User),
                            CreatedDate = status.CreatedDate,
                            Links = status.TextLinks.ToList(),
+                           Mentions = status.TextMentions.ToList(),
                            InReplyToStatusId = GetInReplyToStatusId(status),
                            IsArchived = false,
                            IsRead = false
