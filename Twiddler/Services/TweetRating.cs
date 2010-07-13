@@ -1,5 +1,9 @@
 ﻿using System;
+using System.ComponentModel;
+using System.Linq;
 using Caliburn.Core.IoC;
+using MvvmFoundation.Wpf;
+using Twiddler.Core;
 using Twiddler.Core.Models;
 using Twiddler.Core.Services;
 using Twiddler.Services.Interfaces;
@@ -11,22 +15,32 @@ namespace Twiddler.Services
     {
         private readonly ITwitterClient _client;
         private readonly Tweet _tweet;
+        private bool _isMention;
+        private PropertyObserver<ITwitterClient> _observer;
 
         public TweetRating(ITwitterClient client, Tweet tweet)
         {
             _client = client;
             _tweet = tweet;
+
+            _observer = new PropertyObserver<ITwitterClient>(_client).
+                RegisterHandler(x => x.AuthenticatedUser,
+                                x => UpdateIsMention());
+            UpdateIsMention();
         }
 
         #region ITweetRating Members
 
         public bool IsMention
         {
-            get
+            get { return _isMention; }
+            private set
             {
-                User authenticatedUser = _client.AuthenticatedUser;
-                return authenticatedUser != null
-                       && _tweet.Mentions.Contains(authenticatedUser.ScreenName);
+                if (_isMention != value)
+                {
+                    _isMention = value;
+                    PropertyChanged.Raise(x => IsMention);
+                }
             }
         }
 
@@ -35,6 +49,20 @@ namespace Twiddler.Services
             get { throw new NotImplementedException(); }
         }
 
+        public event PropertyChangedEventHandler PropertyChanged;
+
         #endregion
+
+        private void UpdateIsMention()
+        {
+            User authenticatedUser = _client.AuthenticatedUser;
+            if (authenticatedUser == null)
+                return;
+            if (_tweet.Mentions == null)
+                return;
+            if (!_tweet.Mentions.Any())
+                return;
+            IsMention = _tweet.Mentions.Contains(authenticatedUser.ScreenName);
+        }
     }
 }

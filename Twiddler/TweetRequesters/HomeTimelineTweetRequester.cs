@@ -17,12 +17,13 @@ namespace Twiddler.TweetRequesters
 
         protected override ITwitterLeafNode CreateRequest(long since)
         {
-            return
-                Client.
-                    MakeRequestFor().
-                    Statuses().
-                    OnHomeTimeline().
-                    Since(since);
+            ITwitterHomeTimeline request = Client.
+                MakeRequestFor().
+                Statuses().
+                OnHomeTimeline();
+            return since > 0L
+                       ? request.Since(since)
+                       : request;
         }
     }
 }

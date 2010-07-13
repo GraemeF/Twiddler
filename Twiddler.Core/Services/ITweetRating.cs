@@ -1,6 +1,8 @@
-﻿namespace Twiddler.Core.Services
+﻿using System.ComponentModel;
+
+namespace Twiddler.Core.Services
 {
-    public interface ITweetRating
+    public interface ITweetRating : INotifyPropertyChanged
     {
         bool IsMention { get; }
         bool IsDirectMessage { get; }
