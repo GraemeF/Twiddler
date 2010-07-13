@@ -4,6 +4,7 @@ using TweetSharp.Twitter.Extensions;
 using TweetSharp.Twitter.Fluent;
 using TweetSharp.Twitter.Model;
 using Twiddler.Core;
+using Twiddler.Core.Models;
 using Twiddler.Models;
 using Twiddler.Models.Interfaces;
 using Twiddler.Services.Interfaces;
@@ -14,15 +15,31 @@ namespace Twiddler.Services
     public class TwitterClient : ITwitterClient
     {
         private readonly ICredentialsStore _credentialsStore;
+        private readonly Factories.UserFactory _userFactory;
+        private User _authenticatedUser;
         private AuthorizationStatus _authorizationStatus;
         private ITwitterCredentials _credentials;
 
-        public TwitterClient(ICredentialsStore credentialsStore)
+        public TwitterClient(ICredentialsStore credentialsStore, Factories.UserFactory userFactory)
         {
             _credentialsStore = credentialsStore;
+            _userFactory = userFactory;
         }
 
         #region ITwitterClient Members
+
+        public User AuthenticatedUser
+        {
+            get { return _authenticatedUser; }
+            private set
+            {
+                if (_authenticatedUser != value)
+                {
+                    _authenticatedUser = value;
+                    PropertyChanged.Raise(x => AuthenticatedUser);
+                }
+            }
+        }
 
         public AuthorizationStatus AuthorizationStatus
         {
@@ -96,6 +113,9 @@ namespace Twiddler.Services
             AuthorizationStatus = profile != null
                                       ? AuthorizationStatus.Authorized
                                       : AuthorizationStatus.NotAuthorized;
+            AuthenticatedUser = profile != null
+                                    ? _userFactory(profile)
+                                    : null;
         }
     }
 }

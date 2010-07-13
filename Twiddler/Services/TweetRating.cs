@@ -2,19 +2,19 @@
 using Caliburn.Core.IoC;
 using Twiddler.Core.Models;
 using Twiddler.Core.Services;
-using Twiddler.Models.Interfaces;
+using Twiddler.Services.Interfaces;
 
 namespace Twiddler.Services
 {
     [PerRequest(typeof (ITweetRating))]
     public class TweetRating : ITweetRating
     {
-        private readonly IUserInfo _userInfo;
+        private readonly ITwitterClient _client;
         private readonly Tweet _tweet;
 
-        public TweetRating(IUserInfo userInfo, Tweet tweet)
+        public TweetRating(ITwitterClient client, Tweet tweet)
         {
-            _userInfo = userInfo;
+            _client = client;
             _tweet = tweet;
         }
 
@@ -22,7 +22,7 @@ namespace Twiddler.Services
 
         public bool IsMention
         {
-            get { return _tweet.Mentions.Contains(_userInfo.ScreenName); }
+            get { return _tweet.Mentions.Contains(_client.AuthenticatedUser.ScreenName); }
         }
 
         public bool IsDirectMessage

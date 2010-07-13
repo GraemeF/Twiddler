@@ -1,6 +1,5 @@
 ﻿using Moq;
 using Twiddler.Core.Models;
-using Twiddler.Models.Interfaces;
 using Twiddler.Services;
 using Twiddler.TestData;
 using Xunit;
