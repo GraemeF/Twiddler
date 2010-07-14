@@ -2,16 +2,17 @@
 using System.Collections.Generic;
 using System.Linq;
 using Twiddler.Core.Models;
+using Twiddler.TwitterStore.Models;
 
 namespace Twiddler.TestData
 {
     public class TweetBuilder
     {
         private readonly DateTime _createdDate = DateTime.Now.AddMinutes(-5.0);
-        private readonly string _inReplyToStatusId;
         private readonly bool _isRead;
         private readonly User _user = A.User;
         private string _id = "1";
+        private string _inReplyToStatusId;
         private bool _isArchived;
         private List<Uri> _links = new List<Uri>();
         private List<string> _mentions = new List<string>();
@@ -34,19 +35,19 @@ namespace Twiddler.TestData
         {
         }
 
-        public static implicit operator Tweet(TweetBuilder builder)
+        public ITweet Build()
         {
             return new Tweet
                        {
-                           CreatedDate = builder._createdDate,
-                           Id = builder._id,
-                           InReplyToStatusId = builder._inReplyToStatusId,
-                           IsArchived = builder._isArchived,
-                           IsRead = builder._isRead,
-                           Status = builder._status,
-                           User = builder._user,
-                           Links = new List<Uri>(builder._links),
-                           Mentions = new List<string>(builder._mentions)
+                           CreatedDate = _createdDate,
+                           Id = _id,
+                           InReplyToStatusId = _inReplyToStatusId,
+                           IsArchived = _isArchived,
+                           IsRead = _isRead,
+                           Status = _status,
+                           User = _user,
+                           Links = new List<Uri>(_links),
+                           Mentions = new List<string>(_mentions)
                        };
         }
 
@@ -78,6 +79,11 @@ namespace Twiddler.TestData
         public TweetBuilder NotArchived()
         {
             return new TweetBuilder(this) {_isArchived = false};
+        }
+
+        public TweetBuilder InReplyTo(string statusId)
+        {
+            return new TweetBuilder(this) {_inReplyToStatusId = statusId};
         }
     }
 }

@@ -14,7 +14,7 @@ namespace Twiddler.Tests.Screens
     public class TimelineScreenTests
     {
         private readonly Mock<ITimeline> _fakeTimeline = new Mock<ITimeline>();
-        private readonly ObservableCollection<Tweet> _tweets = new ObservableCollection<Tweet>();
+        private readonly ObservableCollection<ITweet> _tweets = new ObservableCollection<ITweet>();
 
         public TimelineScreenTests()
         {
@@ -37,7 +37,7 @@ namespace Twiddler.Tests.Screens
             var test = new TimelineScreen(new Lazy<ITimeline>(() => _fakeTimeline.Object), x => mockScreen.Object);
             test.Initialize();
 
-            _tweets.Add(A.Tweet);
+            _tweets.Add(A.Tweet.Build());
 
             Assert.Contains(mockScreen.Object, test.Screens);
             mockScreen.Verify(x => x.Initialize());
@@ -61,7 +61,7 @@ namespace Twiddler.Tests.Screens
             var test = new TimelineScreen(new Lazy<ITimeline>(() => _fakeTimeline.Object), x => mockScreen.Object);
             test.Initialize();
 
-            _tweets.Add(A.Tweet);
+            _tweets.Add(A.Tweet.Build());
 
             test.Selection = mockScreen.Object;
             test.Selection = null;

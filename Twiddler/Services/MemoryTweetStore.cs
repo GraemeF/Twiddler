@@ -2,22 +2,23 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using Twiddler.Core.Models;
 using Twiddler.Core.Services;
+using Twiddler.TwitterStore.Models;
 
 namespace Twiddler.Services
 {
     //[Singleton(typeof (ITweetStore))]
     public class MemoryTweetStore : ITweetResolver
     {
-        private readonly ConcurrentDictionary<string, Tweet> _tweets = new ConcurrentDictionary<string, Tweet>();
+        private readonly ConcurrentDictionary<string, ITweet> _tweets = new ConcurrentDictionary<string, ITweet>();
 
         #region ITweetResolver Members
 
-        public void Add(Tweet tweet)
+        public void Add(ITweet tweet)
         {
             _tweets.TryAdd(tweet.Id, tweet);
         }
 
-        public void Add(IEnumerable<Tweet> tweets)
+        public void Add(IEnumerable<ITweet> tweets)
         {
             foreach (Tweet tweet in tweets)
             {
@@ -25,7 +26,7 @@ namespace Twiddler.Services
             }
         }
 
-        public Tweet GetTweet(string id)
+        public ITweet GetTweet(string id)
         {
             return _tweets[id];
         }

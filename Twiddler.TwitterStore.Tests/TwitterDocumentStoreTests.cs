@@ -3,6 +3,7 @@ using Raven.Client;
 using Twiddler.Core.Models;
 using Twiddler.TestData;
 using Twiddler.TwitterStore.Interfaces;
+using Twiddler.TwitterStore.Models;
 using Xunit;
 
 namespace Twiddler.TwitterStore.Tests
@@ -29,7 +30,7 @@ namespace Twiddler.TwitterStore.Tests
         {
             var test = new TwitterDocumentStore(_fakeDocumentStoreFactory.Object);
 
-            Tweet tweet = A.Tweet;
+            var tweet = new Tweet();
             test.Add(tweet);
 
             _fakeDocumentSession.Verify(x => x.Store(tweet));
@@ -43,7 +44,7 @@ namespace Twiddler.TwitterStore.Tests
 
             bool eventRaised = false;
             test.Updated += (sender, args) => eventRaised = true;
-            test.Add(A.Tweet);
+            test.Add(A.Tweet.Build());
 
             Assert.True(eventRaised);
         }
@@ -51,7 +52,7 @@ namespace Twiddler.TwitterStore.Tests
         [Fact]
         public void GetTweet_GivenTweetThatIsInTheStore_ReturnsTheTweet()
         {
-            Tweet tweet = A.Tweet;
+            var tweet = new Tweet();
             string id = "The tweet id";
 
             var test = new TwitterDocumentStore(_fakeDocumentStoreFactory.Object);

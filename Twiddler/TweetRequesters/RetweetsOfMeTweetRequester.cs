@@ -11,7 +11,7 @@ namespace Twiddler.TweetRequesters
         [ImportingConstructor]
         public RetweetsOfMeTweetRequester(ITwitterClient client,
                                           IRequestLimitStatus requestLimitStatus,
-                                          Factories.TweetFactory tweetFactory)
+                                          Core.Factories.TweetFactory tweetFactory)
             : base(client, requestLimitStatus, tweetFactory)
         {
         }

@@ -1,8 +1,8 @@
 ﻿using Caliburn.Testability.Extensions;
-using Twiddler.Core.Models;
+using Twiddler.TwitterStore.Models;
 using Xunit;
 
-namespace Twiddler.Tests.Models
+namespace Twiddler.TwitterStore.Tests
 {
     public class TweetTests
     {

@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.Windows;
 using Caliburn.Testability.Extensions;
 using Moq;
@@ -21,7 +20,7 @@ namespace Twiddler.Tests.Screens
 
         private readonly Mock<ILinkThumbnailScreen> _fakeThumbnailScreen = new Mock<ILinkThumbnailScreen>();
         private readonly Mock<ITweetRating> _fakeTweetRating = new Mock<ITweetRating>();
-        private readonly Tweet _tweet = A.Tweet;
+        private readonly ITweet _tweet = A.Tweet.Build();
 
         [Fact]
         public void GettingMarkAsReadCommand__ReturnsCommand()
@@ -82,8 +81,7 @@ namespace Twiddler.Tests.Screens
         {
             var mockScreen = new Mock<ILoadingTweetScreen>();
 
-            var test = new TweetScreen(new Tweet
-                                           {InReplyToStatusId = "4"},
+            var test = new TweetScreen(A.Tweet.InReplyTo("4").Build(),
                                        x => _fakeTweetRating.Object,
                                        _fakeThumbnailFactory.Object,
                                        x => mockScreen.Object,
@@ -101,16 +99,13 @@ namespace Twiddler.Tests.Screens
                 Returns(_fakeThumbnailScreen.Object);
 
             var test =
-                new TweetScreen(
-                    new Tweet
-                        {
-                            Status = "This tweet contains a link",
-                            Links = new List<Uri> {new Uri("http://link.one.com"),}
-                        },
-                    x => _fakeTweetRating.Object,
-                    _fakeThumbnailFactory.Object,
-                    null,
-                    null);
+                new TweetScreen(A.Tweet.
+                                    WithStatus("This tweet contains a link").
+                                    LinkingTo(new Uri("http://link.one.com")).Build(),
+                                x => _fakeTweetRating.Object,
+                                _fakeThumbnailFactory.Object,
+                                null,
+                                null);
             test.Initialize();
 
             Assert.Contains(_fakeThumbnailScreen.Object, test.Links);

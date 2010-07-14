@@ -39,16 +39,24 @@
       <HintPath>..\Library\MvvmFoundation\MvvmFoundation.Wpf.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="TweetSharp">
+      <HintPath>..\Library\TweetSharp\TweetSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="TweetSharp.Twitter">
+      <HintPath>..\Library\TweetSharp\TweetSharp.Twitter.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Factories.cs" />
     <Compile Include="CollectionChangedExtensions.cs" />
-    <Compile Include="Models\Tweet.cs" />
+    <Compile Include="Models\ITweet.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="NoCoverageAttribute.cs" />
     <Compile Include="PropertyHelper.cs" />

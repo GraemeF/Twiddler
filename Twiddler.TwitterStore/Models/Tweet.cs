@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using Twiddler.Core;
+using Twiddler.Core.Models;
 
-namespace Twiddler.Core.Models
+namespace Twiddler.TwitterStore.Models
 {
-    public class Tweet : INotifyPropertyChanged
+    public class Tweet : ITweet
     {
         private bool _isArchived;
         private bool _isRead;
@@ -13,6 +15,8 @@ namespace Twiddler.Core.Models
         {
             Links = new List<Uri>();
         }
+
+        #region ITweet Members
 
         public string Id { get; set; }
         public User User { get; set; }
@@ -48,11 +52,7 @@ namespace Twiddler.Core.Models
             }
         }
 
-        #region INotifyPropertyChanged Members
-
         public event PropertyChangedEventHandler PropertyChanged;
-
-        #endregion
 
         public void Archive()
         {
@@ -63,5 +63,7 @@ namespace Twiddler.Core.Models
         {
             IsRead = true;
         }
+
+        #endregion
     }
 }

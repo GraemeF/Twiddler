@@ -80,8 +80,8 @@ namespace Twiddler.Services
 
         private void RequestAndAddNewTweetsToStore(ITweetRequester tweetRequester)
         {
-            IEnumerable<Tweet> requestTweets = tweetRequester.RequestTweets();
-            IEnumerable<Tweet> removeKnownTweets = _newTweetFilter.RemoveKnownTweets(requestTweets);
+            IEnumerable<ITweet> requestTweets = tweetRequester.RequestTweets();
+            IEnumerable<ITweet> removeKnownTweets = _newTweetFilter.RemoveKnownTweets(requestTweets);
             _tweetSink.Add(removeKnownTweets);
         }
 

@@ -6,6 +6,7 @@ using Raven.Client;
 using Raven.Client.Document;
 using Twiddler.Core.Models;
 using Twiddler.TwitterStore.Interfaces;
+using Twiddler.TwitterStore.Models;
 
 namespace Twiddler.TwitterStore
 {

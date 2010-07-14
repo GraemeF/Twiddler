@@ -10,12 +10,12 @@ namespace Twiddler.Tests.Services
     public class TweetRatingTests
     {
         private User _user = A.User;
-        private Tweet _tweet;
+        private ITweet _tweet;
 
         [Fact]
         public void GettingIsMention_WhenTheUserIsNotAuthenticated_ReturnsFalse()
         {
-            _tweet = A.Tweet;
+            _tweet = A.Tweet.Build();
             _user = null;
             TweetRating test = BuildDefaultTestSubject();
 
@@ -25,7 +25,7 @@ namespace Twiddler.Tests.Services
         [Fact]
         public void GettingIsMention_WhenTheUserIsNotMentioned_ReturnsFalse()
         {
-            _tweet = A.Tweet;
+            _tweet = A.Tweet.Build();
             TweetRating test = BuildDefaultTestSubject();
 
             Assert.False(test.IsMention);
@@ -34,7 +34,7 @@ namespace Twiddler.Tests.Services
         [Fact]
         public void GettingIsMention_WhenTheUserIsMentioned_ReturnsTrue()
         {
-            _tweet = A.Tweet.Mentioning(_user.ScreenName);
+            _tweet = A.Tweet.Mentioning(_user.ScreenName).Build();
             TweetRating test = BuildDefaultTestSubject();
 
             Assert.True(test.IsMention);

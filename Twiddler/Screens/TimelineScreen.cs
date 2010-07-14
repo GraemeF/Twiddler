@@ -18,8 +18,8 @@ namespace Twiddler.Screens
         private readonly Factories.TweetScreenFactory _screenFactory;
         private readonly Lazy<ITimeline> _timeline;
         private ITweetScreen _selection;
-        private IObservable<Tweet> _tweetAdded;
-        private IObservable<Tweet> _tweetRemoved;
+        private IObservable<ITweet> _tweetAdded;
+        private IObservable<ITweet> _tweetRemoved;
         private IObservable<IEvent<NotifyCollectionChangedEventArgs>> _tweetsChanged;
 
         [ImportingConstructor]
@@ -84,26 +84,26 @@ namespace Twiddler.Screens
                 ToObservable().
                 Concat(_tweetsChanged.
                            SelectMany(c => c.EventArgs.
-                                               SafeNewItems<Tweet>().
+                                               SafeNewItems<ITweet>().
                                                ToObservable()));
 
             _tweetRemoved = _tweetsChanged.
                 SelectMany(c => c.EventArgs.
-                                    SafeOldItems<Tweet>().
+                                    SafeOldItems<ITweet>().
                                     ToObservable());
 
             _tweetAdded.Subscribe(AddTweetScreen);
             _tweetRemoved.Subscribe(RemoveTweetScreen);
         }
 
-        private void AddTweetScreen(Tweet tweet)
+        private void AddTweetScreen(ITweet tweet)
         {
             ITweetScreen screen = _screenFactory(tweet);
             screen.Initialize();
             this.OpenScreen(screen);
         }
 
-        private void RemoveTweetScreen(Tweet tweet)
+        private void RemoveTweetScreen(ITweet tweet)
         {
             this.ShutdownScreen(Screens.First(x => x.Id == tweet.Id));
         }

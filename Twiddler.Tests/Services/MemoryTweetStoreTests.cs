@@ -13,7 +13,7 @@ namespace Twiddler.Tests.Services
         {
             var test = new MemoryTweetStore();
 
-            Tweet tweet = A.Tweet;
+            ITweet tweet = A.Tweet.Build();
             test.Add(tweet);
 
             Assert.Same(tweet, test.GetTweet(tweet.Id));

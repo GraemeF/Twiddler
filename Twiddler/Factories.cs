@@ -1,9 +1,6 @@
 using System.ComponentModel.Composition;
 using System.ComponentModel.Composition.Hosting;
-using System.Globalization;
-using System.Linq;
 using TweetSharp.Twitter.Fluent;
-using TweetSharp.Twitter.Model;
 using Twiddler.Core.Models;
 using Twiddler.Core.Services;
 using Twiddler.Models;
@@ -22,13 +19,9 @@ namespace Twiddler
 
         public delegate IFluentTwitter RequestFactory(ITwitterClient client);
 
-        public delegate Tweet TweetFactory(TwitterStatus status);
+        public delegate ITweetRating TweetRatingFactory(ITweet tweet);
 
-        public delegate ITweetRating TweetRatingFactory(Tweet tweet);
-
-        public delegate ITweetScreen TweetScreenFactory(Tweet tweet);
-
-        public delegate User UserFactory(TwitterUser user);
+        public delegate ITweetScreen TweetScreenFactory(ITweet tweet);
 
         #endregion
 
@@ -56,53 +49,15 @@ namespace Twiddler
         }
 
         [Export(typeof (TweetScreenFactory))]
-        public ITweetScreen CreateTweetScreen(Tweet tweet)
+        public ITweetScreen CreateTweetScreen(ITweet tweet)
         {
-            return ComposePartWith<ITweetScreen, Tweet>(tweet);
+            return ComposePartWith<ITweetScreen, ITweet>(tweet);
         }
 
         [Export(typeof (TweetRatingFactory))]
-        public ITweetRating CreateTweetRating(Tweet tweet)
+        public ITweetRating CreateTweetRating(ITweet tweet)
         {
-            return ComposePartWith<ITweetRating, Tweet>(tweet);
-        }
-
-        [Export(typeof (TweetFactory))]
-        public static Tweet CreateTweetFromTwitterStatus(TwitterStatus status)
-        {
-            return new Tweet
-                       {
-                           Id = status.Id.ToString(CultureInfo.InvariantCulture),
-                           Status = status.Text,
-                           User = CreateUserFromTwitterUser(status.User),
-                           CreatedDate = status.CreatedDate,
-                           Links = status.TextLinks.ToList(),
-                           Mentions = status.TextMentions.ToList(),
-                           InReplyToStatusId = GetInReplyToStatusId(status),
-                           IsArchived = false,
-                           IsRead = false
-                       };
-        }
-
-        private static string GetInReplyToStatusId(TwitterStatus status)
-        {
-            return status.InReplyToStatusId.HasValue
-                       ? status.InReplyToStatusId.ToString()
-                       : null;
-        }
-
-        [Export(typeof (UserFactory))]
-        public static User CreateUserFromTwitterUser(TwitterUser user)
-        {
-            return new User
-                       {
-                           Id = user.Id.ToString(CultureInfo.InvariantCulture),
-                           Name = user.Name,
-                           ProfileImageUrl = user.ProfileImageUrl,
-                           ScreenName = user.ScreenName,
-                           FollowersCount = user.FollowersCount,
-                           IsVerified = user.IsVerified.GetValueOrDefault()
-                       };
+            return ComposePartWith<ITweetRating, ITweet>(tweet);
         }
     }
 }

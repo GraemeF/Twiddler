@@ -42,7 +42,7 @@ namespace Twiddler.Screens
                 Subscribe(PopulateWithTweet);
         }
 
-        private Tweet GetTweet()
+        private ITweet GetTweet()
         {
             try
             {
@@ -54,7 +54,7 @@ namespace Twiddler.Screens
             }
         }
 
-        private void PopulateWithTweet(Tweet tweet)
+        private void PopulateWithTweet(ITweet tweet)
         {
             if (tweet != null)
                 OpenScreen(_tweetScreenFactory(tweet), delegate { });

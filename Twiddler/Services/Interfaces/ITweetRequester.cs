@@ -5,6 +5,6 @@ namespace Twiddler.Services.Interfaces
 {
     public interface ITweetRequester
     {
-        IEnumerable<Tweet> RequestTweets();
+        IEnumerable<ITweet> RequestTweets();
     }
 }

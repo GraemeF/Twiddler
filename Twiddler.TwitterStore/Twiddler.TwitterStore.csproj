@@ -47,10 +47,18 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="TweetSharp">
+      <HintPath>..\Library\TweetSharp\TweetSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="TweetSharp.Twitter">
+      <HintPath>..\Library\TweetSharp\TweetSharp.Twitter.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DocumentStoreFactory.cs" />
+    <Compile Include="Factories.cs" />
     <Compile Include="Interfaces\IDocumentStoreFactory.cs" />
+    <Compile Include="Models\Tweet.cs" />
     <Compile Include="TwitterDocumentStore.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

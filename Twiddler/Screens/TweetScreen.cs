@@ -19,12 +19,12 @@ namespace Twiddler.Screens
     {
         private readonly ILinkThumbnailScreenFactory _linkThumbnailScreenFactory;
         private readonly Factories.LoadingTweetScreenFactory _loadingTweetScreenFactory;
-        private readonly Tweet _tweet;
+        private readonly ITweet _tweet;
         private readonly ITweetRating _tweetRating;
-        private PropertyObserver<Tweet> _tweetObserver;
+        private PropertyObserver<ITweet> _tweetObserver;
 
         [ImportingConstructor]
-        public TweetScreen(Tweet tweet,
+        public TweetScreen(ITweet tweet,
                            Factories.TweetRatingFactory tweetRatingFactory,
                            ILinkThumbnailScreenFactory linkThumbnailScreenFactory,
                            Factories.LoadingTweetScreenFactory loadingTweetScreenFactory,
@@ -93,7 +93,7 @@ namespace Twiddler.Screens
             OpenLinksFromTweet();
             OpenInReplyToTweet();
 
-            _tweetObserver = new PropertyObserver<Tweet>(_tweet).
+            _tweetObserver = new PropertyObserver<ITweet>(_tweet).
                 RegisterHandler(x => x.IsRead,
                                 x => NotifyOfPropertyChange(() => Opacity));
         }

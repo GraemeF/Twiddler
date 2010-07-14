@@ -5,6 +5,6 @@ namespace Twiddler.Core.Services
 {
     public interface INewTweetFilter
     {
-        IEnumerable<Tweet> RemoveKnownTweets(IEnumerable<Tweet> tweets);
+        IEnumerable<ITweet> RemoveKnownTweets(IEnumerable<ITweet> tweets);
     }
 }

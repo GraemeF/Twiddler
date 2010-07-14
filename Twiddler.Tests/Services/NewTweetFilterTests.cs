@@ -17,17 +17,17 @@ namespace Twiddler.Tests.Services
         {
             NewTweetFilter test = BuildDefaultTestSubject();
 
-            Tweet knownTweet = A.Tweet.IdentifiedBy("Known Id");
-            Tweet newTweet = A.Tweet.IdentifiedBy("New Id");
+            ITweet knownTweet = A.Tweet.IdentifiedBy("Known Id").Build();
+            ITweet newTweet = A.Tweet.IdentifiedBy("New Id").Build();
 
             _fakeResolver.
                 Setup(x => x.GetTweet(knownTweet.Id)).
                 Returns(knownTweet);
             _fakeResolver.
                 Setup(x => x.GetTweet(newTweet.Id)).
-                Returns((Tweet) null);
+                Returns((ITweet) null);
 
-            IEnumerable<Tweet> result = test.RemoveKnownTweets(new[] {newTweet, knownTweet});
+            IEnumerable<ITweet> result = test.RemoveKnownTweets(new[] {newTweet, knownTweet});
             Assert.Contains(newTweet, result);
             Assert.DoesNotContain(knownTweet, result);
         }

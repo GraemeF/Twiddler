@@ -10,14 +10,14 @@ namespace Twiddler.Commands
     [PartCreationPolicy(CreationPolicy.NonShared)]
     public class ArchiveTweetCommand : IArchiveTweetCommand
     {
-        private readonly Tweet _tweet;
-        private PropertyObserver<Tweet> _observer;
+        private readonly ITweet _tweet;
+        private PropertyObserver<ITweet> _observer;
 
         [ImportingConstructor]
-        public ArchiveTweetCommand(Tweet tweet)
+        public ArchiveTweetCommand(ITweet tweet)
         {
             _tweet = tweet;
-            _observer = new PropertyObserver<Tweet>(_tweet).
+            _observer = new PropertyObserver<ITweet>(_tweet).
                 RegisterHandler(x => x.IsArchived,
                                 x => CanExecuteChanged(this, EventArgs.Empty));
         }

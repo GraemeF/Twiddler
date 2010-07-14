@@ -6,7 +6,7 @@ namespace Twiddler.Core.Services
 {
     public interface ITweetStore : ITweetResolver
     {
-        IEnumerable<Tweet> GetInboxTweets();
+        IEnumerable<ITweet> GetInboxTweets();
         event EventHandler<EventArgs> Updated;
     }
 }

@@ -10,7 +10,7 @@ namespace Twiddler.Tests.Commands
         [Fact]
         public void Execute_WhenTweetIsNotArchived_ArchivesTweet()
         {
-            Tweet tweet = A.Tweet;
+            ITweet tweet = A.Tweet.Build();
             var test = new ArchiveTweetCommand(tweet);
 
             test.Execute(null);
@@ -21,7 +21,7 @@ namespace Twiddler.Tests.Commands
         [Fact]
         public void CanExecute_WhenTweetIsNotArchived_IsTrue()
         {
-            var test = new ArchiveTweetCommand(A.Tweet);
+            var test = new ArchiveTweetCommand(A.Tweet.Build());
 
             Assert.True(test.CanExecute(null));
         }
@@ -29,7 +29,7 @@ namespace Twiddler.Tests.Commands
         [Fact]
         public void CanExecute_WhenTweetIsArchived_IsFalse()
         {
-            var test = new ArchiveTweetCommand(A.Tweet);
+            var test = new ArchiveTweetCommand(A.Tweet.Build());
 
             Assert.True(test.CanExecute(null));
         }
@@ -37,7 +37,7 @@ namespace Twiddler.Tests.Commands
         [Fact]
         public void CanExecuteChanged_WhenTweetBecomesArchived_IsRaised()
         {
-            Tweet tweet = A.Tweet;
+            ITweet tweet = A.Tweet.Build();
             var test = new ArchiveTweetCommand(tweet);
 
             bool eventRaised = false;

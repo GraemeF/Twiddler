@@ -7,6 +7,7 @@ using TweetSharp.Twitter.Fluent;
 using TweetSharp.Twitter.Model;
 using Twiddler.Core.Models;
 using Twiddler.Services.Interfaces;
+using Twiddler.TwitterStore.Models;
 
 namespace Twiddler.Services
 {
@@ -14,13 +15,13 @@ namespace Twiddler.Services
     {
         protected readonly ITwitterClient Client;
         private readonly IRequestLimitStatus _requestLimitStatus;
-        private readonly Factories.TweetFactory _tweetFactory;
+        private readonly Core.Factories.TweetFactory _tweetFactory;
 
         private long _lastTweet;
 
         protected TweetRequester(ITwitterClient client,
                                  IRequestLimitStatus requestLimitStatus,
-                                 Factories.TweetFactory tweetFactory)
+                                 Core.Factories.TweetFactory tweetFactory)
         {
             Client = client;
             _requestLimitStatus = requestLimitStatus;
@@ -29,7 +30,7 @@ namespace Twiddler.Services
 
         #region ITweetRequester Members
 
-        public IEnumerable<Tweet> RequestTweets()
+        public IEnumerable<ITweet> RequestTweets()
         {
             return GotTweets(CreateRequest(_lastTweet).Request());
         }
@@ -38,7 +39,7 @@ namespace Twiddler.Services
 
         protected abstract ITwitterLeafNode CreateRequest(long since);
 
-        private IEnumerable<Tweet> GotTweets(TwitterResult result)
+        private IEnumerable<ITweet> GotTweets(TwitterResult result)
         {
             if (result.RateLimitStatus != null)
                 UpdateLimit(result.RateLimitStatus);

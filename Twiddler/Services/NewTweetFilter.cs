@@ -20,7 +20,7 @@ namespace Twiddler.Services
 
         #region INewTweetFilter Members
 
-        public IEnumerable<Tweet> RemoveKnownTweets(IEnumerable<Tweet> tweets)
+        public IEnumerable<ITweet> RemoveKnownTweets(IEnumerable<ITweet> tweets)
         {
             return tweets.Where(x => _tweetResolver.GetTweet(x.Id) == null);
         }

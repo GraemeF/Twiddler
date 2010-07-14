@@ -6,6 +6,7 @@ using System.Linq;
 using Twiddler.Core.Models;
 using Twiddler.Core.Services;
 using Twiddler.Services.Interfaces;
+using Twiddler.TwitterStore.Models;
 
 namespace Twiddler.Services
 {
@@ -20,7 +21,7 @@ namespace Twiddler.Services
         public StoreTimeline(ITweetStore tweetStore)
         {
             _tweetStore = tweetStore;
-            Tweets = new ObservableCollection<Tweet>(tweetStore.GetInboxTweets());
+            Tweets = new ObservableCollection<ITweet>(tweetStore.GetInboxTweets());
             _updateSubscription = Observable.FromEvent<EventArgs>(handler => tweetStore.Updated += handler,
                                                                   handler => tweetStore.Updated -= handler).
                 Subscribe(x => UpdateTweets());
@@ -34,7 +35,7 @@ namespace Twiddler.Services
             GC.SuppressFinalize(this);
         }
 
-        public ObservableCollection<Tweet> Tweets { get; private set; }
+        public ObservableCollection<ITweet> Tweets { get; private set; }
 
         #endregion
 
@@ -46,16 +47,16 @@ namespace Twiddler.Services
 
         private void UpdateTweets()
         {
-            IEnumerable<Tweet> inboxTweets = _tweetStore.GetInboxTweets();
+            IEnumerable<ITweet> inboxTweets = _tweetStore.GetInboxTweets();
 
             RemoveMissingTweets(inboxTweets);
 
             AddNewTweets(inboxTweets);
         }
 
-        private void AddNewTweets(IEnumerable<Tweet> inboxTweets)
+        private void AddNewTweets(IEnumerable<ITweet> inboxTweets)
         {
-            List<Tweet> addedTweets =
+            List<ITweet> addedTweets =
                 inboxTweets.
                     Where(inboxTweet => !Tweets.
                                              Any(tweet => tweet.Id == inboxTweet.Id)).
@@ -65,15 +66,15 @@ namespace Twiddler.Services
                 Tweets.Add(tweet);
         }
 
-        private void RemoveMissingTweets(IEnumerable<Tweet> inboxTweets)
+        private void RemoveMissingTweets(IEnumerable<ITweet> inboxTweets)
         {
-            List<Tweet> removedTweets =
+            List<ITweet> removedTweets =
                 Tweets.
                     Where(tweet => !inboxTweets.
                                         Any(inboxTweet => tweet.Id == inboxTweet.Id)).
                     ToList();
 
-            foreach (Tweet tweet in removedTweets)
+            foreach (ITweet tweet in removedTweets)
                 Tweets.Remove(tweet);
         }
     }

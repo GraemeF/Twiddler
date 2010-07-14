@@ -51,6 +51,10 @@
       <Project>{159DA135-5F63-455B-A572-A3EBB99ACA4D}</Project>
       <Name>Twiddler.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Twiddler.TwitterStore\Twiddler.TwitterStore.csproj">
+      <Project>{624CE557-4EDF-47EE-835B-3CB1C6290FEF}</Project>
+      <Name>Twiddler.TwitterStore</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -15,13 +15,13 @@ namespace Twiddler.Services
     public class TwitterClient : ITwitterClient
     {
         private readonly ICredentialsStore _credentialsStore;
-        private readonly Factories.UserFactory _userFactory;
+        private readonly Core.Factories.UserFactory _userFactory;
         private User _authenticatedUser;
         private AuthorizationStatus _authorizationStatus;
         private ITwitterCredentials _credentials;
 
         [ImportingConstructor]
-        public TwitterClient(ICredentialsStore credentialsStore, Factories.UserFactory userFactory)
+        public TwitterClient(ICredentialsStore credentialsStore, Core.Factories.UserFactory userFactory)
         {
             _credentialsStore = credentialsStore;
             _userFactory = userFactory;

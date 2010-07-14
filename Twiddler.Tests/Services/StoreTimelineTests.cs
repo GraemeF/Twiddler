@@ -24,7 +24,7 @@ namespace Twiddler.Tests.Services
         [Fact]
         public void GettingTweets_WhenTheStoreHasInboxTweets_ContainsTweets()
         {
-            Tweet tweet = A.Tweet;
+            ITweet tweet = A.Tweet.Build();
             StoreInboxTweetsChangesTo(new[] {tweet});
 
             StoreTimeline test = BuildDefaultTestSubject();
@@ -36,7 +36,7 @@ namespace Twiddler.Tests.Services
         public void GettingTweets_WhenNewTweetsAreAddedToTheStore_ContainsNewTweets()
         {
             StoreTimeline test = BuildDefaultTestSubject();
-            Tweet tweet = A.Tweet;
+            ITweet tweet = A.Tweet.Build();
 
             bool eventRaised = false;
             test.Tweets.CollectionChanged += (sender, args) => eventRaised = args.NewItems.Contains(tweet);
@@ -52,13 +52,13 @@ namespace Twiddler.Tests.Services
             const string TestId = "123";
             StoreTimeline test = BuildDefaultTestSubject();
 
-            Tweet tweet = A.Tweet.IdentifiedBy(TestId);
+            ITweet tweet = A.Tweet.IdentifiedBy(TestId).Build();
             StoreInboxTweetsChangesTo(new[] {tweet});
 
             bool eventRaised = false;
             test.Tweets.CollectionChanged += (sender, args) => eventRaised = true;
 
-            StoreInboxTweetsChangesTo(new Tweet[] {A.Tweet.IdentifiedBy(TestId)});
+            StoreInboxTweetsChangesTo(new ITweet[] { A.Tweet.IdentifiedBy(TestId).Build() });
 
             Assert.False(eventRaised);
             Assert.Contains(tweet, test.Tweets);
@@ -68,18 +68,18 @@ namespace Twiddler.Tests.Services
         public void GettingTweets_WhenTweetsRemovedFromTheStore_DoesNotContainOldTweets()
         {
             StoreTimeline test = BuildDefaultTestSubject();
-            Tweet tweet = A.Tweet;
+            ITweet tweet = A.Tweet.Build();
             StoreInboxTweetsChangesTo(new[] {tweet});
 
             bool eventRaised = false;
             test.Tweets.CollectionChanged += (sender, args) => eventRaised = args.OldItems.Contains(tweet);
 
-            StoreInboxTweetsChangesTo(new Tweet[] {});
+            StoreInboxTweetsChangesTo(new ITweet[] {});
             Assert.True(eventRaised);
             Assert.DoesNotContain(tweet, test.Tweets);
         }
 
-        private void StoreInboxTweetsChangesTo(IEnumerable<Tweet> inboxTweets)
+        private void StoreInboxTweetsChangesTo(IEnumerable<ITweet> inboxTweets)
         {
             _fakeStore.
                 Setup(x => x.GetInboxTweets()).

@@ -6,6 +6,6 @@ namespace Twiddler.Services.Interfaces
 {
     public interface ITimeline : IDisposable
     {
-        ObservableCollection<Tweet> Tweets { get; }
+        ObservableCollection<ITweet> Tweets { get; }
     }
 }

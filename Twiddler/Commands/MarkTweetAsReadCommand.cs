@@ -12,15 +12,15 @@ namespace Twiddler.Commands
     public class MarkTweetAsReadCommand : IMarkTweetAsReadCommand
     {
         private readonly ITweetStore _store;
-        private readonly Tweet _tweet;
-        private PropertyObserver<Tweet> _observer;
+        private readonly ITweet _tweet;
+        private PropertyObserver<ITweet> _observer;
 
         [ImportingConstructor]
-        public MarkTweetAsReadCommand(Tweet tweet, ITweetStore store)
+        public MarkTweetAsReadCommand(ITweet tweet, ITweetStore store)
         {
             _tweet = tweet;
             _store = store;
-            _observer = new PropertyObserver<Tweet>(_tweet).
+            _observer = new PropertyObserver<ITweet>(_tweet).
                 RegisterHandler(x => x.IsRead,
                                 x => CanExecuteChanged(this, EventArgs.Empty));
         }

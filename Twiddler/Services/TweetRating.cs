@@ -7,6 +7,7 @@ using Twiddler.Core;
 using Twiddler.Core.Models;
 using Twiddler.Core.Services;
 using Twiddler.Services.Interfaces;
+using Twiddler.TwitterStore.Models;
 
 namespace Twiddler.Services
 {
@@ -15,12 +16,12 @@ namespace Twiddler.Services
     public class TweetRating : ITweetRating
     {
         private readonly ITwitterClient _client;
-        private readonly Tweet _tweet;
+        private readonly ITweet _tweet;
         private bool _isMention;
         private PropertyObserver<ITwitterClient> _observer;
 
         [ImportingConstructor]
-        public TweetRating(ITwitterClient client, Tweet tweet)
+        public TweetRating(ITwitterClient client, ITweet tweet)
         {
             _client = client;
             _tweet = tweet;

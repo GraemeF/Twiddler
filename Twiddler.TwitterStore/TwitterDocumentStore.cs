@@ -6,6 +6,7 @@ using Raven.Client;
 using Twiddler.Core.Models;
 using Twiddler.Core.Services;
 using Twiddler.TwitterStore.Interfaces;
+using Twiddler.TwitterStore.Models;
 
 namespace Twiddler.TwitterStore
 {
@@ -24,7 +25,7 @@ namespace Twiddler.TwitterStore
 
         #region ITweetStore Members
 
-        public void Add(Tweet tweet)
+        public void Add(ITweet tweet)
         {
             lock (_mutex)
                 using (IDocumentSession session = _documentStore.OpenSession())
@@ -35,7 +36,7 @@ namespace Twiddler.TwitterStore
                 }
         }
 
-        public void Add(IEnumerable<Tweet> tweets)
+        public void Add(IEnumerable<ITweet> tweets)
         {
             lock (_mutex)
             {
@@ -50,7 +51,7 @@ namespace Twiddler.TwitterStore
             }
         }
 
-        public Tweet GetTweet(string id)
+        public ITweet GetTweet(string id)
         {
             lock (_mutex)
                 using (IDocumentSession session = _documentStore.OpenSession())
@@ -59,7 +60,7 @@ namespace Twiddler.TwitterStore
                 }
         }
 
-        public IEnumerable<Tweet> GetInboxTweets()
+        public IEnumerable<ITweet> GetInboxTweets()
         {
             using (IDocumentSession session = _documentStore.OpenSession())
             {
