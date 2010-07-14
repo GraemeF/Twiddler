@@ -1,13 +1,14 @@
-using Caliburn.Core.IoC;
+using System.ComponentModel.Composition;
 using TweetSharp.Twitter.Fluent;
 using Twiddler.Services;
 using Twiddler.Services.Interfaces;
 
 namespace Twiddler.TweetRequesters
 {
-    [PerRequest("Retweets of Me", typeof (ITweetRequester))]
+    [Export(typeof (ITweetRequester))]
     public class RetweetsOfMeTweetRequester : TweetRequester
     {
+        [ImportingConstructor]
         public RetweetsOfMeTweetRequester(ITwitterClient client,
                                           IRequestLimitStatus requestLimitStatus,
                                           Factories.TweetFactory tweetFactory)

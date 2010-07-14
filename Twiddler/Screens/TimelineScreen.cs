@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.ComponentModel.Composition;
 using System.Linq;
 using System.Threading.Tasks;
-using Caliburn.Core.IoC;
 using Caliburn.PresentationFramework.Screens;
 using Twiddler.Core;
 using Twiddler.Core.Models;
@@ -12,7 +12,7 @@ using Twiddler.Services.Interfaces;
 
 namespace Twiddler.Screens
 {
-    [PerRequest(typeof (ITimelineScreen))]
+    [Export(typeof (ITimelineScreen))]
     public class TimelineScreen : ScreenConductor<ITweetScreen>.WithCollection.AllScreensActive, ITimelineScreen
     {
         private readonly Factories.TweetScreenFactory _screenFactory;
@@ -22,6 +22,7 @@ namespace Twiddler.Screens
         private IObservable<Tweet> _tweetRemoved;
         private IObservable<IEvent<NotifyCollectionChangedEventArgs>> _tweetsChanged;
 
+        [ImportingConstructor]
         public TimelineScreen(Lazy<ITimeline> timeline, Factories.TweetScreenFactory screenFactory) : base(false)
         {
             _timeline = timeline;

@@ -1,16 +1,18 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.Composition;
 using System.Linq;
-using Caliburn.Core.IoC;
 using Twiddler.Core.Models;
 using Twiddler.Core.Services;
 
 namespace Twiddler.Services
 {
-    [PerRequest(typeof (INewTweetFilter))]
+    [Export(typeof (INewTweetFilter))]
+    [PartCreationPolicy(CreationPolicy.NonShared)]
     public class NewTweetFilter : INewTweetFilter
     {
         private readonly ITweetResolver _tweetResolver;
 
+        [ImportingConstructor]
         public NewTweetFilter(ITweetStore tweetResolver)
         {
             _tweetResolver = tweetResolver;

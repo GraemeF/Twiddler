@@ -1,14 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition.Hosting;
+using System.ComponentModel.Composition.Primitives;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using Autofac;
-using Caliburn.Autofac;
+using Caliburn.MEF;
 using Caliburn.PresentationFramework.ApplicationModel;
 using Microsoft.Practices.ServiceLocation;
-using Twiddler.Core.Models;
 using Twiddler.Screens.Interfaces;
 
 namespace Twiddler
@@ -18,10 +17,19 @@ namespace Twiddler
         private static readonly DirectoryCatalog DirectoryCatalog =
             new DirectoryCatalog(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "Twiddler.*.dll");
 
+        private static readonly AggregateCatalog Catalog =
+            new AggregateCatalog(new ComposablePartCatalog[]
+                                     {
+                                         new AssemblyCatalog(Assembly.GetExecutingAssembly()),
+                                         DirectoryCatalog
+                                     });
+
+        private CompositionContainer _compositionContainer;
+
         protected override IServiceLocator CreateContainer()
         {
-            IContainer container = ConfigureContainer().Build();
-            return new AutofacAdapter(container);
+            _compositionContainer = new CompositionContainer(Catalog);
+            return new MEFAdapter(_compositionContainer);
         }
 
         protected override Assembly[] SelectAssemblies()
@@ -65,20 +73,9 @@ namespace Twiddler
             }
         }
 
-        private static ContainerBuilder ConfigureContainer()
-        {
-            var builder = new ContainerBuilder();
-
-            builder.RegisterInstance(new CompositionContainer(new AssemblyCatalog(Assembly.GetExecutingAssembly())));
-            builder.RegisterInstance<Factories.TweetFactory>(Factories.CreateTweetFromTwitterStatus);
-            builder.RegisterInstance<Factories.UserFactory>(Factories.CreateUserFromTwitterUser);
-
-            return builder;
-        }
-
         protected override object CreateRootModel()
         {
-            return Container.GetInstance<IShellScreen>();
+            return _compositionContainer.GetExportedValue<IShellScreen>();
         }
     }
 }

@@ -1,10 +1,10 @@
 ﻿using System;
-using Caliburn.Core.IoC;
+using System.ComponentModel.Composition;
 using Twiddler.Services.Interfaces;
 
 namespace Twiddler.Services
 {
-    [Singleton(typeof (IClock))]
+    [Export(typeof (IClock))]
     public class Clock : IClock
     {
         #region IClock Members

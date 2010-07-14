@@ -1,3 +1,4 @@
+using System.ComponentModel.Composition;
 using System.Globalization;
 using System.Linq;
 using TweetSharp.Twitter.Fluent;
@@ -22,14 +23,15 @@ namespace Twiddler
 
         public delegate Tweet TweetFactory(TwitterStatus status);
 
+        public delegate ITweetRating TweetRatingFactory(Tweet tweet);
+
         public delegate ITweetScreen TweetScreenFactory(Tweet tweet);
 
         public delegate User UserFactory(TwitterUser user);
 
-        public delegate ITweetRating TweetRatingFactory(Tweet tweet);
-
         #endregion
 
+        [Export(typeof (TweetFactory))]
         public static Tweet CreateTweetFromTwitterStatus(TwitterStatus status)
         {
             return new Tweet
@@ -53,6 +55,7 @@ namespace Twiddler
                        : null;
         }
 
+        [Export(typeof (UserFactory))]
         public static User CreateUserFromTwitterUser(TwitterUser user)
         {
             return new User

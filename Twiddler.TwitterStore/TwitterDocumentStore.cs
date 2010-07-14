@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.Composition;
 using System.Linq;
-using Caliburn.Core.IoC;
 using Raven.Client;
 using Twiddler.Core.Models;
 using Twiddler.Core.Services;
@@ -9,13 +9,14 @@ using Twiddler.TwitterStore.Interfaces;
 
 namespace Twiddler.TwitterStore
 {
-    [Singleton(typeof (ITweetStore))]
+    [Export(typeof (ITweetStore))]
     public class TwitterDocumentStore : ITweetStore
     {
         private readonly IDocumentStore _documentStore;
 
         private readonly object _mutex = new object();
 
+        [ImportingConstructor]
         public TwitterDocumentStore(IDocumentStoreFactory documentStoreFactory)
         {
             _documentStore = documentStoreFactory.CreateDocumentStore();

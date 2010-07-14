@@ -1,13 +1,14 @@
-﻿using Caliburn.Core.IoC;
+﻿using System.ComponentModel.Composition;
 using TweetSharp.Twitter.Fluent;
 using Twiddler.Services;
 using Twiddler.Services.Interfaces;
 
 namespace Twiddler.TweetRequesters
 {
-    [PerRequest("Friends Timeline", typeof (ITweetRequester))]
+    [Export(typeof (ITweetRequester))]
     public class FriendsTimelineTweetRequester : TweetRequester
     {
+        [ImportingConstructor]
         public FriendsTimelineTweetRequester(ITwitterClient client,
                                              IRequestLimitStatus requestLimitStatus,
                                              Factories.TweetFactory tweetFactory)

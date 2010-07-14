@@ -1,5 +1,5 @@
 ﻿using System;
-using Caliburn.Core.IoC;
+using System.ComponentModel.Composition;
 using Caliburn.PresentationFramework.Screens;
 using Twiddler.Commands.Interfaces;
 using Twiddler.Models;
@@ -7,9 +7,11 @@ using Twiddler.Screens.Interfaces;
 
 namespace Twiddler.Screens
 {
-    [PerRequest(typeof (IImageThumbnailScreen))]
+    [Export(typeof (IImageThumbnailScreen))]
+    [PartCreationPolicy(CreationPolicy.NonShared)]
     public class ImageThumbnailScreen : Screen<Uri>, IImageThumbnailScreen
     {
+        [ImportingConstructor]
         public ImageThumbnailScreen(ImageLocations imageLocations, IOpenLinkCommand openLinkCommand)
         {
             OpenLinkCommand = openLinkCommand;

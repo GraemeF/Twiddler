@@ -1,5 +1,5 @@
+using System.ComponentModel.Composition;
 using System.Linq;
-using Caliburn.Core.IoC;
 using Caliburn.PresentationFramework.Screens;
 using MvvmFoundation.Wpf;
 using Twiddler.Commands.Interfaces;
@@ -8,12 +8,13 @@ using Twiddler.Services.Interfaces;
 
 namespace Twiddler.Screens
 {
-    [PerRequest(typeof (IStatusScreen))]
+    [Export(typeof (IStatusScreen))]
     public class StatusScreen : ScreenConductor<IScreen>.WithCollection.AllScreensActive, IStatusScreen
     {
         private readonly ITwitterClient _client;
         private PropertyObserver<ITwitterClient> _observer;
 
+        [ImportingConstructor]
         public StatusScreen(ITwitterClient client,
                             IAuthorizeCommand authorizeCommand,
                             IDeauthorizeCommand deauthorizeCommand,

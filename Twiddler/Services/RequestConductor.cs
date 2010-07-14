@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.Composition;
 using System.Linq;
 using System.Threading.Tasks;
-using Caliburn.Core.IoC;
 using MvvmFoundation.Wpf;
 using TweetSharp.Extensions;
 using Twiddler.Core.Models;
@@ -11,7 +11,7 @@ using Twiddler.Services.Interfaces;
 
 namespace Twiddler.Services
 {
-    [PerRequest(typeof (IRequestConductor))]
+    [Export(typeof (IRequestConductor))]
     public class RequestConductor : IRequestConductor
     {
         private readonly ITwitterClient _client;
@@ -21,6 +21,7 @@ namespace Twiddler.Services
         private IDisposable _subscription;
         private ITweetSink _tweetSink;
 
+        [ImportingConstructor]
         public RequestConductor(ITwitterClient client,
                                 IEnumerable<ITweetRequester> tweetRequesters,
                                 INewTweetFilter newTweetFilter)

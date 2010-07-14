@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
+using System.ComponentModel.Composition;
 using System.Linq;
-using Caliburn.Core.IoC;
 using MvvmFoundation.Wpf;
 using Twiddler.Core;
 using Twiddler.Core.Models;
@@ -10,7 +10,8 @@ using Twiddler.Services.Interfaces;
 
 namespace Twiddler.Services
 {
-    [PerRequest(typeof (ITweetRating))]
+    [Export(typeof (ITweetRating))]
+    [PartCreationPolicy(CreationPolicy.NonShared)]
     public class TweetRating : ITweetRating
     {
         private readonly ITwitterClient _client;
@@ -18,6 +19,7 @@ namespace Twiddler.Services
         private bool _isMention;
         private PropertyObserver<ITwitterClient> _observer;
 
+        [ImportingConstructor]
         public TweetRating(ITwitterClient client, Tweet tweet)
         {
             _client = client;

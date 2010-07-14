@@ -4,6 +4,7 @@ obj
 *.suo
 Thumbs.db
 _ReSharper.*
+*.ReSharper
 Reports/
 /*.cache
 /*.db

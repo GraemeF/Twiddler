@@ -1,22 +1,23 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.Composition;
 using System.Linq;
-using Caliburn.Core.IoC;
 using Caliburn.PresentationFramework.Screens;
 using Twiddler.Core.Models;
 using Twiddler.Core.Services;
 using Twiddler.Screens.Interfaces;
-using Twiddler.Services.Interfaces;
 
 namespace Twiddler.Screens
 {
-    [PerRequest(typeof (ILoadingTweetScreen))]
+    [Export(typeof (ILoadingTweetScreen))]
+    [PartCreationPolicy(CreationPolicy.NonShared)]
     public class LoadingTweetScreen : ScreenConductor<IScreen>, ILoadingTweetScreen
     {
         private readonly ITweetPlaceholderScreen _placeholderScreen;
         private readonly ITweetStore _store;
         private readonly Factories.TweetScreenFactory _tweetScreenFactory;
 
+        [ImportingConstructor]
         public LoadingTweetScreen(ITweetPlaceholderScreen placeholderScreen,
                                   ITweetStore store,
                                   string id,

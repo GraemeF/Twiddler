@@ -1,7 +1,7 @@
 ﻿using System;
+using System.ComponentModel.Composition;
 using System.Windows;
 using System.Windows.Input;
-using Caliburn.Core.IoC;
 using Caliburn.PresentationFramework;
 using Caliburn.PresentationFramework.Screens;
 using MvvmFoundation.Wpf;
@@ -13,7 +13,8 @@ using Twiddler.Services.Interfaces;
 
 namespace Twiddler.Screens
 {
-    [PerRequest(typeof (ITweetScreen))]
+    [Export(typeof (ITweetScreen))]
+    [PartCreationPolicy(CreationPolicy.NonShared)]
     public class TweetScreen : ScreenConductor<IScreen>.WithCollection.AllScreensActive, ITweetScreen
     {
         private readonly ILinkThumbnailScreenFactory _linkThumbnailScreenFactory;
@@ -22,6 +23,7 @@ namespace Twiddler.Screens
         private readonly ITweetRating _tweetRating;
         private PropertyObserver<Tweet> _tweetObserver;
 
+        [ImportingConstructor]
         public TweetScreen(Tweet tweet,
                            Factories.TweetRatingFactory tweetRatingFactory,
                            ILinkThumbnailScreenFactory linkThumbnailScreenFactory,

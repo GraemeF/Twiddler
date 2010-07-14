@@ -1,17 +1,19 @@
 ﻿using System;
-using Caliburn.Core.IoC;
+using System.ComponentModel.Composition;
 using MvvmFoundation.Wpf;
 using Twiddler.Commands.Interfaces;
 using Twiddler.Core.Models;
 
 namespace Twiddler.Commands
 {
-    [PerRequest(typeof (IArchiveTweetCommand))]
+    [Export(typeof (IArchiveTweetCommand))]
+    [PartCreationPolicy(CreationPolicy.NonShared)]
     public class ArchiveTweetCommand : IArchiveTweetCommand
     {
         private readonly Tweet _tweet;
         private PropertyObserver<Tweet> _observer;
 
+        [ImportingConstructor]
         public ArchiveTweetCommand(Tweet tweet)
         {
             _tweet = tweet;

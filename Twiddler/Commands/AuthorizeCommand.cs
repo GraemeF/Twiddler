@@ -1,13 +1,14 @@
-using Caliburn.Core.IoC;
+using System.ComponentModel.Composition;
 using Twiddler.Commands.Interfaces;
 using Twiddler.Core;
 using Twiddler.Services.Interfaces;
 
 namespace Twiddler.Commands
 {
-    [PerRequest(typeof (IAuthorizeCommand))]
+    [Export(typeof (IAuthorizeCommand))]
     public class AuthorizeCommand : AuthorizationCommand, IAuthorizeCommand
     {
+        [ImportingConstructor]
         public AuthorizeCommand(ITwitterClient client) : base(client, AuthorizationStatus.NotAuthorized)
         {
         }

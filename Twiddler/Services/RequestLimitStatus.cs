@@ -1,13 +1,13 @@
 ﻿using System;
 using System.ComponentModel;
-using Caliburn.Core.IoC;
+using System.ComponentModel.Composition;
 using TweetSharp.Extensions;
 using Twiddler.Core;
 using Twiddler.Services.Interfaces;
 
 namespace Twiddler.Services
 {
-    [Singleton(typeof (IRequestLimitStatus))]
+    [Export(typeof (IRequestLimitStatus))]
     public class RequestLimitStatus : IRequestLimitStatus
     {
         private int _hourlyLimit = 350;

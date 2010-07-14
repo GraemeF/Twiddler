@@ -1,5 +1,5 @@
 ﻿using System;
-using Caliburn.Core.IoC;
+using System.ComponentModel.Composition;
 using MvvmFoundation.Wpf;
 using Twiddler.Commands.Interfaces;
 using Twiddler.Core.Models;
@@ -7,13 +7,15 @@ using Twiddler.Core.Services;
 
 namespace Twiddler.Commands
 {
-    [PerRequest(typeof (IMarkTweetAsReadCommand))]
+    [Export(typeof (IMarkTweetAsReadCommand))]
+    [PartCreationPolicy(CreationPolicy.NonShared)]
     public class MarkTweetAsReadCommand : IMarkTweetAsReadCommand
     {
-        private readonly Tweet _tweet;
         private readonly ITweetStore _store;
+        private readonly Tweet _tweet;
         private PropertyObserver<Tweet> _observer;
 
+        [ImportingConstructor]
         public MarkTweetAsReadCommand(Tweet tweet, ITweetStore store)
         {
             _tweet = tweet;
