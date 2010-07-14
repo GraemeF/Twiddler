@@ -23,7 +23,7 @@ namespace Twiddler.Services
 
         [ImportingConstructor]
         public RequestConductor(ITwitterClient client,
-                                IEnumerable<ITweetRequester> tweetRequesters,
+                                [ImportMany] IEnumerable<ITweetRequester> tweetRequesters,
                                 INewTweetFilter newTweetFilter)
         {
             _client = client;

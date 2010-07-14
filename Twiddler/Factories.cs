@@ -1,4 +1,5 @@
 using System.ComponentModel.Composition;
+using System.ComponentModel.Composition.Hosting;
 using System.Globalization;
 using System.Linq;
 using TweetSharp.Twitter.Fluent;
@@ -11,7 +12,7 @@ using Twiddler.Services.Interfaces;
 
 namespace Twiddler
 {
-    public static class Factories
+    public class Factories
     {
         #region Delegates
 
@@ -30,6 +31,41 @@ namespace Twiddler
         public delegate User UserFactory(TwitterUser user);
 
         #endregion
+
+        [Import]
+        private CompositionContainer Container { get; set; }
+
+        private TPart ComposePartWith<TPart, TImport>(TImport import)
+        {
+            var childContainer = new CompositionContainer(Container);
+            childContainer.ComposeExportedValue(import);
+
+            return childContainer.GetExportedValue<TPart>();
+        }
+
+        [Export(typeof (ImageThumbnailScreenFactory))]
+        public IImageThumbnailScreen CreateImageThumbnailScreen(ImageLocations imageLocations)
+        {
+            return ComposePartWith<IImageThumbnailScreen, ImageLocations>(imageLocations);
+        }
+
+        [Export(typeof (LoadingTweetScreenFactory))]
+        public ILoadingTweetScreen CreateLoadingTweetScreen(string id)
+        {
+            return ComposePartWith<ILoadingTweetScreen, string>(id);
+        }
+
+        [Export(typeof (TweetScreenFactory))]
+        public ITweetScreen CreateTweetScreen(Tweet tweet)
+        {
+            return ComposePartWith<ITweetScreen, Tweet>(tweet);
+        }
+
+        [Export(typeof (TweetRatingFactory))]
+        public ITweetRating CreateTweetRating(Tweet tweet)
+        {
+            return ComposePartWith<ITweetRating, Tweet>(tweet);
+        }
 
         [Export(typeof (TweetFactory))]
         public static Tweet CreateTweetFromTwitterStatus(TwitterStatus status)
