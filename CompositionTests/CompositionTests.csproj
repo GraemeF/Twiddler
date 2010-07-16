@@ -31,16 +31,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.ComponentModel.Composition.Diagnostics">
-      <HintPath>..\..\Composition.Diagnostics\Lib\Microsoft.ComponentModel.Composition.Diagnostics.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.ComponentModel.Composition.Diagnostics.Tests">
-      <HintPath>..\..\MEF2_Preview1\bin\CompositionDiagnostics\Microsoft.ComponentModel.Composition.Diagnostics.Tests.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
-    <Reference Include="System.ComponentModel.Composition.Codeplex">
-      <HintPath>..\..\MEF2_Preview1\bin\CompositionDiagnostics\System.ComponentModel.Composition.Codeplex.dll</HintPath>
-    </Reference>
+    <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
