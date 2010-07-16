@@ -1,5 +1,7 @@
-﻿using System.ComponentModel.Composition;
+﻿using System;
+using System.ComponentModel.Composition;
 using System.ComponentModel.Composition.Hosting;
+using System.ComponentModel.Composition.Primitives;
 using Xunit;
 
 namespace CompositionTests
@@ -10,15 +12,32 @@ namespace CompositionTests
         public void ComposeWith__ReturnsInstanceWithInstance()
         {
             var container =
-                new CompositionContainer(new TypeCatalog(typeof(Injected),
-                                                         typeof(InnerItem),
-                                                         typeof(OuterItem)));
+                new CompositionContainer(new TypeCatalog(typeof (Injected),
+                                                         typeof (InnerItem),
+                                                         typeof (OuterItem)));
 
             var test = new ComposingFactory(container);
 
             var injectedObject = new Injected();
 
             Assert.Same(injectedObject, test.ComposeWith<InnerItem, Injected>(injectedObject));
+        }
+
+        [Fact]
+        public void ComposeWith_GivenCatalog_ReturnsInstanceWithInstance()
+        {
+            var typeCatalog = new TypeCatalog(typeof (Injected),
+                                              typeof (InnerItem),
+                                              typeof (OuterItem));
+            var container =
+                new CompositionContainer(typeCatalog);
+
+            var test = new ComposingFactory(container);
+
+            var injectedObject = new Injected();
+
+            IDisposable childCatalog;
+            Assert.Same(injectedObject, test.ComposeWith<InnerItem>(typeCatalog, out childCatalog, injectedObject));
         }
 
         #region Nested type: Injected
@@ -52,7 +71,7 @@ namespace CompositionTests
         #endregion
     }
 
-    [Export(typeof(IComposingFactory))]
+    [Export(typeof (IComposingFactory))]
     public class ComposingFactory : IComposingFactory
     {
         private readonly CompositionContainer _container;
@@ -73,6 +92,17 @@ namespace CompositionTests
         }
 
         #endregion
+
+        //child catalog is a filtered catalog that contains only parts that should appear in the child (including TPart)
+        public TPart ComposeWith<TPart>(ComposablePartCatalog childCatalog,
+                                        out IDisposable disposable,
+                                        params object[] imports)
+        {
+            var childContainer = new CompositionContainer(childCatalog, _container);
+            childContainer.ComposeParts(imports);
+            disposable = childContainer;
+            return childContainer.GetExportedValue<TPart>();
+        }
     }
 
     public interface IComposingFactory
