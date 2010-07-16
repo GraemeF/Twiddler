@@ -9,63 +9,67 @@ namespace CompositionTests
     public class ComposingFactoryTests
     {
         [Fact]
-        public void ComposeWith__ReturnsInstanceWithInstance()
+        public void ComposeWith_WhenComposedTypeImportsInjectedType_ReturnsInstanceOfComposedTypeWithInjectedInstance()
         {
-            var container =
-                new CompositionContainer(new TypeCatalog(typeof (Injected),
-                                                         typeof (InnerItem),
-                                                         typeof (OuterItem)));
+            // Shouldn't need to have the File type in the catalog as we are providing the instance
+            var container = new CompositionContainer(new TypeCatalog(typeof (Folder)));
 
+            // The factory has the root container which it can use to resolve Folder
             var test = new ComposingFactory(container);
 
-            var injectedObject = new Injected();
+            // This is the instance of File that the Folder needs to have injected
+            var file = new File();
 
-            Assert.Same(injectedObject, test.ComposeWith<InnerItem, Injected>(injectedObject));
+            // Compose a Folder, providing the instance of File
+            Folder composedFolder = test.ComposeWith<Folder, File>(file);
+
+            // Check that the Folder has the correct instance of File
+            Assert.Same(file, composedFolder.File);
         }
 
         [Fact]
         public void ComposeWith_GivenCatalog_ReturnsInstanceWithInstance()
         {
-            var typeCatalog = new TypeCatalog(typeof (Injected),
-                                              typeof (InnerItem),
-                                              typeof (OuterItem));
+            var typeCatalog = new TypeCatalog(typeof (File),
+                                              typeof (Folder),
+                                              typeof (Disk));
             var container =
                 new CompositionContainer(typeCatalog);
 
             var test = new ComposingFactory(container);
 
-            var injectedObject = new Injected();
+            var file = new File();
 
             IDisposable childCatalog;
-            Assert.Same(injectedObject, test.ComposeWith<InnerItem>(typeCatalog, out childCatalog, injectedObject));
+            Assert.Same(file, test.ComposeWith<Folder>(typeCatalog, out childCatalog, file).File);
         }
 
-        #region Nested type: Injected
+        #region Nested type: Disk
 
-        private class Injected
+        [Export]
+        private class Disk
+        {
+            [Import]
+            public Folder Folder { get; set; }
+        }
+
+        #endregion
+
+        #region Nested type: File
+
+        private class File
         {
         }
 
         #endregion
 
-        #region Nested type: InnerItem
+        #region Nested type: Folder
 
         [Export]
-        private class InnerItem
+        private class Folder
         {
             [Import]
-            public Injected InjectedObject { get; set; }
-        }
-
-        #endregion
-
-        #region Nested type: OuterItem
-
-        [Export]
-        private class OuterItem
-        {
-            [Import]
-            public InnerItem Inner { get; set; }
+            public File File { get; set; }
         }
 
         #endregion
