@@ -48,7 +48,7 @@ namespace Twiddler.Tests.Screens
 
         private TweetScreen BuildDefaultTestSubject()
         {
-            return new TweetScreen(_tweet, x => _fakeTweetRating.Object, _fakeThumbnailFactory.Object, null, null);
+            return new TweetScreen(_tweet, _fakeTweetRating.Object, _fakeThumbnailFactory.Object, null, null);
         }
 
         [Fact]
@@ -82,7 +82,7 @@ namespace Twiddler.Tests.Screens
             var mockScreen = new Mock<ILoadingTweetScreen>();
 
             var test = new TweetScreen(A.Tweet.InReplyTo("4").Build(),
-                                       x => _fakeTweetRating.Object,
+                                       _fakeTweetRating.Object,
                                        _fakeThumbnailFactory.Object,
                                        x => mockScreen.Object,
                                        null);
@@ -102,7 +102,7 @@ namespace Twiddler.Tests.Screens
                 new TweetScreen(A.Tweet.
                                     WithStatus("This tweet contains a link").
                                     LinkingTo(new Uri("http://link.one.com")).Build(),
-                                x => _fakeTweetRating.Object,
+                                _fakeTweetRating.Object,
                                 _fakeThumbnailFactory.Object,
                                 null,
                                 null);

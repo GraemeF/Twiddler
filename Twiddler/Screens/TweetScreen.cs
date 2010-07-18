@@ -25,14 +25,14 @@ namespace Twiddler.Screens
 
         [ImportingConstructor]
         public TweetScreen(ITweet tweet,
-                           Factories.TweetRatingFactory tweetRatingFactory,
+                           ITweetRating tweetRating,
                            ILinkThumbnailScreenFactory linkThumbnailScreenFactory,
                            Factories.LoadingTweetScreenFactory loadingTweetScreenFactory,
                            ITweetStore store)
             : base(false)
         {
             _tweet = tweet;
-            _tweetRating = tweetRatingFactory(tweet);
+            _tweetRating = tweetRating;
             Id = _tweet.Id;
             MarkAsReadCommand = new MarkTweetAsReadCommand(_tweet, store);
             _linkThumbnailScreenFactory = linkThumbnailScreenFactory;

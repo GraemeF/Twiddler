@@ -1,11 +1,8 @@
 using System.ComponentModel.Composition;
 using System.ComponentModel.Composition.Hosting;
-using TweetSharp.Twitter.Fluent;
 using Twiddler.Core.Models;
-using Twiddler.Core.Services;
 using Twiddler.Models;
 using Twiddler.Screens.Interfaces;
-using Twiddler.Services.Interfaces;
 
 namespace Twiddler
 {
@@ -16,10 +13,6 @@ namespace Twiddler
         public delegate IImageThumbnailScreen ImageThumbnailScreenFactory(ImageLocations imageLocations);
 
         public delegate ILoadingTweetScreen LoadingTweetScreenFactory(string id);
-
-        public delegate IFluentTwitter RequestFactory(ITwitterClient client);
-
-        public delegate ITweetRating TweetRatingFactory(ITweet tweet);
 
         public delegate ITweetScreen TweetScreenFactory(ITweet tweet);
 
@@ -52,12 +45,6 @@ namespace Twiddler
         public ITweetScreen CreateTweetScreen(ITweet tweet)
         {
             return ComposePartWith<ITweetScreen, ITweet>(tweet);
-        }
-
-        [Export(typeof (TweetRatingFactory))]
-        public ITweetRating CreateTweetRating(ITweet tweet)
-        {
-            return ComposePartWith<ITweetRating, ITweet>(tweet);
         }
     }
 }
