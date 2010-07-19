@@ -1,0 +1,3 @@
+[submodule "Library/FootReST"]
+	path = Library/FootReST
+	url = git@github.com:GraemeF/FootReST.git
