@@ -1,3 +1,6 @@
 [submodule "Library/FootReST"]
 	path = Library/FootReST
 	url = git@github.com:GraemeF/FootReST.git
+[submodule "Library/Fluid"]
+	path = Library/Fluid
+	url = git@github.com:GraemeF/Fluid.git
