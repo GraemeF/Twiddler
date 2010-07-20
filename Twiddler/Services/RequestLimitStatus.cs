@@ -1,12 +1,14 @@
 ﻿using System;
 using System.ComponentModel;
 using System.ComponentModel.Composition;
+using Caliburn.Core.IoC;
 using TweetSharp.Extensions;
 using Twiddler.Core;
 using Twiddler.Services.Interfaces;
 
 namespace Twiddler.Services
 {
+    [Singleton(typeof (IRequestLimitStatus))]
     [Export(typeof (IRequestLimitStatus))]
     public class RequestLimitStatus : IRequestLimitStatus
     {

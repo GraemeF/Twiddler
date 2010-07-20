@@ -2,15 +2,16 @@
 using System.ComponentModel;
 using System.ComponentModel.Composition;
 using System.Linq;
+using Caliburn.Core.IoC;
 using MvvmFoundation.Wpf;
 using Twiddler.Core;
 using Twiddler.Core.Models;
 using Twiddler.Core.Services;
 using Twiddler.Services.Interfaces;
-using Twiddler.TwitterStore.Models;
 
 namespace Twiddler.Services
 {
+    [PerRequest(typeof (ITweetRating))]
     [Export(typeof (ITweetRating))]
     [PartCreationPolicy(CreationPolicy.NonShared)]
     public class TweetRating : ITweetRating

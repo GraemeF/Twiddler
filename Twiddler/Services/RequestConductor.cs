@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Linq;
 using System.Threading.Tasks;
+using Caliburn.Core.IoC;
 using MvvmFoundation.Wpf;
 using TweetSharp.Extensions;
 using Twiddler.Core.Models;
@@ -11,6 +12,7 @@ using Twiddler.Services.Interfaces;
 
 namespace Twiddler.Services
 {
+    [Singleton(typeof (IRequestConductor))]
     [Export(typeof (IRequestConductor))]
     public class RequestConductor : IRequestConductor
     {

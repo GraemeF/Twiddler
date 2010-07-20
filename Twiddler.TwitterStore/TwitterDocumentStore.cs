@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Linq;
+using Caliburn.Core.IoC;
 using Raven.Client;
 using Twiddler.Core.Models;
 using Twiddler.Core.Services;
@@ -10,6 +11,7 @@ using Twiddler.TwitterStore.Models;
 
 namespace Twiddler.TwitterStore
 {
+    [Singleton(typeof (ITweetStore))]
     [Export(typeof (ITweetStore))]
     public class TwitterDocumentStore : ITweetStore
     {

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel.Composition;
 using System.Linq;
+using Caliburn.Core.IoC;
 using Twiddler.Core.Models;
 using Twiddler.Core.Services;
 using Twiddler.Services.Interfaces;
@@ -10,6 +11,7 @@ using Twiddler.TwitterStore.Models;
 
 namespace Twiddler.Services
 {
+    [PerRequest(typeof (ITimeline))]
     [Export(typeof (ITimeline))]
     [PartCreationPolicy(CreationPolicy.NonShared)]
     public class StoreTimeline : ITimeline

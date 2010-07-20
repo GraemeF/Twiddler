@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel;
 using System.ComponentModel.Composition;
+using Caliburn.Core.IoC;
 using TweetSharp.Twitter.Extensions;
 using TweetSharp.Twitter.Fluent;
 using TweetSharp.Twitter.Model;
@@ -11,6 +12,7 @@ using Twiddler.Services.Interfaces;
 
 namespace Twiddler.Services
 {
+    [Singleton(typeof (ITwitterClient))]
     [Export(typeof (ITwitterClient))]
     public class TwitterClient : ITwitterClient
     {

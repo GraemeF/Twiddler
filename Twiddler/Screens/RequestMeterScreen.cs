@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel.Composition;
 using System.Linq;
+using Caliburn.Core.IoC;
 using Caliburn.PresentationFramework.Screens;
 using MvvmFoundation.Wpf;
 using TweetSharp.Extensions;
@@ -9,6 +10,7 @@ using Twiddler.Services.Interfaces;
 
 namespace Twiddler.Screens
 {
+    [PerRequest(typeof (IRequestMeterScreen))]
     [Export(typeof (IRequestMeterScreen))]
     [PartCreationPolicy(CreationPolicy.NonShared)]
     public class RequestMeterScreen : Screen, IRequestMeterScreen, IDisposable

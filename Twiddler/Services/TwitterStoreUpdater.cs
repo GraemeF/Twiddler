@@ -1,9 +1,11 @@
 ﻿using System.ComponentModel.Composition;
+using Caliburn.Core.IoC;
 using Twiddler.Core.Services;
 using Twiddler.Services.Interfaces;
 
 namespace Twiddler.Services
 {
+    [Singleton(typeof (ITwitterStoreUpdater))]
     [Export(typeof (ITwitterStoreUpdater))]
     public class TwitterStoreUpdater : ITwitterStoreUpdater
     {

@@ -1,5 +1,6 @@
 using System.ComponentModel.Composition;
 using System.Linq;
+using Caliburn.Core.IoC;
 using Caliburn.PresentationFramework.Screens;
 using MvvmFoundation.Wpf;
 using Twiddler.Commands.Interfaces;
@@ -8,6 +9,7 @@ using Twiddler.Services.Interfaces;
 
 namespace Twiddler.Screens
 {
+    [Singleton(typeof (IStatusScreen))]
     [Export(typeof (IStatusScreen))]
     public class StatusScreen : ScreenConductor<IScreen>.WithCollection.AllScreensActive, IStatusScreen
     {

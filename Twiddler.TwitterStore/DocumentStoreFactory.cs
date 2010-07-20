@@ -2,14 +2,15 @@
 using System.ComponentModel.Composition;
 using System.IO;
 using System.Linq;
+using Caliburn.Core.IoC;
 using Raven.Client;
 using Raven.Client.Document;
-using Twiddler.Core.Models;
 using Twiddler.TwitterStore.Interfaces;
 using Twiddler.TwitterStore.Models;
 
 namespace Twiddler.TwitterStore
 {
+    [Singleton(typeof (IDocumentStoreFactory))]
     [Export(typeof (IDocumentStoreFactory))]
     public class DocumentStoreFactory : IDocumentStoreFactory
     {

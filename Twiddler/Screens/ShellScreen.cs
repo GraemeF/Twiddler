@@ -1,10 +1,12 @@
 using System.ComponentModel.Composition;
+using Caliburn.Core.IoC;
 using Caliburn.PresentationFramework.Screens;
 using Twiddler.Screens.Interfaces;
 using Twiddler.Services.Interfaces;
 
 namespace Twiddler.Screens
 {
+    [Singleton(typeof (IShellScreen))]
     [Export(typeof (IShellScreen))]
     public class ShellScreen : ScreenConductor<IScreen>.WithCollection.AllScreensActive, IShellScreen
     {

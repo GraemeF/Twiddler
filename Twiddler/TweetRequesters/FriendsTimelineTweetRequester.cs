@@ -1,10 +1,12 @@
 ﻿using System.ComponentModel.Composition;
+using Caliburn.Core.IoC;
 using TweetSharp.Twitter.Fluent;
 using Twiddler.Services;
 using Twiddler.Services.Interfaces;
 
 namespace Twiddler.TweetRequesters
 {
+    [Singleton(typeof (ITweetRequester))]
     [Export(typeof (ITweetRequester))]
     public class FriendsTimelineTweetRequester : TweetRequester
     {

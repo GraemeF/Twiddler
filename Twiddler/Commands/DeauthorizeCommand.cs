@@ -1,9 +1,11 @@
 using System.ComponentModel.Composition;
+using Caliburn.Core.IoC;
 using Twiddler.Commands.Interfaces;
 using Twiddler.Services.Interfaces;
 
 namespace Twiddler.Commands
 {
+    [PerRequest(typeof (IDeauthorizeCommand))]
     [Export(typeof (IDeauthorizeCommand))]
     [PartCreationPolicy(CreationPolicy.NonShared)]
     public class DeauthorizeCommand : AuthorizationCommand, IDeauthorizeCommand

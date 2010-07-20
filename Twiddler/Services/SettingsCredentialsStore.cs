@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.Composition;
+using Caliburn.Core.IoC;
 using Twiddler.Core;
 using Twiddler.Models;
 using Twiddler.Models.Interfaces;
@@ -7,6 +8,7 @@ using Twiddler.Services.Interfaces;
 
 namespace Twiddler.Services
 {
+    [Singleton(typeof (ICredentialsStore))]
     [Export(typeof (ICredentialsStore))]
     [NoCoverage]
     public class SettingsCredentialsStore : ICredentialsStore

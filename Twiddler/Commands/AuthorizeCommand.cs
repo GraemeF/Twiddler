@@ -1,10 +1,12 @@
 using System.ComponentModel.Composition;
+using Caliburn.Core.IoC;
 using Twiddler.Commands.Interfaces;
 using Twiddler.Core;
 using Twiddler.Services.Interfaces;
 
 namespace Twiddler.Commands
 {
+    [Singleton(typeof (IAuthorizeCommand))]
     [Export(typeof (IAuthorizeCommand))]
     public class AuthorizeCommand : AuthorizationCommand, IAuthorizeCommand
     {

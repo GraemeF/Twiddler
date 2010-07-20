@@ -1,11 +1,13 @@
 ﻿using System;
 using System.ComponentModel.Composition;
+using Caliburn.Core.IoC;
 using MvvmFoundation.Wpf;
 using Twiddler.Commands.Interfaces;
 using Twiddler.Core.Models;
 
 namespace Twiddler.Commands
 {
+    [PerRequest(typeof (IArchiveTweetCommand))]
     [Export(typeof (IArchiveTweetCommand))]
     [PartCreationPolicy(CreationPolicy.NonShared)]
     public class ArchiveTweetCommand : IArchiveTweetCommand

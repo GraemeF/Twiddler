@@ -1,11 +1,13 @@
 ﻿using System;
 using System.ComponentModel.Composition;
 using System.Diagnostics;
+using Caliburn.Core.IoC;
 using Twiddler.Commands.Interfaces;
 using Twiddler.Core;
 
 namespace Twiddler.Commands
 {
+    [Singleton(typeof (IOpenLinkCommand))]
     [Export(typeof (IOpenLinkCommand))]
     [NoCoverage]
     public class OpenLinkCommand : IOpenLinkCommand
