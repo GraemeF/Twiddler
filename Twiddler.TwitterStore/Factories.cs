@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.Composition;
 using System.Globalization;
 using System.Linq;
+using Caliburn.Core.IoC;
 using TweetSharp.Twitter.Model;
 using Twiddler.Core.Models;
 using Twiddler.TwitterStore.Models;
@@ -9,6 +10,7 @@ namespace Twiddler.TwitterStore
 {
     internal class Factories
     {
+        [Singleton(typeof (Core.Factories.TweetFactory))]
         [Export(typeof (Core.Factories.TweetFactory))]
         public static Tweet CreateTweetFromTwitterStatus(TwitterStatus status)
         {
@@ -33,6 +35,7 @@ namespace Twiddler.TwitterStore
                        : null;
         }
 
+        [Singleton(typeof (Core.Factories.UserFactory))]
         [Export(typeof (Core.Factories.UserFactory))]
         public static User CreateUserFromTwitterUser(TwitterUser user)
         {

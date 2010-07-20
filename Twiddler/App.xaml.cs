@@ -22,7 +22,9 @@ namespace Twiddler
                                          DirectoryCatalog
                                      });
 
-        private readonly IContainerFactory _containerFactory = new MefContainerFactory(Catalog);
+        private readonly IContainerFactory _containerFactory = 
+            //new MefContainerFactory(Catalog);
+            new AutofacContainerFactory();
 
         protected override IServiceLocator CreateContainer()
         {

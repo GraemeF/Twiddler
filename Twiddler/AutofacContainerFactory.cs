@@ -31,8 +31,8 @@ namespace Twiddler
             var builder = new ContainerBuilder();
 
             builder.RegisterInstance(new CompositionContainer(new AssemblyCatalog(Assembly.GetExecutingAssembly())));
-            builder.RegisterInstance<Factories.TweetFactory>(Factories.CreateTweetFromTwitterStatus);
-            builder.RegisterInstance<Factories.UserFactory>(Factories.CreateUserFromTwitterUser);
+            //builder.RegisterInstance<Factories.TweetFactory>(Factories.CreateTweetFromTwitterStatus);
+            //builder.RegisterInstance<Factories.UserFactory>(Factories.CreateUserFromTwitterUser);
 
             return builder;
         }
