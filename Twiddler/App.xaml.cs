@@ -5,10 +5,8 @@ using System.ComponentModel.Composition.Primitives;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using Caliburn.MEF;
 using Caliburn.PresentationFramework.ApplicationModel;
 using Microsoft.Practices.ServiceLocation;
-using Twiddler.Screens.Interfaces;
 
 namespace Twiddler
 {
@@ -24,12 +22,11 @@ namespace Twiddler
                                          DirectoryCatalog
                                      });
 
-        private CompositionContainer _compositionContainer;
+        private readonly IContainerFactory _containerFactory = new MefContainerFactory(Catalog);
 
         protected override IServiceLocator CreateContainer()
         {
-            _compositionContainer = new CompositionContainer(Catalog);
-            return new MEFAdapter(_compositionContainer);
+            return _containerFactory.CreateContainer();
         }
 
         protected override Assembly[] SelectAssemblies()
@@ -75,7 +72,7 @@ namespace Twiddler
 
         protected override object CreateRootModel()
         {
-            return _compositionContainer.GetExportedValue<IShellScreen>();
+            return _containerFactory.CreateRootModel();
         }
     }
 }

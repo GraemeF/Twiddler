@@ -40,6 +40,12 @@
     <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Autofac">
+      <HintPath>..\Library\Caliburn\Autofac.dll</HintPath>
+    </Reference>
+    <Reference Include="Caliburn.Autofac">
+      <HintPath>..\Library\Caliburn\Caliburn.Autofac.dll</HintPath>
+    </Reference>
     <Reference Include="Caliburn.Core, Version=2.0.0.48647, Culture=neutral, PublicKeyToken=8e5891231f2ed21f, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Library\Caliburn\Caliburn.Core.dll</HintPath>
@@ -196,12 +202,15 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="AutofacContainerFactory.cs" />
     <Compile Include="Commands\ArchiveTweetCommand.cs" />
     <Compile Include="Commands\Interfaces\IArchiveTweetCommand.cs" />
     <Compile Include="Commands\Interfaces\IMarkTweetAsReadCommand.cs" />
     <Compile Include="Commands\Interfaces\IOpenLinkCommand.cs" />
     <Compile Include="Commands\MarkTweetAsReadCommand.cs" />
     <Compile Include="Commands\OpenLinkCommand.cs" />
+    <Compile Include="IContainerFactory.cs" />
+    <Compile Include="MefContainerFactory.cs" />
     <Compile Include="Screens\Interfaces\ILinkThumbnailScreen.cs" />
     <Compile Include="Screens\Interfaces\IImageThumbnailScreen.cs" />
     <Compile Include="Screens\ImageThumbnailScreen.cs" />
