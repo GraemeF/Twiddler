@@ -1,5 +1,5 @@
 ﻿using System.ComponentModel.Composition.Hosting;
-using System.Reflection;
+using System.ComponentModel.Composition.Primitives;
 using Autofac;
 using Caliburn.Autofac;
 using Microsoft.Practices.ServiceLocation;
@@ -9,7 +9,13 @@ namespace Twiddler
 {
     internal class AutofacContainerFactory : IContainerFactory
     {
+        private readonly ComposablePartCatalog _catalog;
         private IContainer _container;
+
+        public AutofacContainerFactory(ComposablePartCatalog catalog)
+        {
+            _catalog = catalog;
+        }
 
         #region IContainerFactory Members
 
@@ -26,13 +32,15 @@ namespace Twiddler
 
         #endregion
 
-        private static ContainerBuilder ConfigureContainer()
+        private ContainerBuilder ConfigureContainer()
         {
             var builder = new ContainerBuilder();
 
-            builder.RegisterInstance(new CompositionContainer(new AssemblyCatalog(Assembly.GetExecutingAssembly())));
-            //builder.RegisterInstance<Factories.TweetFactory>(Factories.CreateTweetFromTwitterStatus);
-            //builder.RegisterInstance<Factories.UserFactory>(Factories.CreateUserFromTwitterUser);
+            var compositionContainer = new CompositionContainer(_catalog);
+
+            builder.RegisterInstance(compositionContainer);
+            builder.RegisterInstance(compositionContainer.GetExportedValue<Core.Factories.TweetFactory>());
+            builder.RegisterInstance(compositionContainer.GetExportedValue<Core.Factories.UserFactory>());
 
             return builder;
         }

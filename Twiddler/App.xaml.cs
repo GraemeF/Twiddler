@@ -24,7 +24,8 @@ namespace Twiddler
 
         private readonly IContainerFactory _containerFactory = 
             //new MefContainerFactory(Catalog);
-            new AutofacContainerFactory();
+            //new AutofacContainerFactory(Catalog);
+            new UnityContainerFactory(Catalog);
 
         protected override IServiceLocator CreateContainer()
         {
