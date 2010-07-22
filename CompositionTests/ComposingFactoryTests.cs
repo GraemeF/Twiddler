@@ -8,7 +8,7 @@ namespace CompositionTests
 {
     public class ComposingFactoryTests
     {
-        [Fact]
+        [Fact(Skip = "This is needed for MEF support.")]
         public void ComposeWith_WhenComposedTypeImportsInjectedType_ReturnsInstanceOfComposedTypeWithInjectedInstance()
         {
             // Shouldn't need to have the File type in the catalog as we are providing the instance
@@ -27,7 +27,7 @@ namespace CompositionTests
             Assert.Same(file, composedFolder.File);
         }
 
-        [Fact]
+        [Fact(Skip = "This is needed for MEF support.")]
         public void ComposeWith_GivenCatalog_ReturnsInstanceWithInstance()
         {
             var typeCatalog = new TypeCatalog(typeof (File),
