@@ -5,7 +5,6 @@ using Caliburn.Unity;
 using Microsoft.Practices.ServiceLocation;
 using Microsoft.Practices.Unity;
 using Twiddler.Screens.Interfaces;
-using Twiddler.Services;
 using Twiddler.Services.Interfaces;
 
 namespace Twiddler

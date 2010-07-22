@@ -2,7 +2,7 @@
 
 namespace Twiddler.Models
 {
-    public struct ImageLocations
+    public class ImageLocations
     {
         public Uri Thumbnail { get; set; }
         public Uri FullSize { get; set; }

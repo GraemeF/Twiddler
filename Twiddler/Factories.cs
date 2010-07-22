@@ -23,9 +23,9 @@ namespace Twiddler
             RegisterFactory<TweetScreenFactory>(CreateTweetScreen);
         }
 
-        protected abstract void RegisterFactory<TFactory>(TFactory factory);
+        protected abstract void RegisterFactory<TFactory>(TFactory factory) where TFactory : class;
 
-        protected abstract TPart ComposePartWith<TPart, TImport>(TImport import);
+        protected abstract TPart ComposePartWith<TPart, TImport>(TImport import) where TImport : class;
 
         private IImageThumbnailScreen CreateImageThumbnailScreen(ImageLocations imageLocations)
         {

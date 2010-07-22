@@ -22,6 +22,10 @@ namespace Twiddler
         public IServiceLocator CreateContainer()
         {
             _container = ConfigureContainer().Build();
+
+            var factories = new AutofacFactories(_container);
+            factories.RegisterFactories();
+
             return new AutofacAdapter(_container);
         }
 
