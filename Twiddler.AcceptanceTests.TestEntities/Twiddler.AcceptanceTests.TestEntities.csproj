@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{159DA135-5F63-455B-A572-A3EBB99ACA4D}</ProjectGuid>
+    <ProjectGuid>{DF851BC8-3494-4A66-921C-285F9737C5AD}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Twiddler.Core</RootNamespace>
-    <AssemblyName>Twiddler.Core</AssemblyName>
+    <RootNamespace>Twiddler.AcceptanceTests.TestEntities</RootNamespace>
+    <AssemblyName>Twiddler.AcceptanceTests.TestEntities</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -31,42 +31,40 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Caliburn.PresentationFramework, Version=2.0.0.48647, Culture=neutral, PublicKeyToken=8e5891231f2ed21f, processorArchitecture=MSIL">
+    <Reference Include="Gallio, Version=3.2.0.0, Culture=neutral, PublicKeyToken=eb9cfa67ee6ab36e, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Library\Caliburn\Caliburn.PresentationFramework.dll</HintPath>
-    </Reference>
-    <Reference Include="MvvmFoundation.Wpf">
-      <HintPath>..\Library\MvvmFoundation\MvvmFoundation.Wpf.dll</HintPath>
+      <HintPath>..\Library\Gallio\bin\Gallio.dll</HintPath>
     </Reference>
     <Reference Include="System" />
-    <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="TweetSharp">
-      <HintPath>..\Library\TweetSharp\TweetSharp.dll</HintPath>
-    </Reference>
-    <Reference Include="TweetSharp.Twitter">
-      <HintPath>..\Library\TweetSharp\TweetSharp.Twitter.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Factories.cs" />
-    <Compile Include="CollectionChangedExtensions.cs" />
-    <Compile Include="Models\ITweet.cs" />
-    <Compile Include="Models\TwiddlerSettings.cs" />
-    <Compile Include="Models\User.cs" />
-    <Compile Include="NoCoverageAttribute.cs" />
-    <Compile Include="PropertyHelper.cs" />
-    <Compile Include="Services\INewTweetFilter.cs" />
-    <Compile Include="Services\ITweetRating.cs" />
-    <Compile Include="Services\ITweetSink.cs" />
-    <Compile Include="Services\ITweetResolver.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="TwiddlerApplication.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\ITweetStore.cs" />
+    <Compile Include="Shell.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Library\Fluid\Fluid.csproj">
+      <Project>{206369ED-5FA1-4450-B6B4-3FD735CDFA0B}</Project>
+      <Name>Fluid</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
