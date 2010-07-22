@@ -6,7 +6,7 @@ using Twiddler.Services.Interfaces;
 
 namespace Twiddler.TweetRequesters
 {
-    [Singleton(typeof (ITweetRequester))]
+    [Singleton("Retweets", typeof (ITweetRequester))]
     [Export(typeof (ITweetRequester))]
     public class RetweetsOfMeTweetRequester : TweetRequester
     {
