@@ -32,6 +32,7 @@
 	<Target Name="MergeCodeCoverageReports"
 			DependsOnTargets="MSBuildSelfExtractingExe">
 		<Exec Command='"$(NCoverExplorerPath)" Reports\*.coverage.xml /s:Reports\ncover-fullreport.xml /h:Reports\Coverage\ /r:FullCoverageReport /m:50 /fc /p:"Twiddler"' />
+		<Message Text="##teamcity[importData type='dotNetCoverage' tool='ncover3' path='Reports\ncover-fullreport.xml']" />
 	</Target>
 	<PropertyGroup>
 		<FullPublishDependsOn>
