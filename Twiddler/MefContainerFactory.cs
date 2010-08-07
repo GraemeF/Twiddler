@@ -3,6 +3,7 @@ using System.ComponentModel.Composition.Primitives;
 using Caliburn.MEF;
 using Microsoft.Practices.ServiceLocation;
 using Twiddler.Screens.Interfaces;
+using System;
 
 namespace Twiddler
 {
@@ -27,6 +28,11 @@ namespace Twiddler
         public object CreateRootModel()
         {
             return _compositionContainer.GetExportedValue<IShellScreen>();
+        }
+
+        public void Register<T>(T args) where T : class
+        {
+            throw new NotImplementedException();
         }
 
         #endregion

@@ -34,6 +34,14 @@ namespace Twiddler
             return _container.Resolve<IShellScreen>();
         }
 
+        public void Register<T>(T args) where T : class
+        {
+            var builder = new ContainerBuilder();
+            builder.RegisterInstance(args);
+
+            builder.Update(_container);
+        }
+
         #endregion
 
         private ContainerBuilder ConfigureContainer()

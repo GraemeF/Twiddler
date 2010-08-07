@@ -210,7 +210,6 @@
     </Compile>
     <Compile Include="AutofacContainerFactory.cs" />
     <Compile Include="AutofacFactories.cs" />
-    <Compile Include="Options.cs" />
     <Compile Include="UnityContainerFactory.cs" />
     <Compile Include="UnityFactories.cs" />
     <Compile Include="Commands\ArchiveTweetCommand.cs" />

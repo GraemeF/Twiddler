@@ -6,5 +6,6 @@ namespace Twiddler
     {
         IServiceLocator CreateContainer();
         object CreateRootModel();
+        void Register<T>(T args) where T : class;
     }
 }

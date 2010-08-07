@@ -7,19 +7,37 @@ using Raven.Client;
 using Raven.Client.Document;
 using Twiddler.TwitterStore.Interfaces;
 using Twiddler.TwitterStore.Models;
+using NDesk.Options;
 
 namespace Twiddler.TwitterStore
 {
-    [Singleton(typeof (IDocumentStoreFactory))]
-    [Export(typeof (IDocumentStoreFactory))]
+    [Singleton(typeof(IDocumentStoreFactory))]
+    [Export(typeof(IDocumentStoreFactory))]
     public class DocumentStoreFactory : IDocumentStoreFactory
     {
+        string _storeDirectory;
+
+        public DocumentStoreFactory(System.Windows.StartupEventArgs args)
+        {
+            _storeDirectory = GetDefaultDataDirectory();
+            ParseOptions(args);
+        }
+
+        private void ParseOptions(System.Windows.StartupEventArgs args)
+        {
+            var p = new OptionSet()
+            {
+                { "store=", "the path of the RavenDB store.", v => _storeDirectory = v }
+            };
+
+            p.Parse(args.Args);
+        }
+
         #region IDocumentStoreFactory Members
 
         public IDocumentStore CreateDocumentStore()
         {
-            var documentStore = new DocumentStore {DataDirectory = GetDataDirectory()};
-            //var documentStore = new DocumentStore {Url = "http://localhost:8080"};
+            var documentStore = new DocumentStore { DataDirectory = _storeDirectory };
 
             documentStore.Initialize();
             CreateIndices(documentStore);
@@ -39,7 +57,7 @@ namespace Twiddler.TwitterStore
                                  {
                                      Map = docs => from doc in docs
                                                    orderby doc.CreatedDate descending
-                                                   select new {doc.IsArchived}
+                                                   select new { doc.IsArchived }
                                  });
             }
             catch (InvalidOperationException)
@@ -47,7 +65,7 @@ namespace Twiddler.TwitterStore
             }
         }
 
-        private static string GetDataDirectory()
+        private static string GetDefaultDataDirectory()
         {
             return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "Twiddler");
         }

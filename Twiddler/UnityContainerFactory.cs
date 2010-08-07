@@ -32,6 +32,11 @@ namespace Twiddler
             return _container.Resolve<IShellScreen>();
         }
 
+        public void Register<T>(T args) where T : class
+        {
+            throw new System.NotImplementedException();
+        }
+
         #endregion
 
         private IUnityContainer ConfigureContainer()

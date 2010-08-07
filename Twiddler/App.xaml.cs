@@ -77,5 +77,12 @@ namespace Twiddler
         {
             return _containerFactory.CreateRootModel();
         }
+
+        protected override void OnStartup(System.Windows.StartupEventArgs args)
+        {
+            _containerFactory.Register(args);
+
+            base.OnStartup(args);
+        }
     }
 }
