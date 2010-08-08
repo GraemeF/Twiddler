@@ -31,7 +31,7 @@ namespace Twiddler.AcceptanceTests.TestEntities
             var args = new StringBuilder();
             if (newStore)
                 if (Directory.Exists(TemporaryStorePath))
-                    Directory.Delete(TemporaryStorePath);
+                    Directory.Delete(TemporaryStorePath, true);
 
             if (store != null)
                 args.AppendFormat(" /store=\"{0}\"", store);
@@ -137,6 +137,14 @@ namespace Twiddler.AcceptanceTests.TestEntities
             {
                 _process.CloseMainWindow();
                 _process.Dispose();
+            }
+        }
+
+        public bool IsUserAuthorized
+        {
+            get
+            {
+                return Shell.IsUserAuthorized;
             }
         }
     }
