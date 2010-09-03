@@ -46,13 +46,17 @@
 {
     background-image: url(../img/testkinds/MbUnitv2Assembly.png);
 }
+.gallio-report .testKind-NUnitv254+Assembly
+{
+    background-image: url(../img/testkinds/NUnitv254+Assembly.png);
+}
 .gallio-report .testKind-NUnitv248Assembly
 {
     background-image: url(../img/testkinds/NUnitv248Assembly.png);
 }
-.gallio-report .testKind-NUnitv25Assembly
+.gallio-report .testKind-NUnitv253Assembly
 {
-    background-image: url(../img/testkinds/NUnitv25Assembly.png);
+    background-image: url(../img/testkinds/NUnitv253Assembly.png);
 }
 .gallio-report .testKind-xUnitAssembly
 {

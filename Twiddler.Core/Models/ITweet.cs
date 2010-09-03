@@ -15,7 +15,6 @@ namespace Twiddler.Core.Models
         List<string> Mentions { get; set; }
         bool IsRead { get; set; }
         bool IsArchived { get; set; }
-        event PropertyChangedEventHandler PropertyChanged;
         void Archive();
         void MarkAsRead();
     }

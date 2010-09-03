@@ -1,5 +1,7 @@
-﻿using TechTalk.SpecFlow;
+﻿using System;
+using TechTalk.SpecFlow;
 using Twiddler.AcceptanceTests.TestEntities;
+using Xunit;
 
 namespace Twiddler.AcceptanceTests
 {
@@ -7,12 +9,6 @@ namespace Twiddler.AcceptanceTests
     public class AuthorizationStepDefinitions
     {
         private TwiddlerApplication _twiddler;
-
-        [BeforeScenario]
-        public void StartApplication()
-        {
-            _twiddler = TwiddlerApplication.Launch();
-        }
 
         [AfterScenario]
         public void StopApplication()
@@ -24,22 +20,16 @@ namespace Twiddler.AcceptanceTests
             }
         }
 
-        [Given(@"I have not previously authorized")]
-        public void GivenIHaveNotPreviouslyAuthorized()
-        {
-            ScenarioContext.Current.Pending();
-        }
-
         [Then(@"the authorization status should show I am unauthorized")]
         public void ThenTheAuthorizationStatusShouldShowIAmUnuathorized()
         {
-            ScenarioContext.Current.Pending();
+            Assert.Equal("Unauthorized", _twiddler.AuthorizationStatus, StringComparer.CurrentCultureIgnoreCase);
         }
 
         [When(@"I start the application")]
         public void WhenIStartTheApplication()
         {
-            ScenarioContext.Current.Pending();
+            _twiddler = TwiddlerApplication.Launch();
         }
     }
 }

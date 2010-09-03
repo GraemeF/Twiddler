@@ -71,6 +71,72 @@
             <param name="arg4">The fourth argument.</param>
             <param name="arg5">The fifth argument.</param>
         </member>
+        <member name="T:Gallio.Common.Collections.EnumerableCounter">
+            <summary>
+            Encapsulates various strategies for counting the number of elements in a collection, an array, or
+            a simple enumerable type.
+            </summary>
+        </member>
+        <member name="M:Gallio.Common.Collections.EnumerableCounter.#ctor(System.Collections.IEnumerable)">
+            <summary>
+            Constructor.
+            </summary>
+            <param name="values">The collection, the array, or the simple enumerable object to count elements.</param>
+            <exception cref="T:System.ArgumentNullException">Thrown if <paramref name="values"/> is null.</exception>
+        </member>
+        <member name="M:Gallio.Common.Collections.EnumerableCounter.Count">
+            <summary>
+            Counts the number of elements in a collection, an array, or any other enumerable type, by
+            using the most appropriate strategies.
+            </summary>
+            <returns>An enumeration of counting strategies applicable to the specified enumerable values.</returns>
+        </member>
+        <member name="T:Gallio.Common.Collections.ICountingStrategy">
+            <summary>
+            Represents a strategy for counting the number of elements in a collection, an array, or a simple enumerable type.
+            </summary>
+        </member>
+        <member name="P:Gallio.Common.Collections.ICountingStrategy.Name">
+            <summary>
+            Gets the name of the counting strategy.
+            </summary>
+        </member>
+        <member name="P:Gallio.Common.Collections.ICountingStrategy.Description">
+            <summary>
+            Gets a displayable description of the counting strategy.
+            </summary>
+        </member>
+        <member name="P:Gallio.Common.Collections.ICountingStrategy.Count">
+            <summary>
+            Returns the number of elements found by applying the current counting strategy.
+            </summary>
+            <returns>The number of elements found.</returns>
+        </member>
+        <member name="T:Gallio.Common.Collections.CountingStrategyName">
+            <summary>
+            Name of the existing counting strategies.
+            </summary>
+        </member>
+        <member name="F:Gallio.Common.Collections.CountingStrategyName.ByLengthGetter">
+            <summary>
+            Counts by getting the value returned by the <see cref="P:System.Array.Length"/> property getter.
+            </summary>
+        </member>
+        <member name="F:Gallio.Common.Collections.CountingStrategyName.ByCountGetter">
+            <summary>
+            Counts by getting the value returned by the <see cref="P:System.Collections.ICollection.Count"/> or <see cref="P:System.Collections.Generic.ICollection`1.Count"/> property getter.
+            </summary>
+        </member>
+        <member name="F:Gallio.Common.Collections.CountingStrategyName.ByEnumeratingElements">
+            <summary>
+            Counts by enumerating the elements returned by <see cref="M:System.Collections.IEnumerable.GetEnumerator"/>.
+            </summary>
+        </member>
+        <member name="F:Gallio.Common.Collections.CountingStrategyName.ByReflectedCountGetter">
+            <summary>
+            Counts by getting the value returned by an existing public "Count" property getter.
+            </summary>
+        </member>
         <member name="T:Gallio.Common.Comparison">
             <summary>
             Represents the method that compares two objects of the same type.
@@ -477,6 +543,24 @@
         </member>
         <member name="P:Gallio.Common.IO.ContentInline.IsDynamic">
             <inheritdoc />
+        </member>
+        <member name="T:Gallio.Common.Lazy`1">
+            <summary>
+            Lazy computation type.
+            </summary>
+            <typeparam name="T">The encapsulated type.</typeparam>
+        </member>
+        <member name="M:Gallio.Common.Lazy`1.#ctor(Gallio.Common.Func{`0})">
+            <summary>
+            Constructor.
+            </summary>
+            <param name="func">A function which computes the value on first request.</param>
+            <exception cref="T:System.ArgumentNullException">Thrown if <paramref name="func"/> is null.</exception>
+        </member>
+        <member name="P:Gallio.Common.Lazy`1.Value">
+            <summary>
+            Gets the value.
+            </summary>
         </member>
         <member name="T:Gallio.Common.Markup.AttachmentType">
             <summary>
@@ -2099,7 +2183,7 @@
             </summary>
             <remarks>
             <para>
-            The process task provides a guarnatee that when you call <see cref="M:Gallio.Common.Concurrency.Task.Join(System.Nullable{System.TimeSpan})"/>
+            The process task provides a guarantee that when you call <see cref="M:Gallio.Common.Concurrency.Task.Join(System.Nullable{System.TimeSpan})"/>
             all redirected output from the console output and error streams will already
             have been captured and delivered to the event handlers, as appropriate.
             </para>
@@ -11757,11 +11841,6 @@
         <member name="P:Gallio.Model.Isolation.Messages.IsolatedTaskFinishedMessage.Exception">
             <summary>
             Gets or sets the exception data.
-            </summary>
-        </member>
-        <member name="T:Gallio.Model.Isolation.Messages.PingMessage">
-            <summary>
-            Tells the server that the client is active.
             </summary>
         </member>
         <member name="T:Gallio.Model.Isolation.Messages.RunIsolatedTaskMessage">

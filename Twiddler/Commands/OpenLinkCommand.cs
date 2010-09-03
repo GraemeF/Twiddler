@@ -16,7 +16,7 @@ namespace Twiddler.Commands
 
         public void Execute(object parameter)
         {
-            Process.Start((parameter).ToString(), "");
+            Process.Start(parameter.ToString(), "");
         }
 
         public bool CanExecute(object parameter)
@@ -24,7 +24,9 @@ namespace Twiddler.Commands
             return true;
         }
 
+#pragma warning disable 0067
         public event EventHandler CanExecuteChanged;
+#pragma warning restore 0067
 
         #endregion
     }

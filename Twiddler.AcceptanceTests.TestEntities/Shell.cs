@@ -1,4 +1,5 @@
-﻿using Fluid;
+﻿using System.Linq;
+using Fluid;
 
 namespace Twiddler.AcceptanceTests.TestEntities
 {
@@ -9,6 +10,18 @@ namespace Twiddler.AcceptanceTests.TestEntities
         public Shell(Window window)
         {
             _window = window;
+        }
+
+        public string AuthorizationStatus
+        {
+            get
+            {
+                return TextBlock.
+                    In(_window, "Status").
+                    Called("Authorization").
+                    First().
+                    Text;
+            }
         }
     }
 }
