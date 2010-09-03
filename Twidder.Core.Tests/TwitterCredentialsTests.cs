@@ -8,15 +8,15 @@ namespace Twidder.Core.Tests
         [Fact]
         public void GettingAreValid_WhenCredentialsAreComplete_ReturnsTrue()
         {
-            var test = new TwitterCredentials("id", "accessToken", "accessTokenSecret");
-            Assert.True(test.AreValid);
+            var test = new AccessToken("id", "accessToken", "accessTokenSecret");
+            Assert.True(test.IsValid);
         }
 
         [Fact]
         public void GettingAreValid_WhenAccessTokenIsMissing_ReturnsFalse()
         {
-            var test = new TwitterCredentials("id", "", "accessTokenSecret");
-            Assert.False(test.AreValid);
+            var test = new AccessToken("id", "", "accessTokenSecret");
+            Assert.False(test.IsValid);
         }
     }
 }

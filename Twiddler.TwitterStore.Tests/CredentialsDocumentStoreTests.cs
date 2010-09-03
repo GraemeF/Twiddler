@@ -27,12 +27,12 @@ namespace Twiddler.TwitterStore.Tests
         public void Load_WhenTheCredentialsAreInTheStore_ReturnsTheCredentials()
         {
             string id = "The credentials id";
-            var credentials = new TwitterCredentials(id, null, null);
+            var credentials = new AccessToken(id, null, null);
 
-            CredentialsDocumentStore test = BuildDefaultTestSubject();
+            AccessTokenDocumentStore test = BuildDefaultTestSubject();
 
             _fakeDocumentSession.
-                Setup(x => x.Load<TwitterCredentials>(id)).
+                Setup(x => x.Load<AccessToken>(id)).
                 Returns(credentials);
 
             Assert.Same(credentials, test.Load(id));
@@ -43,18 +43,18 @@ namespace Twiddler.TwitterStore.Tests
         {
             string id = "The credentials id";
 
-            CredentialsDocumentStore test = BuildDefaultTestSubject();
+            AccessTokenDocumentStore test = BuildDefaultTestSubject();
 
             _fakeDocumentSession.
-                Setup(x => x.Load<TwitterCredentials>(id)).
-                Returns((TwitterCredentials) null);
+                Setup(x => x.Load<AccessToken>(id)).
+                Returns((AccessToken) null);
 
             Assert.NotNull(test.Load(id));
         }
 
-        private CredentialsDocumentStore BuildDefaultTestSubject()
+        private AccessTokenDocumentStore BuildDefaultTestSubject()
         {
-            return new CredentialsDocumentStore(_fakeDocumentStoreFactory.Object);
+            return new AccessTokenDocumentStore(_fakeDocumentStoreFactory.Object);
         }
     }
 }

@@ -7,39 +7,39 @@ using Twiddler.TwitterStore.Interfaces;
 
 namespace Twiddler.TwitterStore
 {
-    [Singleton(typeof (ICredentialsStore))]
-    [Export(typeof (ICredentialsStore))]
-    public class CredentialsDocumentStore : ICredentialsStore
+    [Singleton(typeof (IAccessTokenStore))]
+    [Export(typeof (IAccessTokenStore))]
+    public class AccessTokenDocumentStore : IAccessTokenStore
     {
         private readonly IDocumentStore _documentStore;
 
         private readonly object _mutex = new object();
 
         [ImportingConstructor]
-        public CredentialsDocumentStore(IDocumentStoreFactory documentStoreFactory)
+        public AccessTokenDocumentStore(IDocumentStoreFactory documentStoreFactory)
         {
             _documentStore = documentStoreFactory.GetDocumentStore();
         }
 
-        #region ICredentialsStore Members
+        #region IAccessTokenStore Members
 
-        public void Save(ITwitterCredentials credentials)
+        public void Save(IAccessToken accessToken)
         {
             lock (_mutex)
                 using (IDocumentSession session = _documentStore.OpenSession())
                 {
-                    session.Store(credentials);
+                    session.Store(accessToken);
                     session.SaveChanges();
                 }
         }
 
-        public ITwitterCredentials Load(string id)
+        public IAccessToken Load(string id)
         {
             lock (_mutex)
                 using (IDocumentSession session = _documentStore.OpenSession())
                 {
-                    return session.Load<TwitterCredentials>(id)
-                           ?? new TwitterCredentials(id, null, null);
+                    return session.Load<AccessToken>(id)
+                           ?? new AccessToken(id, null, null);
                 }
         }
 

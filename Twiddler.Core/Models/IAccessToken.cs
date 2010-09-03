@@ -1,12 +1,10 @@
 ﻿namespace Twiddler.Core.Models
 {
-    public interface ITwitterCredentials
+    public interface IAccessToken
     {
         string Id { get; }
-        string ConsumerKey { get; }
-        string ConsumerSecret { get; }
         string TokenSecret { get; set; }
         string Token { get; set; }
-        bool AreValid { get; }
+        bool IsValid { get; }
     }
 }
