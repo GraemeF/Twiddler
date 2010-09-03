@@ -29,7 +29,7 @@ namespace Twiddler.Tests.Commands
         }
 
         [Theory]
-        [InlineData(AuthorizationStatus.NotAuthorized)]
+        [InlineData(AuthorizationStatus.Unauthorized)]
         public void CanExecute_WhenAbleToAuthorize_IsTrue(AuthorizationStatus status)
         {
             AuthorizeCommand test = BuildDefaultTestSubject();

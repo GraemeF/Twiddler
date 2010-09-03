@@ -4,7 +4,7 @@ namespace Twiddler.Services.Interfaces
     {
         Unknown,
         Authorized,
-        NotAuthorized,
+        Unauthorized,
         InvalidApplication,
         Verifying
     }

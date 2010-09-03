@@ -80,7 +80,7 @@ namespace Twiddler.Services
 
         public void Deauthorize()
         {
-            AuthorizationStatus = AuthorizationStatus.NotAuthorized;
+            AuthorizationStatus = AuthorizationStatus.Unauthorized;
 
             _credentialsStore.Save(new TwitterCredentials(TwitterCredentials.DefaultCredentialsId,
                                                           null, null));
@@ -93,7 +93,7 @@ namespace Twiddler.Services
             if (_credentials.AreValid)
                 VerifyCredentialsWithTwitter();
             else
-                AuthorizationStatus = AuthorizationStatus.NotAuthorized;
+                AuthorizationStatus = AuthorizationStatus.Unauthorized;
         }
 
         private void VerifyCredentialsWithTwitter()
@@ -113,7 +113,7 @@ namespace Twiddler.Services
 
             AuthorizationStatus = profile != null
                                       ? AuthorizationStatus.Authorized
-                                      : AuthorizationStatus.NotAuthorized;
+                                      : AuthorizationStatus.Unauthorized;
             AuthenticatedUser = profile != null
                                     ? _userFactory(profile)
                                     : null;

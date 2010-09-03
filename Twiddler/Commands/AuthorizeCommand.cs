@@ -15,7 +15,7 @@ namespace Twiddler.Commands
 
         [ImportingConstructor]
         public AuthorizeCommand(ITwitterClient client, ICredentialsStore credentialsStore)
-            : base(client, AuthorizationStatus.NotAuthorized)
+            : base(client, AuthorizationStatus.Unauthorized)
         {
             _credentialsStore = credentialsStore;
         }
