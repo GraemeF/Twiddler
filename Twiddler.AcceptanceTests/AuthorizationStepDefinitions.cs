@@ -1,4 +1,5 @@
-﻿using TechTalk.SpecFlow;
+﻿using System;
+using TechTalk.SpecFlow;
 using Twiddler.AcceptanceTests.TestEntities;
 using Xunit;
 
@@ -22,7 +23,7 @@ namespace Twiddler.AcceptanceTests
         [Then(@"the authorization status should show I am unauthorized")]
         public void ThenTheAuthorizationStatusShouldShowIAmUnuathorized()
         {
-            Assert.False(_twiddler.IsUserAuthorized);
+            Assert.Equal("Unauthorized", _twiddler.AuthorizationStatus, StringComparer.CurrentCultureIgnoreCase);
         }
 
         [When(@"I start the application")]

@@ -12,7 +12,7 @@ namespace Twiddler.AcceptanceTests.TestEntities
             _window = window;
         }
 
-        public bool IsUserAuthorized
+        public string AuthorizationStatus
         {
             get
             {
@@ -20,7 +20,7 @@ namespace Twiddler.AcceptanceTests.TestEntities
                     In(_window, "Status").
                     Called("Authorization").
                     First().
-                    Text == "Authorized";
+                    Text;
             }
         }
     }

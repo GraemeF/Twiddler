@@ -140,11 +140,11 @@ namespace Twiddler.AcceptanceTests.TestEntities
             }
         }
 
-        public bool IsUserAuthorized
+        public string AuthorizationStatus
         {
             get
             {
-                return Shell.IsUserAuthorized;
+                return Shell.AuthorizationStatus;
             }
         }
     }
