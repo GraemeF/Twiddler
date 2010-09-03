@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using Moq;
 using Twiddler.Commands;
+using Twiddler.Core.Services;
 using Twiddler.Services.Interfaces;
 using Xunit;
 using Xunit.Extensions;
@@ -11,6 +12,7 @@ namespace Twiddler.Tests.Commands
     public class AuthorizeCommandTests
     {
         private readonly Mock<ITwitterClient> _fakeClient = new Mock<ITwitterClient>();
+        private readonly Mock<ICredentialsStore> _fakeCredentialsStore = new Mock<ICredentialsStore>();
 
         [Theory]
         [InlineData(AuthorizationStatus.Authorized)]
@@ -54,7 +56,7 @@ namespace Twiddler.Tests.Commands
 
         private AuthorizeCommand BuildDefaultTestSubject()
         {
-            return new AuthorizeCommand(_fakeClient.Object);
+            return new AuthorizeCommand(_fakeClient.Object, _fakeCredentialsStore.Object);
         }
 
         private void ClientAuthorizationStatusChangesTo(AuthorizationStatus status)

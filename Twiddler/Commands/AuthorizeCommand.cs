@@ -2,6 +2,7 @@ using System.ComponentModel.Composition;
 using Caliburn.Core.IoC;
 using Twiddler.Commands.Interfaces;
 using Twiddler.Core;
+using Twiddler.Core.Services;
 using Twiddler.Services.Interfaces;
 
 namespace Twiddler.Commands
@@ -10,9 +11,13 @@ namespace Twiddler.Commands
     [Export(typeof (IAuthorizeCommand))]
     public class AuthorizeCommand : AuthorizationCommand, IAuthorizeCommand
     {
+        private readonly ICredentialsStore _credentialsStore;
+
         [ImportingConstructor]
-        public AuthorizeCommand(ITwitterClient client) : base(client, AuthorizationStatus.NotAuthorized)
+        public AuthorizeCommand(ITwitterClient client, ICredentialsStore credentialsStore)
+            : base(client, AuthorizationStatus.NotAuthorized)
         {
+            _credentialsStore = credentialsStore;
         }
 
         #region IAuthorizeCommand Members
@@ -20,7 +25,7 @@ namespace Twiddler.Commands
         [NoCoverage]
         public override void Execute(object parameter)
         {
-            var dlg = new OAuthDialog();
+            var dlg = new OAuthDialog(_credentialsStore);
             bool? result = dlg.ShowDialog();
 
             if (result.HasValue == result.Value)

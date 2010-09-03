@@ -19,8 +19,8 @@
         public string Id { get; private set; }
         public string ConsumerKey { get; private set; }
         public string ConsumerSecret { get; private set; }
-        public string TokenSecret { get; private set; }
-        public string Token { get; private set; }
+        public string TokenSecret { get; set; }
+        public string Token { get; set; }
 
         public bool AreValid
         {

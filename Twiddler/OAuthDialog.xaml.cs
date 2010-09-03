@@ -31,7 +31,7 @@ using TweetSharp.Twitter.Fluent;
 using TweetSharp.Twitter.Model;
 using Twiddler.Core;
 using Twiddler.Core.Models;
-using Twiddler.Properties;
+using Twiddler.Core.Services;
 
 namespace Twiddler
 {
@@ -40,10 +40,12 @@ namespace Twiddler
     {
         private readonly string _consumerKey;
         private readonly string _consumerSecret;
+        private readonly ICredentialsStore _credentialsStore;
         private readonly OAuthToken _requestToken;
 
-        public OAuthDialog()
+        public OAuthDialog(ICredentialsStore credentialsStore)
         {
+            _credentialsStore = credentialsStore;
             InitializeComponent();
 
 
@@ -51,7 +53,7 @@ namespace Twiddler
             pinLbl.Visibility = Visibility.Hidden;
             pinInstruction.Visibility = Visibility.Hidden;
 
-            var creds = new TwitterCredentials(null, null, null);
+            ITwitterCredentials creds = _credentialsStore.Load(TwitterCredentials.DefaultCredentialsId);
             _consumerKey = creds.ConsumerKey;
             _consumerSecret = creds.ConsumerSecret;
 
@@ -114,9 +116,11 @@ namespace Twiddler
                 DialogResult = false;
                 return;
             }
-            Settings.Default.AccessToken = result.Token;
-            Settings.Default.AccessTokenSecret = result.TokenSecret;
-            Settings.Default.Save();
+
+            var credentials = new TwitterCredentials(TwitterCredentials.DefaultCredentialsId,
+                                                     result.Token, result.TokenSecret);
+            _credentialsStore.Save(credentials);
+
             DialogResult = true;
             Close();
         }

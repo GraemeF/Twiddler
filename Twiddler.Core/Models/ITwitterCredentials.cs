@@ -5,8 +5,8 @@
         string Id { get; }
         string ConsumerKey { get; }
         string ConsumerSecret { get; }
-        string TokenSecret { get; }
-        string Token { get; }
+        string TokenSecret { get; set; }
+        string Token { get; set; }
         bool AreValid { get; }
     }
 }
