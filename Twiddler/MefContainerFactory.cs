@@ -1,9 +1,9 @@
-﻿using System.ComponentModel.Composition.Hosting;
+﻿using System;
+using System.ComponentModel.Composition.Hosting;
 using System.ComponentModel.Composition.Primitives;
 using Caliburn.MEF;
 using Microsoft.Practices.ServiceLocation;
 using Twiddler.Screens.Interfaces;
-using System;
 
 namespace Twiddler
 {

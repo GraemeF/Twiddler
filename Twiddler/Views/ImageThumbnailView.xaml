@@ -1,15 +1,15 @@
-﻿<UserControl x:Class="Twiddler.Views.ImageThumbnailView" 
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+﻿<UserControl x:Class="Twiddler.Views.ImageThumbnailView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              mc:Ignorable="d">
-    <Border>
-        <Button MaxWidth="50"
-                MaxHeight="50" 
-                Command="{Binding OpenLinkCommand}" 
-                CommandParameter="{Binding Link}">
-            <Image Source="{Binding Thumbnail}" />
-        </Button>
-    </Border>
+	<Border>
+		<Button MaxWidth="50"
+		        MaxHeight="50"
+		        Command="{Binding OpenLinkCommand}"
+		        CommandParameter="{Binding Link}">
+			<Image Source="{Binding Thumbnail}" />
+		</Button>
+	</Border>
 </UserControl>

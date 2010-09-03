@@ -2,42 +2,33 @@
 using System.ComponentModel.Composition;
 using System.IO;
 using System.Linq;
+using System.Windows;
 using Caliburn.Core.IoC;
+using NDesk.Options;
 using Raven.Client;
 using Raven.Client.Document;
 using Twiddler.TwitterStore.Interfaces;
 using Twiddler.TwitterStore.Models;
-using NDesk.Options;
 
 namespace Twiddler.TwitterStore
 {
-    [Singleton(typeof(IDocumentStoreFactory))]
-    [Export(typeof(IDocumentStoreFactory))]
+    [Singleton(typeof (IDocumentStoreFactory))]
+    [Export(typeof (IDocumentStoreFactory))]
     public class DocumentStoreFactory : IDocumentStoreFactory
     {
-        string _storeDirectory;
+        private string _storeDirectory;
 
-        public DocumentStoreFactory(System.Windows.StartupEventArgs args)
+        public DocumentStoreFactory(StartupEventArgs args)
         {
             _storeDirectory = GetDefaultDataDirectory();
             ParseOptions(args);
-        }
-
-        private void ParseOptions(System.Windows.StartupEventArgs args)
-        {
-            var p = new OptionSet()
-            {
-                { "store=", "the path of the RavenDB store.", v => _storeDirectory = v }
-            };
-
-            p.Parse(args.Args);
         }
 
         #region IDocumentStoreFactory Members
 
         public IDocumentStore CreateDocumentStore()
         {
-            var documentStore = new DocumentStore { DataDirectory = _storeDirectory };
+            var documentStore = new DocumentStore {DataDirectory = _storeDirectory};
 
             documentStore.Initialize();
             CreateIndices(documentStore);
@@ -46,6 +37,16 @@ namespace Twiddler.TwitterStore
         }
 
         #endregion
+
+        private void ParseOptions(StartupEventArgs args)
+        {
+            var p = new OptionSet
+                        {
+                            {"store=", "the path of the RavenDB store.", v => _storeDirectory = v}
+                        };
+
+            p.Parse(args.Args);
+        }
 
         private void CreateIndices(IDocumentStore documentStore)
         {
@@ -57,7 +58,7 @@ namespace Twiddler.TwitterStore
                                  {
                                      Map = docs => from doc in docs
                                                    orderby doc.CreatedDate descending
-                                                   select new { doc.IsArchived }
+                                                   select new {doc.IsArchived}
                                  });
             }
             catch (InvalidOperationException)

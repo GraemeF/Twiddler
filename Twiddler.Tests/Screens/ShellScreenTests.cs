@@ -10,12 +10,12 @@ namespace Twiddler.Tests.Screens
     {
         private readonly Mock<IStatusScreen> _fakeStatus = new Mock<IStatusScreen>();
         private readonly Mock<ITimelineScreen> _fakeTimeline = new Mock<ITimelineScreen>();
-        private Mock<ITwitterStoreUpdater> _fakeUpdater = new Mock<ITwitterStoreUpdater>();
+        private readonly Mock<ITwitterStoreUpdater> _fakeUpdater = new Mock<ITwitterStoreUpdater>();
 
         [Fact]
         public void GettingTimeline_WhenInitialized_ReturnsInitializedTimeline()
         {
-            var test = BuildDefaultTestSubject();
+            ShellScreen test = BuildDefaultTestSubject();
             test.Initialize();
 
             _fakeTimeline.Verify(x => x.Initialize());
@@ -25,7 +25,7 @@ namespace Twiddler.Tests.Screens
         [Fact]
         public void GettingStatus_WhenInitialized_ReturnsInitializedStatus()
         {
-            var test = BuildDefaultTestSubject();
+            ShellScreen test = BuildDefaultTestSubject();
             test.Initialize();
 
             _fakeStatus.Verify(x => x.Initialize());
@@ -35,7 +35,7 @@ namespace Twiddler.Tests.Screens
         [Fact]
         public void Initialize__StartsRequestingTweets()
         {
-            var test = BuildDefaultTestSubject();
+            ShellScreen test = BuildDefaultTestSubject();
             test.Initialize();
 
             _fakeUpdater.Verify(x => x.Start());

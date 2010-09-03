@@ -1,7 +1,6 @@
 ﻿using System.ComponentModel.Composition;
 using System.Globalization;
 using System.Linq;
-using Caliburn.Core.IoC;
 using TweetSharp.Twitter.Model;
 using Twiddler.Core.Models;
 using Twiddler.TwitterStore.Models;
