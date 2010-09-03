@@ -16,27 +16,35 @@ namespace Twiddler.TwitterStore
     [Export(typeof (IDocumentStoreFactory))]
     public class DocumentStoreFactory : IDocumentStoreFactory
     {
+        private readonly Lazy<DocumentStore> _documentStore;
         private string _storeDirectory;
 
         public DocumentStoreFactory(StartupEventArgs args)
         {
             _storeDirectory = GetDefaultDataDirectory();
             ParseOptions(args);
+
+            _documentStore = new Lazy<DocumentStore>(CreateDocumentStore);
         }
 
         #region IDocumentStoreFactory Members
 
-        public IDocumentStore CreateDocumentStore()
+        public IDocumentStore GetDocumentStore()
         {
-            var documentStore = new DocumentStore {DataDirectory = _storeDirectory};
-
-            documentStore.Initialize();
-            CreateIndices(documentStore);
-
-            return documentStore;
+            return _documentStore.Value;
         }
 
         #endregion
+
+        private DocumentStore CreateDocumentStore()
+        {
+            var store = new DocumentStore {DataDirectory = _storeDirectory};
+
+            store.Initialize();
+            CreateIndices(store);
+
+            return store;
+        }
 
         private void ParseOptions(StartupEventArgs args)
         {

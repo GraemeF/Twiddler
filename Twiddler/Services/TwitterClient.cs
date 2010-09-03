@@ -7,7 +7,6 @@ using TweetSharp.Twitter.Model;
 using Twiddler.Core;
 using Twiddler.Core.Models;
 using Twiddler.Core.Services;
-using Twiddler.Models;
 using Twiddler.Services.Interfaces;
 
 namespace Twiddler.Services
@@ -70,7 +69,7 @@ namespace Twiddler.Services
 
         public void CheckAuthorization()
         {
-            _credentials = _credentialsStore.Load();
+            _credentials = _credentialsStore.Load(TwitterCredentials.DefaultCredentialsId);
 
             if (string.IsNullOrEmpty(_credentials.ConsumerKey) ||
                 string.IsNullOrEmpty(_credentials.ConsumerSecret))
@@ -83,8 +82,7 @@ namespace Twiddler.Services
         {
             AuthorizationStatus = AuthorizationStatus.NotAuthorized;
 
-            _credentialsStore.Save(new TwitterCredentials(_credentials.ConsumerKey,
-                                                          _credentials.ConsumerSecret,
+            _credentialsStore.Save(new TwitterCredentials(TwitterCredentials.DefaultCredentialsId,
                                                           null, null));
         }
 

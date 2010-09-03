@@ -30,6 +30,7 @@ using TweetSharp.Twitter.Extensions;
 using TweetSharp.Twitter.Fluent;
 using TweetSharp.Twitter.Model;
 using Twiddler.Core;
+using Twiddler.Core.Models;
 using Twiddler.Properties;
 
 namespace Twiddler
@@ -50,8 +51,9 @@ namespace Twiddler
             pinLbl.Visibility = Visibility.Hidden;
             pinInstruction.Visibility = Visibility.Hidden;
 
-            _consumerKey = Settings.Default.ConsumerKey;
-            _consumerSecret = Settings.Default.ConsumerSecret;
+            var creds = new TwitterCredentials(null, null, null);
+            _consumerKey = creds.ConsumerKey;
+            _consumerSecret = creds.ConsumerSecret;
 
             //get a request token.  this is only used during 
             //this process. 

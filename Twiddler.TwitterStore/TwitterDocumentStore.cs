@@ -22,7 +22,7 @@ namespace Twiddler.TwitterStore
         [ImportingConstructor]
         public TwitterDocumentStore(IDocumentStoreFactory documentStoreFactory)
         {
-            _documentStore = documentStoreFactory.CreateDocumentStore();
+            _documentStore = documentStoreFactory.GetDocumentStore();
         }
 
         #region ITweetStore Members

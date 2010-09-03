@@ -271,7 +271,6 @@
     <Compile Include="Services\Interfaces\ITwitterStoreUpdater.cs" />
     <Compile Include="Services\MemoryTweetStore.cs" />
     <Compile Include="Commands\Interfaces\IDeauthorizeCommand.cs" />
-    <Compile Include="Services\SettingsCredentialsStore.cs" />
     <Compile Include="Screens\Interfaces\IStatusScreen.cs" />
     <Compile Include="Screens\StatusScreen.cs" />
     <Compile Include="Screens\TweetScreen.cs" />

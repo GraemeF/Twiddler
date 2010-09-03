@@ -4,7 +4,7 @@ namespace Twiddler.Core.Services
 {
     public interface ICredentialsStore
     {
-        ITwitterCredentials Load();
+        ITwitterCredentials Load(string id);
         void Save(ITwitterCredentials credentials);
     }
 }

@@ -8,3 +8,5 @@ _ReSharper.*
 Reports/
 /*.cache
 /*.db
+
+Coverage.xml

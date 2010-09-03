@@ -16,7 +16,7 @@ namespace Twiddler.TwitterStore.Tests
         public TwitterDocumentStoreTests()
         {
             _fakeDocumentStoreFactory.
-                Setup(x => x.CreateDocumentStore()).
+                Setup(x => x.GetDocumentStore()).
                 Returns(_fakeDocumentStore.Object);
 
             _fakeDocumentStore.

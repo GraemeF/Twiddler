@@ -2,6 +2,7 @@
 {
     public interface ITwitterCredentials
     {
+        string Id { get; }
         string ConsumerKey { get; }
         string ConsumerSecret { get; }
         string TokenSecret { get; }
