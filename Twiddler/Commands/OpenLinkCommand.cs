@@ -16,7 +16,7 @@ namespace Twiddler.Commands
 
         public void Execute(object parameter)
         {
-            Process.Start((parameter).ToString(), "");
+            Process.Start(parameter.ToString(), "");
         }
 
         public bool CanExecute(object parameter)
