@@ -1,6 +1,6 @@
-﻿using Twiddler.Models.Interfaces;
+﻿using Twiddler.Core.Models;
 
-namespace Twiddler.Services.Interfaces
+namespace Twiddler.Core.Services
 {
     public interface ICredentialsStore
     {

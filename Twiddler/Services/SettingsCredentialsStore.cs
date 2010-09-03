@@ -1,8 +1,9 @@
 ﻿using System.ComponentModel.Composition;
 using Caliburn.Core.IoC;
 using Twiddler.Core;
+using Twiddler.Core.Models;
+using Twiddler.Core.Services;
 using Twiddler.Models;
-using Twiddler.Models.Interfaces;
 using Twiddler.Properties;
 using Twiddler.Services.Interfaces;
 

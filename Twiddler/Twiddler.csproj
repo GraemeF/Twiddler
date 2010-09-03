@@ -271,7 +271,6 @@
     <Compile Include="Services\Interfaces\ITwitterStoreUpdater.cs" />
     <Compile Include="Services\MemoryTweetStore.cs" />
     <Compile Include="Commands\Interfaces\IDeauthorizeCommand.cs" />
-    <Compile Include="Services\Interfaces\ICredentialsStore.cs" />
     <Compile Include="Services\SettingsCredentialsStore.cs" />
     <Compile Include="Models\TwitterCredentials.cs" />
     <Compile Include="Screens\Interfaces\IStatusScreen.cs" />
@@ -281,7 +280,6 @@
     <Compile Include="Services\Interfaces\ITweetSource.cs" />
     <Compile Include="Services\Interfaces\ITweetRequester.cs" />
     <Compile Include="Services\Interfaces\ITwitterClient.cs" />
-    <Compile Include="Models\Interfaces\ITwitterCredentials.cs" />
     <Compile Include="OAuthDialog.xaml.cs">
       <DependentUpon>OAuthDialog.xaml</DependentUpon>
     </Compile>
@@ -345,7 +343,9 @@
       <Name>Twiddler.TwitterStore</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Models\Interfaces\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -1,4 +1,4 @@
-﻿namespace Twiddler.Models.Interfaces
+﻿namespace Twiddler.Core.Models
 {
     public interface ITwitterCredentials
     {

@@ -6,8 +6,8 @@ using TweetSharp.Twitter.Fluent;
 using TweetSharp.Twitter.Model;
 using Twiddler.Core;
 using Twiddler.Core.Models;
+using Twiddler.Core.Services;
 using Twiddler.Models;
-using Twiddler.Models.Interfaces;
 using Twiddler.Services.Interfaces;
 
 namespace Twiddler.Services

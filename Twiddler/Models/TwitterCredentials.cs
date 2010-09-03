@@ -1,4 +1,4 @@
-﻿using Twiddler.Models.Interfaces;
+﻿using Twiddler.Core.Models;
 
 namespace Twiddler.Models
 {
