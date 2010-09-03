@@ -5,7 +5,6 @@ using Twiddler.Core.Models;
 using Twiddler.Core.Services;
 using Twiddler.Models;
 using Twiddler.Properties;
-using Twiddler.Services.Interfaces;
 
 namespace Twiddler.Services
 {
