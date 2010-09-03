@@ -4,6 +4,59 @@
         <name>MbUnit</name>
     </assembly>
     <members>
+        <member name="T:MbUnit.Framework.ContractVerifiers.Core.NotEnoughHashesException">
+            <summary>
+            This exception type is used to signal that a <see cref="T:MbUnit.Framework.ContractVerifiers.Core.HashStore"/> was
+            not initialized with a sufficient number of hash code values.
+            </summary>
+        </member>
+        <member name="M:MbUnit.Framework.ContractVerifiers.Core.NotEnoughHashesException.#ctor(System.Int32,System.Int32)">
+            <summary>
+            Creates an exception specifying the expected minimum and the
+            actual number of hash code values.
+            </summary>
+        </member>
+        <member name="M:MbUnit.Framework.ContractVerifiers.Core.NotEnoughHashesException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
+            <summary>
+            Creates a exception from serialization info.
+            </summary>
+            <param name="info">The serialization info.</param>
+            <param name="context">The streaming context.</param>
+        </member>
+        <member name="T:MbUnit.Framework.DisableAttribute">
+            <summary>
+            Specifies that a test fixture or a test method is abstract and should not run.
+            </summary>
+            <remarks>
+            <para>
+            The attribute hides the test methods in the current test fixture or a test method itself, 
+            so they can be consumed properly in the desired context from any derived concrete test fixtures.
+            </para>
+            <para>
+            This attribute is not inherited.
+            </para>
+            </remarks>
+        </member>
+        <member name="M:MbUnit.Framework.DisableAttribute.#ctor">
+            <summary>
+            Indicates that this test method/fixture is disabled.
+            </summary>
+        </member>
+        <member name="M:MbUnit.Framework.DisableAttribute.#ctor(System.String)">
+            <summary>
+             Indicates that this test method/fixture is disabled and provides a reason.
+            </summary>
+            <param name="reason">The reason for which the test method/fixture is disabled.</param>
+            <exception cref="T:System.ArgumentNullException">Thrown if <paramref name="reason"/> is null.</exception>
+        </member>
+        <member name="M:MbUnit.Framework.DisableAttribute.DecorateTest(Gallio.Framework.Pattern.IPatternScope,Gallio.Common.Reflection.ICodeElementInfo)">
+            <inheritdoc />
+        </member>
+        <member name="P:MbUnit.Framework.DisableAttribute.Reason">
+            <summary>
+            Gets the reason that the test method/fixture is disabled.
+            </summary>
+        </member>
         <member name="T:MbUnit.Framework.AnnotationAttribute">
             <summary>
             Associates an annotation message of the specified type with the code element.
@@ -5233,19 +5286,23 @@
             </remarks>
             <example>
             <code><![CDATA[
-            [Test]
-            [Header("username", "password")]
+            [TestFixture]
+            [Header("UserName", "Password")]
             [Row("jeff", "letmein")]
             [Row("liz", "password")]
-            public void Test([BindObject] Credentials credentials)
+            public class CredentialsTest
             {
-                // ...
-            }
-            
-            public class Credentials
-            {
+                [Bind("UserName")]
                 public string UserName;
+            
+                [Bind("Password")]
                 public string Password;
+            
+                [Test]
+                public void Test()
+                {
+                    // ...
+                }
             }
             ]]></code>
             </example>
@@ -6882,10 +6939,10 @@
             [Row(2, "b")]
             public class Fixture
             {
-                [TestParameter]
+                [Parameter]
                 public int Parameter1;
                 
-                [TestParameter]
+                [Parameter]
                 public string Parameter2 { get; set; }
             }
             ]]></code>
