@@ -1,7 +1,7 @@
-﻿using Twiddler.Models;
+﻿using Twiddler.Core.Models;
 using Xunit;
 
-namespace Twiddler.Tests.Models
+namespace Twidder.Core.Tests
 {
     public class TwitterCredentialsTests
     {

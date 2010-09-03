@@ -1,6 +1,4 @@
-﻿using Twiddler.Core.Models;
-
-namespace Twiddler.Models
+﻿namespace Twiddler.Core.Models
 {
     public class TwitterCredentials : ITwitterCredentials
     {
