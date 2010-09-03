@@ -75,11 +75,7 @@ namespace Twiddler.Services
         {
             _accessToken = _accessTokenStore.Load(AccessToken.DefaultCredentialsId);
 
-            if (string.IsNullOrEmpty(_applicationCredentials.ConsumerKey) ||
-                string.IsNullOrEmpty(_applicationCredentials.ConsumerSecret))
-                AuthorizationStatus = AuthorizationStatus.InvalidApplication;
-            else
-                CheckCredentials();
+            CheckCredentials();
         }
 
         public void Deauthorize()
@@ -87,7 +83,7 @@ namespace Twiddler.Services
             AuthorizationStatus = AuthorizationStatus.Unauthorized;
 
             _accessTokenStore.Save(new AccessToken(AccessToken.DefaultCredentialsId,
-                                                          null, null));
+                                                   null, null));
         }
 
         #endregion
