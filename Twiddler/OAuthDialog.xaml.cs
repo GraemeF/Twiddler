@@ -52,7 +52,7 @@ namespace Twiddler
             pinLbl.Visibility = Visibility.Hidden;
             pinInstruction.Visibility = Visibility.Hidden;
 
-            IAccessToken creds = _accessTokenStore.Load(AccessToken.DefaultCredentialsId);
+            AccessToken creds = _accessTokenStore.Load(AccessToken.DefaultCredentialsId);
 
             //get a request token.  this is only used during 
             //this process. 

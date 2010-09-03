@@ -1,6 +1,6 @@
 ﻿namespace Twiddler.Core.Models
 {
-    public class AccessToken : IAccessToken
+    public class AccessToken
     {
         public const string DefaultCredentialsId = "DefaultCredentials";
 

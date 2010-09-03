@@ -18,7 +18,7 @@ namespace Twiddler.Services
         private readonly IAccessTokenStore _accessTokenStore;
         private readonly ITwitterApplicationCredentials _applicationCredentials;
         private readonly Core.Factories.UserFactory _userFactory;
-        private IAccessToken _accessToken;
+        private AccessToken _accessToken;
         private User _authenticatedUser;
         private AuthorizationStatus _authorizationStatus;
 

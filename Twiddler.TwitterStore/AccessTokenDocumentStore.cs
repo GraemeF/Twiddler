@@ -23,7 +23,7 @@ namespace Twiddler.TwitterStore
 
         #region IAccessTokenStore Members
 
-        public void Save(IAccessToken accessToken)
+        public void Save(AccessToken accessToken)
         {
             lock (_mutex)
                 using (IDocumentSession session = _documentStore.OpenSession())
@@ -33,7 +33,7 @@ namespace Twiddler.TwitterStore
                 }
         }
 
-        public IAccessToken Load(string id)
+        public AccessToken Load(string id)
         {
             lock (_mutex)
                 using (IDocumentSession session = _documentStore.OpenSession())

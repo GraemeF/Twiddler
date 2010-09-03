@@ -4,7 +4,7 @@ namespace Twiddler.Core.Services
 {
     public interface IAccessTokenStore
     {
-        IAccessToken Load(string id);
-        void Save(IAccessToken accessToken);
+        AccessToken Load(string id);
+        void Save(AccessToken accessToken);
     }
 }

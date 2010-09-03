@@ -56,7 +56,6 @@
   <ItemGroup>
     <Compile Include="Factories.cs" />
     <Compile Include="CollectionChangedExtensions.cs" />
-    <Compile Include="Models\IAccessToken.cs" />
     <Compile Include="Models\ITweet.cs" />
     <Compile Include="Models\ITwitterApplicationCredentials.cs" />
     <Compile Include="Models\TwiddlerSettings.cs" />
