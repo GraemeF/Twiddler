@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.IO;
 using System.Text;
+using System.Threading;
 using Fluid;
 using Gallio.Framework;
 using Twiddler.AcceptanceTests.TestEntities.Properties;
@@ -32,8 +33,7 @@ namespace Twiddler.AcceptanceTests.TestEntities
         {
             var args = new StringBuilder();
             if (newStore)
-                if (Directory.Exists(TemporaryStorePath))
-                    Directory.Delete(TemporaryStorePath, true);
+                DeleteTemporaryStore();
 
             args.AppendFormat(" /store=\"{0}\"", TemporaryStorePath);
             args.AppendFormat(" /service={0}", DefaultService);
@@ -57,6 +57,21 @@ namespace Twiddler.AcceptanceTests.TestEntities
                 if (!process.HasExited)
                     process.Kill();
                 throw;
+            }
+        }
+
+        private static void DeleteTemporaryStore()
+        {
+            while (Directory.Exists(TemporaryStorePath))
+            {
+                try
+                {
+                    Directory.Delete(TemporaryStorePath, true);
+                }
+                catch (IOException)
+                {
+                    Thread.Sleep(200);
+                }
             }
         }
 
