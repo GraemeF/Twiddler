@@ -90,6 +90,17 @@ namespace Twiddler.AcceptanceTests.TestEntities
             get { return new Shell(_shell); }
         }
 
+        public AuthorizationWindow AuthorizationWindow
+        {
+            get
+            {
+                return new AuthorizationWindow(Desktop.
+                                                   Window.
+                                                   OwnedBy(_process).
+                                                   Titled("OAuthDialog"));
+            }
+        }
+
         private static string TemporaryStorePath
         {
             get
@@ -136,7 +147,14 @@ namespace Twiddler.AcceptanceTests.TestEntities
         {
             if (disposing)
             {
-                _process.CloseMainWindow();
+                try
+                {
+                    _process.CloseMainWindow();
+                }
+                catch (InvalidOperationException)
+                {
+                }
+
                 _process.Dispose();
             }
         }
@@ -149,6 +167,9 @@ namespace Twiddler.AcceptanceTests.TestEntities
         public void Authorize()
         {
             Shell.ClickAuthorizeButton();
+            AuthorizationWindow.ClickAuthorizeAtTwitterButton();
+            AuthorizationWindow.Pin = "1234567";
+            AuthorizationWindow.ClickOKButton();
         }
     }
 }
