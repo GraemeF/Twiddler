@@ -10,6 +10,7 @@ namespace Twiddler.AcceptanceTests
     {
         private bool _newStore;
         private TwiddlerApplication _twiddler;
+        private TwitterService _twitter;
 
         private void EnsureTwiddlerHasBeenStarted()
         {
@@ -21,6 +22,13 @@ namespace Twiddler.AcceptanceTests
         public void ResetStartupParameters()
         {
             _newStore = true;
+        }
+
+        [BeforeScenario]
+        public void StartTwitterService()
+        {
+            _twitter = new TwitterService();
+            _twitter.Start();
         }
 
         [AfterScenario]
@@ -61,6 +69,19 @@ namespace Twiddler.AcceptanceTests
             EnsureTwiddlerHasBeenStarted();
 
             _twiddler.Authorize();
+        }
+
+        [Given(@"Twitter is unavailable")]
+        public void GivenTwitterIsUnavailable()
+        {
+            _twitter.Dispose();
+            _twitter = null;
+        }
+
+        [Then(@"Twitter should be unavailable")]
+        public void ThenTwitterShouldBeUnavailable()
+        {
+            ScenarioContext.Current.Pending();
         }
     }
 }
