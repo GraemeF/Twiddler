@@ -145,5 +145,10 @@ namespace Twiddler.AcceptanceTests.TestEntities
         {
             get { return Shell.AuthorizationStatus; }
         }
+
+        public void Authorize()
+        {
+            Shell.ClickAuthorizeButton();
+        }
     }
 }

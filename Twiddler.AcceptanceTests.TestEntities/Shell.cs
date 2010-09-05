@@ -17,11 +17,28 @@ namespace Twiddler.AcceptanceTests.TestEntities
             get
             {
                 return TextBlock.
-                    In(_window, "Status").
-                    Called("Authorization").
-                    First().
+                    In(Status).
+                    Called("Authorization").First().
                     Text;
             }
+        }
+
+        private Container Status
+        {
+            get
+            {
+                return Container.
+                    In(_window).
+                    Called("Status").First();
+            }
+        }
+
+        public void ClickAuthorizeButton()
+        {
+            Button.
+                In(Status).
+                Called("Authorize").First().
+                Click();
         }
     }
 }

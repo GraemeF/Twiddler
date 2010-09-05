@@ -5,9 +5,9 @@
 	
 Scenario: Not authorized
 	Given I have not previously authorized
-	Then the authorization status should show I am unauthorized
+	Then I should be unauthorized
 	
-Scenario: Begin authorization
+Scenario: Successfully authorize
 	Given I have not previously authorized
-	When I click the Authorize button
-	Then the authorization window should be displayed
+	When I authorize with Twitter
+	Then I should be authorized

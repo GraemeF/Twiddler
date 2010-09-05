@@ -8,8 +8,8 @@ namespace Twiddler.AcceptanceTests
     [Binding]
     public class AuthorizationStepDefinitions
     {
-        private TwiddlerApplication _twiddler;
         private bool _newStore;
+        private TwiddlerApplication _twiddler;
 
         private void EnsureTwiddlerHasBeenStarted()
         {
@@ -33,8 +33,8 @@ namespace Twiddler.AcceptanceTests
             }
         }
 
-        [Then(@"the authorization status should show I am unauthorized")]
-        public void ThenTheAuthorizationStatusShouldShowIAmUnuathorized()
+        [Then(@"I should be unauthorized")]
+        public void ThenIShouldBeUnuathorized()
         {
             EnsureTwiddlerHasBeenStarted();
 
@@ -47,20 +47,20 @@ namespace Twiddler.AcceptanceTests
             _newStore = true;
         }
 
-        [When(@"I click the Authorize button")]
-        public void WhenIClickTheAuthorizeButton()
+        [Then(@"I should be authorized")]
+        public void ThenIShouldBeAuthorized()
         {
             EnsureTwiddlerHasBeenStarted();
 
-            ScenarioContext.Current.Pending();
+            Assert.Equal("Authorized", _twiddler.AuthorizationStatus, StringComparer.CurrentCultureIgnoreCase);
         }
 
-        [Then(@"the authorization window should be displayed")]
-        public void ThenTheAuthorizationWindowShouldBeDisplayed()
+        [When(@"I authorize with Twitter")]
+        public void WhenIAuthorizeWithTwitter()
         {
             EnsureTwiddlerHasBeenStarted();
 
-            ScenarioContext.Current.Pending();
+            _twiddler.Authorize();
         }
     }
 }

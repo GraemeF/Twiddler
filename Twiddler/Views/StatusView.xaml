@@ -11,10 +11,12 @@
 			           AutomationProperties.AutomationId="Authorization" />
 			<Button Command="{Binding AuthorizeCommand}"
 			        Content="Authorize"
-			        Margin="4" />
+			        Margin="4"
+			        AutomationProperties.AutomationId="Authorize" />
 			<Button Command="{Binding DeauthorizeCommand}"
 			        Content="Deauthorize"
-			        Margin="4" />
+			        Margin="4"
+			        AutomationProperties.AutomationId="Deauthorize" />
 		</StackPanel>
 		<ContentControl cal:View.Model="{Binding RequestMeter}"
 		                Margin="4" />
