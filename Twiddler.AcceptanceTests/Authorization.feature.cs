@@ -27,8 +27,8 @@ namespace Twiddler.AcceptanceTests
         public static void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Authorization", "In order to interact with Twitter\r\nAs a Twitter user\r\nI want to authorize Twidder" +
-                    " with Twitter", ((string[])(null)));
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Authorization", "In order to interact with Twitter\r\nAs a Twitter user\r\nI want to authorize Twiddle" +
+                    "r with Twitter", ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }
         
