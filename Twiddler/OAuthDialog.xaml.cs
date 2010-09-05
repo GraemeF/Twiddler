@@ -38,8 +38,8 @@ namespace Twiddler
     [NoCoverage]
     public partial class OAuthDialog
     {
-        private readonly ITwitterApplicationCredentials _applicationCredentials;
         private readonly IAccessTokenStore _accessTokenStore;
+        private readonly ITwitterApplicationCredentials _applicationCredentials;
         private readonly OAuthToken _requestToken;
 
         public OAuthDialog(IAccessTokenStore accessTokenStore, ITwitterApplicationCredentials applicationCredentials)
@@ -72,20 +72,25 @@ namespace Twiddler
 
         private void AuthorizeDesktopBtn_Click(object sender, RoutedEventArgs e)
         {
-            AuthorizeDesktopBtn.IsEnabled = false;
-            pinTextBox.Visibility = Visibility.Visible;
-            pinLbl.Visibility = Visibility.Visible;
-            pinInstruction.Visibility = Visibility.Visible;
             IFluentTwitter twitter = FluentTwitter.CreateRequest()
                 .Authentication
                 .AuthorizeDesktop(_applicationCredentials.ConsumerKey,
                                   _applicationCredentials.ConsumerSecret,
                                   _requestToken.Token);
 
-            twitter.Request();
-
-            //wait again until the user has authorized the desktop app
-            //entered the PIN, and clicked "OK"
+            TwitterResult response = twitter.Request();
+            if (response.IsNetworkError || response.IsServiceError || response.IsTwitterError)
+            {
+                MessageBox.Show(response.Exception.Message, "Error", MessageBoxButton.OK,
+                                MessageBoxImage.Exclamation);
+            }
+            else
+            {
+                AuthorizeDesktopBtn.IsEnabled = false;
+                pinTextBox.Visibility = Visibility.Visible;
+                pinLbl.Visibility = Visibility.Visible;
+                pinInstruction.Visibility = Visibility.Visible;
+            }
         }
 
         private void okBtn_Click(object sender, RoutedEventArgs e)
@@ -108,7 +113,7 @@ namespace Twiddler
 
             if (result == null || string.IsNullOrEmpty(result.Token))
             {
-                MessageBox.Show(response.AsError().ErrorMessage, "Error", MessageBoxButton.OK,
+                MessageBox.Show(response.Exception.Message, "Error", MessageBoxButton.OK,
                                 MessageBoxImage.Exclamation);
                 //TODO: handle this error condition. 
                 //the user may have incorrectly entered the PIN or twitter 
@@ -119,7 +124,7 @@ namespace Twiddler
             }
 
             var credentials = new AccessToken(AccessToken.DefaultCredentialsId,
-                                                     result.Token, result.TokenSecret);
+                                              result.Token, result.TokenSecret);
             _accessTokenStore.Save(credentials);
 
             DialogResult = true;
