@@ -2,6 +2,9 @@
 
 namespace Twiddler.AcceptanceTests.TestEntities
 {
+    /// <remarks>
+    /// Could use http://dev.twitter.com/console to generate stuff to use here.
+    /// </remarks>
     public class TwitterService : IDisposable
     {
         #region IDisposable Members

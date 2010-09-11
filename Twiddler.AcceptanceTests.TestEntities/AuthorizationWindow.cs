@@ -28,6 +28,17 @@ namespace Twiddler.AcceptanceTests.TestEntities
             }
         }
 
+        public bool HasError
+        {
+            get
+            {
+                return Window.
+                    In(_window).
+                    Matching(x => x.Current.Name == "Error").
+                    Any();
+            }
+        }
+
         public void ClickAuthorizeAtTwitterButton()
         {
             Button.

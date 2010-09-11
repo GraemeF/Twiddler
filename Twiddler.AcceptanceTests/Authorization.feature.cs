@@ -73,39 +73,41 @@ testRunner.Then("I should be unauthorized");
             testRunner.CollectScenarioErrors();
         }
         
-        [Xunit.FactAttribute()]
+        [Xunit.FactAttribute(Skip="Ignored")]
         [Xunit.TraitAttribute("FeatureTitle", "Authorization")]
         [Xunit.TraitAttribute("Description", "Twitter is unavailable for authorization")]
         public virtual void TwitterIsUnavailableForAuthorization()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Twitter is unavailable for authorization", ((string[])(null)));
-#line 10
-this.ScenarioSetup(scenarioInfo);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Twitter is unavailable for authorization", new string[] {
+                        "ignore"});
 #line 11
-testRunner.Given("I have not previously authorized");
+this.ScenarioSetup(scenarioInfo);
 #line 12
-testRunner.And("Twitter is unavailable");
+testRunner.Given("I have not previously authorized");
 #line 13
-testRunner.When("I authorize with Twitter");
+testRunner.And("Twitter is unavailable");
 #line 14
-testRunner.Then("Twitter should be unavailable");
+testRunner.When("I authorize with Twitter");
+#line 15
+testRunner.Then("authorization should fail");
 #line hidden
             testRunner.CollectScenarioErrors();
         }
         
-        [Xunit.FactAttribute()]
+        [Xunit.FactAttribute(Skip="Ignored")]
         [Xunit.TraitAttribute("FeatureTitle", "Authorization")]
         [Xunit.TraitAttribute("Description", "Successfully authorize")]
         public virtual void SuccessfullyAuthorize()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Successfully authorize", ((string[])(null)));
-#line 16
-this.ScenarioSetup(scenarioInfo);
-#line 17
-testRunner.Given("I have not previously authorized");
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Successfully authorize", new string[] {
+                        "ignore"});
 #line 18
-testRunner.When("I authorize with Twitter");
+this.ScenarioSetup(scenarioInfo);
 #line 19
+testRunner.Given("I have not previously authorized");
+#line 20
+testRunner.When("I authorize with Twitter");
+#line 21
 testRunner.Then("I should be authorized");
 #line hidden
             testRunner.CollectScenarioErrors();

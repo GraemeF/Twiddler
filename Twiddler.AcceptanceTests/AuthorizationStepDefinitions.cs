@@ -78,10 +78,10 @@ namespace Twiddler.AcceptanceTests
             _twitter = null;
         }
 
-        [Then(@"Twitter should be unavailable")]
-        public void ThenTwitterShouldBeUnavailable()
+        [Then(@"authorization should fail")]
+        public void ThenAuthorizationShouldFail()
         {
-            ScenarioContext.Current.Pending();
+            Assert.True(_twiddler.AuthorizationWindow.HasError);
         }
     }
 }
