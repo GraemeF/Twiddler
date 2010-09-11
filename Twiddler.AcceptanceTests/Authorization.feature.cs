@@ -27,8 +27,8 @@ namespace Twiddler.AcceptanceTests
         public static void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Authorization", "In order to interact with Twitter\r\nAs a Twitter user\r\nI want to authorize Twidder" +
-                    " with Twitter", ((string[])(null)));
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Authorization", "In order to interact with Twitter\r\nAs a Twitter user\r\nI want to authorize Twiddle" +
+                    "r with Twitter", ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -59,16 +59,56 @@ namespace Twiddler.AcceptanceTests
         
         [Xunit.FactAttribute()]
         [Xunit.TraitAttribute("FeatureTitle", "Authorization")]
-        [Xunit.TraitAttribute("Description", "Not authorized with Twitter")]
-        public virtual void NotAuthorizedWithTwitter()
+        [Xunit.TraitAttribute("Description", "Not authorized")]
+        public virtual void NotAuthorized()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Not authorized with Twitter", ((string[])(null)));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Not authorized", ((string[])(null)));
 #line 6
 this.ScenarioSetup(scenarioInfo);
 #line 7
-testRunner.When("I start the application");
+testRunner.Given("I have not previously authorized");
 #line 8
-testRunner.Then("the authorization status should show I am unauthorized");
+testRunner.Then("I should be unauthorized");
+#line hidden
+            testRunner.CollectScenarioErrors();
+        }
+        
+        [Xunit.FactAttribute(Skip="Ignored")]
+        [Xunit.TraitAttribute("FeatureTitle", "Authorization")]
+        [Xunit.TraitAttribute("Description", "Twitter is unavailable for authorization")]
+        public virtual void TwitterIsUnavailableForAuthorization()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Twitter is unavailable for authorization", new string[] {
+                        "ignore"});
+#line 11
+this.ScenarioSetup(scenarioInfo);
+#line 12
+testRunner.Given("I have not previously authorized");
+#line 13
+testRunner.And("Twitter is unavailable");
+#line 14
+testRunner.When("I authorize with Twitter");
+#line 15
+testRunner.Then("authorization should fail");
+#line hidden
+            testRunner.CollectScenarioErrors();
+        }
+        
+        [Xunit.FactAttribute(Skip="Ignored")]
+        [Xunit.TraitAttribute("FeatureTitle", "Authorization")]
+        [Xunit.TraitAttribute("Description", "Successfully authorize")]
+        public virtual void SuccessfullyAuthorize()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Successfully authorize", new string[] {
+                        "ignore"});
+#line 18
+this.ScenarioSetup(scenarioInfo);
+#line 19
+testRunner.Given("I have not previously authorized");
+#line 20
+testRunner.When("I authorize with Twitter");
+#line 21
+testRunner.Then("I should be authorized");
 #line hidden
             testRunner.CollectScenarioErrors();
         }

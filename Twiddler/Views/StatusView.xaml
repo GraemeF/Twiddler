@@ -3,20 +3,22 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:cal="clr-namespace:Caliburn.PresentationFramework.Views;assembly=Caliburn.PresentationFramework"
              AutomationProperties.AutomationId="Status">
-    <DockPanel>
-        <StackPanel Orientation="Horizontal">
-            <TextBlock Text="{Binding Authorization}"
-                       VerticalAlignment="Center"
-                       Margin="4"
-                       AutomationProperties.AutomationId="Authorization" />
-            <Button Command="{Binding AuthorizeCommand}"
-                    Content="Authorize"
-                    Margin="4" />
-            <Button Command="{Binding DeauthorizeCommand}"
-                    Content="Deauthorize"
-                    Margin="4" />
-        </StackPanel>
-        <ContentControl cal:View.Model="{Binding RequestMeter}"
-                        Margin="4" />
-    </DockPanel>
+	<DockPanel>
+		<StackPanel Orientation="Horizontal">
+			<TextBlock Text="{Binding Authorization}"
+			           VerticalAlignment="Center"
+			           Margin="4"
+			           AutomationProperties.AutomationId="Authorization" />
+			<Button Command="{Binding AuthorizeCommand}"
+			        Content="Authorize"
+			        Margin="4"
+			        AutomationProperties.AutomationId="Authorize" />
+			<Button Command="{Binding DeauthorizeCommand}"
+			        Content="Deauthorize"
+			        Margin="4"
+			        AutomationProperties.AutomationId="Deauthorize" />
+		</StackPanel>
+		<ContentControl cal:View.Model="{Binding RequestMeter}"
+		                Margin="4" />
+	</DockPanel>
 </UserControl>

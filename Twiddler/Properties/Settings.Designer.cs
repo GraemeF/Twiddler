@@ -22,47 +22,5 @@ namespace Twiddler.Properties {
                 return defaultInstance;
             }
         }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("AQ8gY3dFm0R2FE4pjqGQ")]
-        public string ConsumerKey {
-            get {
-                return ((string)(this["ConsumerKey"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("nNN52t9DBk0QlwLcnlhY1z6b36LDRV1McGr9P243E")]
-        public string ConsumerSecret {
-            get {
-                return ((string)(this["ConsumerSecret"]));
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string AccessToken {
-            get {
-                return ((string)(this["AccessToken"]));
-            }
-            set {
-                this["AccessToken"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string AccessTokenSecret {
-            get {
-                return ((string)(this["AccessTokenSecret"]));
-            }
-            set {
-                this["AccessTokenSecret"] = value;
-            }
-        }
     }
 }

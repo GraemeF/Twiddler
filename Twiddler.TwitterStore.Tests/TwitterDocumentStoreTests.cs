@@ -1,6 +1,5 @@
 ﻿using Moq;
 using Raven.Client;
-using Twiddler.Core.Models;
 using Twiddler.TestData;
 using Twiddler.TwitterStore.Interfaces;
 using Twiddler.TwitterStore.Models;
@@ -17,7 +16,7 @@ namespace Twiddler.TwitterStore.Tests
         public TwitterDocumentStoreTests()
         {
             _fakeDocumentStoreFactory.
-                Setup(x => x.CreateDocumentStore()).
+                Setup(x => x.GetDocumentStore()).
                 Returns(_fakeDocumentStore.Object);
 
             _fakeDocumentStore.

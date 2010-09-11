@@ -56,6 +56,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AccessTokenDocumentStore.cs" />
     <Compile Include="DocumentStoreFactory.cs" />
     <Compile Include="Factories.cs" />
     <Compile Include="Interfaces\IDocumentStoreFactory.cs" />

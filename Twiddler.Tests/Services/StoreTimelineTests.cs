@@ -58,7 +58,7 @@ namespace Twiddler.Tests.Services
             bool eventRaised = false;
             test.Tweets.CollectionChanged += (sender, args) => eventRaised = true;
 
-            StoreInboxTweetsChangesTo(new ITweet[] { A.Tweet.IdentifiedBy(TestId).Build() });
+            StoreInboxTweetsChangesTo(new[] {A.Tweet.IdentifiedBy(TestId).Build()});
 
             Assert.False(eventRaised);
             Assert.Contains(tweet, test.Tweets);

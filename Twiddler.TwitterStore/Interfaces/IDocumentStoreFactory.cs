@@ -4,6 +4,6 @@ namespace Twiddler.TwitterStore.Interfaces
 {
     public interface IDocumentStoreFactory
     {
-        IDocumentStore CreateDocumentStore();
+        IDocumentStore GetDocumentStore();
     }
 }

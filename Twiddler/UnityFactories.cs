@@ -1,6 +1,4 @@
-﻿using System;
-using Microsoft.Practices.Unity;
-using Twiddler.Core;
+﻿using Microsoft.Practices.Unity;
 
 namespace Twiddler
 {

@@ -2,7 +2,10 @@
 using System.Diagnostics;
 using System.IO;
 using System.Text;
+using System.Threading;
 using Fluid;
+using Gallio.Framework;
+using Twiddler.AcceptanceTests.TestEntities.Properties;
 
 namespace Twiddler.AcceptanceTests.TestEntities
 {
@@ -26,27 +29,28 @@ namespace Twiddler.AcceptanceTests.TestEntities
         /// Launches an instance of Twiddler for testing.
         /// </summary>
         /// <returns>The launched instance.</returns>
-        public static TwiddlerApplication Launch(bool newStore, string store, Uri service)
+        public static TwiddlerApplication Launch(bool newStore = true)
         {
             var args = new StringBuilder();
             if (newStore)
-                if (Directory.Exists(TemporaryStorePath))
-                    Directory.Delete(TemporaryStorePath, true);
+                DeleteTemporaryStore();
 
-            if (store != null)
-                args.AppendFormat(" /store=\"{0}\"", store);
-            if (service != null)
-                args.AppendFormat(" /service={0}", service.ToString());
+            args.AppendFormat(" /store=\"{0}\"", TemporaryStorePath);
+            args.AppendFormat(" /service={0}", DefaultService);
 
-            var path = Path.GetFullPath(ApplicationPath);
-            Gallio.Framework.TestLog.WriteLine("Starting \"{0}\" {1}", path, args.ToString());
+            string path = Path.GetFullPath(ApplicationPath);
+            TestLog.WriteLine("Starting \"{0}\" {1}", path, args.ToString());
 
-            var startInfo = new ProcessStartInfo(path, args.ToString()) { UseShellExecute = false };
+            var startInfo = new ProcessStartInfo(path, args.ToString()) {UseShellExecute = false};
             Process process = Process.Start(startInfo);
 
             try
             {
-                return new TwiddlerApplication(process, Desktop.Window.OwnedBy(process).Titled("Twiddler"));
+                return new TwiddlerApplication(process,
+                                               Desktop.
+                                                   Window.
+                                                   OwnedBy(process).
+                                                   Titled("Twiddler"));
             }
             catch (Exception)
             {
@@ -56,22 +60,19 @@ namespace Twiddler.AcceptanceTests.TestEntities
             }
         }
 
-        /// <summary>
-        /// Launches an instance of Twiddler for testing.
-        /// </summary>
-        /// <returns>The launched instance.</returns>
-        public static TwiddlerApplication Launch()
+        private static void DeleteTemporaryStore()
         {
-            return Launch(true, TemporaryStorePath, DefaultService);
-        }
-
-        /// <summary>
-        /// Launches an instance of Twiddler for testing.
-        /// </summary>
-        /// <returns>The launched instance.</returns>
-        public static TwiddlerApplication Launch(bool newStore)
-        {
-            return Launch(newStore, null, null);
+            while (Directory.Exists(TemporaryStorePath))
+            {
+                try
+                {
+                    Directory.Delete(TemporaryStorePath, true);
+                }
+                catch (IOException)
+                {
+                    Thread.Sleep(200);
+                }
+            }
         }
 
         private TwiddlerApplication(Process process, Window shell)
@@ -89,6 +90,17 @@ namespace Twiddler.AcceptanceTests.TestEntities
             get { return new Shell(_shell); }
         }
 
+        public AuthorizationWindow AuthorizationWindow
+        {
+            get
+            {
+                return new AuthorizationWindow(Desktop.
+                                                   Window.
+                                                   OwnedBy(_process).
+                                                   Titled("OAuthDialog"));
+            }
+        }
+
         private static string TemporaryStorePath
         {
             get
@@ -100,7 +112,7 @@ namespace Twiddler.AcceptanceTests.TestEntities
 
         public static Uri DefaultService
         {
-            get { return new Uri(Properties.Settings.Default.DefaultService); }
+            get { return new Uri(Settings.Default.DefaultService); }
         }
 
         /// <summary>
@@ -135,17 +147,29 @@ namespace Twiddler.AcceptanceTests.TestEntities
         {
             if (disposing)
             {
-                _process.CloseMainWindow();
+                try
+                {
+                    _process.CloseMainWindow();
+                }
+                catch (InvalidOperationException)
+                {
+                }
+
                 _process.Dispose();
             }
         }
 
         public string AuthorizationStatus
         {
-            get
-            {
-                return Shell.AuthorizationStatus;
-            }
+            get { return Shell.AuthorizationStatus; }
+        }
+
+        public void Authorize()
+        {
+            Shell.ClickAuthorizeButton();
+            AuthorizationWindow.ClickAuthorizeAtTwitterButton();
+            AuthorizationWindow.Pin = "1234567";
+            AuthorizationWindow.ClickOKButton();
         }
     }
 }

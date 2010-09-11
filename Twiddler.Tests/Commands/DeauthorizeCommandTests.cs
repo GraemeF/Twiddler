@@ -23,7 +23,7 @@ namespace Twiddler.Tests.Commands
         }
 
         [Theory]
-        [InlineData(AuthorizationStatus.NotAuthorized)]
+        [InlineData(AuthorizationStatus.Unauthorized)]
         [InlineData(AuthorizationStatus.InvalidApplication)]
         [InlineData(AuthorizationStatus.Unknown)]
         [InlineData(AuthorizationStatus.Verifying)]

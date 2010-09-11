@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace Twiddler.Core.Models
+﻿namespace Twiddler.Core.Models
 {
     public class TwiddlerSettings
     {

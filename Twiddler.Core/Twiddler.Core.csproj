@@ -57,10 +57,13 @@
     <Compile Include="Factories.cs" />
     <Compile Include="CollectionChangedExtensions.cs" />
     <Compile Include="Models\ITweet.cs" />
+    <Compile Include="Models\ITwitterApplicationCredentials.cs" />
     <Compile Include="Models\TwiddlerSettings.cs" />
+    <Compile Include="Models\AccessToken.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="NoCoverageAttribute.cs" />
     <Compile Include="PropertyHelper.cs" />
+    <Compile Include="Services\IAccessTokenStore.cs" />
     <Compile Include="Services\INewTweetFilter.cs" />
     <Compile Include="Services\ITweetRating.cs" />
     <Compile Include="Services\ITweetSink.cs" />

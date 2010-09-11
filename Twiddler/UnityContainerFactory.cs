@@ -34,7 +34,7 @@ namespace Twiddler
 
         public void Register<T>(T args) where T : class
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         #endregion

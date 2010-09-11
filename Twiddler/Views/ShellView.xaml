@@ -4,12 +4,15 @@
         xmlns:cal="clr-namespace:Caliburn.PresentationFramework.Views;assembly=Caliburn.PresentationFramework"
         Title="Twiddler"
         MinHeight="300"
-        MinWidth="300" Background="White">
-    <DockPanel VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
-        <ContentControl cal:View.Model="{Binding Status}"
+        MinWidth="300"
+        Background="White">
+	<DockPanel VerticalAlignment="Stretch"
+	           HorizontalAlignment="Stretch">
+		<ContentControl cal:View.Model="{Binding Status}"
 		                DockPanel.Dock="Top"
 		                Margin="4" />
-        <ContentControl cal:View.Model="{Binding Timeline}"
-		                Margin="4" DockPanel.Dock="Bottom" />
-    </DockPanel>
+		<ContentControl cal:View.Model="{Binding Timeline}"
+		                Margin="4"
+		                DockPanel.Dock="Bottom" />
+	</DockPanel>
 </Window>

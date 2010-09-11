@@ -2,6 +2,8 @@
 using System.ComponentModel;
 using Moq;
 using Twiddler.Commands;
+using Twiddler.Core.Models;
+using Twiddler.Core.Services;
 using Twiddler.Services.Interfaces;
 using Xunit;
 using Xunit.Extensions;
@@ -10,7 +12,11 @@ namespace Twiddler.Tests.Commands
 {
     public class AuthorizeCommandTests
     {
+        private readonly Mock<ITwitterApplicationCredentials> _fakeApplicationCredentials =
+            new Mock<ITwitterApplicationCredentials>();
+
         private readonly Mock<ITwitterClient> _fakeClient = new Mock<ITwitterClient>();
+        private readonly Mock<IAccessTokenStore> _fakeCredentialsStore = new Mock<IAccessTokenStore>();
 
         [Theory]
         [InlineData(AuthorizationStatus.Authorized)]
@@ -27,7 +33,7 @@ namespace Twiddler.Tests.Commands
         }
 
         [Theory]
-        [InlineData(AuthorizationStatus.NotAuthorized)]
+        [InlineData(AuthorizationStatus.Unauthorized)]
         public void CanExecute_WhenAbleToAuthorize_IsTrue(AuthorizationStatus status)
         {
             AuthorizeCommand test = BuildDefaultTestSubject();
@@ -54,7 +60,9 @@ namespace Twiddler.Tests.Commands
 
         private AuthorizeCommand BuildDefaultTestSubject()
         {
-            return new AuthorizeCommand(_fakeClient.Object);
+            return new AuthorizeCommand(_fakeApplicationCredentials.Object,
+                                        _fakeClient.Object,
+                                        _fakeCredentialsStore.Object);
         }
 
         private void ClientAuthorizationStatusChangesTo(AuthorizationStatus status)

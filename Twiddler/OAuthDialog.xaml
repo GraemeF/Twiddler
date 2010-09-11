@@ -4,43 +4,48 @@
         Title="OAuthDialog"
         Height="208"
         Width="300">
-    <Grid>
-        <TextBlock Name="textBlock1"
-                   Text="You need to give this application permission to access your Twitter account.  This is done right on the Twitter site.  Click the &quot;Authorize&quot; button below to go to Twitter.com and grant the application access. "
-                   TextWrapping="Wrap" />
-        <Button Content="Authorize at twitter.com"
-                Name="AuthorizeDesktopBtn"
-                Click="AuthorizeDesktopBtn_Click"
-                Margin="43,65,92,83" />
-        <Button Height="23"
-                Content="Cancel"
-                Name="Cancel"
-                VerticalAlignment="Bottom"
-                HorizontalAlignment="Right"
-                Width="77"
-                Margin="0,0,12,0"
-                Click="Cancel_Click" />
-        <Button Height="23"
-                Margin="108,0,95,0"
-                Name="okBtn"
-                VerticalAlignment="Bottom"
-                Click="okBtn_Click">Ok</Button>
-        <Label Height="28"
-               HorizontalAlignment="Left"
-               Margin="0,0,0,29"
-               Name="pinLbl"
-               VerticalAlignment="Bottom"
-               Width="39">PIN:</Label>
-        <TextBox Height="23"
-                 Margin="33,0,0,34"
-                 Name="pinTextBox"
-                 VerticalAlignment="Bottom"
-                 HorizontalAlignment="Left"
-                 Width="84" />
-        <TextBlock Height="18"
-                   Margin="0,0,33,59"
-                   Name="pinInstruction"
-                   VerticalAlignment="Bottom">
-			Enter the PIN provided by twitter.com</TextBlock>
-    </Grid>
+	<Grid>
+		<TextBlock Name="textBlock1"
+		           Text="You need to give this application permission to access your Twitter account.  This is done right on the Twitter site.  Click the &quot;Authorize&quot; button below to go to Twitter.com and grant the application access. "
+		           TextWrapping="Wrap" />
+		<Button Content="Authorize at twitter.com"
+		        Name="AuthorizeDesktopBtn"
+		        Click="AuthorizeDesktopBtn_Click"
+		        Margin="43,65,92,83" />
+		<Button Height="23"
+		        Content="Cancel"
+		        Name="Cancel"
+		        VerticalAlignment="Bottom"
+		        HorizontalAlignment="Right"
+		        Width="77"
+		        Margin="0,0,12,0"
+		        Click="Cancel_Click" />
+		<Button Height="23"
+		        Margin="108,0,95,0"
+		        Name="okBtn"
+		        VerticalAlignment="Bottom"
+		        Click="okBtn_Click">
+			Ok
+		</Button>
+		<Label Height="28"
+		       HorizontalAlignment="Left"
+		       Margin="0,0,0,29"
+		       Name="pinLbl"
+		       VerticalAlignment="Bottom"
+		       Width="39">
+			PIN:
+		</Label>
+		<TextBox Height="23"
+		         Margin="33,0,0,34"
+		         Name="pinTextBox"
+		         VerticalAlignment="Bottom"
+		         HorizontalAlignment="Left"
+		         Width="84" />
+		<TextBlock Height="18"
+		           Margin="0,0,33,59"
+		           Name="pinInstruction"
+		           VerticalAlignment="Bottom">
+			Enter the PIN provided by twitter.com
+		</TextBlock>
+	</Grid>
 </Window>

@@ -6,8 +6,7 @@ using TweetSharp.Twitter.Fluent;
 using TweetSharp.Twitter.Model;
 using Twiddler.Core;
 using Twiddler.Core.Models;
-using Twiddler.Models;
-using Twiddler.Models.Interfaces;
+using Twiddler.Core.Services;
 using Twiddler.Services.Interfaces;
 
 namespace Twiddler.Services
@@ -16,16 +15,20 @@ namespace Twiddler.Services
     [Export(typeof (ITwitterClient))]
     public class TwitterClient : ITwitterClient
     {
-        private readonly ICredentialsStore _credentialsStore;
+        private readonly IAccessTokenStore _accessTokenStore;
+        private readonly ITwitterApplicationCredentials _applicationCredentials;
         private readonly Core.Factories.UserFactory _userFactory;
+        private AccessToken _accessToken;
         private User _authenticatedUser;
         private AuthorizationStatus _authorizationStatus;
-        private ITwitterCredentials _credentials;
 
         [ImportingConstructor]
-        public TwitterClient(ICredentialsStore credentialsStore, Core.Factories.UserFactory userFactory)
+        public TwitterClient(ITwitterApplicationCredentials applicationCredentials,
+                             IAccessTokenStore accessTokenStore,
+                             Core.Factories.UserFactory userFactory)
         {
-            _credentialsStore = credentialsStore;
+            _applicationCredentials = applicationCredentials;
+            _accessTokenStore = accessTokenStore;
             _userFactory = userFactory;
         }
 
@@ -62,40 +65,37 @@ namespace Twiddler.Services
             return
                 FluentTwitter.
                     CreateRequest().
-                    AuthenticateWith(_credentials.ConsumerKey, _credentials.ConsumerSecret,
-                                     _credentials.Token, _credentials.TokenSecret);
+                    AuthenticateWith(_applicationCredentials.ConsumerKey,
+                                     _applicationCredentials.ConsumerSecret,
+                                     _accessToken.Token,
+                                     _accessToken.TokenSecret);
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
         public void CheckAuthorization()
         {
-            _credentials = _credentialsStore.Load();
+            _accessToken = _accessTokenStore.Load(AccessToken.DefaultCredentialsId);
 
-            if (string.IsNullOrEmpty(_credentials.ConsumerKey) ||
-                string.IsNullOrEmpty(_credentials.ConsumerSecret))
-                AuthorizationStatus = AuthorizationStatus.InvalidApplication;
-            else
-                CheckCredentials();
+            CheckCredentials();
         }
 
         public void Deauthorize()
         {
-            AuthorizationStatus = AuthorizationStatus.NotAuthorized;
+            AuthorizationStatus = AuthorizationStatus.Unauthorized;
 
-            _credentialsStore.Save(new TwitterCredentials(_credentials.ConsumerKey,
-                                                          _credentials.ConsumerSecret,
-                                                          null, null));
+            _accessTokenStore.Save(new AccessToken(AccessToken.DefaultCredentialsId,
+                                                   null, null));
         }
 
         #endregion
 
         private void CheckCredentials()
         {
-            if (_credentials.AreValid)
+            if (_accessToken.IsValid)
                 VerifyCredentialsWithTwitter();
             else
-                AuthorizationStatus = AuthorizationStatus.NotAuthorized;
+                AuthorizationStatus = AuthorizationStatus.Unauthorized;
         }
 
         private void VerifyCredentialsWithTwitter()
@@ -105,8 +105,8 @@ namespace Twiddler.Services
             ITwitterAccountVerifyCredentials twitter =
                 FluentTwitter.
                     CreateRequest().
-                    AuthenticateWith(_credentials.ConsumerKey, _credentials.ConsumerSecret,
-                                     _credentials.Token, _credentials.TokenSecret).
+                    AuthenticateWith(_applicationCredentials.ConsumerKey, _applicationCredentials.ConsumerSecret,
+                                     _accessToken.Token, _accessToken.TokenSecret).
                     Account().
                     VerifyCredentials();
 
@@ -115,7 +115,7 @@ namespace Twiddler.Services
 
             AuthorizationStatus = profile != null
                                       ? AuthorizationStatus.Authorized
-                                      : AuthorizationStatus.NotAuthorized;
+                                      : AuthorizationStatus.Unauthorized;
             AuthenticatedUser = profile != null
                                     ? _userFactory(profile)
                                     : null;

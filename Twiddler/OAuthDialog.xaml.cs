@@ -30,33 +30,35 @@ using TweetSharp.Twitter.Extensions;
 using TweetSharp.Twitter.Fluent;
 using TweetSharp.Twitter.Model;
 using Twiddler.Core;
-using Twiddler.Properties;
+using Twiddler.Core.Models;
+using Twiddler.Core.Services;
 
 namespace Twiddler
 {
     [NoCoverage]
     public partial class OAuthDialog
     {
-        private readonly string _consumerKey;
-        private readonly string _consumerSecret;
+        private readonly IAccessTokenStore _accessTokenStore;
+        private readonly ITwitterApplicationCredentials _applicationCredentials;
         private readonly OAuthToken _requestToken;
 
-        public OAuthDialog()
+        public OAuthDialog(IAccessTokenStore accessTokenStore, ITwitterApplicationCredentials applicationCredentials)
         {
+            _accessTokenStore = accessTokenStore;
+            _applicationCredentials = applicationCredentials;
             InitializeComponent();
-
 
             pinTextBox.Visibility = Visibility.Hidden;
             pinLbl.Visibility = Visibility.Hidden;
             pinInstruction.Visibility = Visibility.Hidden;
 
-            _consumerKey = Settings.Default.ConsumerKey;
-            _consumerSecret = Settings.Default.ConsumerSecret;
+            AccessToken creds = _accessTokenStore.Load(AccessToken.DefaultCredentialsId);
 
             //get a request token.  this is only used during 
             //this process. 
             IFluentTwitter getRequestTokenRequest = FluentTwitter.CreateRequest()
-                .Authentication.GetRequestToken(_consumerKey, _consumerSecret);
+                .Authentication.GetRequestToken(_applicationCredentials.ConsumerKey,
+                                                _applicationCredentials.ConsumerSecret);
 
             TwitterResult response = getRequestTokenRequest.Request();
             _requestToken = response.AsToken();
@@ -70,18 +72,25 @@ namespace Twiddler
 
         private void AuthorizeDesktopBtn_Click(object sender, RoutedEventArgs e)
         {
-            AuthorizeDesktopBtn.IsEnabled = false;
-            pinTextBox.Visibility = Visibility.Visible;
-            pinLbl.Visibility = Visibility.Visible;
-            pinInstruction.Visibility = Visibility.Visible;
             IFluentTwitter twitter = FluentTwitter.CreateRequest()
                 .Authentication
-                .AuthorizeDesktop(_consumerKey, _consumerSecret, _requestToken.Token);
+                .AuthorizeDesktop(_applicationCredentials.ConsumerKey,
+                                  _applicationCredentials.ConsumerSecret,
+                                  _requestToken.Token);
 
-            twitter.Request();
-
-            //wait again until the user has authorized the desktop app
-            //entered the PIN, and clicked "OK"
+            TwitterResult response = twitter.Request();
+            if (response.IsNetworkError || response.IsServiceError || response.IsTwitterError)
+            {
+                MessageBox.Show(response.Exception.Message, "Error", MessageBoxButton.OK,
+                                MessageBoxImage.Exclamation);
+            }
+            else
+            {
+                AuthorizeDesktopBtn.IsEnabled = false;
+                pinTextBox.Visibility = Visibility.Visible;
+                pinLbl.Visibility = Visibility.Visible;
+                pinInstruction.Visibility = Visibility.Visible;
+            }
         }
 
         private void okBtn_Click(object sender, RoutedEventArgs e)
@@ -94,16 +103,17 @@ namespace Twiddler
             }
 
             string verifier = pinTextBox.Text;
-            IFluentTwitter twitter = FluentTwitter.CreateRequest().Authentication.GetAccessToken(_consumerKey,
-                                                                                                 _consumerSecret,
-                                                                                                 _requestToken.Token,
-                                                                                                 verifier);
+            IFluentTwitter twitter =
+                FluentTwitter.CreateRequest().Authentication.GetAccessToken(_applicationCredentials.ConsumerKey,
+                                                                            _applicationCredentials.ConsumerSecret,
+                                                                            _requestToken.Token,
+                                                                            verifier);
             TwitterResult response = twitter.Request();
             OAuthToken result = response.AsToken();
 
             if (result == null || string.IsNullOrEmpty(result.Token))
             {
-                MessageBox.Show(response.AsError().ErrorMessage, "Error", MessageBoxButton.OK,
+                MessageBox.Show(response.Exception.Message, "Error", MessageBoxButton.OK,
                                 MessageBoxImage.Exclamation);
                 //TODO: handle this error condition. 
                 //the user may have incorrectly entered the PIN or twitter 
@@ -112,9 +122,11 @@ namespace Twiddler
                 DialogResult = false;
                 return;
             }
-            Settings.Default.AccessToken = result.Token;
-            Settings.Default.AccessTokenSecret = result.TokenSecret;
-            Settings.Default.Save();
+
+            var credentials = new AccessToken(AccessToken.DefaultCredentialsId,
+                                              result.Token, result.TokenSecret);
+            _accessTokenStore.Save(credentials);
+
             DialogResult = true;
             Close();
         }

@@ -23,7 +23,7 @@ namespace Twiddler.Tests.Screens
         [InlineData(AuthorizationStatus.Unknown)]
         [InlineData(AuthorizationStatus.Verifying)]
         [InlineData(AuthorizationStatus.Authorized)]
-        [InlineData(AuthorizationStatus.NotAuthorized)]
+        [InlineData(AuthorizationStatus.Unauthorized)]
         public void GettingAuthorization__ReturnsStatusFromClient(AuthorizationStatus status)
         {
             ClientAuthorizationStatusChangesTo(status);
@@ -52,7 +52,7 @@ namespace Twiddler.Tests.Screens
         [Fact]
         public void Authorization_WhenClientStatusChanges_RaisesPropertyChanged()
         {
-            ClientAuthorizationStatusChangesTo(AuthorizationStatus.NotAuthorized);
+            ClientAuthorizationStatusChangesTo(AuthorizationStatus.Unauthorized);
 
             StatusScreen test = BuildDefaultTestSubject();
             test.Initialize();

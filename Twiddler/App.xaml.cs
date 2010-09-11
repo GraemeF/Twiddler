@@ -5,6 +5,7 @@ using System.ComponentModel.Composition.Primitives;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Windows;
 using Caliburn.PresentationFramework.ApplicationModel;
 using Microsoft.Practices.ServiceLocation;
 
@@ -25,7 +26,8 @@ namespace Twiddler
         private readonly IContainerFactory _containerFactory = 
             //new MefContainerFactory(Catalog);
             new AutofacContainerFactory(Catalog);
-            //new UnityContainerFactory(Catalog);
+
+        //new UnityContainerFactory(Catalog);
 
         protected override IServiceLocator CreateContainer()
         {
@@ -78,7 +80,7 @@ namespace Twiddler
             return _containerFactory.CreateRootModel();
         }
 
-        protected override void OnStartup(System.Windows.StartupEventArgs args)
+        protected override void OnStartup(StartupEventArgs args)
         {
             _containerFactory.Register(args);
 

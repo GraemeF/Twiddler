@@ -59,6 +59,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CredentialsDocumentStoreTests.cs" />
     <Compile Include="TweetTests.cs" />
     <Compile Include="TwitterDocumentStoreTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

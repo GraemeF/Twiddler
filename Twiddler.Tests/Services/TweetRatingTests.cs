@@ -9,8 +9,8 @@ namespace Twiddler.Tests.Services
 {
     public class TweetRatingTests
     {
-        private User _user = A.User;
         private ITweet _tweet;
+        private User _user = A.User;
 
         [Fact]
         public void GettingIsMention_WhenTheUserIsNotAuthenticated_ReturnsFalse()

@@ -1,5 +1,9 @@
-﻿<UserControl x:Class="Twiddler.Views.LoadingTweetView" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:cal="clr-namespace:Caliburn.PresentationFramework.Views;assembly=Caliburn.PresentationFramework" MaxWidth="320">
-    <Grid>
-        <ContentControl cal:View.Model="{Binding ActiveScreen}" />
-    </Grid>
+﻿<UserControl x:Class="Twiddler.Views.LoadingTweetView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:cal="clr-namespace:Caliburn.PresentationFramework.Views;assembly=Caliburn.PresentationFramework"
+             MaxWidth="320">
+	<Grid>
+		<ContentControl cal:View.Model="{Binding ActiveScreen}" />
+	</Grid>
 </UserControl>
