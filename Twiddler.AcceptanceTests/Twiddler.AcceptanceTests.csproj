@@ -63,6 +63,7 @@
       <DependentUpon>Timeline.feature</DependentUpon>
     </Compile>
     <Compile Include="TimelineStepDefinitions.cs" />
+    <Compile Include="TwiddlerStepDefinitions.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">
