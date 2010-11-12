@@ -139,7 +139,7 @@
     <LibraryPath Condition=" '$(LibraryPath)' == '' ">..\Library\</LibraryPath>
     <ReportsPath Condition=" '$(ReportsPath)' == '' ">..\Reports\</ReportsPath>
   </PropertyGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\..\wraps\openwrap\build\OpenWrap.CSharp.targets" />
   <Import Project="$(LibraryPath)\Extensions.targets" />
   <ItemGroup>
     <GallioTestedAssembly Include="$(OutDir)Twiddler.exe" />
