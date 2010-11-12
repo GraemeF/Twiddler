@@ -38,16 +38,6 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="TechTalk.SpecFlow">
-      <HintPath>..\Library\SpecFlow\TechTalk.SpecFlow.dll</HintPath>
-    </Reference>
-    <Reference Include="xunit">
-      <HintPath>..\Library\Gallio\bin\Xunit\xunit.dll</HintPath>
-    </Reference>
-    <Reference Include="xunit.extensions, Version=1.6.1.1521, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Library\Gallio\bin\Xunit\xunit.extensions.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Authorization.feature.cs">
