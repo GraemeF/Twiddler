@@ -1,1 +1,5 @@
 ﻿depends: openwrap content
+depends: shouldfluent
+depends: Moq
+depends: SpecFlow
+depends: Autofac
