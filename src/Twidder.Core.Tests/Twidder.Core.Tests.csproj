@@ -51,7 +51,7 @@
   </ItemGroup>
   <PropertyGroup>
     <!-- Give the correct path to the library stuff -->
-    <LibraryPath Condition=" '$(LibraryPath)' == '' ">..\Library\</LibraryPath>
+    <LibraryPath Condition=" '$(LibraryPath)' == '' ">..\..\Library\</LibraryPath>
     <ReportsPath Condition=" '$(ReportsPath)' == '' ">..\Reports\</ReportsPath>
   </PropertyGroup>
   <Import Project="..\..\wraps\openwrap\build\OpenWrap.CSharp.targets" />
