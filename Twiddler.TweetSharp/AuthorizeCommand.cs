@@ -1,12 +1,11 @@
 using System.ComponentModel.Composition;
 using Caliburn.Core.IoC;
-using Twiddler.Commands.Interfaces;
 using Twiddler.Core;
+using Twiddler.Core.Commands;
 using Twiddler.Core.Models;
 using Twiddler.Core.Services;
-using Twiddler.Services.Interfaces;
 
-namespace Twiddler.Commands
+namespace Twiddler.TweetSharp
 {
     [Singleton(typeof (IAuthorizeCommand))]
     [Export(typeof (IAuthorizeCommand))]

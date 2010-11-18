@@ -33,7 +33,7 @@ using Twiddler.Core;
 using Twiddler.Core.Models;
 using Twiddler.Core.Services;
 
-namespace Twiddler
+namespace Twiddler.TweetSharp
 {
     [NoCoverage]
     public partial class OAuthDialog

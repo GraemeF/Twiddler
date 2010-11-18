@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Twiddler.Services
+namespace Twiddler.Core
 {
     public interface IRateLimitStatus
     {

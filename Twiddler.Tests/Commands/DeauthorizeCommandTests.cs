@@ -2,6 +2,7 @@ using System;
 using System.ComponentModel;
 using Moq;
 using Twiddler.Commands;
+using Twiddler.Core.Services;
 using Twiddler.Services.Interfaces;
 using Xunit;
 using Xunit.Extensions;

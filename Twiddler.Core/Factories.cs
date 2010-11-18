@@ -1,6 +1,6 @@
 ﻿using TweetSharp.Twitter.Model;
 using Twiddler.Core.Models;
-using Twiddler.Services.Interfaces;
+using Twiddler.Core.Services;
 
 namespace Twiddler.Core
 {

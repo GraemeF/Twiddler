@@ -7,9 +7,8 @@ using TweetSharp.Twitter.Model;
 using Twiddler.Core;
 using Twiddler.Core.Models;
 using Twiddler.Core.Services;
-using Twiddler.Services.Interfaces;
 
-namespace Twiddler.Services
+namespace Twiddler.TweetSharp
 {
     [Singleton(typeof (ITwitterClient))]
     [Export(typeof (ITwitterClient))]
@@ -62,9 +61,7 @@ namespace Twiddler.Services
 
         public ITwitterRequestBuilder MakeRequestFor()
         {
-            return
-                FluentTwitter.
-                    CreateRequest().
+            return new TweetSharpRequestBuilder().
                     AuthenticateWith(_applicationCredentials.ConsumerKey,
                                      _applicationCredentials.ConsumerSecret,
                                      _accessToken.Token,

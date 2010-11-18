@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Twiddler.Core;
 using Twiddler.Core.Models;
+using Twiddler.Core.Services;
 using Twiddler.Services.Interfaces;
 using Twiddler.TwitterStore.Models;
 

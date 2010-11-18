@@ -1,9 +1,9 @@
 using System;
 using System.Windows.Input;
 using MvvmFoundation.Wpf;
-using Twiddler.Services.Interfaces;
+using Twiddler.Core.Services;
 
-namespace Twiddler.Commands
+namespace Twiddler.Core.Commands
 {
     public abstract class AuthorizationCommand : ICommand
     {

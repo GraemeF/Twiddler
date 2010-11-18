@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using Twiddler.Services.Interfaces;
+using Twiddler.Core.Services;
 
-namespace Twiddler.Services
+namespace Twiddler.Core
 {
     public interface ITwitterResult
     {

@@ -1,12 +1,10 @@
 ﻿using Moq;
 using Twiddler.Core.Models;
 using Twiddler.Core.Services;
-using Twiddler.Services;
-using Twiddler.Services.Interfaces;
 using Twiddler.TestData;
 using Xunit;
 
-namespace Twiddler.Tests.Services
+namespace Twiddler.TweetSharp.Tests
 {
     public class TwitterClientTests
     {

@@ -1,4 +1,4 @@
-namespace Twiddler.Services.Interfaces
+namespace Twiddler.Core.Services
 {
     public enum AuthorizationStatus
     {

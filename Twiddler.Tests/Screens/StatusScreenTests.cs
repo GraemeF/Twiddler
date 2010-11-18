@@ -3,6 +3,8 @@ using System.Threading;
 using Caliburn.Testability.Extensions;
 using Moq;
 using Twiddler.Commands.Interfaces;
+using Twiddler.Core.Commands;
+using Twiddler.Core.Services;
 using Twiddler.Screens;
 using Twiddler.Screens.Interfaces;
 using Twiddler.Services.Interfaces;

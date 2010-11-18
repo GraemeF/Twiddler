@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using Twiddler.Core.Models;
 
-namespace Twiddler.Services.Interfaces
+namespace Twiddler.Core.Services
 {
     public interface ITwitterClient : INotifyPropertyChanged
     {

@@ -4,6 +4,8 @@ using Caliburn.Core.IoC;
 using Caliburn.PresentationFramework.Screens;
 using MvvmFoundation.Wpf;
 using Twiddler.Commands.Interfaces;
+using Twiddler.Core.Commands;
+using Twiddler.Core.Services;
 using Twiddler.Screens.Interfaces;
 using Twiddler.Services.Interfaces;
 

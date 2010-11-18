@@ -1,6 +1,8 @@
 using System.ComponentModel.Composition;
 using Caliburn.Core.IoC;
 using Twiddler.Commands.Interfaces;
+using Twiddler.Core.Commands;
+using Twiddler.Core.Services;
 using Twiddler.Services.Interfaces;
 
 namespace Twiddler.Commands

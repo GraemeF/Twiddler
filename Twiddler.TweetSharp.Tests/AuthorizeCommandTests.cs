@@ -1,14 +1,12 @@
 ﻿using System;
 using System.ComponentModel;
 using Moq;
-using Twiddler.Commands;
 using Twiddler.Core.Models;
 using Twiddler.Core.Services;
-using Twiddler.Services.Interfaces;
 using Xunit;
 using Xunit.Extensions;
 
-namespace Twiddler.Tests.Commands
+namespace Twiddler.TweetSharp.Tests
 {
     public class AuthorizeCommandTests
     {
