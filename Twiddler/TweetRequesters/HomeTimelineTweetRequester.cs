@@ -1,6 +1,5 @@
 ﻿using System.ComponentModel.Composition;
 using Caliburn.Core.IoC;
-using TweetSharp.Twitter.Fluent;
 using Twiddler.Services;
 using Twiddler.Services.Interfaces;
 
@@ -18,9 +17,9 @@ namespace Twiddler.TweetRequesters
         {
         }
 
-        protected override ITwitterLeafNode CreateRequest(long since)
+        protected override ITwitterRequestBuilder CreateRequest(long since)
         {
-            ITwitterHomeTimeline request = Client.
+            ITwitterRequestBuilder request = Client.
                 MakeRequestFor().
                 Statuses().
                 OnHomeTimeline();

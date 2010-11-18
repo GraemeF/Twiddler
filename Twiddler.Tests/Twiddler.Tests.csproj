@@ -97,7 +97,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Commands\ArchiveTweetCommandTests.cs" />
-    <Compile Include="Commands\AuthorizeCommandTests.cs" />
     <Compile Include="Commands\DeauthorizeCommandTests.cs" />
     <Compile Include="Commands\MarkTweetAsReadCommandTests.cs" />
     <Compile Include="Services\NewTweetFilterTests.cs" />
@@ -118,7 +117,6 @@
     <Compile Include="Screens\TimelineScreenTests.cs" />
     <Compile Include="Screens\TweetScreenTests.cs" />
     <Compile Include="Services\MemoryTweetStoreTests.cs" />
-    <Compile Include="Services\TwitterClientTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Twiddler.Core\Twiddler.Core.csproj">

@@ -64,10 +64,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Library\RavenDB\Esent.Interop.dll</HintPath>
     </Reference>
-    <Reference Include="Hammock, Version=1.0.0.0, Culture=neutral, PublicKeyToken=c148cfba29ed1a4d, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Library\TweetSharp\Hammock.dll</HintPath>
-    </Reference>
     <Reference Include="ICSharpCode.NRefactory, Version=3.0.0.3800, Culture=neutral, PublicKeyToken=efe927acf176eea2, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Library\RavenDB\ICSharpCode.NRefactory.dll</HintPath>
@@ -130,14 +126,6 @@
     </Reference>
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="TweetSharp, Version=1.0.0.0, Culture=neutral, PublicKeyToken=c148cfba29ed1a4d, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Library\TweetSharp\TweetSharp.dll</HintPath>
-    </Reference>
-    <Reference Include="TweetSharp.Twitter, Version=1.0.0.0, Culture=neutral, PublicKeyToken=c148cfba29ed1a4d, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Library\TweetSharp\TweetSharp.Twitter.dll</HintPath>
-    </Reference>
     <Reference Include="UIAutomationProvider">
       <RequiredTargetFramework>3.0</RequiredTargetFramework>
     </Reference>
@@ -158,12 +146,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="OAuthDialog.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="Views\ImageThumbnailView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -264,11 +246,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Commands\AuthorizationCommand.cs" />
-    <Compile Include="Commands\AuthorizeCommand.cs" />
     <Compile Include="Commands\DeauthorizeCommand.cs" />
     <Compile Include="Factories.cs" />
-    <Compile Include="Commands\Interfaces\IAuthorizeCommand.cs" />
     <Compile Include="Screens\Interfaces\ILoadingTweetScreen.cs" />
     <Compile Include="Screens\LoadingTweetScreen.cs" />
     <Compile Include="Services\Interfaces\ITwitterStoreUpdater.cs" />
@@ -277,13 +256,8 @@
     <Compile Include="Screens\Interfaces\IStatusScreen.cs" />
     <Compile Include="Screens\StatusScreen.cs" />
     <Compile Include="Screens\TweetScreen.cs" />
-    <Compile Include="Services\Interfaces\AuthorizationStatus.cs" />
     <Compile Include="Services\Interfaces\ITweetSource.cs" />
     <Compile Include="Services\Interfaces\ITweetRequester.cs" />
-    <Compile Include="Services\Interfaces\ITwitterClient.cs" />
-    <Compile Include="OAuthDialog.xaml.cs">
-      <DependentUpon>OAuthDialog.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -304,7 +278,6 @@
     <Compile Include="Screens\ShellScreen.cs" />
     <Compile Include="Screens\TimelineScreen.cs" />
     <Compile Include="TweetRequesters\RetweetsOfMeTweetRequester.cs" />
-    <Compile Include="Services\TwitterClient.cs" />
     <Compile Include="Services\TwitterStoreUpdater.cs" />
     <Compile Include="Views\LoadingTweetView.xaml.cs">
       <DependentUpon>LoadingTweetView.xaml</DependentUpon>

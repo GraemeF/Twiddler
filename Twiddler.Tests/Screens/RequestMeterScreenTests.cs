@@ -2,7 +2,6 @@
 using System.ComponentModel;
 using Caliburn.Testability.Extensions;
 using Moq;
-using TweetSharp.Extensions;
 using Twiddler.Screens;
 using Twiddler.Services.Interfaces;
 using Xunit;
@@ -20,7 +19,7 @@ namespace Twiddler.Tests.Screens
         {
             _fakeRequestStatus.SetupAllProperties();
             _fakeRequestStatus.Object.PeriodEndTime = EndOfPeriod;
-            _fakeRequestStatus.Setup(x => x.PeriodDuration).Returns(100.Minutes());
+            _fakeRequestStatus.Setup(x => x.PeriodDuration).Returns(TimeSpan.FromMinutes(100));
         }
 
         [Fact]
@@ -50,7 +49,7 @@ namespace Twiddler.Tests.Screens
         [Fact]
         public void GettingPeriodDuration__GetsFormattedPeriodDurationFromLimitStatus()
         {
-            TimeSpan duration = 1.Hour() + 23.Minutes();
+            var duration = new TimeSpan(1, 23, 0);
             _fakeRequestStatus.
                 Setup(x => x.PeriodDuration).
                 Returns(duration);
@@ -64,7 +63,7 @@ namespace Twiddler.Tests.Screens
         [Fact]
         public void GettingRemainingTime__GetsFormattedRemainingTimeFromLimitStatus()
         {
-            TimeLeftInPeriodIs(4.Minutes() + 11.Seconds());
+            TimeLeftInPeriodIs(new TimeSpan(0, 4, 11));
 
             RequestMeterScreen test = BuildDefaultTestSubject();
             test.Initialize();
@@ -75,7 +74,7 @@ namespace Twiddler.Tests.Screens
         [Fact]
         public void GettingRemainingTime_WhenClockHasPassedTheEndTime_ReturnsZero()
         {
-            TimeLeftInPeriodIs(-4.Minutes());
+            TimeLeftInPeriodIs(-new TimeSpan(0, 4, 0));
 
             RequestMeterScreen test = BuildDefaultTestSubject();
             test.Initialize();
@@ -144,7 +143,7 @@ namespace Twiddler.Tests.Screens
         {
             RequestMeterScreen test = BuildDefaultTestSubject();
 
-            TimeLeftInPeriodIs(remainingMinutes.Minutes());
+            TimeLeftInPeriodIs(TimeSpan.FromMinutes(remainingMinutes));
 
             Assert.Equal(fraction, test.UsedTimeFraction);
         }

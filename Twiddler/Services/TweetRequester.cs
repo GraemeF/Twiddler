@@ -1,10 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using TweetSharp.Extensions;
-using TweetSharp.Twitter.Extensions;
-using TweetSharp.Twitter.Fluent;
-using TweetSharp.Twitter.Model;
 using Twiddler.Core.Models;
 using Twiddler.Services.Interfaces;
 using Twiddler.TwitterStore.Models;
@@ -37,9 +33,9 @@ namespace Twiddler.Services
 
         #endregion
 
-        protected abstract ITwitterLeafNode CreateRequest(long since);
+        protected abstract ITwitterRequestBuilder CreateRequest(long since);
 
-        private IEnumerable<ITweet> GotTweets(TwitterResult result)
+        private IEnumerable<ITweet> GotTweets(ITwitterResult result)
         {
             if (result.RateLimitStatus != null)
                 UpdateLimit(result.RateLimitStatus);
@@ -50,7 +46,7 @@ namespace Twiddler.Services
                 result.IsTwitterError)
                 return new Tweet[] {};
 
-            IEnumerable<TwitterStatus> statuses = result.AsStatuses();
+            IEnumerable<IRawStatus> statuses = result.AsStatuses();
 
             _lastTweet = Math.Max(_lastTweet,
                                   statuses.Any()
@@ -62,11 +58,11 @@ namespace Twiddler.Services
                     Select(twitterStatus => _tweetFactory(twitterStatus));
         }
 
-        private void UpdateLimit(TwitterRateLimitStatus status)
+        private void UpdateLimit(IRateLimitStatus status)
         {
             _requestLimitStatus.HourlyLimit = status.HourlyLimit;
             _requestLimitStatus.PeriodEndTime = status.ResetTime;
-            _requestLimitStatus.PeriodDuration = 1.Hour();
+            _requestLimitStatus.PeriodDuration = TimeSpan.FromHours(1);
             _requestLimitStatus.RemainingHits = status.RemainingHits;
         }
     }

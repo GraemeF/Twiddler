@@ -4,7 +4,6 @@ using System.Linq;
 using Caliburn.Core.IoC;
 using Caliburn.PresentationFramework.Screens;
 using MvvmFoundation.Wpf;
-using TweetSharp.Extensions;
 using Twiddler.Screens.Interfaces;
 using Twiddler.Services.Interfaces;
 
@@ -16,7 +15,7 @@ namespace Twiddler.Screens
     public class RequestMeterScreen : Screen, IRequestMeterScreen, IDisposable
     {
         private readonly IClock _clock;
-        private readonly IObservable<long> _elapsedSeconds = Observable.Interval(1.Second());
+        private readonly IObservable<long> _elapsedSeconds = Observable.Interval(TimeSpan.FromSeconds(1));
         private readonly IRequestLimitStatus _limitStatus;
         private PropertyObserver<IRequestLimitStatus> _observer;
         private IDisposable _timePassingSubscription;

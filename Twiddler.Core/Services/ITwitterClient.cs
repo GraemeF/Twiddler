@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel;
-using TweetSharp.Twitter.Fluent;
 using Twiddler.Core.Models;
 
 namespace Twiddler.Services.Interfaces
@@ -8,7 +7,7 @@ namespace Twiddler.Services.Interfaces
     {
         User AuthenticatedUser { get; }
         AuthorizationStatus AuthorizationStatus { get; }
-        IFluentTwitter MakeRequestFor();
+        ITwitterRequestBuilder MakeRequestFor();
         void CheckAuthorization();
         void Deauthorize();
     }

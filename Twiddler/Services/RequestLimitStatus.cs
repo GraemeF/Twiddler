@@ -2,7 +2,6 @@
 using System.ComponentModel;
 using System.ComponentModel.Composition;
 using Caliburn.Core.IoC;
-using TweetSharp.Extensions;
 using Twiddler.Core;
 using Twiddler.Services.Interfaces;
 
@@ -13,7 +12,7 @@ namespace Twiddler.Services
     public class RequestLimitStatus : IRequestLimitStatus
     {
         private int _hourlyLimit = 350;
-        private TimeSpan _periodDuration = 1.Hour();
+        private TimeSpan _periodDuration = TimeSpan.FromHours(1);
         private DateTime _periodEndTime;
         private int _remainingHits;
 

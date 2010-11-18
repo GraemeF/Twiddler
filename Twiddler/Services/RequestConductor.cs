@@ -5,7 +5,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using Caliburn.Core.IoC;
 using MvvmFoundation.Wpf;
-using TweetSharp.Extensions;
 using Twiddler.Core.Models;
 using Twiddler.Core.Services;
 using Twiddler.Services.Interfaces;
@@ -74,7 +73,7 @@ namespace Twiddler.Services
         {
             if (_subscription == null)
                 _subscription = Observable.
-                    Interval(1.Minute()).
+                    Interval(TimeSpan.FromMinutes(1)).
                     StartWith(0L).
                     Subscribe(x => new TaskFactory().
                                        StartNew(() => Parallel.ForEach(_tweetRequesters, RequestAndAddNewTweetsToStore)));

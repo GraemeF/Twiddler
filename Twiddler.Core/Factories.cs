@@ -1,5 +1,6 @@
 ﻿using TweetSharp.Twitter.Model;
 using Twiddler.Core.Models;
+using Twiddler.Services.Interfaces;
 
 namespace Twiddler.Core
 {
@@ -7,7 +8,7 @@ namespace Twiddler.Core
     {
         #region Delegates
 
-        public delegate ITweet TweetFactory(TwitterStatus status);
+        public delegate ITweet TweetFactory(IRawStatus status);
 
         public delegate User UserFactory(TwitterUser user);
 

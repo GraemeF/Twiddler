@@ -60,7 +60,7 @@ namespace Twiddler.Services
             }
         }
 
-        public IFluentTwitter MakeRequestFor()
+        public ITwitterRequestBuilder MakeRequestFor()
         {
             return
                 FluentTwitter.
