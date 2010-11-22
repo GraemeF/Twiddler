@@ -9,7 +9,7 @@ using Twiddler.TwitterStore.Models;
 
 namespace Twiddler.Services
 {
-    public abstract class TweetRequester : ITweetRequester
+    public abstract class TweetRequestBuilder : ITweetRequester
     {
         protected readonly ITwitterClient Client;
         private readonly IRequestLimitStatus _requestLimitStatus;
@@ -17,7 +17,7 @@ namespace Twiddler.Services
 
         private long _lastTweet;
 
-        protected TweetRequester(ITwitterClient client,
+        protected TweetRequestBuilder(ITwitterClient client,
                                  IRequestLimitStatus requestLimitStatus,
                                  Core.Factories.TweetFactory tweetFactory)
         {
@@ -30,12 +30,12 @@ namespace Twiddler.Services
 
         public IEnumerable<ITweet> RequestTweets()
         {
-            return GotTweets(CreateRequest(_lastTweet).Request());
+            return GotTweets(CreateRequest(_lastTweet).GetResponse());
         }
 
         #endregion
 
-        protected abstract ITwitterRequestBuilder CreateRequest(long since);
+        protected abstract ITwitterRequest CreateRequest(long since);
 
         private IEnumerable<ITweet> GotTweets(ITwitterResult result)
         {

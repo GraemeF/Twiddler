@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.ComponentModel.Composition;
 using Caliburn.Core.IoC;
 using TweetSharp.Twitter.Extensions;
@@ -59,15 +60,6 @@ namespace Twiddler.TweetSharp
             }
         }
 
-        public ITwitterRequestBuilder MakeRequestFor()
-        {
-            return new TweetSharpRequestBuilder().
-                    AuthenticateWith(_applicationCredentials.ConsumerKey,
-                                     _applicationCredentials.ConsumerSecret,
-                                     _accessToken.Token,
-                                     _accessToken.TokenSecret);
-        }
-
         public event PropertyChangedEventHandler PropertyChanged;
 
         public void CheckAuthorization()
@@ -83,6 +75,35 @@ namespace Twiddler.TweetSharp
 
             _accessTokenStore.Save(new AccessToken(AccessToken.DefaultCredentialsId,
                                                    null, null));
+        }
+
+        public ITwitterRequest CreateRequestForStatusesOnFriendsTimeline(long since)
+        {
+            return new TweetSharpRequest(FluentTwitter.CreateRequest().
+                   AuthenticateWith(_applicationCredentials.ConsumerKey,
+                                    _applicationCredentials.ConsumerSecret,
+                                    _accessToken.Token,
+                                    _accessToken.TokenSecret));
+        }
+
+        public ITwitterRequest CreateRequestForStatusesOnHomeTimeline(long since)
+        {
+            throw new NotImplementedException();
+        }
+
+        public ITwitterRequest CreateRequestForMentions(long since)
+        {
+            throw new NotImplementedException();
+        }
+
+        public ITwitterRequest CreateRequestForRetweetsOfMe(long since)
+        {
+            throw new NotImplementedException();
+        }
+
+        public ITwitterRequest CreateRequestForStatusesOnUserTimeline(long since)
+        {
+            throw new NotImplementedException();
         }
 
         #endregion

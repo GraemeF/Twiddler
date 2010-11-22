@@ -8,25 +8,19 @@ namespace Twiddler.TweetRequesters
 {
     [Singleton("Retweets", typeof (ITweetRequester))]
     [Export(typeof (ITweetRequester))]
-    public class RetweetsOfMeTweetRequester : TweetRequester
+    public class RetweetsOfMeTweetRequestBuilder : TweetRequestBuilder
     {
         [ImportingConstructor]
-        public RetweetsOfMeTweetRequester(ITwitterClient client,
+        public RetweetsOfMeTweetRequestBuilder(ITwitterClient client,
                                           IRequestLimitStatus requestLimitStatus,
                                           Core.Factories.TweetFactory tweetFactory)
             : base(client, requestLimitStatus, tweetFactory)
         {
         }
 
-        protected override ITwitterRequestBuilder CreateRequest(long since)
+        protected override ITwitterRequest CreateRequest(long since)
         {
-            ITwitterRequestBuilder request = Client.
-                MakeRequestFor().
-                Statuses().
-                RetweetsOfMe();
-            return since > 0L
-                       ? request.Since(since)
-                       : request;
+            return Client.CreateRequestForRetweetsOfMe(since);
         }
     }
 }

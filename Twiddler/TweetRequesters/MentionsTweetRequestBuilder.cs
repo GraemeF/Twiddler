@@ -8,25 +8,19 @@ namespace Twiddler.TweetRequesters
 {
     [PerRequest("Mentions", typeof (ITweetRequester))]
     [Export(typeof (ITweetRequester))]
-    public class MentionsTweetRequester : TweetRequester
+    public class MentionsTweetRequestBuilder : TweetRequestBuilder
     {
         [ImportingConstructor]
-        public MentionsTweetRequester(ITwitterClient client,
+        public MentionsTweetRequestBuilder(ITwitterClient client,
                                       IRequestLimitStatus requestLimitStatus,
                                       Core.Factories.TweetFactory tweetFactory)
             : base(client, requestLimitStatus, tweetFactory)
         {
         }
 
-        protected override ITwitterRequestBuilder CreateRequest(long since)
+        protected override ITwitterRequest CreateRequest(long since)
         {
-            ITwitterRequestBuilder request = Client.
-                MakeRequestFor().
-                Statuses().
-                Mentions();
-            return since > 0L
-                       ? request.Since(since)
-                       : request;
+            return Client.CreateRequestForMentions(since);
         }
     }
 }

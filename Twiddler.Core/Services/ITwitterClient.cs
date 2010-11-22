@@ -7,8 +7,12 @@ namespace Twiddler.Core.Services
     {
         User AuthenticatedUser { get; }
         AuthorizationStatus AuthorizationStatus { get; }
-        ITwitterRequestBuilder MakeRequestFor();
         void CheckAuthorization();
         void Deauthorize();
+        ITwitterRequest CreateRequestForStatusesOnFriendsTimeline(long since);
+        ITwitterRequest CreateRequestForStatusesOnHomeTimeline(long since);
+        ITwitterRequest CreateRequestForMentions(long since);
+        ITwitterRequest CreateRequestForRetweetsOfMe(long since);
+        ITwitterRequest CreateRequestForStatusesOnUserTimeline(long since);
     }
 }

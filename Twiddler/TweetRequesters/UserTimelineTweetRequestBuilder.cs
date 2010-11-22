@@ -6,27 +6,21 @@ using Twiddler.Services.Interfaces;
 
 namespace Twiddler.TweetRequesters
 {
-    [Singleton("Home", typeof (ITweetRequester))]
+    [Singleton("Mine", typeof (ITweetRequester))]
     [Export(typeof (ITweetRequester))]
-    public class HomeTimelineTweetRequester : TweetRequester
+    public class UserTimelineTweetRequestBuilder : TweetRequestBuilder
     {
         [ImportingConstructor]
-        public HomeTimelineTweetRequester(ITwitterClient client,
+        public UserTimelineTweetRequestBuilder(ITwitterClient client,
                                           IRequestLimitStatus requestLimitStatus,
                                           Core.Factories.TweetFactory tweetFactory)
             : base(client, requestLimitStatus, tweetFactory)
         {
         }
 
-        protected override ITwitterRequestBuilder CreateRequest(long since)
+        protected override ITwitterRequest CreateRequest(long since)
         {
-            ITwitterRequestBuilder request = Client.
-                MakeRequestFor().
-                Statuses().
-                OnHomeTimeline();
-            return since > 0L
-                       ? request.Since(since)
-                       : request;
+            return Client.CreateRequestForStatusesOnUserTimeline(since);
         }
     }
 }

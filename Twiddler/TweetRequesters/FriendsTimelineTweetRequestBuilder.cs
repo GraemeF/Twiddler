@@ -8,25 +8,19 @@ namespace Twiddler.TweetRequesters
 {
     [Singleton("Friends", typeof (ITweetRequester))]
     [Export(typeof (ITweetRequester))]
-    public class FriendsTimelineTweetRequester : TweetRequester
+    public class FriendsTimelineTweetRequestBuilder : TweetRequestBuilder
     {
         [ImportingConstructor]
-        public FriendsTimelineTweetRequester(ITwitterClient client,
+        public FriendsTimelineTweetRequestBuilder(ITwitterClient client,
                                              IRequestLimitStatus requestLimitStatus,
                                              Core.Factories.TweetFactory tweetFactory)
             : base(client, requestLimitStatus, tweetFactory)
         {
         }
 
-        protected override ITwitterRequestBuilder CreateRequest(long since)
+        protected override ITwitterRequest CreateRequest(long since)
         {
-            ITwitterRequestBuilder request = Client.
-                MakeRequestFor().
-                Statuses().
-                OnFriendsTimeline();
-            return since > 0L
-                       ? request.Since(since)
-                       : request;
+            return Client.CreateRequestForStatusesOnFriendsTimeline(since);
         }
     }
 }

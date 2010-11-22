@@ -59,7 +59,7 @@
       <DependentUpon>OAuthDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TweetSharpRequestBuilder.cs" />
+    <Compile Include="TweetSharpRequest.cs" />
     <Compile Include="TwitterClient.cs" />
   </ItemGroup>
   <ItemGroup>

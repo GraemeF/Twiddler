@@ -78,7 +78,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\ITweetStore.cs" />
     <Compile Include="Services\ITwitterClient.cs" />
-    <Compile Include="Services\ITwitterRequestBuilder.cs" />
+    <Compile Include="Services\ITwitterRequest.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
