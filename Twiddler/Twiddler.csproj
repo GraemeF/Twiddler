@@ -304,6 +304,10 @@
       <Project>{159DA135-5F63-455B-A572-A3EBB99ACA4D}</Project>
       <Name>Twiddler.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Twiddler.TweetSharp\Twiddler.TweetSharp.csproj">
+      <Project>{77A16F4D-025B-43F5-86F1-F12212466445}</Project>
+      <Name>Twiddler.TweetSharp</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Twiddler.TwitterStore\Twiddler.TwitterStore.csproj">
       <Project>{624CE557-4EDF-47EE-835B-3CB1C6290FEF}</Project>
       <Name>Twiddler.TwitterStore</Name>

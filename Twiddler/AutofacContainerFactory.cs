@@ -51,8 +51,8 @@ namespace Twiddler
             var compositionContainer = new CompositionContainer(_catalog);
 
             builder.RegisterInstance(compositionContainer);
-            builder.RegisterInstance(compositionContainer.GetExportedValue<Core.Factories.TweetFactory>());
-            builder.RegisterInstance(compositionContainer.GetExportedValue<Core.Factories.UserFactory>());
+            builder.RegisterInstance(compositionContainer.GetExportedValue<TweetSharp.Factories.TweetFactory>());
+            builder.RegisterInstance(compositionContainer.GetExportedValue<TweetSharp.Factories.UserFactory>());
 
             return builder;
         }

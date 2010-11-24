@@ -58,10 +58,8 @@
   <ItemGroup>
     <Compile Include="Commands\AuthorizationCommand.cs" />
     <Compile Include="Commands\IAuthorizeCommand.cs" />
-    <Compile Include="Factories.cs" />
     <Compile Include="CollectionChangedExtensions.cs" />
     <Compile Include="IRateLimitStatus.cs" />
-    <Compile Include="ITwitterResult.cs" />
     <Compile Include="Models\IRequestLimitStatus.cs" />
     <Compile Include="Models\ITweet.cs" />
     <Compile Include="Models\ITwitterApplicationCredentials.cs" />
@@ -80,7 +78,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\ITweetStore.cs" />
     <Compile Include="Services\ITwitterClient.cs" />
-    <Compile Include="Services\ITwitterRequest.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -5,11 +5,19 @@ using TweetSharp.Twitter.Model;
 using Twiddler.Core.Models;
 using Twiddler.TwitterStore.Models;
 
-namespace Twiddler.TwitterStore
+namespace Twiddler.TweetSharp
 {
-    internal class Factories
+    public static class Factories
     {
-        [Export(typeof (Core.Factories.TweetFactory))]
+        #region Delegates
+
+        public delegate ITweet TweetFactory(TwitterStatus status);
+
+        public delegate User UserFactory(TwitterUser user);
+
+        #endregion
+
+        [Export(typeof (TweetFactory))]
         public static Tweet CreateTweetFromTwitterStatus(TwitterStatus status)
         {
             return new Tweet
@@ -33,7 +41,7 @@ namespace Twiddler.TwitterStore
                        : null;
         }
 
-        [Export(typeof (Core.Factories.UserFactory))]
+        [Export(typeof (UserFactory))]
         public static User CreateUserFromTwitterUser(TwitterUser user)
         {
             return new User

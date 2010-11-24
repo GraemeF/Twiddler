@@ -46,8 +46,8 @@ namespace Twiddler
             var compositionContainer = new CompositionContainer(_catalog);
 
             container.RegisterInstance(compositionContainer);
-            container.RegisterInstance(compositionContainer.GetExportedValue<Core.Factories.TweetFactory>());
-            container.RegisterInstance(compositionContainer.GetExportedValue<Core.Factories.UserFactory>());
+            container.RegisterInstance(compositionContainer.GetExportedValue<TweetSharp.Factories.TweetFactory>());
+            container.RegisterInstance(compositionContainer.GetExportedValue<TweetSharp.Factories.UserFactory>());
             container.RegisterInstance(new Lazy<ITimeline>(container.Resolve<ITimeline>));
 
             var factories = new UnityFactories(container);

@@ -31,8 +31,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Hammock">
+      <HintPath>..\Library\TweetSharp\Hammock.dll</HintPath>
+    </Reference>
     <Reference Include="Moq">
       <HintPath>..\Library\Moq\Moq.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\Library\TweetSharp\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="System" />
@@ -42,6 +48,12 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="TweetSharp">
+      <HintPath>..\Library\TweetSharp\TweetSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="TweetSharp.Twitter">
+      <HintPath>..\Library\TweetSharp\TweetSharp.Twitter.dll</HintPath>
+    </Reference>
     <Reference Include="xunit">
       <HintPath>..\Library\Gallio\bin\Xunit\xunit.dll</HintPath>
     </Reference>

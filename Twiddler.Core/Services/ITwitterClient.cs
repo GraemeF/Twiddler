@@ -9,10 +9,5 @@ namespace Twiddler.Core.Services
         AuthorizationStatus AuthorizationStatus { get; }
         void CheckAuthorization();
         void Deauthorize();
-        ITwitterRequest CreateRequestForStatusesOnFriendsTimeline(long since);
-        ITwitterRequest CreateRequestForStatusesOnHomeTimeline(long since);
-        ITwitterRequest CreateRequestForMentions(long since);
-        ITwitterRequest CreateRequestForRetweetsOfMe(long since);
-        ITwitterRequest CreateRequestForStatusesOnUserTimeline(long since);
     }
 }
