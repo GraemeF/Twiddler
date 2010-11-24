@@ -5,21 +5,20 @@ using Twiddler.Core;
 using Twiddler.Core.Models;
 using Twiddler.Core.Services;
 using Twiddler.Services.Interfaces;
-using Twiddler.TwitterStore.Models;
 
-namespace Twiddler.Services
+namespace Twiddler.TweetSharp.TweetRequesters
 {
     public abstract class TweetRequestBuilder : ITweetRequester
     {
         protected readonly ITwitterClient Client;
         private readonly IRequestLimitStatus _requestLimitStatus;
-        private readonly Core.Factories.TweetFactory _tweetFactory;
+        private readonly Factories.TweetFactory _tweetFactory;
 
         private long _lastTweet;
 
         protected TweetRequestBuilder(ITwitterClient client,
-                                 IRequestLimitStatus requestLimitStatus,
-                                 Core.Factories.TweetFactory tweetFactory)
+                                      IRequestLimitStatus requestLimitStatus,
+                                      Factories.TweetFactory tweetFactory)
         {
             Client = client;
             _requestLimitStatus = requestLimitStatus;
@@ -46,7 +45,7 @@ namespace Twiddler.Services
                 result.IsNetworkError ||
                 result.IsServiceError ||
                 result.IsTwitterError)
-                return new Tweet[] {};
+                return new ITweet[] {};
 
             IEnumerable<IRawStatus> statuses = result.AsStatuses();
 

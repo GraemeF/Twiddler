@@ -220,20 +220,14 @@
     <Compile Include="Services\NewTweetFilter.cs" />
     <Compile Include="Services\StoreTimeline.cs" />
     <Compile Include="Services\TweetRating.cs" />
-    <Compile Include="TweetRequesters\FriendsTimelineTweetRequestBuilder.cs" />
-    <Compile Include="TweetRequesters\HomeTimelineTweetRequestBuilder.cs" />
     <Compile Include="Services\Interfaces\IClock.cs" />
-    <Compile Include="Services\Interfaces\IRequestLimitStatus.cs" />
     <Compile Include="Screens\RequestMeterScreen.cs" />
     <Compile Include="Services\Interfaces\IRequestConductor.cs" />
     <Compile Include="Services\ImageServices\TwitPicDecoder.cs" />
     <Compile Include="Services\ImageServices\YFrogDecoder.cs" />
     <Compile Include="Services\LinkThumbnailScreenFactory.cs" />
-    <Compile Include="TweetRequesters\MentionsTweetRequestBuilder.cs" />
     <Compile Include="Services\RequestConductor.cs" />
     <Compile Include="Services\RequestLimitStatus.cs" />
-    <Compile Include="Services\TweetRequestBuilder.cs" />
-    <Compile Include="TweetRequesters\UserTimelineTweetRequestBuilder.cs" />
     <Compile Include="Views\ImageThumbnailView.xaml.cs">
       <DependentUpon>ImageThumbnailView.xaml</DependentUpon>
     </Compile>
@@ -257,7 +251,6 @@
     <Compile Include="Screens\StatusScreen.cs" />
     <Compile Include="Screens\TweetScreen.cs" />
     <Compile Include="Services\Interfaces\ITweetSource.cs" />
-    <Compile Include="Services\Interfaces\ITweetRequester.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -277,7 +270,6 @@
     <Compile Include="Screens\Interfaces\ITimelineScreen.cs" />
     <Compile Include="Screens\ShellScreen.cs" />
     <Compile Include="Screens\TimelineScreen.cs" />
-    <Compile Include="TweetRequesters\RetweetsOfMeTweetRequestBuilder.cs" />
     <Compile Include="Services\TwitterStoreUpdater.cs" />
     <Compile Include="Views\LoadingTweetView.xaml.cs">
       <DependentUpon>LoadingTweetView.xaml</DependentUpon>

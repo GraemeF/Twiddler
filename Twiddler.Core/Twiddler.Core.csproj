@@ -62,6 +62,7 @@
     <Compile Include="CollectionChangedExtensions.cs" />
     <Compile Include="IRateLimitStatus.cs" />
     <Compile Include="ITwitterResult.cs" />
+    <Compile Include="Models\IRequestLimitStatus.cs" />
     <Compile Include="Models\ITweet.cs" />
     <Compile Include="Models\ITwitterApplicationCredentials.cs" />
     <Compile Include="Models\TwiddlerSettings.cs" />
@@ -73,6 +74,7 @@
     <Compile Include="Services\IAccessTokenStore.cs" />
     <Compile Include="Services\INewTweetFilter.cs" />
     <Compile Include="Services\ITweetRating.cs" />
+    <Compile Include="Services\ITweetRequester.cs" />
     <Compile Include="Services\ITweetSink.cs" />
     <Compile Include="Services\ITweetResolver.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

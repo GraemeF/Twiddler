@@ -1,10 +1,10 @@
 ﻿using System.ComponentModel.Composition;
 using Caliburn.Core.IoC;
+using Twiddler.Core;
 using Twiddler.Core.Services;
-using Twiddler.Services;
 using Twiddler.Services.Interfaces;
 
-namespace Twiddler.TweetRequesters
+namespace Twiddler.TweetSharp.TweetRequesters
 {
     [Singleton("Friends", typeof (ITweetRequester))]
     [Export(typeof (ITweetRequester))]
@@ -12,8 +12,8 @@ namespace Twiddler.TweetRequesters
     {
         [ImportingConstructor]
         public FriendsTimelineTweetRequestBuilder(ITwitterClient client,
-                                             IRequestLimitStatus requestLimitStatus,
-                                             Core.Factories.TweetFactory tweetFactory)
+                                                  IRequestLimitStatus requestLimitStatus,
+                                                  Factories.TweetFactory tweetFactory)
             : base(client, requestLimitStatus, tweetFactory)
         {
         }

@@ -59,6 +59,12 @@
       <DependentUpon>OAuthDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TweetRequesters\FriendsTimelineTweetRequestBuilder.cs" />
+    <Compile Include="TweetRequesters\HomeTimelineTweetRequestBuilder.cs" />
+    <Compile Include="TweetRequesters\MentionsTweetRequestBuilder.cs" />
+    <Compile Include="TweetRequesters\RetweetsOfMeTweetRequestBuilder.cs" />
+    <Compile Include="TweetRequesters\TweetRequestBuilder.cs" />
+    <Compile Include="TweetRequesters\UserTimelineTweetRequestBuilder.cs" />
     <Compile Include="TweetSharpRequest.cs" />
     <Compile Include="TwitterClient.cs" />
   </ItemGroup>

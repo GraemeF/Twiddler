@@ -17,7 +17,7 @@ namespace Twiddler.TweetSharp
     {
         private readonly IAccessTokenStore _accessTokenStore;
         private readonly ITwitterApplicationCredentials _applicationCredentials;
-        private readonly Core.Factories.UserFactory _userFactory;
+        private readonly Factories.UserFactory _userFactory;
         private AccessToken _accessToken;
         private User _authenticatedUser;
         private AuthorizationStatus _authorizationStatus;
@@ -25,7 +25,7 @@ namespace Twiddler.TweetSharp
         [ImportingConstructor]
         public TwitterClient(ITwitterApplicationCredentials applicationCredentials,
                              IAccessTokenStore accessTokenStore,
-                             Core.Factories.UserFactory userFactory)
+                             Factories.UserFactory userFactory)
         {
             _applicationCredentials = applicationCredentials;
             _accessTokenStore = accessTokenStore;
@@ -80,10 +80,10 @@ namespace Twiddler.TweetSharp
         public ITwitterRequest CreateRequestForStatusesOnFriendsTimeline(long since)
         {
             return new TweetSharpRequest(FluentTwitter.CreateRequest().
-                   AuthenticateWith(_applicationCredentials.ConsumerKey,
-                                    _applicationCredentials.ConsumerSecret,
-                                    _accessToken.Token,
-                                    _accessToken.TokenSecret));
+                                             AuthenticateWith(_applicationCredentials.ConsumerKey,
+                                                              _applicationCredentials.ConsumerSecret,
+                                                              _accessToken.Token,
+                                                              _accessToken.TokenSecret));
         }
 
         public ITwitterRequest CreateRequestForStatusesOnHomeTimeline(long since)
