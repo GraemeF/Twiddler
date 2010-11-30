@@ -18,7 +18,7 @@ namespace Twiddler.Tests.Screens
     {
         private readonly IAuthorizeCommand _authorizeCommand = new Mock<IAuthorizeCommand>().Object;
         private readonly IDeauthorizeCommand _deauthorizeCommand = new Mock<IDeauthorizeCommand>().Object;
-        private readonly Mock<ITwitterClient> _fakeClient = new Mock<ITwitterClient>();
+        private readonly Mock<IAuthorizer> _fakeClient = new Mock<IAuthorizer>();
         private readonly Mock<IRequestMeterScreen> _fakeRequestMeter = new Mock<IRequestMeterScreen>();
 
         [Theory]

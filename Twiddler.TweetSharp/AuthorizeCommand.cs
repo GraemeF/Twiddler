@@ -16,7 +16,7 @@ namespace Twiddler.TweetSharp
 
         [ImportingConstructor]
         public AuthorizeCommand(ITwitterApplicationCredentials applicationCredentials,
-                                ITwitterClient client,
+                                IAuthorizer client,
                                 IAccessTokenStore accessTokenStore)
             : base(client, AuthorizationStatus.Unauthorized)
         {

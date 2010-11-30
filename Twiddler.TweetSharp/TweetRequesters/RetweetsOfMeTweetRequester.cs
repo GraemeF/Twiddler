@@ -10,7 +10,7 @@ namespace Twiddler.TweetSharp.TweetRequesters
     public class RetweetsOfMeTweetRequester : TweetRequester
     {
         [ImportingConstructor]
-        public RetweetsOfMeTweetRequester(ITweetSharpTwitterClient client,
+        public RetweetsOfMeTweetRequester(ITwitterClient client,
                                           IRequestLimitStatus requestLimitStatus,
                                           Factories.TweetFactory tweetFactory)
             : base(client, requestLimitStatus, tweetFactory)

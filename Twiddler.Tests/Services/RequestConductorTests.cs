@@ -13,7 +13,7 @@ namespace Twiddler.Tests.Services
 {
     public class RequestConductorTests
     {
-        private readonly Mock<ITwitterClient> _fakeClient = new Mock<ITwitterClient>();
+        private readonly Mock<IAuthorizer> _fakeClient = new Mock<IAuthorizer>();
         private readonly Mock<INewTweetFilter> _fakeFilter = new Mock<INewTweetFilter>();
         private readonly Mock<ITweetRequester> _fakeRequester = new Mock<ITweetRequester>();
         private readonly Mock<ITweetSink> _fakeSink = new Mock<ITweetSink>();

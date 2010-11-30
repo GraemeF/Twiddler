@@ -10,7 +10,7 @@ namespace Twiddler.TweetSharp.TweetRequesters
     public class MentionsTweetRequester : TweetRequester
     {
         [ImportingConstructor]
-        public MentionsTweetRequester(ITweetSharpTwitterClient client,
+        public MentionsTweetRequester(ITwitterClient client,
                                       IRequestLimitStatus requestLimitStatus,
                                       Factories.TweetFactory tweetFactory)
             : base(client, requestLimitStatus, tweetFactory)

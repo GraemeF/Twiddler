@@ -7,16 +7,16 @@ namespace Twiddler.Core.Commands
 {
     public abstract class AuthorizationCommand : ICommand
     {
-        protected readonly ITwitterClient Client;
+        protected readonly IAuthorizer Client;
         private readonly AuthorizationStatus _executableStatus;
-        private PropertyObserver<ITwitterClient> _observer;
+        private PropertyObserver<IAuthorizer> _observer;
 
-        protected AuthorizationCommand(ITwitterClient client, AuthorizationStatus executableStatus)
+        protected AuthorizationCommand(IAuthorizer client, AuthorizationStatus executableStatus)
         {
             Client = client;
             _executableStatus = executableStatus;
 
-            _observer = new PropertyObserver<ITwitterClient>(Client).
+            _observer = new PropertyObserver<IAuthorizer>(Client).
                 RegisterHandler(x => x.AuthorizationStatus,
                                 y => OnCanExecuteChanged());
         }

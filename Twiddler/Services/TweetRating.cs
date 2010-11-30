@@ -16,18 +16,18 @@ namespace Twiddler.Services
     [PartCreationPolicy(CreationPolicy.NonShared)]
     public class TweetRating : ITweetRating
     {
-        private readonly ITwitterClient _client;
+        private readonly IAuthorizer _client;
         private readonly ITweet _tweet;
         private bool _isMention;
-        private PropertyObserver<ITwitterClient> _observer;
+        private PropertyObserver<IAuthorizer> _observer;
 
         [ImportingConstructor]
-        public TweetRating(ITwitterClient client, ITweet tweet)
+        public TweetRating(IAuthorizer client, ITweet tweet)
         {
             _client = client;
             _tweet = tweet;
 
-            _observer = new PropertyObserver<ITwitterClient>(_client).
+            _observer = new PropertyObserver<IAuthorizer>(_client).
                 RegisterHandler(x => x.AuthenticatedUser,
                                 x => UpdateIsMention());
             UpdateIsMention();

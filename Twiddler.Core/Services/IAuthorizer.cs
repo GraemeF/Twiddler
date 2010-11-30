@@ -3,7 +3,7 @@ using Twiddler.Core.Models;
 
 namespace Twiddler.Core.Services
 {
-    public interface ITwitterClient : INotifyPropertyChanged
+    public interface IAuthorizer : INotifyPropertyChanged
     {
         User AuthenticatedUser { get; }
         AuthorizationStatus AuthorizationStatus { get; }

@@ -10,7 +10,7 @@ namespace Twiddler.TweetSharp.TweetRequesters
     public class FriendsTimelineTweetRequester : TweetRequester
     {
         [ImportingConstructor]
-        public FriendsTimelineTweetRequester(ITweetSharpTwitterClient client,
+        public FriendsTimelineTweetRequester(ITwitterClient client,
                                              IRequestLimitStatus requestLimitStatus,
                                              Factories.TweetFactory tweetFactory)
             : base(client, requestLimitStatus, tweetFactory)

@@ -43,7 +43,7 @@ namespace Twiddler.Tests.Services
 
         private TweetRating BuildDefaultTestSubject()
         {
-            var fakeClient = new Mock<ITwitterClient>();
+            var fakeClient = new Mock<IAuthorizer>();
             fakeClient.
                 Setup(x => x.AuthenticatedUser).
                 Returns(_user);

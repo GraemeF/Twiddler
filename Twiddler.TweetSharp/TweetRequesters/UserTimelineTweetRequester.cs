@@ -1,7 +1,6 @@
 ﻿using System.ComponentModel.Composition;
 using Caliburn.Core.IoC;
 using TweetSharp.Twitter.Fluent;
-using Twiddler.Core.Services;
 using Twiddler.Services.Interfaces;
 
 namespace Twiddler.TweetSharp.TweetRequesters
@@ -11,7 +10,7 @@ namespace Twiddler.TweetSharp.TweetRequesters
     public class UserTimelineTweetRequester : TweetRequester
     {
         [ImportingConstructor]
-        public UserTimelineTweetRequester(ITweetSharpTwitterClient client,
+        public UserTimelineTweetRequester(ITwitterClient client,
                                           IRequestLimitStatus requestLimitStatus,
                                           Factories.TweetFactory tweetFactory)
             : base(client, requestLimitStatus, tweetFactory)
@@ -28,10 +27,5 @@ namespace Twiddler.TweetSharp.TweetRequesters
                        ? request.Since(since)
                        : request;
         }
-    }
-
-    public interface ITweetSharpTwitterClient:ITwitterClient
-    {
-        IFluentTwitter MakeRequestFor();
     }
 }

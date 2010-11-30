@@ -11,7 +11,7 @@ namespace Twiddler.Tests.Commands
 {
     public class DeauthorizeCommandTests
     {
-        private readonly Mock<ITwitterClient> _fakeClient = new Mock<ITwitterClient>();
+        private readonly Mock<IAuthorizer> _fakeClient = new Mock<IAuthorizer>();
 
         [Fact]
         public void CanExecute_WhenAuthorized_ReturnsTrue()

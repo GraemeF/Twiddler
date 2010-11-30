@@ -15,15 +15,15 @@ namespace Twiddler.Services
     [Export(typeof (IRequestConductor))]
     public class RequestConductor : IRequestConductor
     {
-        private readonly ITwitterClient _client;
+        private readonly IAuthorizer _client;
         private readonly INewTweetFilter _newTweetFilter;
         private readonly IEnumerable<ITweetRequester> _tweetRequesters;
-        private PropertyObserver<ITwitterClient> _statusObserver;
+        private PropertyObserver<IAuthorizer> _statusObserver;
         private IDisposable _subscription;
         private ITweetSink _tweetSink;
 
         [ImportingConstructor]
-        public RequestConductor(ITwitterClient client,
+        public RequestConductor(IAuthorizer client,
                                 [ImportMany] IEnumerable<ITweetRequester> tweetRequesters,
                                 INewTweetFilter newTweetFilter)
         {
@@ -44,7 +44,7 @@ namespace Twiddler.Services
         {
             _tweetSink = tweetSink;
 
-            _statusObserver = new PropertyObserver<ITwitterClient>(_client).
+            _statusObserver = new PropertyObserver<IAuthorizer>(_client).
                 RegisterHandler(x => x.AuthorizationStatus,
                                 y => PollIfAuthorized());
             PollIfAuthorized();

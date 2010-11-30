@@ -15,11 +15,11 @@ namespace Twiddler.Screens
     [Export(typeof (IStatusScreen))]
     public class StatusScreen : ScreenConductor<IScreen>.WithCollection.AllScreensActive, IStatusScreen
     {
-        private readonly ITwitterClient _client;
-        private PropertyObserver<ITwitterClient> _observer;
+        private readonly IAuthorizer _client;
+        private PropertyObserver<IAuthorizer> _observer;
 
         [ImportingConstructor]
-        public StatusScreen(ITwitterClient client,
+        public StatusScreen(IAuthorizer client,
                             IAuthorizeCommand authorizeCommand,
                             IDeauthorizeCommand deauthorizeCommand,
                             IRequestMeterScreen requestMeter) : base(true)
@@ -43,7 +43,7 @@ namespace Twiddler.Screens
         {
             base.OnInitialize();
 
-            _observer = new PropertyObserver<ITwitterClient>(_client).
+            _observer = new PropertyObserver<IAuthorizer>(_client).
                 RegisterHandler(x => x.AuthorizationStatus,
                                 y => NotifyOfPropertyChange(() => Authorization));
 

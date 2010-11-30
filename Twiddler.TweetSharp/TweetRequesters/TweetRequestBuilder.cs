@@ -13,13 +13,13 @@ namespace Twiddler.TweetSharp.TweetRequesters
 {
     public abstract class TweetRequester : ITweetRequester
     {
-        protected readonly ITweetSharpTwitterClient Client;
+        protected readonly ITwitterClient Client;
         private readonly IRequestLimitStatus _requestLimitStatus;
         private readonly Factories.TweetFactory _tweetFactory;
 
         private long _lastTweet;
 
-        protected TweetRequester(ITweetSharpTwitterClient client,
+        protected TweetRequester(ITwitterClient client,
                                       IRequestLimitStatus requestLimitStatus,
                                       Factories.TweetFactory tweetFactory)
         {

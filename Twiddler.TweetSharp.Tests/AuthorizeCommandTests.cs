@@ -13,7 +13,7 @@ namespace Twiddler.TweetSharp.Tests
         private readonly Mock<ITwitterApplicationCredentials> _fakeApplicationCredentials =
             new Mock<ITwitterApplicationCredentials>();
 
-        private readonly Mock<ITwitterClient> _fakeClient = new Mock<ITwitterClient>();
+        private readonly Mock<IAuthorizer> _fakeClient = new Mock<IAuthorizer>();
         private readonly Mock<IAccessTokenStore> _fakeCredentialsStore = new Mock<IAccessTokenStore>();
 
         [Theory]

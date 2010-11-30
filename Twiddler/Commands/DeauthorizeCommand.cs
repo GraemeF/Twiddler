@@ -13,7 +13,7 @@ namespace Twiddler.Commands
     public class DeauthorizeCommand : AuthorizationCommand, IDeauthorizeCommand
     {
         [ImportingConstructor]
-        public DeauthorizeCommand(ITwitterClient client)
+        public DeauthorizeCommand(IAuthorizer client)
             : base(client, AuthorizationStatus.Authorized)
         {
         }

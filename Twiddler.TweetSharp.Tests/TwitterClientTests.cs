@@ -6,12 +6,12 @@ using Xunit;
 
 namespace Twiddler.TweetSharp.Tests
 {
-    public class TwitterClientTests
+    public class AuthorizerTests
     {
         [Fact]
         public void GettingAuthorization_Initially_ReturnsUnknown()
         {
-            var test = new TwitterClient(new Mock<ITwitterApplicationCredentials>().Object,
+            var test = new Authorizer(new Mock<ITwitterApplicationCredentials>().Object,
                                          new Mock<IAccessTokenStore>().Object,
                                          x => A.User);
 
