@@ -1,9 +1,7 @@
 ﻿using System.ComponentModel;
 using System.ComponentModel.Composition;
 using Caliburn.Core.IoC;
-using TweetSharp.Twitter.Extensions;
-using TweetSharp.Twitter.Fluent;
-using TweetSharp.Twitter.Model;
+using TweetSharp;
 using Twiddler.Core;
 using Twiddler.Core.Models;
 using Twiddler.Core.Services;
@@ -90,16 +88,12 @@ namespace Twiddler.TweetSharp
         {
             AuthorizationStatus = AuthorizationStatus.Verifying;
 
-            ITwitterAccountVerifyCredentials twitter =
-                FluentTwitter.
-                    CreateRequest().
-                    AuthenticateWith(_applicationCredentials.ConsumerKey, _applicationCredentials.ConsumerSecret,
-                                     _accessToken.Token, _accessToken.TokenSecret).
-                    Account().
-                    VerifyCredentials();
+            var service = new TwitterService(_applicationCredentials.ConsumerKey,
+                                             _applicationCredentials.ConsumerSecret,
+                                             _accessToken.Token,
+                                             _accessToken.TokenSecret);
 
-            TwitterResult response = twitter.Request();
-            TwitterUser profile = response.AsUser();
+            TwitterUser profile = service.VerifyCredentials();
 
             AuthorizationStatus = profile != null
                                       ? AuthorizationStatus.Authorized

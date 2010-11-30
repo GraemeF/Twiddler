@@ -34,10 +34,10 @@
     <Reference Include="Caliburn.Core">
       <HintPath>..\Library\Caliburn\Caliburn.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Hammock, Version=1.0.0.0, Culture=neutral, PublicKeyToken=c148cfba29ed1a4d, processorArchitecture=MSIL">
-      <HintPath>..\Library\TweetSharp\Hammock.dll</HintPath>
+    <Reference Include="Hammock.ClientProfile">
+      <HintPath>..\Library\TweetSharp\Hammock.ClientProfile.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=3.5.0.0, Culture=neutral, PublicKeyToken=b9a188c8922137c6, processorArchitecture=MSIL">
+    <Reference Include="Newtonsoft.Json">
       <HintPath>..\Library\TweetSharp\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="PresentationCore" />
@@ -51,11 +51,8 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="TweetSharp, Version=1.0.0.0, Culture=neutral, PublicKeyToken=c148cfba29ed1a4d, processorArchitecture=MSIL">
-      <HintPath>..\Library\TweetSharp\TweetSharp.dll</HintPath>
-    </Reference>
-    <Reference Include="TweetSharp.Twitter, Version=1.0.0.0, Culture=neutral, PublicKeyToken=c148cfba29ed1a4d, processorArchitecture=MSIL">
-      <HintPath>..\Library\TweetSharp\TweetSharp.Twitter.dll</HintPath>
+    <Reference Include="TweetSharp.Next">
+      <HintPath>..\Library\TweetSharp\TweetSharp.Next.dll</HintPath>
     </Reference>
     <Reference Include="WindowsBase" />
   </ItemGroup>

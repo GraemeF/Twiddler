@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.Composition;
 using System.Globalization;
 using System.Linq;
+using TweetSharp;
 using TweetSharp.Twitter.Model;
 using Twiddler.Core.Models;
 using Twiddler.TwitterStore.Models;
@@ -26,8 +27,8 @@ namespace Twiddler.TweetSharp
                            Status = status.Text,
                            User = CreateUserFromTwitterUser(status.User),
                            CreatedDate = status.CreatedDate,
-                           Links = status.TextLinks.ToList(),
-                           Mentions = status.TextMentions.ToList(),
+                           //Links = status.TextLinks.ToList(),
+                           //Mentions = status.TextMentions.ToList(),
                            InReplyToStatusId = GetInReplyToStatusId(status),
                            IsArchived = false,
                            IsRead = false

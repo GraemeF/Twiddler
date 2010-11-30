@@ -1,12 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using TweetSharp.Twitter.Extensions;
-using TweetSharp.Twitter.Fluent;
-using TweetSharp.Twitter.Model;
-using Twiddler.Core;
+using TweetSharp;
 using Twiddler.Core.Models;
-using Twiddler.Core.Services;
 using Twiddler.Services.Interfaces;
 
 namespace Twiddler.TweetSharp.TweetRequesters
@@ -20,8 +16,8 @@ namespace Twiddler.TweetSharp.TweetRequesters
         private long _lastTweet;
 
         protected TweetRequester(ITwitterClient client,
-                                      IRequestLimitStatus requestLimitStatus,
-                                      Factories.TweetFactory tweetFactory)
+                                 IRequestLimitStatus requestLimitStatus,
+                                 Factories.TweetFactory tweetFactory)
         {
             Client = client;
             _requestLimitStatus = requestLimitStatus;
@@ -32,26 +28,15 @@ namespace Twiddler.TweetSharp.TweetRequesters
 
         public IEnumerable<ITweet> RequestTweets()
         {
-            return GotTweets(CreateRequest(_lastTweet).Request());
+            return GotTweets(GetStatuses(_lastTweet));
         }
 
         #endregion
 
-        protected abstract ITwitterLeafNode CreateRequest(long since);
+        protected abstract IEnumerable<TwitterStatus> GetStatuses(long since);
 
-        private IEnumerable<ITweet> GotTweets(TwitterResult result)
+        private IEnumerable<ITweet> GotTweets(IEnumerable<TwitterStatus> statuses)
         {
-            if (result.RateLimitStatus != null)
-                UpdateLimit(result.RateLimitStatus);
-
-            if (result.SkippedDueToRateLimiting ||
-                result.IsNetworkError ||
-                result.IsServiceError ||
-                result.IsTwitterError)
-                return new ITweet[] {};
-
-            IEnumerable<TwitterStatus> statuses = result.AsStatuses();
-
             _lastTweet = Math.Max(_lastTweet,
                                   statuses.Any()
                                       ? statuses.Max(x => x.Id)

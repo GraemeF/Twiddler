@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.Composition;
 using Caliburn.Core.IoC;
-using TweetSharp.Twitter.Fluent;
+using TweetSharp;
 using Twiddler.Core.Models;
 using Twiddler.Core.Services;
 using Twiddler.TweetSharp.TweetRequesters;
@@ -23,16 +23,17 @@ namespace Twiddler.TweetSharp
 
         #region ITwitterClient Members
 
-        public IFluentTwitter MakeRequestFor()
+        public TwitterService Service
         {
-            AccessToken accessToken = _accessTokenStore.Load(AccessToken.DefaultCredentialsId);
-            return
-                FluentTwitter.
-                    CreateRequest().
-                    AuthenticateWith(_applicationCredentials.ConsumerKey,
-                                     _applicationCredentials.ConsumerSecret,
-                                     accessToken.Token,
-                                     accessToken.TokenSecret);
+            get
+            {
+                AccessToken accessToken = _accessTokenStore.Load(AccessToken.DefaultCredentialsId);
+
+                return new TwitterService(_applicationCredentials.ConsumerKey,
+                                          _applicationCredentials.ConsumerSecret,
+                                          accessToken.Token,
+                                          accessToken.TokenSecret);
+            }
         }
 
         #endregion

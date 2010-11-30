@@ -1,6 +1,7 @@
+using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using Caliburn.Core.IoC;
-using TweetSharp.Twitter.Fluent;
+using TweetSharp;
 using Twiddler.Services.Interfaces;
 
 namespace Twiddler.TweetSharp.TweetRequesters
@@ -17,15 +18,11 @@ namespace Twiddler.TweetSharp.TweetRequesters
         {
         }
 
-        protected override ITwitterLeafNode CreateRequest(long since)
+        protected override IEnumerable<TwitterStatus> GetStatuses(long since)
         {
-            ITwitterRetweetsOfMe request = Client.
-                MakeRequestFor().
-                Statuses().
-                RetweetsOfMe();
             return since > 0L
-                       ? request.Since(since)
-                       : request;
+                       ? Client.Service.ListRetweetsOfMyTweetsSince(since)
+                       : Client.Service.ListRetweetsOfMyTweets();
         }
     }
 }

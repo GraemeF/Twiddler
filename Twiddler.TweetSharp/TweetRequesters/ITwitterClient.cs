@@ -1,9 +1,9 @@
-﻿using TweetSharp.Twitter.Fluent;
+﻿using TweetSharp;
 
 namespace Twiddler.TweetSharp.TweetRequesters
 {
     public interface ITwitterClient
     {
-        IFluentTwitter MakeRequestFor();
+        TwitterService Service { get; }
     }
 }
