@@ -6,7 +6,9 @@ using System.Windows;
 using Caliburn.Core.IoC;
 using NDesk.Options;
 using Raven.Client;
+using Raven.Client.Client;
 using Raven.Client.Document;
+using Raven.Client.Indexes;
 using Twiddler.TwitterStore.Interfaces;
 using Twiddler.TwitterStore.Models;
 
@@ -38,7 +40,10 @@ namespace Twiddler.TwitterStore
 
         private DocumentStore CreateDocumentStore()
         {
-            var store = new DocumentStore {DataDirectory = _storeDirectory};
+            var store = new EmbeddableDocumentStore
+            {
+                DataDirectory = _storeDirectory
+            };
 
             store.Initialize();
             CreateIndices(store);
