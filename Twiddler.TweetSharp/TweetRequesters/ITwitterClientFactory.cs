@@ -2,8 +2,8 @@
 
 namespace Twiddler.TweetSharp.TweetRequesters
 {
-    public interface ITwitterClient
+    public interface ITwitterClientFactory
     {
-        TwitterService Service { get; }
+        TwitterService CreateService();
     }
 }

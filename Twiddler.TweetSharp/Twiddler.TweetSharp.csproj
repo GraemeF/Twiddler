@@ -66,12 +66,12 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TweetRequesters\FriendsTimelineTweetRequester.cs" />
     <Compile Include="TweetRequesters\HomeTimelineTweetRequester.cs" />
-    <Compile Include="TweetRequesters\ITwitterClient.cs" />
+    <Compile Include="TweetRequesters\ITwitterClientFactory.cs" />
     <Compile Include="TweetRequesters\MentionsTweetRequester.cs" />
     <Compile Include="TweetRequesters\RetweetsOfMeTweetRequester.cs" />
     <Compile Include="TweetRequesters\TweetRequestBuilder.cs" />
     <Compile Include="TweetRequesters\UserTimelineTweetRequester.cs" />
-    <Compile Include="TwitterClient.cs" />
+    <Compile Include="TwitterClientFactory.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Twiddler.Core\Twiddler.Core.csproj">

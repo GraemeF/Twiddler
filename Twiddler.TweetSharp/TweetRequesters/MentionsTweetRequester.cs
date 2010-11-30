@@ -11,18 +11,18 @@ namespace Twiddler.TweetSharp.TweetRequesters
     public class MentionsTweetRequester : TweetRequester
     {
         [ImportingConstructor]
-        public MentionsTweetRequester(ITwitterClient client,
+        public MentionsTweetRequester(ITwitterClientFactory clientFactory,
                                       IRequestLimitStatus requestLimitStatus,
                                       Factories.TweetFactory tweetFactory)
-            : base(client, requestLimitStatus, tweetFactory)
+            : base(clientFactory, requestLimitStatus, tweetFactory)
         {
         }
 
-        protected override IEnumerable<TwitterStatus> GetStatuses(long since)
+        protected override IEnumerable<TwitterStatus> GetStatuses(TwitterService service, long since)
         {
             return since > 0L
-                       ? Client.Service.ListTweetsMentioningMeSince(since)
-                       : Client.Service.ListTweetsMentioningMe();
+                       ? service.ListTweetsMentioningMeSince(since)
+                       : service.ListTweetsMentioningMe();
         }
     }
 }

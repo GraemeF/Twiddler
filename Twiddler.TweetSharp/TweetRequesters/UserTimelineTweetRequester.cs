@@ -11,18 +11,18 @@ namespace Twiddler.TweetSharp.TweetRequesters
     public class UserTimelineTweetRequester : TweetRequester
     {
         [ImportingConstructor]
-        public UserTimelineTweetRequester(ITwitterClient client,
+        public UserTimelineTweetRequester(ITwitterClientFactory clientFactory,
                                           IRequestLimitStatus requestLimitStatus,
                                           Factories.TweetFactory tweetFactory)
-            : base(client, requestLimitStatus, tweetFactory)
+            : base(clientFactory, requestLimitStatus, tweetFactory)
         {
         }
 
-        protected override IEnumerable<TwitterStatus> GetStatuses(long since)
+        protected override IEnumerable<TwitterStatus> GetStatuses(TwitterService service, long since)
         {
             return since > 0L
-                       ? Client.Service.ListTweetsOnHomeTimelineSince(since)
-                       : Client.Service.ListTweetsOnHomeTimeline();
+                       ? service.ListTweetsOnHomeTimelineSince(since)
+                       : service.ListTweetsOnHomeTimeline();
         }
     }
 }

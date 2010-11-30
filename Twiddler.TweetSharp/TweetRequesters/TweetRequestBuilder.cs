@@ -9,17 +9,17 @@ namespace Twiddler.TweetSharp.TweetRequesters
 {
     public abstract class TweetRequester : ITweetRequester
     {
-        protected readonly ITwitterClient Client;
+        protected readonly ITwitterClientFactory ClientFactory;
         private readonly IRequestLimitStatus _requestLimitStatus;
         private readonly Factories.TweetFactory _tweetFactory;
 
         private long _lastTweet;
 
-        protected TweetRequester(ITwitterClient client,
+        protected TweetRequester(ITwitterClientFactory clientFactory,
                                  IRequestLimitStatus requestLimitStatus,
                                  Factories.TweetFactory tweetFactory)
         {
-            Client = client;
+            ClientFactory = clientFactory;
             _requestLimitStatus = requestLimitStatus;
             _tweetFactory = tweetFactory;
         }
@@ -28,12 +28,19 @@ namespace Twiddler.TweetSharp.TweetRequesters
 
         public IEnumerable<ITweet> RequestTweets()
         {
-            return GotTweets(GetStatuses(_lastTweet));
+            TwitterService service = ClientFactory.CreateService();
+
+            IEnumerable<TwitterStatus> statuses = GetStatuses(service, _lastTweet);
+
+            if (service.Response.RateLimitStatus != null)
+                UpdateLimit(service.Response.RateLimitStatus);
+
+            return GotTweets(statuses);
         }
 
         #endregion
 
-        protected abstract IEnumerable<TwitterStatus> GetStatuses(long since);
+        protected abstract IEnumerable<TwitterStatus> GetStatuses(TwitterService service, long since);
 
         private IEnumerable<ITweet> GotTweets(IEnumerable<TwitterStatus> statuses)
         {
