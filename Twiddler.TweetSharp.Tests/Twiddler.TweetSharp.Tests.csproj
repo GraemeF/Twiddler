@@ -34,8 +34,9 @@
     <Reference Include="Hammock.ClientProfile">
       <HintPath>..\Library\TweetSharp\Hammock.ClientProfile.dll</HintPath>
     </Reference>
-    <Reference Include="Moq">
-      <HintPath>..\Library\Moq\Moq.dll</HintPath>
+    <Reference Include="Moq, Version=4.0.10827.0, Culture=neutral, PublicKeyToken=69f491c39445e920, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Library\Moq\NET40\Moq.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\Library\TweetSharp\Newtonsoft.Json.dll</HintPath>
