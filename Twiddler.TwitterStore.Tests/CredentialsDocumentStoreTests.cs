@@ -15,8 +15,8 @@ namespace Twiddler.TwitterStore.Tests
 
         public CredentialsDocumentStoreTests()
         {
-            _documentStoreFactory = Mocks.Of<IDocumentStoreFactory>().First(x => x.GetDocumentStore() == _documentStore);
             _documentStore = Mocks.Of<IDocumentStore>().First(x => x.OpenSession() == _documentSession);
+            _documentStoreFactory = Mocks.Of<IDocumentStoreFactory>().First(x => x.GetDocumentStore() == _documentStore);
         }
 
         [Fact]
