@@ -1,4 +1,5 @@
-﻿using Moq;
+﻿using System.Linq;
+using Moq;
 using Raven.Client;
 using Twiddler.Core.Models;
 using Twiddler.TwitterStore.Interfaces;
@@ -8,30 +9,25 @@ namespace Twiddler.TwitterStore.Tests
 {
     public class CredentialsDocumentStoreTests
     {
-        private readonly Mock<IDocumentSession> _fakeDocumentSession = new Mock<IDocumentSession>();
-        private readonly Mock<IDocumentStore> _fakeDocumentStore = new Mock<IDocumentStore>();
-        private readonly Mock<IDocumentStoreFactory> _fakeDocumentStoreFactory = new Mock<IDocumentStoreFactory>();
-        
+        private readonly IDocumentSession _documentSession = Mock.Of<IDocumentSession>();
+        private readonly IDocumentStore _documentStore;
+        private readonly IDocumentStoreFactory _documentStoreFactory;
+
         public CredentialsDocumentStoreTests()
         {
-            _fakeDocumentStoreFactory.
-                Setup(x => x.GetDocumentStore()).
-                Returns(_fakeDocumentStore.Object);
-
-            _fakeDocumentStore.
-                Setup(x => x.OpenSession()).
-                Returns(_fakeDocumentSession.Object);
+            _documentStoreFactory = Mocks.Of<IDocumentStoreFactory>().First(x => x.GetDocumentStore() == _documentStore);
+            _documentStore = Mocks.Of<IDocumentStore>().First(x => x.OpenSession() == _documentSession);
         }
 
         [Fact]
         public void Load_WhenTheCredentialsAreInTheStore_ReturnsTheCredentials()
         {
-            string id = "The credentials id";
+            const string id = "The credentials id";
             var credentials = new AccessToken(id, null, null);
 
             AccessTokenDocumentStore test = BuildDefaultTestSubject();
 
-            _fakeDocumentSession.
+            Mock.Get(_documentSession).
                 Setup(x => x.Load<AccessToken>(id)).
                 Returns(credentials);
 
@@ -41,11 +37,11 @@ namespace Twiddler.TwitterStore.Tests
         [Fact]
         public void Load_WhenTheCredentialsAreNotFoundInTheStore_ReturnsNewCredentials()
         {
-            string id = "The credentials id";
+            const string id = "The credentials id";
 
             AccessTokenDocumentStore test = BuildDefaultTestSubject();
 
-            _fakeDocumentSession.
+            Mock.Get(_documentSession).
                 Setup(x => x.Load<AccessToken>(id)).
                 Returns((AccessToken) null);
 
@@ -54,7 +50,7 @@ namespace Twiddler.TwitterStore.Tests
 
         private AccessTokenDocumentStore BuildDefaultTestSubject()
         {
-            return new AccessTokenDocumentStore(_fakeDocumentStoreFactory.Object);
+            return new AccessTokenDocumentStore(_documentStoreFactory);
         }
     }
 }
