@@ -13,15 +13,15 @@ namespace Twiddler.Commands
     [PartCreationPolicy(CreationPolicy.NonShared)]
     public class MarkTweetAsReadCommand : IMarkTweetAsReadCommand
     {
-        private readonly ITweetStore _store;
+        private readonly ITweetSink _tweetSink;
         private readonly ITweet _tweet;
         private PropertyObserver<ITweet> _observer;
 
         [ImportingConstructor]
-        public MarkTweetAsReadCommand(ITweet tweet, ITweetStore store)
+        public MarkTweetAsReadCommand(ITweet tweet, ITweetSink tweetSink)
         {
             _tweet = tweet;
-            _store = store;
+            _tweetSink = tweetSink;
             _observer = new PropertyObserver<ITweet>(_tweet).
                 RegisterHandler(x => x.IsRead,
                                 x => CanExecuteChanged(this, EventArgs.Empty));
@@ -32,7 +32,7 @@ namespace Twiddler.Commands
         public void Execute(object parameter)
         {
             _tweet.MarkAsRead();
-            _store.Add(_tweet);
+            _tweetSink.Add(_tweet);
         }
 
         public bool CanExecute(object parameter)

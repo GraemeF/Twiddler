@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Twiddler.Core.Models;
 
 namespace Twiddler.Core.Services
 {
-    public interface ITweetStore : ITweetResolver
+    public interface ITweetStore : ITweetResolver, ITweetSink
     {
         IEnumerable<ITweet> GetInboxTweets();
-        event EventHandler<EventArgs> Updated;
     }
 }

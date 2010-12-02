@@ -14,7 +14,6 @@ namespace Twiddler.Tests.Services
     public class RequestConductorTests
     {
         private readonly Mock<IAuthorizer> _fakeClient = new Mock<IAuthorizer>();
-        private readonly Mock<INewTweetFilter> _fakeFilter = new Mock<INewTweetFilter>();
         private readonly Mock<ITweetRequester> _fakeRequester = new Mock<ITweetRequester>();
         private readonly Mock<ITweetSink> _fakeSink = new Mock<ITweetSink>();
         private readonly IEnumerable<ITweet> _newTweets = new[] {A.Tweet.Build()};
@@ -26,11 +25,6 @@ namespace Twiddler.Tests.Services
             _fakeRequester.
                 Setup(x => x.RequestTweets()).
                 Returns(_requestedTweets);
-
-            _fakeFilter.
-                Setup(x => x.RemoveKnownTweets(_requestedTweets)).
-                Callback(() => _requestCompleted = true).
-                Returns(_newTweets);
         }
 
         [Fact]
@@ -86,7 +80,7 @@ namespace Twiddler.Tests.Services
 
         private RequestConductor BuildDefaultTestSubject()
         {
-            return new RequestConductor(_fakeClient.Object, new[] {_fakeRequester.Object}, _fakeFilter.Object);
+            return new RequestConductor(_fakeClient.Object, new[] {_fakeRequester.Object});
         }
     }
 }

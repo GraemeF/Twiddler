@@ -1,6 +1,6 @@
 namespace Twiddler.Services.Interfaces
 {
-    public interface ITwitterStoreUpdater
+    public interface ITimelineUpdater
     {
         void Start();
     }

@@ -51,6 +51,9 @@
     <Reference Include="PresentationCore">
       <RequiredTargetFramework>3.0</RequiredTargetFramework>
     </Reference>
+    <Reference Include="Should.Fluent">
+      <HintPath>..\Library\Should\Should.Fluent.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Core">
@@ -91,7 +94,6 @@
     <Compile Include="Commands\ArchiveTweetCommandTests.cs" />
     <Compile Include="Commands\DeauthorizeCommandTests.cs" />
     <Compile Include="Commands\MarkTweetAsReadCommandTests.cs" />
-    <Compile Include="Services\NewTweetFilterTests.cs" />
     <Compile Include="Services\StoreTimelineTests.cs" />
     <Compile Include="Screens\ImageThumbnailScreenTests.cs" />
     <Compile Include="Screens\LoadingTweetScreenTests.cs" />

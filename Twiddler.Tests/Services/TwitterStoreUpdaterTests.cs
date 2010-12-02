@@ -1,28 +1,27 @@
 using Moq;
-using Twiddler.Core.Services;
 using Twiddler.Services;
 using Twiddler.Services.Interfaces;
 using Xunit;
 
 namespace Twiddler.Tests.Services
 {
-    public class TwitterStoreUpdaterTests
+    public class TimelineUpdaterTests
     {
         private readonly Mock<IRequestConductor> _fakeRequestConductor = new Mock<IRequestConductor>();
-        private readonly Mock<ITweetStore> _fakeStore = new Mock<ITweetStore>();
+        private readonly Mock<ITimeline> _fakeStore = new Mock<ITimeline>();
 
         [Fact]
         public void Start__StartsRequestingTweetsForStore()
         {
-            TwitterStoreUpdater test = BuildDefaultTestSubject();
+            TimelineUpdater test = BuildDefaultTestSubject();
             test.Start();
 
             _fakeRequestConductor.Verify(x => x.Start(_fakeStore.Object));
         }
 
-        private TwitterStoreUpdater BuildDefaultTestSubject()
+        private TimelineUpdater BuildDefaultTestSubject()
         {
-            return new TwitterStoreUpdater(_fakeRequestConductor.Object, _fakeStore.Object);
+            return new TimelineUpdater(_fakeRequestConductor.Object, _fakeStore.Object);
         }
     }
 }

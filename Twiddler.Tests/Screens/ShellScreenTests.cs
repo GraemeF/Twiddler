@@ -10,7 +10,7 @@ namespace Twiddler.Tests.Screens
     {
         private readonly Mock<IStatusScreen> _fakeStatus = new Mock<IStatusScreen>();
         private readonly Mock<ITimelineScreen> _fakeTimeline = new Mock<ITimelineScreen>();
-        private readonly Mock<ITwitterStoreUpdater> _fakeUpdater = new Mock<ITwitterStoreUpdater>();
+        private readonly Mock<ITimelineUpdater> _fakeUpdater = new Mock<ITimelineUpdater>();
 
         [Fact]
         public void GettingTimeline_WhenInitialized_ReturnsInitializedTimeline()

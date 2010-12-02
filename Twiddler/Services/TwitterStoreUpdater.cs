@@ -1,29 +1,28 @@
 ﻿using System.ComponentModel.Composition;
 using Caliburn.Core.IoC;
-using Twiddler.Core.Services;
 using Twiddler.Services.Interfaces;
 
 namespace Twiddler.Services
 {
-    [Singleton(typeof (ITwitterStoreUpdater))]
-    [Export(typeof (ITwitterStoreUpdater))]
-    public class TwitterStoreUpdater : ITwitterStoreUpdater
+    [Singleton(typeof (ITimelineUpdater))]
+    [Export(typeof (ITimelineUpdater))]
+    public class TimelineUpdater : ITimelineUpdater
     {
         private readonly IRequestConductor _requestConductor;
-        private readonly ITweetStore _store;
+        private readonly ITimeline _timeline;
 
         [ImportingConstructor]
-        public TwitterStoreUpdater(IRequestConductor requestConductor, ITweetStore store)
+        public TimelineUpdater(IRequestConductor requestConductor, ITimeline timeline)
         {
             _requestConductor = requestConductor;
-            _store = store;
+            _timeline = timeline;
         }
 
-        #region ITwitterStoreUpdater Members
+        #region ITimelineUpdater Members
 
         public void Start()
         {
-            _requestConductor.Start(_store);
+            _requestConductor.Start(_timeline);
         }
 
         #endregion

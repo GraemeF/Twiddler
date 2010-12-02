@@ -1,6 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Moq;
+using Should.Fluent;
 using Twiddler.Core.Models;
 using Twiddler.Core.Services;
 using Twiddler.Services;
@@ -25,7 +25,7 @@ namespace Twiddler.Tests.Services
         public void GettingTweets_WhenTheStoreHasInboxTweets_ContainsTweets()
         {
             ITweet tweet = A.Tweet.Build();
-            StoreInboxTweetsChangesTo(new[] {tweet});
+            StoreHasInboxTweets(new[] {tweet});
 
             StoreTimeline test = BuildDefaultTestSubject();
 
@@ -33,58 +33,54 @@ namespace Twiddler.Tests.Services
         }
 
         [Fact]
-        public void GettingTweets_WhenNewTweetsAreAddedToTheStore_ContainsNewTweets()
+        public void Add_GivenATweet_AddsTweetToStore()
         {
-            StoreTimeline test = BuildDefaultTestSubject();
             ITweet tweet = A.Tweet.Build();
 
-            bool eventRaised = false;
-            test.Tweets.CollectionChanged += (sender, args) => eventRaised = args.NewItems.Contains(tweet);
-            StoreInboxTweetsChangesTo(new[] {tweet});
+            StoreTimeline test = BuildDefaultTestSubject();
+            test.Add(tweet);
 
-            Assert.True(eventRaised);
-            Assert.Contains(tweet, test.Tweets);
+            _fakeStore.Verify(x => x.Add(tweet));
         }
 
         [Fact]
-        public void GettingTweets_WhenTheSameTweetsAreStillInTheStore_ContainsNoNewTweets()
+        public void Add_GivenANewTweet_AddsTweetToTweets()
         {
-            const string TestId = "123";
-            StoreTimeline test = BuildDefaultTestSubject();
-
-            ITweet tweet = A.Tweet.IdentifiedBy(TestId).Build();
-            StoreInboxTweetsChangesTo(new[] {tweet});
-
-            bool eventRaised = false;
-            test.Tweets.CollectionChanged += (sender, args) => eventRaised = true;
-
-            StoreInboxTweetsChangesTo(new[] {A.Tweet.IdentifiedBy(TestId).Build()});
-
-            Assert.False(eventRaised);
-            Assert.Contains(tweet, test.Tweets);
-        }
-
-        [Fact]
-        public void GettingTweets_WhenTweetsRemovedFromTheStore_DoesNotContainOldTweets()
-        {
-            StoreTimeline test = BuildDefaultTestSubject();
             ITweet tweet = A.Tweet.Build();
-            StoreInboxTweetsChangesTo(new[] {tweet});
 
-            bool eventRaised = false;
-            test.Tweets.CollectionChanged += (sender, args) => eventRaised = args.OldItems.Contains(tweet);
+            StoreTimeline test = BuildDefaultTestSubject();
+            test.Add(tweet);
 
-            StoreInboxTweetsChangesTo(new ITweet[] {});
-            Assert.True(eventRaised);
-            Assert.DoesNotContain(tweet, test.Tweets);
+            test.Tweets.Should().Contain.Item(tweet);
         }
 
-        private void StoreInboxTweetsChangesTo(IEnumerable<ITweet> inboxTweets)
+        [Fact]
+        public void Add_GivenAnUpdatedTweet_ReplacesTweetInTweets()
+        {
+            ITweet tweet = A.Tweet.Build();
+
+            StoreTimeline test = BuildDefaultTestSubject();
+            test.Add(tweet);
+
+            test.Tweets.Should().Contain.Item(tweet);
+        }
+
+        [Fact]
+        public void Add_GivenManyTweets_AddsTweetsToStore()
+        {
+            var tweets = new[] {A.Tweet.Build()};
+
+            StoreTimeline test = BuildDefaultTestSubject();
+            test.Add(tweets);
+
+            _fakeStore.Verify(x => x.Add(tweets));
+        }
+
+        private void StoreHasInboxTweets(IEnumerable<ITweet> inboxTweets)
         {
             _fakeStore.
                 Setup(x => x.GetInboxTweets()).
                 Returns(inboxTweets);
-            _fakeStore.Raise(x => x.Updated += null, new EventArgs());
         }
 
         private StoreTimeline BuildDefaultTestSubject()

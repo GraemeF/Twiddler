@@ -10,15 +10,15 @@ namespace Twiddler.Screens
     [Export(typeof (IShellScreen))]
     public class ShellScreen : ScreenConductor<IScreen>.WithCollection.AllScreensActive, IShellScreen
     {
-        private readonly ITwitterStoreUpdater _twitterStoreUpdater;
+        private readonly ITimelineUpdater _timelineUpdater;
 
         [ImportingConstructor]
         public ShellScreen(ITimelineScreen timelineScreen,
                            IStatusScreen statusScreen,
-                           ITwitterStoreUpdater twitterStoreUpdater)
+                           ITimelineUpdater timelineUpdater)
             : base(true)
         {
-            _twitterStoreUpdater = twitterStoreUpdater;
+            _timelineUpdater = timelineUpdater;
             Timeline = timelineScreen;
             Status = statusScreen;
         }
@@ -30,7 +30,7 @@ namespace Twiddler.Screens
         protected override void OnInitialize()
         {
             base.OnInitialize();
-            _twitterStoreUpdater.Start();
+            _timelineUpdater.Start();
         }
     }
 }

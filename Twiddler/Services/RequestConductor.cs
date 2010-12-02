@@ -5,7 +5,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using Caliburn.Core.IoC;
 using MvvmFoundation.Wpf;
-using Twiddler.Core.Models;
 using Twiddler.Core.Services;
 using Twiddler.Services.Interfaces;
 
@@ -16,7 +15,6 @@ namespace Twiddler.Services
     public class RequestConductor : IRequestConductor
     {
         private readonly IAuthorizer _client;
-        private readonly INewTweetFilter _newTweetFilter;
         private readonly IEnumerable<ITweetRequester> _tweetRequesters;
         private PropertyObserver<IAuthorizer> _statusObserver;
         private IDisposable _subscription;
@@ -24,12 +22,10 @@ namespace Twiddler.Services
 
         [ImportingConstructor]
         public RequestConductor(IAuthorizer client,
-                                [ImportMany] IEnumerable<ITweetRequester> tweetRequesters,
-                                INewTweetFilter newTweetFilter)
+                                [ImportMany] IEnumerable<ITweetRequester> tweetRequesters)
         {
             _client = client;
             _tweetRequesters = tweetRequesters;
-            _newTweetFilter = newTweetFilter;
         }
 
         #region IRequestConductor Members
@@ -81,9 +77,7 @@ namespace Twiddler.Services
 
         private void RequestAndAddNewTweetsToStore(ITweetRequester tweetRequester)
         {
-            IEnumerable<ITweet> requestTweets = tweetRequester.RequestTweets();
-            IEnumerable<ITweet> removeKnownTweets = _newTweetFilter.RemoveKnownTweets(requestTweets);
-            _tweetSink.Add(removeKnownTweets);
+            _tweetSink.Add(tweetRequester.RequestTweets());
         }
 
         ~RequestConductor()

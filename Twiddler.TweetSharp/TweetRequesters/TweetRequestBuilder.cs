@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using TweetSharp;
 using Twiddler.Core.Models;
 using Twiddler.Services.Interfaces;
@@ -31,13 +29,16 @@ namespace Twiddler.TweetSharp.TweetRequesters
         public IEnumerable<ITweet> RequestTweets()
         {
             TwitterService service = ClientFactory.CreateService();
-            
+
             IEnumerable<TwitterStatus> statuses = GetStatuses(service, _lastTweet);
 
             if (service.Response.RateLimitStatus != null)
                 UpdateLimit(service.Response.RateLimitStatus);
 
-            return GotTweets(statuses);
+            if (statuses != null)
+                return GotTweets(statuses);
+
+            return new ITweet[] {};
         }
 
         #endregion

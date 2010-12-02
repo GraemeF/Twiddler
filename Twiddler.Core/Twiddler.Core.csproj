@@ -67,7 +67,6 @@
     <Compile Include="PropertyHelper.cs" />
     <Compile Include="Services\AuthorizationStatus.cs" />
     <Compile Include="Services\IAccessTokenStore.cs" />
-    <Compile Include="Services\INewTweetFilter.cs" />
     <Compile Include="Services\ITweetRating.cs" />
     <Compile Include="Services\ITweetRequester.cs" />
     <Compile Include="Services\ITweetSink.cs" />

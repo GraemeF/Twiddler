@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Linq;
 using Caliburn.Core.IoC;
@@ -34,14 +33,12 @@ namespace Twiddler.TwitterStore
                 {
                     session.Store(tweet);
                     session.SaveChanges();
-                    Updated(this, EventArgs.Empty);
                 }
         }
 
         public void Add(IEnumerable<ITweet> tweets)
         {
             lock (_mutex)
-            {
                 using (IDocumentSession session = _documentStore.OpenSession())
                 {
                     foreach (Tweet tweet in tweets)
@@ -49,31 +46,23 @@ namespace Twiddler.TwitterStore
 
                     session.SaveChanges();
                 }
-                Updated(this, EventArgs.Empty);
-            }
         }
 
         public ITweet GetTweet(string id)
         {
             lock (_mutex)
                 using (IDocumentSession session = _documentStore.OpenSession())
-                {
                     return session.Load<Tweet>(id);
-                }
         }
 
         public IEnumerable<ITweet> GetInboxTweets()
         {
             using (IDocumentSession session = _documentStore.OpenSession())
-            {
                 return session.
                     Query<Tweet>("TweetsByIsArchived").
                     Where(x => !x.IsArchived).
                     ToList();
-            }
         }
-
-        public event EventHandler<EventArgs> Updated = delegate { };
 
         #endregion
     }

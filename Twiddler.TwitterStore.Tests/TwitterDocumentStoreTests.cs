@@ -1,6 +1,5 @@
 ﻿using Moq;
 using Raven.Client;
-using Twiddler.TestData;
 using Twiddler.TwitterStore.Interfaces;
 using Twiddler.TwitterStore.Models;
 using Xunit;
@@ -34,18 +33,6 @@ namespace Twiddler.TwitterStore.Tests
 
             _fakeDocumentSession.Verify(x => x.Store(tweet));
             _fakeDocumentSession.Verify(x => x.Dispose());
-        }
-
-        [Fact]
-        public void Add_GivenTweet_RaisesUpdated()
-        {
-            var test = new TwitterDocumentStore(_fakeDocumentStoreFactory.Object);
-
-            bool eventRaised = false;
-            test.Updated += (sender, args) => eventRaised = true;
-            test.Add(A.Tweet.Build());
-
-            Assert.True(eventRaised);
         }
 
         [Fact]
