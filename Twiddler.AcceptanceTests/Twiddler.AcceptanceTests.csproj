@@ -51,6 +51,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApplicationSteps.cs" />
     <Compile Include="Authorization.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

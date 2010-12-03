@@ -29,7 +29,7 @@ namespace Twiddler.AcceptanceTests.TestEntities
         /// Launches an instance of Twiddler for testing.
         /// </summary>
         /// <returns>The launched instance.</returns>
-        public static TwiddlerApplication Launch(bool newStore = true)
+        public TwiddlerApplication(bool newStore)
         {
             var args = new StringBuilder();
             if (newStore)
@@ -42,28 +42,31 @@ namespace Twiddler.AcceptanceTests.TestEntities
             TestLog.WriteLine("Starting \"{0}\" {1}", path, args.ToString());
 
             var startInfo = new ProcessStartInfo(path, args.ToString()) {UseShellExecute = false};
-            Process process = Process.Start(startInfo);
+            _process = Process.Start(startInfo);
 
             try
             {
-                return new TwiddlerApplication(process,
-                                               Desktop.
-                                                   Window.
-                                                   OwnedBy(process).
-                                                   Titled("Twiddler"));
+                _shell = Desktop.
+                    Window.
+                    OwnedBy(_process).
+                    Titled("Twiddler");
             }
             catch (Exception)
             {
-                if (!process.HasExited)
-                    process.Kill();
+                if (!_process.HasExited)
+                    _process.Kill();
                 throw;
             }
+        }
+
+        public TwiddlerApplication()
+            : this(true)
+        {
         }
 
         private static void DeleteTemporaryStore()
         {
             while (Directory.Exists(TemporaryStorePath))
-            {
                 try
                 {
                     Directory.Delete(TemporaryStorePath, true);
@@ -72,13 +75,6 @@ namespace Twiddler.AcceptanceTests.TestEntities
                 {
                     Thread.Sleep(200);
                 }
-            }
-        }
-
-        private TwiddlerApplication(Process process, Window shell)
-        {
-            _process = process;
-            _shell = shell;
         }
 
         /// <summary>

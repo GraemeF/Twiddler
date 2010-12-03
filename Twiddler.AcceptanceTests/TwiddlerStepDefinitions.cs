@@ -3,29 +3,9 @@ using Twiddler.AcceptanceTests.TestEntities;
 
 namespace Twiddler.AcceptanceTests
 {
-    public class TwiddlerStepDefinitions
+    public class TwiddlerStepDefinitions : ApplicationSteps<TwiddlerApplication>
     {
-        protected static bool NewStore;
-        protected static TwiddlerApplication Twiddler;
         protected static TwitterService Twitter;
-
-        [Given(@"I have not previously authorized")]
-        public void GivenIHaveNotPreviouslyAuthorized()
-        {
-            NewStore = true;
-        }
-
-        protected void EnsureTwiddlerHasBeenStarted()
-        {
-            if (Twiddler == null)
-                Twiddler = TwiddlerApplication.Launch(NewStore);
-        }
-
-        [BeforeScenario]
-        public void ResetStartupParameters()
-        {
-            NewStore = true;
-        }
 
         [BeforeScenario]
         public void StartTwitterService()
@@ -34,14 +14,10 @@ namespace Twiddler.AcceptanceTests
             Twitter.Start();
         }
 
-        [AfterScenario]
-        public void StopApplication()
+        [Given(@"I have not previously authorized")]
+        public void GivenIHaveNotPreviouslyAuthorized()
         {
-            if (Twiddler != null)
-            {
-                Twiddler.Dispose();
-                Twiddler = null;
-            }
+            ScenarioContext.Current.Set(true, "NewStore");
         }
     }
 }

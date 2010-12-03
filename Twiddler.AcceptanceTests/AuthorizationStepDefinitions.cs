@@ -10,25 +10,19 @@ namespace Twiddler.AcceptanceTests
         [Then(@"I should be unauthorized")]
         public void ThenIShouldBeUnuathorized()
         {
-            EnsureTwiddlerHasBeenStarted();
-
-            Assert.Equal("Unauthorized", Twiddler.AuthorizationStatus, StringComparer.CurrentCultureIgnoreCase);
+            Assert.Equal("Unauthorized", Application.AuthorizationStatus, StringComparer.CurrentCultureIgnoreCase);
         }
 
         [Then(@"I should be authorized")]
         public void ThenIShouldBeAuthorized()
         {
-            EnsureTwiddlerHasBeenStarted();
-
-            Assert.Equal("Authorized", Twiddler.AuthorizationStatus, StringComparer.CurrentCultureIgnoreCase);
+            Assert.Equal("Authorized", Application.AuthorizationStatus, StringComparer.CurrentCultureIgnoreCase);
         }
 
         [When(@"I authorize with Twitter")]
         public void WhenIAuthorizeWithTwitter()
         {
-            EnsureTwiddlerHasBeenStarted();
-
-            Twiddler.Authorize();
+            Application.Authorize();
         }
 
         [Given(@"Twitter is unavailable")]
@@ -41,7 +35,7 @@ namespace Twiddler.AcceptanceTests
         [Then(@"authorization should fail")]
         public void ThenAuthorizationShouldFail()
         {
-            Assert.True(Twiddler.AuthorizationWindow.HasError);
+            Assert.True(Application.AuthorizationWindow.HasError);
         }
     }
 }
