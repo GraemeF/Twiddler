@@ -5,7 +5,7 @@ using Xunit;
 namespace Twiddler.AcceptanceTests
 {
     [Binding]
-    public class AuthorizationStepDefinitions : TwiddlerStepDefinitions
+    public class AuthorizationStepDefinitions : ApplicationSteps
     {
         [Then(@"I should be unauthorized")]
         public void ThenIShouldBeUnuathorized()

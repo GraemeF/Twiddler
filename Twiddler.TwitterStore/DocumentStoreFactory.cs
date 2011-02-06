@@ -9,6 +9,7 @@ using Raven.Client;
 using Raven.Client.Client;
 using Raven.Client.Document;
 using Raven.Client.Indexes;
+using Raven.Database.Config;
 using Twiddler.TwitterStore.Interfaces;
 using Twiddler.TwitterStore.Models;
 
@@ -19,6 +20,7 @@ namespace Twiddler.TwitterStore
     public class DocumentStoreFactory : IDocumentStoreFactory
     {
         private readonly Lazy<DocumentStore> _documentStore;
+        private bool _inMemory;
         private string _storeDirectory;
 
         public DocumentStoreFactory(StartupEventArgs args)
@@ -41,9 +43,12 @@ namespace Twiddler.TwitterStore
         private DocumentStore CreateDocumentStore()
         {
             var store = new EmbeddableDocumentStore
-            {
-                DataDirectory = _storeDirectory
-            };
+                            {
+                                Configuration = new RavenConfiguration {RunInMemory = _inMemory}
+                            };
+
+            if (!_inMemory && _storeDirectory != null)
+                store.DataDirectory = _storeDirectory;
 
             store.Initialize();
             CreateIndices(store);
@@ -55,10 +60,17 @@ namespace Twiddler.TwitterStore
         {
             var p = new OptionSet
                         {
-                            {"store=", "the path of the RavenDB store.", v => _storeDirectory = v}
+                            {"store=", "the path of the RavenDB store.", v => _storeDirectory = v},
+                            {"inMemory", "if set, use an in-memory RavenDB store.", v => RunInMemory()}
                         };
 
             p.Parse(args.Args);
+        }
+
+        private void RunInMemory()
+        {
+            _inMemory = true;
+            _storeDirectory = null;
         }
 
         private void CreateIndices(IDocumentStore documentStore)

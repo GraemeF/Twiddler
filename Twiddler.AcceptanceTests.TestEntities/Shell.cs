@@ -7,9 +7,9 @@ namespace Twiddler.AcceptanceTests.TestEntities
     {
         private readonly Window _window;
 
-        public Shell(Window window)
+        public Shell(Core.UIItems.WindowItems.Window window)
         {
-            _window = window;
+            _window = new Window {AutomationElement = window.AutomationElement};
         }
 
         public string AuthorizationStatus
@@ -39,6 +39,11 @@ namespace Twiddler.AcceptanceTests.TestEntities
                 In(Status).
                 Called("Authorize").First().
                 Click();
+        }
+
+        public void Close()
+        {
+            _window.AutomationElement.GetWindowPattern().Close();
         }
     }
 }

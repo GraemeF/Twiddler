@@ -31,6 +31,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="log4net">
+      <HintPath>..\Library\White\log4net.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -65,7 +68,6 @@
       <DependentUpon>Timeline.feature</DependentUpon>
     </Compile>
     <Compile Include="TimelineStepDefinitions.cs" />
-    <Compile Include="TwiddlerStepDefinitions.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">

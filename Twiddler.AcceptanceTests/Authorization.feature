@@ -7,14 +7,12 @@ Scenario: Not authorized
 	Given I have not previously authorized
 	Then I should be unauthorized
 
-@ignore
 Scenario: Twitter is unavailable for authorization
 	Given I have not previously authorized
 	And Twitter is unavailable
 	When I authorize with Twitter
 	Then authorization should fail
 
-@ignore
 Scenario: Successfully authorize
 	Given I have not previously authorized
 	When I authorize with Twitter

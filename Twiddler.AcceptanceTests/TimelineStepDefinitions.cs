@@ -3,7 +3,7 @@
 namespace Twiddler.AcceptanceTests
 {
     [Binding]
-    public class TimelineStepDefinitions
+    public class TimelineStepDefinitions : ApplicationSteps
     {
         [Given(@"I have an empty Timeline")]
         public void GivenIHaveAnEmptyTimeline()
