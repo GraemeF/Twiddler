@@ -4,8 +4,8 @@
     {
         public const string DefaultCredentialsId = "DefaultCredentials";
 
-        public AccessToken(string id,
-                           string token,
+        public AccessToken(string id, 
+                           string token, 
                            string secret)
         {
             Id = id;
@@ -13,11 +13,7 @@
             Token = token;
         }
 
-        #region IAccessToken Members
-
         public string Id { get; private set; }
-        public string TokenSecret { get; set; }
-        public string Token { get; set; }
 
         public bool IsValid
         {
@@ -28,6 +24,8 @@
             }
         }
 
-        #endregion
+        public string Token { get; set; }
+
+        public string TokenSecret { get; set; }
     }
 }

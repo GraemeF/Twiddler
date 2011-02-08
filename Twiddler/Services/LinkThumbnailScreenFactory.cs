@@ -1,22 +1,28 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.Composition;
-using System.ComponentModel.Composition.Hosting;
-using System.Linq;
-using Caliburn.Core.IoC;
-using Twiddler.Screens.Interfaces;
-using Twiddler.Services.Interfaces;
-
-namespace Twiddler.Services
+﻿namespace Twiddler.Services
 {
-    [Singleton(typeof (ILinkThumbnailScreenFactory))]
-    [Export(typeof (ILinkThumbnailScreenFactory))]
+    #region Using Directives
+
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel.Composition;
+    using System.ComponentModel.Composition.Hosting;
+    using System.Linq;
+
+    using Caliburn.Core.IoC;
+
+    using Twiddler.Screens.Interfaces;
+    using Twiddler.Services.Interfaces;
+
+    #endregion
+
+    [Singleton(typeof(ILinkThumbnailScreenFactory))]
+    [Export(typeof(ILinkThumbnailScreenFactory))]
     public class LinkThumbnailScreenFactory : ILinkThumbnailScreenFactory
     {
         private readonly Factories.ImageThumbnailScreenFactory _imageThumbnailScreenFactory;
 
         [ImportingConstructor]
-        public LinkThumbnailScreenFactory(CompositionContainer compositionContainer,
+        public LinkThumbnailScreenFactory(CompositionContainer compositionContainer, 
                                           Factories.ImageThumbnailScreenFactory imageThumbnailScreenFactory)
         {
             _imageThumbnailScreenFactory = imageThumbnailScreenFactory;
@@ -24,10 +30,10 @@ namespace Twiddler.Services
             compositionContainer.ComposeParts(this);
         }
 
-        [ImportMany(typeof (IImageUriDecoder))]
+        [ImportMany(typeof(IImageUriDecoder))]
         private IEnumerable<IImageUriDecoder> ImageUriDecoders { get; set; }
 
-        #region ILinkThumbnailScreenFactory Members
+        #region ILinkThumbnailScreenFactory members
 
         public ILinkThumbnailScreen CreateScreenForLink(Uri url)
         {

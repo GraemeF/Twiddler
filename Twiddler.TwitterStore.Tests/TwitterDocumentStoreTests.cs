@@ -1,15 +1,24 @@
-﻿using Moq;
-using Raven.Client;
-using Twiddler.TwitterStore.Interfaces;
-using Twiddler.TwitterStore.Models;
-using Xunit;
-
-namespace Twiddler.TwitterStore.Tests
+﻿namespace Twiddler.TwitterStore.Tests
 {
+    #region Using Directives
+
+    using Moq;
+
+    using Raven.Client;
+
+    using Twiddler.TwitterStore.Interfaces;
+    using Twiddler.TwitterStore.Models;
+
+    using Xunit;
+
+    #endregion
+
     public class TwitterDocumentStoreTests
     {
         private readonly Mock<IDocumentSession> _fakeDocumentSession = new Mock<IDocumentSession>();
+
         private readonly Mock<IDocumentStore> _fakeDocumentStore = new Mock<IDocumentStore>();
+
         private readonly Mock<IDocumentStoreFactory> _fakeDocumentStoreFactory = new Mock<IDocumentStoreFactory>();
 
         public TwitterDocumentStoreTests()

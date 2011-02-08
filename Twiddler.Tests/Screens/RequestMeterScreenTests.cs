@@ -1,18 +1,28 @@
-﻿using System;
-using System.ComponentModel;
-using Caliburn.Testability.Extensions;
-using Moq;
-using Twiddler.Screens;
-using Twiddler.Services.Interfaces;
-using Xunit;
-using Xunit.Extensions;
-
-namespace Twiddler.Tests.Screens
+﻿namespace Twiddler.Tests.Screens
 {
+    #region Using Directives
+
+    using System;
+    using System.ComponentModel;
+
+    using Caliburn.Testability.Extensions;
+
+    using Moq;
+
+    using Twiddler.Screens;
+    using Twiddler.Services.Interfaces;
+
+    using Xunit;
+    using Xunit.Extensions;
+
+    #endregion
+
     public class RequestMeterScreenTests
     {
         private static readonly DateTime EndOfPeriod = new DateTime(2000, 1, 1);
+
         private readonly Mock<IClock> _fakeClock = new Mock<IClock>();
+
         private readonly Mock<IRequestLimitStatus> _fakeRequestStatus = new Mock<IRequestLimitStatus>();
 
         public RequestMeterScreenTests()
@@ -20,19 +30,6 @@ namespace Twiddler.Tests.Screens
             _fakeRequestStatus.SetupAllProperties();
             _fakeRequestStatus.Object.PeriodEndTime = EndOfPeriod;
             _fakeRequestStatus.Setup(x => x.PeriodDuration).Returns(TimeSpan.FromMinutes(100));
-        }
-
-        [Fact]
-        public void Shutdown__UnsubscribesFromRequestStatusChanges()
-        {
-            RequestMeterScreen test = BuildDefaultTestSubject();
-
-            test.Initialize();
-            test.Shutdown();
-
-            test.PropertyChanged += (sender, args) => Assert.True(false);
-
-            PropertyChangesOnRequestStatus("RemainingHits");
         }
 
         [Fact]
@@ -61,14 +58,14 @@ namespace Twiddler.Tests.Screens
         }
 
         [Fact]
-        public void GettingRemainingTime__GetsFormattedRemainingTimeFromLimitStatus()
+        public void GettingRemainingHits__GetsRemainingHitsFromLimitStatus()
         {
-            TimeLeftInPeriodIs(new TimeSpan(0, 4, 11));
-
             RequestMeterScreen test = BuildDefaultTestSubject();
-            test.Initialize();
 
-            Assert.Equal("5m", test.RemainingTime);
+            const int remainingHits = 33;
+            _fakeRequestStatus.Object.RemainingHits = remainingHits;
+
+            Assert.Equal(remainingHits, test.RemainingHits);
         }
 
         [Fact]
@@ -83,36 +80,14 @@ namespace Twiddler.Tests.Screens
         }
 
         [Fact]
-        public void GettingRemainingHits__GetsRemainingHitsFromLimitStatus()
+        public void GettingRemainingTime__GetsFormattedRemainingTimeFromLimitStatus()
         {
-            RequestMeterScreen test = BuildDefaultTestSubject();
+            TimeLeftInPeriodIs(new TimeSpan(0, 4, 11));
 
-            const int remainingHits = 33;
-            _fakeRequestStatus.Object.RemainingHits = remainingHits;
-
-            Assert.Equal(remainingHits, test.RemainingHits);
-        }
-
-        [Fact]
-        public void RemainingHits_WhenChangedOnLimitStatus_RaisesPropertyChanged()
-        {
             RequestMeterScreen test = BuildDefaultTestSubject();
             test.Initialize();
 
-            test.
-                AssertThatChangeNotificationIsRaisedBy(x => x.RemainingHits).
-                When(() => PropertyChangesOnRequestStatus("RemainingHits"));
-        }
-
-        [Fact]
-        public void HourlyLimit_WhenChangedOnLimitStatus_RaisesPropertyChanged()
-        {
-            RequestMeterScreen test = BuildDefaultTestSubject();
-            test.Initialize();
-
-            test.
-                AssertThatChangeNotificationIsRaisedBy(x => x.HourlyLimit).
-                When(() => PropertyChangesOnRequestStatus("HourlyLimit"));
+            Assert.Equal("5m", test.RemainingTime);
         }
 
         [Theory]
@@ -148,22 +123,57 @@ namespace Twiddler.Tests.Screens
             Assert.Equal(fraction, test.UsedTimeFraction);
         }
 
-        private void TimeLeftInPeriodIs(TimeSpan remainingTime)
+        [Fact]
+        public void HourlyLimit_WhenChangedOnLimitStatus_RaisesPropertyChanged()
         {
-            _fakeClock.
-                Setup(x => x.Now).
-                Returns(EndOfPeriod - remainingTime);
+            RequestMeterScreen test = BuildDefaultTestSubject();
+            test.Initialize();
+
+            test.
+                AssertThatChangeNotificationIsRaisedBy(x => x.HourlyLimit).
+                When(() => PropertyChangesOnRequestStatus("HourlyLimit"));
         }
 
-        private void PropertyChangesOnRequestStatus(string propertyName)
+        [Fact]
+        public void RemainingHits_WhenChangedOnLimitStatus_RaisesPropertyChanged()
         {
-            _fakeRequestStatus.Raise(x => x.PropertyChanged += null,
-                                     new PropertyChangedEventArgs(propertyName));
+            RequestMeterScreen test = BuildDefaultTestSubject();
+            test.Initialize();
+
+            test.
+                AssertThatChangeNotificationIsRaisedBy(x => x.RemainingHits).
+                When(() => PropertyChangesOnRequestStatus("RemainingHits"));
+        }
+
+        [Fact]
+        public void Shutdown__UnsubscribesFromRequestStatusChanges()
+        {
+            RequestMeterScreen test = BuildDefaultTestSubject();
+
+            test.Initialize();
+            test.Shutdown();
+
+            test.PropertyChanged += (sender, args) => Assert.True(false);
+
+            PropertyChangesOnRequestStatus("RemainingHits");
         }
 
         private RequestMeterScreen BuildDefaultTestSubject()
         {
             return new RequestMeterScreen(_fakeRequestStatus.Object, _fakeClock.Object);
+        }
+
+        private void PropertyChangesOnRequestStatus(string propertyName)
+        {
+            _fakeRequestStatus.Raise(x => x.PropertyChanged += null, 
+                                     new PropertyChangedEventArgs(propertyName));
+        }
+
+        private void TimeLeftInPeriodIs(TimeSpan remainingTime)
+        {
+            _fakeClock.
+                Setup(x => x.Now).
+                Returns(EndOfPeriod - remainingTime);
         }
     }
 }

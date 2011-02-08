@@ -1,11 +1,16 @@
-﻿using System;
-using System.Threading;
-
-namespace Twiddler.TestData
+﻿namespace Twiddler.TestData
 {
+    #region Using Directives
+
+    using System;
+    using System.Threading;
+
+    #endregion
+
     public class Wait
     {
         private static readonly TimeSpan DefaultDuration = TimeSpan.FromSeconds(5.0);
+
         private static readonly TimeSpan DefaultPeriod = TimeSpan.FromSeconds(0.1);
 
         public static void Until(Func<bool> condition)

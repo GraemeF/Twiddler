@@ -1,16 +1,38 @@
-using System;
-using System.ComponentModel;
-using Moq;
-using Twiddler.Commands;
-using Twiddler.Core.Services;
-using Xunit;
-using Xunit.Extensions;
-
 namespace Twiddler.Tests.Commands
 {
+    #region Using Directives
+
+    using System;
+    using System.ComponentModel;
+
+    using Moq;
+
+    using Twiddler.Commands;
+    using Twiddler.Core.Services;
+
+    using Xunit;
+    using Xunit.Extensions;
+
+    #endregion
+
     public class DeauthorizeCommandTests
     {
         private readonly Mock<IAuthorizer> _fakeClient = new Mock<IAuthorizer>();
+
+        [Fact]
+        public void CanExecuteChanged_WhenAuthorizationStatusChanges_IsRaised()
+        {
+            bool eventRaised = false;
+
+            DeauthorizeCommand test = BuildDefaultTestSubject();
+
+            test.CanExecuteChanged += (sender, args) => eventRaised = true;
+
+            ClientAuthorizationStatusChangesTo(AuthorizationStatus.Verifying);
+            GC.KeepAlive(test);
+
+            Assert.True(eventRaised);
+        }
 
         [Fact]
         public void CanExecute_WhenAuthorized_ReturnsTrue()
@@ -37,21 +59,6 @@ namespace Twiddler.Tests.Commands
         }
 
         [Fact]
-        public void CanExecuteChanged_WhenAuthorizationStatusChanges_IsRaised()
-        {
-            bool eventRaised = false;
-
-            DeauthorizeCommand test = BuildDefaultTestSubject();
-
-            test.CanExecuteChanged += (sender, args) => eventRaised = true;
-
-            ClientAuthorizationStatusChangesTo(AuthorizationStatus.Verifying);
-            GC.KeepAlive(test);
-
-            Assert.True(eventRaised);
-        }
-
-        [Fact]
         public void Execute__DeauthorizesClient()
         {
             DeauthorizeCommand test = BuildDefaultTestSubject();
@@ -69,7 +76,7 @@ namespace Twiddler.Tests.Commands
         private void ClientAuthorizationStatusChangesTo(AuthorizationStatus status)
         {
             _fakeClient.Setup(x => x.AuthorizationStatus).Returns(status);
-            _fakeClient.Raise(x => x.PropertyChanged += null,
+            _fakeClient.Raise(x => x.PropertyChanged += null, 
                               new PropertyChangedEventArgs("AuthorizationStatus"));
         }
     }

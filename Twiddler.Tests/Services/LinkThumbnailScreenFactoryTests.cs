@@ -1,25 +1,35 @@
-﻿using System;
-using System.ComponentModel.Composition;
-using System.ComponentModel.Composition.Hosting;
-using Moq;
-using Twiddler.Models;
-using Twiddler.Screens.Interfaces;
-using Twiddler.Services;
-using Twiddler.Services.Interfaces;
-using Xunit;
-
-namespace Twiddler.Tests.Services
+﻿namespace Twiddler.Tests.Services
 {
+    #region Using Directives
+
+    using System;
+    using System.ComponentModel.Composition;
+    using System.ComponentModel.Composition.Hosting;
+
+    using Moq;
+
+    using Twiddler.Models;
+    using Twiddler.Screens.Interfaces;
+    using Twiddler.Services;
+    using Twiddler.Services.Interfaces;
+
+    using Xunit;
+
+    #endregion
+
     public class LinkThumbnailScreenFactoryTests
     {
         private static readonly Uri KnownUri = new Uri("http://known.host.com/a/picture");
+
         private static readonly Uri UnknownUri = new Uri("http://unknown.host.com/a/picture");
+
         private readonly CompositionContainer _compostionContainer;
+
         private readonly IImageThumbnailScreen _imageThumbnailScreen = new Mock<IImageThumbnailScreen>().Object;
 
         public LinkThumbnailScreenFactoryTests()
         {
-            _compostionContainer = new CompositionContainer(new TypeCatalog(typeof (TestDecoder)));
+            _compostionContainer = new CompositionContainer(new TypeCatalog(typeof(TestDecoder)));
         }
 
         [Fact]
@@ -40,16 +50,14 @@ namespace Twiddler.Tests.Services
 
         private LinkThumbnailScreenFactory BuildDefaultTestSubject()
         {
-            return new LinkThumbnailScreenFactory(_compostionContainer,
+            return new LinkThumbnailScreenFactory(_compostionContainer, 
                                                   x => _imageThumbnailScreen);
         }
 
-        #region Nested type: TestDecoder
-
-        [Export(typeof (IImageUriDecoder))]
+        [Export(typeof(IImageUriDecoder))]
         public class TestDecoder : IImageUriDecoder
         {
-            #region IImageUriDecoder Members
+            #region IImageUriDecoder members
 
             public bool CanGetImageLocations(Uri uri)
             {
@@ -63,7 +71,5 @@ namespace Twiddler.Tests.Services
 
             #endregion
         }
-
-        #endregion
     }
 }

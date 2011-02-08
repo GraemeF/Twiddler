@@ -1,21 +1,23 @@
-﻿using System;
-using System.ComponentModel.Composition;
-using Caliburn.Core.IoC;
-using Twiddler.Services.Interfaces;
-
-namespace Twiddler.Services
+﻿namespace Twiddler.Services
 {
-    [Singleton(typeof (IClock))]
-    [Export(typeof (IClock))]
+    #region Using Directives
+
+    using System;
+    using System.ComponentModel.Composition;
+
+    using Caliburn.Core.IoC;
+
+    using Twiddler.Services.Interfaces;
+
+    #endregion
+
+    [Singleton(typeof(IClock))]
+    [Export(typeof(IClock))]
     public class Clock : IClock
     {
-        #region IClock Members
-
         public DateTime Now
         {
             get { return DateTime.Now; }
         }
-
-        #endregion
     }
 }

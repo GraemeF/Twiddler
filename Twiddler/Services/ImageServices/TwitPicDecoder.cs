@@ -1,20 +1,27 @@
-﻿using System;
-using System.ComponentModel.Composition;
-using System.Linq;
-using Caliburn.Core.IoC;
-using Twiddler.Models;
-using Twiddler.Services.Interfaces;
-
-namespace Twiddler.Services.ImageServices
+﻿namespace Twiddler.Services.ImageServices
 {
-    [Singleton(typeof (IImageUriDecoder))]
-    [Export(typeof (IImageUriDecoder))]
+    #region Using Directives
+
+    using System;
+    using System.ComponentModel.Composition;
+    using System.Linq;
+
+    using Caliburn.Core.IoC;
+
+    using Twiddler.Models;
+    using Twiddler.Services.Interfaces;
+
+    #endregion
+
+    [Singleton(typeof(IImageUriDecoder))]
+    [Export(typeof(IImageUriDecoder))]
     public class TwitPicDecoder : IImageUriDecoder
     {
         private static readonly Uri LinkBase = new Uri("http://twitpic.com/");
+
         private static readonly Uri ThumbBase = new Uri(LinkBase, "show/mini/");
 
-        #region IImageUriDecoder Members
+        #region IImageUriDecoder members
 
         public bool CanGetImageLocations(Uri uri)
         {
@@ -28,8 +35,8 @@ namespace Twiddler.Services.ImageServices
 
             return new ImageLocations
                        {
-                           Link = new Uri(LinkBase, imageId),
-                           FullSize = null,
+                           Link = new Uri(LinkBase, imageId), 
+                           FullSize = null, 
                            Thumbnail = new Uri(ThumbBase, imageId)
                        };
         }

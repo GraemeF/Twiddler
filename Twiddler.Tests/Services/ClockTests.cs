@@ -1,9 +1,15 @@
-﻿using System;
-using Twiddler.Services;
-using Xunit;
-
-namespace Twiddler.Tests.Services
+﻿namespace Twiddler.Tests.Services
 {
+    #region Using Directives
+
+    using System;
+
+    using Twiddler.Services;
+
+    using Xunit;
+
+    #endregion
+
     public class ClockTests
     {
         [Fact]

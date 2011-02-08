@@ -1,13 +1,20 @@
-﻿using System;
-using System.ComponentModel;
-
-namespace Twiddler.Services.Interfaces
+﻿namespace Twiddler.Services.Interfaces
 {
+    #region Using Directives
+
+    using System;
+    using System.ComponentModel;
+
+    #endregion
+
     public interface IRequestLimitStatus : INotifyPropertyChanged
     {
         int HourlyLimit { get; set; }
-        int RemainingHits { get; set; }
-        DateTime PeriodEndTime { get; set; }
+
         TimeSpan PeriodDuration { get; set; }
+
+        DateTime PeriodEndTime { get; set; }
+
+        int RemainingHits { get; set; }
     }
 }

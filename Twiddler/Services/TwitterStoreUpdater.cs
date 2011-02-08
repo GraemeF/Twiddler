@@ -1,14 +1,21 @@
-﻿using System.ComponentModel.Composition;
-using Caliburn.Core.IoC;
-using Twiddler.Services.Interfaces;
-
-namespace Twiddler.Services
+﻿namespace Twiddler.Services
 {
-    [Singleton(typeof (ITimelineUpdater))]
-    [Export(typeof (ITimelineUpdater))]
+    #region Using Directives
+
+    using System.ComponentModel.Composition;
+
+    using Caliburn.Core.IoC;
+
+    using Twiddler.Services.Interfaces;
+
+    #endregion
+
+    [Singleton(typeof(ITimelineUpdater))]
+    [Export(typeof(ITimelineUpdater))]
     public class TimelineUpdater : ITimelineUpdater
     {
         private readonly IRequestConductor _requestConductor;
+
         private readonly ITimeline _timeline;
 
         [ImportingConstructor]
@@ -18,7 +25,7 @@ namespace Twiddler.Services
             _timeline = timeline;
         }
 
-        #region ITimelineUpdater Members
+        #region ITimelineUpdater members
 
         public void Start()
         {

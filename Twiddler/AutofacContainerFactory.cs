@@ -1,15 +1,24 @@
-﻿using System.ComponentModel.Composition.Hosting;
-using System.ComponentModel.Composition.Primitives;
-using Autofac;
-using Caliburn.Autofac;
-using Microsoft.Practices.ServiceLocation;
-using Twiddler.Screens.Interfaces;
-
-namespace Twiddler
+﻿namespace Twiddler
 {
+    #region Using Directives
+
+    using System.ComponentModel.Composition.Hosting;
+    using System.ComponentModel.Composition.Primitives;
+
+    using Autofac;
+
+    using Caliburn.Autofac;
+
+    using Microsoft.Practices.ServiceLocation;
+
+    using Twiddler.Screens.Interfaces;
+
+    #endregion
+
     internal class AutofacContainerFactory : IContainerFactory
     {
         private readonly ComposablePartCatalog _catalog;
+
         private IContainer _container;
 
         public AutofacContainerFactory(ComposablePartCatalog catalog)
@@ -17,7 +26,7 @@ namespace Twiddler
             _catalog = catalog;
         }
 
-        #region IContainerFactory Members
+        #region IContainerFactory members
 
         public IServiceLocator CreateContainer()
         {

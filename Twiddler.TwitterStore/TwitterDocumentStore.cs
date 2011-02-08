@@ -1,17 +1,24 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel.Composition;
-using System.Linq;
-using Caliburn.Core.IoC;
-using Raven.Client;
-using Twiddler.Core.Models;
-using Twiddler.Core.Services;
-using Twiddler.TwitterStore.Interfaces;
-using Twiddler.TwitterStore.Models;
-
-namespace Twiddler.TwitterStore
+﻿namespace Twiddler.TwitterStore
 {
-    [Singleton(typeof (ITweetStore))]
-    [Export(typeof (ITweetStore))]
+    #region Using Directives
+
+    using System.Collections.Generic;
+    using System.ComponentModel.Composition;
+    using System.Linq;
+
+    using Caliburn.Core.IoC;
+
+    using Raven.Client;
+
+    using Twiddler.Core.Models;
+    using Twiddler.Core.Services;
+    using Twiddler.TwitterStore.Interfaces;
+    using Twiddler.TwitterStore.Models;
+
+    #endregion
+
+    [Singleton(typeof(ITweetStore))]
+    [Export(typeof(ITweetStore))]
     public class TwitterDocumentStore : ITweetStore
     {
         private readonly IDocumentStore _documentStore;
@@ -24,7 +31,18 @@ namespace Twiddler.TwitterStore
             _documentStore = documentStoreFactory.GetDocumentStore();
         }
 
-        #region ITweetStore Members
+        #region ITweetResolver members
+
+        public ITweet GetTweet(string id)
+        {
+            lock (_mutex)
+                using (IDocumentSession session = _documentStore.OpenSession())
+                    return session.Load<Tweet>(id);
+        }
+
+        #endregion
+
+        #region ITweetSink members
 
         public void Add(ITweet tweet)
         {
@@ -48,12 +66,9 @@ namespace Twiddler.TwitterStore
                 }
         }
 
-        public ITweet GetTweet(string id)
-        {
-            lock (_mutex)
-                using (IDocumentSession session = _documentStore.OpenSession())
-                    return session.Load<Tweet>(id);
-        }
+        #endregion
+
+        #region ITweetStore members
 
         public IEnumerable<ITweet> GetInboxTweets()
         {

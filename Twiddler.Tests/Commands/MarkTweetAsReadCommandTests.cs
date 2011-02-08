@@ -1,35 +1,35 @@
-﻿using Moq;
-using Twiddler.Commands;
-using Twiddler.Core.Models;
-using Twiddler.Core.Services;
-using Twiddler.TestData;
-using Xunit;
-
-namespace Twiddler.Tests.Commands
+﻿namespace Twiddler.Tests.Commands
 {
+    #region Using Directives
+
+    using Moq;
+
+    using Twiddler.Commands;
+    using Twiddler.Core.Models;
+    using Twiddler.Core.Services;
+    using Twiddler.TestData;
+
+    using Xunit;
+
+    #endregion
+
     public class MarkTweetAsReadCommandTests
     {
         private readonly Mock<ITweetStore> _fakeStore = new Mock<ITweetStore>();
+
         private readonly ITweet _tweet = A.Tweet.Build();
 
         [Fact]
-        public void Execute_WhenTweetIsNotRead_MarksTweetAsRead()
+        public void CanExecuteChanged_WhenTweetBecomesRead_IsRaised()
         {
             MarkTweetAsReadCommand test = BuildDefaultTestSubject();
 
-            test.Execute(null);
+            bool eventRaised = false;
+            test.CanExecuteChanged += (sender, args) => eventRaised = true;
 
-            Assert.True(_tweet.IsRead);
-        }
+            _tweet.MarkAsRead();
 
-        [Fact]
-        public void Execute_WhenTweetIsNotRead_SavesTweetToStore()
-        {
-            MarkTweetAsReadCommand test = BuildDefaultTestSubject();
-
-            test.Execute(null);
-
-            _fakeStore.Verify(x => x.Add(_tweet));
+            Assert.True(eventRaised);
         }
 
         [Fact]
@@ -49,16 +49,23 @@ namespace Twiddler.Tests.Commands
         }
 
         [Fact]
-        public void CanExecuteChanged_WhenTweetBecomesRead_IsRaised()
+        public void Execute_WhenTweetIsNotRead_MarksTweetAsRead()
         {
             MarkTweetAsReadCommand test = BuildDefaultTestSubject();
 
-            bool eventRaised = false;
-            test.CanExecuteChanged += (sender, args) => eventRaised = true;
+            test.Execute(null);
 
-            _tweet.MarkAsRead();
+            Assert.True(_tweet.IsRead);
+        }
 
-            Assert.True(eventRaised);
+        [Fact]
+        public void Execute_WhenTweetIsNotRead_SavesTweetToStore()
+        {
+            MarkTweetAsReadCommand test = BuildDefaultTestSubject();
+
+            test.Execute(null);
+
+            _fakeStore.Verify(x => x.Add(_tweet));
         }
 
         private MarkTweetAsReadCommand BuildDefaultTestSubject()

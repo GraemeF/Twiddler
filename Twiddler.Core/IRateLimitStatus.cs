@@ -1,11 +1,17 @@
-﻿using System;
-
-namespace Twiddler.Core
+﻿namespace Twiddler.Core
 {
+    #region Using Directives
+
+    using System;
+
+    #endregion
+
     public interface IRateLimitStatus
     {
         int HourlyLimit { get; }
-        DateTime ResetTime { get; }
+
         int RemainingHits { get; }
+
+        DateTime ResetTime { get; }
     }
 }

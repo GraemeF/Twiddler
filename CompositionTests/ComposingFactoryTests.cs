@@ -1,18 +1,40 @@
-﻿using System;
-using System.ComponentModel.Composition;
-using System.ComponentModel.Composition.Hosting;
-using System.ComponentModel.Composition.Primitives;
-using Xunit;
-
-namespace CompositionTests
+﻿namespace CompositionTests
 {
+    #region Using Directives
+
+    using System;
+    using System.ComponentModel.Composition;
+    using System.ComponentModel.Composition.Hosting;
+    using System.ComponentModel.Composition.Primitives;
+
+    using Xunit;
+
+    #endregion
+
     public class ComposingFactoryTests
     {
+        [Fact(Skip = "This is needed for MEF support.")]
+        public void ComposeWith_GivenCatalog_ReturnsInstanceWithInstance()
+        {
+            var typeCatalog = new TypeCatalog(typeof(File), 
+                                              typeof(Folder), 
+                                              typeof(Disk));
+            var container =
+                new CompositionContainer(typeCatalog);
+
+            var test = new ComposingFactory(container);
+
+            var file = new File();
+
+            IDisposable childCatalog;
+            Assert.Same(file, test.ComposeWith<Folder>(typeCatalog, out childCatalog, file).File);
+        }
+
         [Fact(Skip = "This is needed for MEF support.")]
         public void ComposeWith_WhenComposedTypeImportsInjectedType_ReturnsInstanceOfComposedTypeWithInjectedInstance()
         {
             // Shouldn't need to have the File type in the catalog as we are providing the instance
-            var container = new CompositionContainer(new TypeCatalog(typeof (Folder)));
+            var container = new CompositionContainer(new TypeCatalog(typeof(Folder)));
 
             // The factory has the root container which it can use to resolve Folder
             var test = new ComposingFactory(container);
@@ -27,25 +49,6 @@ namespace CompositionTests
             Assert.Same(file, composedFolder.File);
         }
 
-        [Fact(Skip = "This is needed for MEF support.")]
-        public void ComposeWith_GivenCatalog_ReturnsInstanceWithInstance()
-        {
-            var typeCatalog = new TypeCatalog(typeof (File),
-                                              typeof (Folder),
-                                              typeof (Disk));
-            var container =
-                new CompositionContainer(typeCatalog);
-
-            var test = new ComposingFactory(container);
-
-            var file = new File();
-
-            IDisposable childCatalog;
-            Assert.Same(file, test.ComposeWith<Folder>(typeCatalog, out childCatalog, file).File);
-        }
-
-        #region Nested type: Disk
-
         [Export]
         private class Disk
         {
@@ -53,17 +56,9 @@ namespace CompositionTests
             public Folder Folder { get; set; }
         }
 
-        #endregion
-
-        #region Nested type: File
-
         private class File
         {
         }
-
-        #endregion
-
-        #region Nested type: Folder
 
         [Export]
         private class Folder
@@ -71,11 +66,9 @@ namespace CompositionTests
             [Import]
             public File File { get; set; }
         }
-
-        #endregion
     }
 
-    [Export(typeof (IComposingFactory))]
+    [Export(typeof(IComposingFactory))]
     public class ComposingFactory : IComposingFactory
     {
         private readonly CompositionContainer _container;
@@ -86,7 +79,18 @@ namespace CompositionTests
             _container = container;
         }
 
-        #region IComposingFactory Members
+        // child catalog is a filtered catalog that contains only parts that should appear in the child (including TPart)
+        public TPart ComposeWith<TPart>(ComposablePartCatalog childCatalog, 
+                                        out IDisposable disposable, 
+                                        params object[] imports)
+        {
+            var childContainer = new CompositionContainer(childCatalog, _container);
+            childContainer.ComposeParts(imports);
+            disposable = childContainer;
+            return childContainer.GetExportedValue<TPart>();
+        }
+
+        #region IComposingFactory members
 
         public TPart ComposeWith<TPart, TInject>(TInject injectedObject)
         {
@@ -96,17 +100,6 @@ namespace CompositionTests
         }
 
         #endregion
-
-        //child catalog is a filtered catalog that contains only parts that should appear in the child (including TPart)
-        public TPart ComposeWith<TPart>(ComposablePartCatalog childCatalog,
-                                        out IDisposable disposable,
-                                        params object[] imports)
-        {
-            var childContainer = new CompositionContainer(childCatalog, _container);
-            childContainer.ComposeParts(imports);
-            disposable = childContainer;
-            return childContainer.GetExportedValue<TPart>();
-        }
     }
 
     public interface IComposingFactory

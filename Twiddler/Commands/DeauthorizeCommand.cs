@@ -1,16 +1,22 @@
-using System.ComponentModel.Composition;
-using Caliburn.Core.IoC;
-using Twiddler.Commands.Interfaces;
-using Twiddler.Core.Commands;
-using Twiddler.Core.Services;
-using Twiddler.Services.Interfaces;
-
 namespace Twiddler.Commands
 {
-    [PerRequest(typeof (IDeauthorizeCommand))]
-    [Export(typeof (IDeauthorizeCommand))]
+    #region Using Directives
+
+    using System.ComponentModel.Composition;
+
+    using Caliburn.Core.IoC;
+
+    using Twiddler.Commands.Interfaces;
+    using Twiddler.Core.Commands;
+    using Twiddler.Core.Services;
+
+    #endregion
+
+    [PerRequest(typeof(IDeauthorizeCommand))]
+    [Export(typeof(IDeauthorizeCommand))]
     [PartCreationPolicy(CreationPolicy.NonShared)]
-    public class DeauthorizeCommand : AuthorizationCommand, IDeauthorizeCommand
+    public class DeauthorizeCommand : AuthorizationCommand, 
+                                      IDeauthorizeCommand
     {
         [ImportingConstructor]
         public DeauthorizeCommand(IAuthorizer client)
@@ -18,7 +24,7 @@ namespace Twiddler.Commands
         {
         }
 
-        #region IDeauthorizeCommand Members
+        #region ICommand members
 
         public override void Execute(object parameter)
         {

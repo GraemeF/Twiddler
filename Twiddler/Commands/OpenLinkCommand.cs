@@ -1,14 +1,20 @@
-﻿using System;
-using System.ComponentModel.Composition;
-using System.Diagnostics;
-using Caliburn.Core.IoC;
-using Twiddler.Commands.Interfaces;
-using Twiddler.Core;
-
-namespace Twiddler.Commands
+﻿namespace Twiddler.Commands
 {
-    [Singleton(typeof (IOpenLinkCommand))]
-    [Export(typeof (IOpenLinkCommand))]
+    #region Using Directives
+
+    using System;
+    using System.ComponentModel.Composition;
+    using System.Diagnostics;
+
+    using Caliburn.Core.IoC;
+
+    using Twiddler.Commands.Interfaces;
+    using Twiddler.Core;
+
+    #endregion
+
+    [Singleton(typeof(IOpenLinkCommand))]
+    [Export(typeof(IOpenLinkCommand))]
     [NoCoverage]
     public class OpenLinkCommand : IOpenLinkCommand
     {
@@ -16,7 +22,7 @@ namespace Twiddler.Commands
 
         public void Execute(object parameter)
         {
-            Process.Start(parameter.ToString(), "");
+            Process.Start(parameter.ToString(), string.Empty);
         }
 
         public bool CanExecute(object parameter)

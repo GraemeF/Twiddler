@@ -1,11 +1,17 @@
-﻿using System.Collections.Generic;
-using Twiddler.Core.Models;
-using Twiddler.Services;
-using Twiddler.TestData;
-using Xunit;
-
-namespace Twiddler.Tests.Services
+﻿namespace Twiddler.Tests.Services
 {
+    #region Using Directives
+
+    using System.Collections.Generic;
+
+    using Twiddler.Core.Models;
+    using Twiddler.Services;
+    using Twiddler.TestData;
+
+    using Xunit;
+
+    #endregion
+
     public class MemoryTweetStoreTests
     {
         [Fact]
@@ -24,7 +30,7 @@ namespace Twiddler.Tests.Services
         {
             var test = new MemoryTweetStore();
 
-            Assert.Throws(typeof (KeyNotFoundException),
+            Assert.Throws(typeof(KeyNotFoundException), 
                           () => test.GetTweet("456"));
         }
     }

@@ -1,12 +1,20 @@
-﻿using System;
-using TechTalk.SpecFlow;
-using Twiddler.AcceptanceTests.TestEntities;
-
-namespace Twiddler.AcceptanceTests
+﻿namespace Twiddler.AcceptanceTests
 {
+    #region Using Directives
+
+    using System;
+
+    using TechTalk.SpecFlow;
+
+    using Twiddler.AcceptanceTests.TestEntities;
+
+    #endregion
+
     [Binding]
     public class ApplicationSteps
     {
+        protected static TwitterService Twitter;
+
         protected static TwiddlerApplication Application
         {
             get
@@ -26,12 +34,11 @@ namespace Twiddler.AcceptanceTests
                 disposable.Dispose();
         }
 
-        protected static void Launch()
+        [Given(@"I have not previously authorized")]
+        public void GivenIHaveNotPreviouslyAuthorized()
         {
-            var application = new TwiddlerApplication();
-            ScenarioContext.Current.Add("Application", application);
+            ScenarioContext.Current.Set(true, "NewStore");
         }
-        protected static TwitterService Twitter;
 
         [BeforeScenario]
         public void StartTwitterService()
@@ -40,10 +47,10 @@ namespace Twiddler.AcceptanceTests
             Twitter.Start();
         }
 
-        [Given(@"I have not previously authorized")]
-        public void GivenIHaveNotPreviouslyAuthorized()
+        protected static void Launch()
         {
-            ScenarioContext.Current.Set(true, "NewStore");
+            var application = new TwiddlerApplication();
+            ScenarioContext.Current.Add("Application", application);
         }
     }
 }

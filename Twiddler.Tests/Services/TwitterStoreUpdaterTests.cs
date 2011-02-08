@@ -1,13 +1,20 @@
-using Moq;
-using Twiddler.Services;
-using Twiddler.Services.Interfaces;
-using Xunit;
-
 namespace Twiddler.Tests.Services
 {
+    #region Using Directives
+
+    using Moq;
+
+    using Twiddler.Services;
+    using Twiddler.Services.Interfaces;
+
+    using Xunit;
+
+    #endregion
+
     public class TimelineUpdaterTests
     {
         private readonly Mock<IRequestConductor> _fakeRequestConductor = new Mock<IRequestConductor>();
+
         private readonly Mock<ITimeline> _fakeStore = new Mock<ITimeline>();
 
         [Fact]

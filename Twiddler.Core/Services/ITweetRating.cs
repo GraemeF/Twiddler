@@ -1,10 +1,15 @@
-﻿using System.ComponentModel;
-
-namespace Twiddler.Core.Services
+﻿namespace Twiddler.Core.Services
 {
+    #region Using Directives
+
+    using System.ComponentModel;
+
+    #endregion
+
     public interface ITweetRating : INotifyPropertyChanged
     {
-        bool IsMention { get; }
         bool IsDirectMessage { get; }
+
+        bool IsMention { get; }
     }
 }

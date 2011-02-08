@@ -1,14 +1,21 @@
-﻿using System.ComponentModel.Composition;
-using Caliburn.Core.IoC;
-using Raven.Client;
-using Twiddler.Core.Models;
-using Twiddler.Core.Services;
-using Twiddler.TwitterStore.Interfaces;
-
-namespace Twiddler.TwitterStore
+﻿namespace Twiddler.TwitterStore
 {
-    [Singleton(typeof (IAccessTokenStore))]
-    [Export(typeof (IAccessTokenStore))]
+    #region Using Directives
+
+    using System.ComponentModel.Composition;
+
+    using Caliburn.Core.IoC;
+
+    using Raven.Client;
+
+    using Twiddler.Core.Models;
+    using Twiddler.Core.Services;
+    using Twiddler.TwitterStore.Interfaces;
+
+    #endregion
+
+    [Singleton(typeof(IAccessTokenStore))]
+    [Export(typeof(IAccessTokenStore))]
     public class AccessTokenDocumentStore : IAccessTokenStore
     {
         private readonly IDocumentStore _documentStore;
@@ -21,7 +28,15 @@ namespace Twiddler.TwitterStore
             _documentStore = documentStoreFactory.GetDocumentStore();
         }
 
-        #region IAccessTokenStore Members
+        #region IAccessTokenStore members
+
+        public AccessToken Load(string id)
+        {
+            lock (_mutex)
+                using (IDocumentSession session = _documentStore.OpenSession())
+                    return session.Load<AccessToken>(id)
+                           ?? new AccessToken(id, null, null);
+        }
 
         public void Save(AccessToken accessToken)
         {
@@ -30,16 +45,6 @@ namespace Twiddler.TwitterStore
                 {
                     session.Store(accessToken);
                     session.SaveChanges();
-                }
-        }
-
-        public AccessToken Load(string id)
-        {
-            lock (_mutex)
-                using (IDocumentSession session = _documentStore.OpenSession())
-                {
-                    return session.Load<AccessToken>(id)
-                           ?? new AccessToken(id, null, null);
                 }
         }
 

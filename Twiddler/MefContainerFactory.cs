@@ -1,15 +1,23 @@
-﻿using System;
-using System.ComponentModel.Composition.Hosting;
-using System.ComponentModel.Composition.Primitives;
-using Caliburn.MEF;
-using Microsoft.Practices.ServiceLocation;
-using Twiddler.Screens.Interfaces;
-
-namespace Twiddler
+﻿namespace Twiddler
 {
+    #region Using Directives
+
+    using System;
+    using System.ComponentModel.Composition.Hosting;
+    using System.ComponentModel.Composition.Primitives;
+
+    using Caliburn.MEF;
+
+    using Microsoft.Practices.ServiceLocation;
+
+    using Twiddler.Screens.Interfaces;
+
+    #endregion
+
     internal class MefContainerFactory : IContainerFactory
     {
         private readonly ComposablePartCatalog _catalog;
+
         private CompositionContainer _compositionContainer;
 
         public MefContainerFactory(ComposablePartCatalog catalog)
@@ -17,7 +25,7 @@ namespace Twiddler
             _catalog = catalog;
         }
 
-        #region IContainerFactory Members
+        #region IContainerFactory members
 
         public IServiceLocator CreateContainer()
         {

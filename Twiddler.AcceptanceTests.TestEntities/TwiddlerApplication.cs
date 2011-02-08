@@ -1,18 +1,27 @@
-﻿using System;
-using System.Diagnostics;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using Core;
-using Core.UIItems.WindowItems;
-using Gallio.Framework;
-using MbUnit.Framework;
-using Twiddler.AcceptanceTests.TestEntities.Properties;
-using Desktop = Fluid.Desktop;
-
-namespace Twiddler.AcceptanceTests.TestEntities
+﻿namespace Twiddler.AcceptanceTests.TestEntities
 {
+    #region Using Directives
+
+    using System;
+    using System.Diagnostics;
+    using System.IO;
+    using System.Linq;
+    using System.Text;
+    using System.Threading;
+
+    using Core;
+    using Core.UIItems.WindowItems;
+
+    using Gallio.Framework;
+
+    using MbUnit.Framework;
+
+    using Twiddler.AcceptanceTests.TestEntities.Properties;
+
+    using Desktop = Fluid.Desktop;
+
+    #endregion
+
     public class TwiddlerApplication : IDisposable
     {
         private readonly Application _application;
@@ -24,14 +33,21 @@ namespace Twiddler.AcceptanceTests.TestEntities
 #else
         private const string Configuration = "Release";
 #endif
+
         private const string ApplicationPath = @"..\..\..\Twiddler\bin\" + Configuration + @"\Twiddler.exe";
 
         #endregion
 
         /// <summary>
-        /// Launches an instance of Twiddler for testing.
+        /// Initializes a new instance of the <see cref="TwiddlerApplication"/> class. 
+        /// 	Launches an instance of Twiddler for testing.
         /// </summary>
-        /// <returns>The launched instance.</returns>
+        /// <param name="newStore">
+        /// The new Store.
+        /// </param>
+        /// <returns>
+        /// The launched instance.
+        /// </returns>
         public TwiddlerApplication(bool newStore)
         {
             var args = new StringBuilder();
@@ -42,7 +58,10 @@ namespace Twiddler.AcceptanceTests.TestEntities
             string path = Path.GetFullPath(ApplicationPath);
             TestLog.WriteLine("Starting \"{0}\" {1}", path, args.ToString());
 
-            var startInfo = new ProcessStartInfo(path, args.ToString()) {UseShellExecute = false};
+            var startInfo = new ProcessStartInfo(path, args.ToString())
+                                {
+                                    UseShellExecute = false
+                                };
             _application = Application.Launch(startInfo);
 
             try
@@ -76,7 +95,7 @@ namespace Twiddler.AcceptanceTests.TestEntities
         }
 
         /// <summary>
-        /// Gets the shell window.
+        /// 	Gets the shell window.
         /// </summary>
         /// <value>The shell window.</value>
         public Shell Shell { get; private set; }
@@ -109,6 +128,7 @@ namespace Twiddler.AcceptanceTests.TestEntities
                     _application.Kill();
                     throw new ApplicationException("The application did not close after 10 seconds.", ex);
                 }
+
                 throw;
             }
         }

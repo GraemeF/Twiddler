@@ -1,17 +1,25 @@
-﻿using System;
-using System.ComponentModel.Composition.Hosting;
-using System.ComponentModel.Composition.Primitives;
-using Caliburn.Unity;
-using Microsoft.Practices.ServiceLocation;
-using Microsoft.Practices.Unity;
-using Twiddler.Screens.Interfaces;
-using Twiddler.Services.Interfaces;
-
-namespace Twiddler
+﻿namespace Twiddler
 {
+    #region Using Directives
+
+    using System;
+    using System.ComponentModel.Composition.Hosting;
+    using System.ComponentModel.Composition.Primitives;
+
+    using Caliburn.Unity;
+
+    using Microsoft.Practices.ServiceLocation;
+    using Microsoft.Practices.Unity;
+
+    using Twiddler.Screens.Interfaces;
+    using Twiddler.Services.Interfaces;
+
+    #endregion
+
     internal class UnityContainerFactory : IContainerFactory
     {
         private readonly ComposablePartCatalog _catalog;
+
         private IUnityContainer _container;
 
         public UnityContainerFactory(ComposablePartCatalog catalog)
@@ -19,7 +27,7 @@ namespace Twiddler
             _catalog = catalog;
         }
 
-        #region IContainerFactory Members
+        #region IContainerFactory members
 
         public IServiceLocator CreateContainer()
         {

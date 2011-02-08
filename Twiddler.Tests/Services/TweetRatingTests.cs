@@ -1,17 +1,32 @@
-﻿using Moq;
-using Twiddler.Core.Models;
-using Twiddler.Core.Services;
-using Twiddler.Services;
-using Twiddler.Services.Interfaces;
-using Twiddler.TestData;
-using Xunit;
-
-namespace Twiddler.Tests.Services
+﻿namespace Twiddler.Tests.Services
 {
+    #region Using Directives
+
+    using Moq;
+
+    using Twiddler.Core.Models;
+    using Twiddler.Core.Services;
+    using Twiddler.Services;
+    using Twiddler.TestData;
+
+    using Xunit;
+
+    #endregion
+
     public class TweetRatingTests
     {
         private ITweet _tweet;
+
         private User _user = A.User;
+
+        [Fact]
+        public void GettingIsMention_WhenTheUserIsMentioned_ReturnsTrue()
+        {
+            _tweet = A.Tweet.Mentioning(_user.ScreenName).Build();
+            TweetRating test = BuildDefaultTestSubject();
+
+            Assert.True(test.IsMention);
+        }
 
         [Fact]
         public void GettingIsMention_WhenTheUserIsNotAuthenticated_ReturnsFalse()
@@ -30,15 +45,6 @@ namespace Twiddler.Tests.Services
             TweetRating test = BuildDefaultTestSubject();
 
             Assert.False(test.IsMention);
-        }
-
-        [Fact]
-        public void GettingIsMention_WhenTheUserIsMentioned_ReturnsTrue()
-        {
-            _tweet = A.Tweet.Mentioning(_user.ScreenName).Build();
-            TweetRating test = BuildDefaultTestSubject();
-
-            Assert.True(test.IsMention);
         }
 
         private TweetRating BuildDefaultTestSubject()

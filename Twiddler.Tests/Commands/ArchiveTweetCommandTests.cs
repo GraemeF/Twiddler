@@ -1,39 +1,17 @@
-﻿using Twiddler.Commands;
-using Twiddler.Core.Models;
-using Twiddler.TestData;
-using Xunit;
-
-namespace Twiddler.Tests.Commands
+﻿namespace Twiddler.Tests.Commands
 {
+    #region Using Directives
+
+    using Twiddler.Commands;
+    using Twiddler.Core.Models;
+    using Twiddler.TestData;
+
+    using Xunit;
+
+    #endregion
+
     public class ArchiveTweetCommandTests
     {
-        [Fact]
-        public void Execute_WhenTweetIsNotArchived_ArchivesTweet()
-        {
-            ITweet tweet = A.Tweet.Build();
-            var test = new ArchiveTweetCommand(tweet);
-
-            test.Execute(null);
-
-            Assert.True(tweet.IsArchived);
-        }
-
-        [Fact]
-        public void CanExecute_WhenTweetIsNotArchived_IsTrue()
-        {
-            var test = new ArchiveTweetCommand(A.Tweet.Build());
-
-            Assert.True(test.CanExecute(null));
-        }
-
-        [Fact]
-        public void CanExecute_WhenTweetIsArchived_IsFalse()
-        {
-            var test = new ArchiveTweetCommand(A.Tweet.Build());
-
-            Assert.True(test.CanExecute(null));
-        }
-
         [Fact]
         public void CanExecuteChanged_WhenTweetBecomesArchived_IsRaised()
         {
@@ -46,6 +24,33 @@ namespace Twiddler.Tests.Commands
             tweet.Archive();
 
             Assert.True(eventRaised);
+        }
+
+        [Fact]
+        public void CanExecute_WhenTweetIsArchived_IsFalse()
+        {
+            var test = new ArchiveTweetCommand(A.Tweet.Build());
+
+            Assert.True(test.CanExecute(null));
+        }
+
+        [Fact]
+        public void CanExecute_WhenTweetIsNotArchived_IsTrue()
+        {
+            var test = new ArchiveTweetCommand(A.Tweet.Build());
+
+            Assert.True(test.CanExecute(null));
+        }
+
+        [Fact]
+        public void Execute_WhenTweetIsNotArchived_ArchivesTweet()
+        {
+            ITweet tweet = A.Tweet.Build();
+            var test = new ArchiveTweetCommand(tweet);
+
+            test.Execute(null);
+
+            Assert.True(tweet.IsArchived);
         }
     }
 }

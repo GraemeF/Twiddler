@@ -1,27 +1,39 @@
-﻿using System.ComponentModel;
-using System.ComponentModel.Composition;
-using Caliburn.Core.IoC;
-using TweetSharp;
-using Twiddler.Core;
-using Twiddler.Core.Models;
-using Twiddler.Core.Services;
-
-namespace Twiddler.TweetSharp
+﻿namespace Twiddler.TweetSharp
 {
-    [Singleton(typeof (IAuthorizer))]
-    [Export(typeof (IAuthorizer))]
+    #region Using Directives
+
+    using System.ComponentModel;
+    using System.ComponentModel.Composition;
+
+    using Caliburn.Core.IoC;
+
+    using global::TweetSharp;
+
+    using Twiddler.Core;
+    using Twiddler.Core.Models;
+    using Twiddler.Core.Services;
+
+    #endregion
+
+    [Singleton(typeof(IAuthorizer))]
+    [Export(typeof(IAuthorizer))]
     public class Authorizer : IAuthorizer
     {
         private readonly IAccessTokenStore _accessTokenStore;
+
         private readonly ITwitterApplicationCredentials _applicationCredentials;
+
         private readonly Factories.UserFactory _userFactory;
+
         private AccessToken _accessToken;
+
         private User _authenticatedUser;
+
         private AuthorizationStatus _authorizationStatus;
 
         [ImportingConstructor]
-        public Authorizer(ITwitterApplicationCredentials applicationCredentials,
-                          IAccessTokenStore accessTokenStore,
+        public Authorizer(ITwitterApplicationCredentials applicationCredentials, 
+                          IAccessTokenStore accessTokenStore, 
                           Factories.UserFactory userFactory)
         {
             _applicationCredentials = applicationCredentials;
@@ -29,7 +41,7 @@ namespace Twiddler.TweetSharp
             _userFactory = userFactory;
         }
 
-        #region IAuthorizer Members
+        public event PropertyChangedEventHandler PropertyChanged;
 
         public User AuthenticatedUser
         {
@@ -57,7 +69,7 @@ namespace Twiddler.TweetSharp
             }
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
+        #region IAuthorizer members
 
         public void CheckAuthorization()
         {
@@ -70,8 +82,9 @@ namespace Twiddler.TweetSharp
         {
             AuthorizationStatus = AuthorizationStatus.Unauthorized;
 
-            _accessTokenStore.Save(new AccessToken(AccessToken.DefaultCredentialsId,
-                                                   null, null));
+            _accessTokenStore.Save(new AccessToken(AccessToken.DefaultCredentialsId, 
+                                                   null, 
+                                                   null));
         }
 
         #endregion
@@ -88,9 +101,9 @@ namespace Twiddler.TweetSharp
         {
             AuthorizationStatus = AuthorizationStatus.Verifying;
 
-            var service = new TwitterService(_applicationCredentials.ConsumerKey,
-                                             _applicationCredentials.ConsumerSecret,
-                                             _accessToken.Token,
+            var service = new TwitterService(_applicationCredentials.ConsumerKey, 
+                                             _applicationCredentials.ConsumerSecret, 
+                                             _accessToken.Token, 
                                              _accessToken.TokenSecret);
 
             TwitterUser profile = service.VerifyCredentials();

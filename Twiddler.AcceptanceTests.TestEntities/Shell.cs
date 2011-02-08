@@ -1,15 +1,23 @@
-﻿using System.Linq;
-using Fluid;
-
-namespace Twiddler.AcceptanceTests.TestEntities
+﻿namespace Twiddler.AcceptanceTests.TestEntities
 {
+    #region Using Directives
+
+    using System.Linq;
+
+    using Fluid;
+
+    #endregion
+
     public class Shell
     {
         private readonly Window _window;
 
         public Shell(Core.UIItems.WindowItems.Window window)
         {
-            _window = new Window {AutomationElement = window.AutomationElement};
+            _window = new Window
+                          {
+                              AutomationElement = window.AutomationElement
+                          };
         }
 
         public string AuthorizationStatus

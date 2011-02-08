@@ -1,7 +1,11 @@
-﻿using TechTalk.SpecFlow;
-
-namespace Twiddler.AcceptanceTests
+﻿namespace Twiddler.AcceptanceTests
 {
+    #region Using Directives
+
+    using TechTalk.SpecFlow;
+
+    #endregion
+
     [Binding]
     public class TimelineStepDefinitions : ApplicationSteps
     {

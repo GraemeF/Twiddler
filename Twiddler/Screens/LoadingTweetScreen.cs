@@ -1,28 +1,37 @@
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.Composition;
-using System.Linq;
-using Caliburn.Core.IoC;
-using Caliburn.PresentationFramework.Screens;
-using Twiddler.Core.Models;
-using Twiddler.Core.Services;
-using Twiddler.Screens.Interfaces;
-
 namespace Twiddler.Screens
 {
-    [PerRequest(typeof (ILoadingTweetScreen))]
-    [Export(typeof (ILoadingTweetScreen))]
+    #region Using Directives
+
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel.Composition;
+    using System.Linq;
+
+    using Caliburn.Core.IoC;
+    using Caliburn.PresentationFramework.Screens;
+
+    using Twiddler.Core.Models;
+    using Twiddler.Core.Services;
+    using Twiddler.Screens.Interfaces;
+
+    #endregion
+
+    [PerRequest(typeof(ILoadingTweetScreen))]
+    [Export(typeof(ILoadingTweetScreen))]
     [PartCreationPolicy(CreationPolicy.NonShared)]
-    public class LoadingTweetScreen : ScreenConductor<IScreen>, ILoadingTweetScreen
+    public class LoadingTweetScreen : ScreenConductor<IScreen>, 
+                                      ILoadingTweetScreen
     {
         private readonly ITweetPlaceholderScreen _placeholderScreen;
+
         private readonly ITweetStore _store;
+
         private readonly Factories.TweetScreenFactory _tweetScreenFactory;
 
         [ImportingConstructor]
-        public LoadingTweetScreen(ITweetPlaceholderScreen placeholderScreen,
-                                  ITweetStore store,
-                                  string id,
+        public LoadingTweetScreen(ITweetPlaceholderScreen placeholderScreen, 
+                                  ITweetStore store, 
+                                  string id, 
                                   Factories.TweetScreenFactory tweetScreenFactory)
         {
             _placeholderScreen = placeholderScreen;

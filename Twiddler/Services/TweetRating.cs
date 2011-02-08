@@ -1,24 +1,33 @@
-﻿using System;
-using System.ComponentModel;
-using System.ComponentModel.Composition;
-using System.Linq;
-using Caliburn.Core.IoC;
-using MvvmFoundation.Wpf;
-using Twiddler.Core;
-using Twiddler.Core.Models;
-using Twiddler.Core.Services;
-using Twiddler.Services.Interfaces;
-
-namespace Twiddler.Services
+﻿namespace Twiddler.Services
 {
-    [PerRequest(typeof (ITweetRating))]
-    [Export(typeof (ITweetRating))]
+    #region Using Directives
+
+    using System;
+    using System.ComponentModel;
+    using System.ComponentModel.Composition;
+    using System.Linq;
+
+    using Caliburn.Core.IoC;
+
+    using MvvmFoundation.Wpf;
+
+    using Twiddler.Core;
+    using Twiddler.Core.Models;
+    using Twiddler.Core.Services;
+
+    #endregion
+
+    [PerRequest(typeof(ITweetRating))]
+    [Export(typeof(ITweetRating))]
     [PartCreationPolicy(CreationPolicy.NonShared)]
     public class TweetRating : ITweetRating
     {
         private readonly IAuthorizer _client;
+
         private readonly ITweet _tweet;
+
         private bool _isMention;
+
         private PropertyObserver<IAuthorizer> _observer;
 
         [ImportingConstructor]
@@ -28,12 +37,17 @@ namespace Twiddler.Services
             _tweet = tweet;
 
             _observer = new PropertyObserver<IAuthorizer>(_client).
-                RegisterHandler(x => x.AuthenticatedUser,
+                RegisterHandler(x => x.AuthenticatedUser, 
                                 x => UpdateIsMention());
             UpdateIsMention();
         }
 
-        #region ITweetRating Members
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public bool IsDirectMessage
+        {
+            get { throw new NotImplementedException(); }
+        }
 
         public bool IsMention
         {
@@ -47,15 +61,6 @@ namespace Twiddler.Services
                 }
             }
         }
-
-        public bool IsDirectMessage
-        {
-            get { throw new NotImplementedException(); }
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        #endregion
 
         private void UpdateIsMention()
         {

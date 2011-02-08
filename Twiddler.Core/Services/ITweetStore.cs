@@ -1,9 +1,15 @@
-﻿using System.Collections.Generic;
-using Twiddler.Core.Models;
-
-namespace Twiddler.Core.Services
+﻿namespace Twiddler.Core.Services
 {
-    public interface ITweetStore : ITweetResolver, ITweetSink
+    #region Using Directives
+
+    using System.Collections.Generic;
+
+    using Twiddler.Core.Models;
+
+    #endregion
+
+    public interface ITweetStore : ITweetResolver, 
+                                   ITweetSink
     {
         IEnumerable<ITweet> GetInboxTweets();
     }

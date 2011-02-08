@@ -1,22 +1,30 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using TweetSharp;
-using Twiddler.Core.Models;
-using Twiddler.Services.Interfaces;
-
-namespace Twiddler.TweetSharp.TweetRequesters
+﻿namespace Twiddler.TweetSharp.TweetRequesters
 {
+    #region Using Directives
+
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+
+    using global::TweetSharp;
+
+    using Twiddler.Core.Models;
+    using Twiddler.Services.Interfaces;
+
+    #endregion
+
     public abstract class TweetRequester : ITweetRequester
     {
         protected readonly ITwitterClientFactory ClientFactory;
+
         private readonly IRequestLimitStatus _requestLimitStatus;
+
         private readonly Factories.TweetFactory _tweetFactory;
 
         private long _lastTweet;
 
-        protected TweetRequester(ITwitterClientFactory clientFactory,
-                                 IRequestLimitStatus requestLimitStatus,
+        protected TweetRequester(ITwitterClientFactory clientFactory, 
+                                 IRequestLimitStatus requestLimitStatus, 
                                  Factories.TweetFactory tweetFactory)
         {
             ClientFactory = clientFactory;
@@ -24,7 +32,7 @@ namespace Twiddler.TweetSharp.TweetRequesters
             _tweetFactory = tweetFactory;
         }
 
-        #region ITweetRequester Members
+        #region ITweetRequester members
 
         public IEnumerable<ITweet> RequestTweets()
         {
@@ -38,7 +46,7 @@ namespace Twiddler.TweetSharp.TweetRequesters
             if (statuses != null)
                 return GotTweets(statuses);
 
-            return new ITweet[] {};
+            return new ITweet[] { };
         }
 
         #endregion
@@ -47,7 +55,7 @@ namespace Twiddler.TweetSharp.TweetRequesters
 
         private IEnumerable<ITweet> GotTweets(IEnumerable<TwitterStatus> statuses)
         {
-            _lastTweet = Math.Max(_lastTweet,
+            _lastTweet = Math.Max(_lastTweet, 
                                   statuses.Any()
                                       ? statuses.Max(x => x.Id)
                                       : 0L);

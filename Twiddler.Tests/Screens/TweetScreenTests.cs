@@ -1,33 +1,43 @@
-using System;
-using System.Windows;
-using Caliburn.Testability.Extensions;
-using Moq;
-using Twiddler.Commands;
-using Twiddler.Core.Models;
-using Twiddler.Core.Services;
-using Twiddler.Screens;
-using Twiddler.Screens.Interfaces;
-using Twiddler.Services.Interfaces;
-using Twiddler.TestData;
-using Xunit;
-
 namespace Twiddler.Tests.Screens
 {
+    #region Using Directives
+
+    using System;
+    using System.Windows;
+
+    using Caliburn.Testability.Extensions;
+
+    using Moq;
+
+    using Twiddler.Commands;
+    using Twiddler.Core.Models;
+    using Twiddler.Core.Services;
+    using Twiddler.Screens;
+    using Twiddler.Screens.Interfaces;
+    using Twiddler.Services.Interfaces;
+    using Twiddler.TestData;
+
+    using Xunit;
+
+    #endregion
+
     public class TweetScreenTests
     {
         private readonly Mock<ILinkThumbnailScreenFactory> _fakeThumbnailFactory =
             new Mock<ILinkThumbnailScreenFactory>();
 
         private readonly Mock<ILinkThumbnailScreen> _fakeThumbnailScreen = new Mock<ILinkThumbnailScreen>();
+
         private readonly Mock<ITweetRating> _fakeTweetRating = new Mock<ITweetRating>();
+
         private readonly ITweet _tweet = A.Tweet.Build();
 
         [Fact]
-        public void GettingMarkAsReadCommand__ReturnsCommand()
+        public void GettingCreatedDate__ReturnsCreatedDate()
         {
             TweetScreen test = BuildDefaultTestSubject();
 
-            Assert.IsType<MarkTweetAsReadCommand>(test.MarkAsReadCommand);
+            Assert.Equal(_tweet.CreatedDate, test.CreatedDate);
         }
 
         [Fact]
@@ -39,32 +49,18 @@ namespace Twiddler.Tests.Screens
         }
 
         [Fact]
-        public void GettingStatus__ReturnsTweetStatus()
+        public void GettingInReplyToTweet_WhenTheTweetIsAReply_IsALoadingTweetScreen()
         {
-            TweetScreen test = BuildDefaultTestSubject();
+            var mockScreen = new Mock<ILoadingTweetScreen>();
 
-            Assert.Equal(_tweet.Status, test.Status);
-        }
+            var test = new TweetScreen(A.Tweet.InReplyTo("4").Build(), 
+                                       _fakeTweetRating.Object, 
+                                       _fakeThumbnailFactory.Object, 
+                                       x => mockScreen.Object, 
+                                       null);
+            test.Initialize();
 
-        private TweetScreen BuildDefaultTestSubject()
-        {
-            return new TweetScreen(_tweet, _fakeTweetRating.Object, _fakeThumbnailFactory.Object, null, null);
-        }
-
-        [Fact]
-        public void GettingUser__ReturnsUser()
-        {
-            TweetScreen test = BuildDefaultTestSubject();
-
-            Assert.Equal(_tweet.User, test.User);
-        }
-
-        [Fact]
-        public void GettingCreatedDate__ReturnsCreatedDate()
-        {
-            TweetScreen test = BuildDefaultTestSubject();
-
-            Assert.Equal(_tweet.CreatedDate, test.CreatedDate);
+            Assert.Same(mockScreen.Object, test.InReplyToTweet);
         }
 
         [Fact]
@@ -77,21 +73,6 @@ namespace Twiddler.Tests.Screens
         }
 
         [Fact]
-        public void GettingInReplyToTweet_WhenTheTweetIsAReply_IsALoadingTweetScreen()
-        {
-            var mockScreen = new Mock<ILoadingTweetScreen>();
-
-            var test = new TweetScreen(A.Tweet.InReplyTo("4").Build(),
-                                       _fakeTweetRating.Object,
-                                       _fakeThumbnailFactory.Object,
-                                       x => mockScreen.Object,
-                                       null);
-            test.Initialize();
-
-            Assert.Same(mockScreen.Object, test.InReplyToTweet);
-        }
-
-        [Fact]
         public void GettingLinks_WhenTweetContainsALink_ReturnsCollectionWithOpenedLinkScreen()
         {
             _fakeThumbnailFactory.
@@ -101,10 +82,10 @@ namespace Twiddler.Tests.Screens
             var test =
                 new TweetScreen(A.Tweet.
                                     WithStatus("This tweet contains a link").
-                                    LinkingTo(new Uri("http://link.one.com")).Build(),
-                                _fakeTweetRating.Object,
-                                _fakeThumbnailFactory.Object,
-                                null,
+                                    LinkingTo(new Uri("http://link.one.com")).Build(), 
+                                _fakeTweetRating.Object, 
+                                _fakeThumbnailFactory.Object, 
+                                null, 
                                 null);
             test.Initialize();
 
@@ -112,10 +93,11 @@ namespace Twiddler.Tests.Screens
         }
 
         [Fact]
-        public void GettingMentionVisibility_WhenTweetIsNotAMention_ReturnsCollapsed()
+        public void GettingMarkAsReadCommand__ReturnsCommand()
         {
             TweetScreen test = BuildDefaultTestSubject();
-            Assert.Equal(Visibility.Collapsed, test.MentionVisibility);
+
+            Assert.IsType<MarkTweetAsReadCommand>(test.MarkAsReadCommand);
         }
 
         [Fact]
@@ -127,6 +109,13 @@ namespace Twiddler.Tests.Screens
                 Returns(true);
 
             Assert.Equal(Visibility.Visible, test.MentionVisibility);
+        }
+
+        [Fact]
+        public void GettingMentionVisibility_WhenTweetIsNotAMention_ReturnsCollapsed()
+        {
+            TweetScreen test = BuildDefaultTestSubject();
+            Assert.Equal(Visibility.Collapsed, test.MentionVisibility);
         }
 
         [Fact]
@@ -146,6 +135,27 @@ namespace Twiddler.Tests.Screens
                 AssertThatChangeNotificationIsRaisedBy(x => x.Opacity).
                 When(() => _tweet.MarkAsRead());
             Assert.Equal(.5, test.Opacity);
+        }
+
+        [Fact]
+        public void GettingStatus__ReturnsTweetStatus()
+        {
+            TweetScreen test = BuildDefaultTestSubject();
+
+            Assert.Equal(_tweet.Status, test.Status);
+        }
+
+        [Fact]
+        public void GettingUser__ReturnsUser()
+        {
+            TweetScreen test = BuildDefaultTestSubject();
+
+            Assert.Equal(_tweet.User, test.User);
+        }
+
+        private TweetScreen BuildDefaultTestSubject()
+        {
+            return new TweetScreen(_tweet, _fakeTweetRating.Object, _fakeThumbnailFactory.Object, null, null);
         }
     }
 }

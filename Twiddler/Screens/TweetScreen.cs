@@ -1,35 +1,47 @@
-﻿using System;
-using System.ComponentModel.Composition;
-using System.Windows;
-using System.Windows.Input;
-using Caliburn.Core.IoC;
-using Caliburn.PresentationFramework;
-using Caliburn.PresentationFramework.Screens;
-using MvvmFoundation.Wpf;
-using Twiddler.Commands;
-using Twiddler.Core.Models;
-using Twiddler.Core.Services;
-using Twiddler.Screens.Interfaces;
-using Twiddler.Services.Interfaces;
-
-namespace Twiddler.Screens
+﻿namespace Twiddler.Screens
 {
-    [PerRequest(typeof (ITweetScreen))]
-    [Export(typeof (ITweetScreen))]
+    #region Using Directives
+
+    using System;
+    using System.ComponentModel.Composition;
+    using System.Windows;
+    using System.Windows.Input;
+
+    using Caliburn.Core.IoC;
+    using Caliburn.PresentationFramework;
+    using Caliburn.PresentationFramework.Screens;
+
+    using MvvmFoundation.Wpf;
+
+    using Twiddler.Commands;
+    using Twiddler.Core.Models;
+    using Twiddler.Core.Services;
+    using Twiddler.Screens.Interfaces;
+    using Twiddler.Services.Interfaces;
+
+    #endregion
+
+    [PerRequest(typeof(ITweetScreen))]
+    [Export(typeof(ITweetScreen))]
     [PartCreationPolicy(CreationPolicy.NonShared)]
-    public class TweetScreen : ScreenConductor<IScreen>.WithCollection.AllScreensActive, ITweetScreen
+    public class TweetScreen : ScreenConductor<IScreen>.WithCollection.AllScreensActive, 
+                               ITweetScreen
     {
         private readonly ILinkThumbnailScreenFactory _linkThumbnailScreenFactory;
+
         private readonly Factories.LoadingTweetScreenFactory _loadingTweetScreenFactory;
+
         private readonly ITweet _tweet;
+
         private readonly ITweetRating _tweetRating;
+
         private PropertyObserver<ITweet> _tweetObserver;
 
         [ImportingConstructor]
-        public TweetScreen(ITweet tweet,
-                           ITweetRating tweetRating,
-                           ILinkThumbnailScreenFactory linkThumbnailScreenFactory,
-                           Factories.LoadingTweetScreenFactory loadingTweetScreenFactory,
+        public TweetScreen(ITweet tweet, 
+                           ITweetRating tweetRating, 
+                           ILinkThumbnailScreenFactory linkThumbnailScreenFactory, 
+                           Factories.LoadingTweetScreenFactory loadingTweetScreenFactory, 
                            ITweetStore store)
             : base(false)
         {
@@ -42,29 +54,18 @@ namespace Twiddler.Screens
             Links = new BindableCollection<ILinkThumbnailScreen>();
         }
 
-        public string Status
-        {
-            get { return _tweet.Status; }
-        }
-
-        public User User
-        {
-            get { return _tweet.User; }
-        }
-
         public DateTime CreatedDate
         {
             get { return _tweet.CreatedDate; }
         }
 
-        public BindableCollection<ILinkThumbnailScreen> Links { get; private set; }
+        public string Id { get; private set; }
 
         public ILoadingTweetScreen InReplyToTweet { get; private set; }
 
-        public double Opacity
-        {
-            get { return _tweet.IsRead ? 0.5 : 1.0; }
-        }
+        public BindableCollection<ILinkThumbnailScreen> Links { get; private set; }
+
+        public ICommand MarkAsReadCommand { get; private set; }
 
         public Visibility MentionVisibility
         {
@@ -76,13 +77,25 @@ namespace Twiddler.Screens
             }
         }
 
-        #region ITweetScreen Members
+        public double Opacity
+        {
+            get
+            {
+                return _tweet.IsRead
+                           ? 0.5
+                           : 1.0;
+            }
+        }
 
-        public ICommand MarkAsReadCommand { get; private set; }
+        public string Status
+        {
+            get { return _tweet.Status; }
+        }
 
-        public string Id { get; private set; }
-
-        #endregion
+        public User User
+        {
+            get { return _tweet.User; }
+        }
 
         public void MarkAsRead()
         {
@@ -96,7 +109,7 @@ namespace Twiddler.Screens
             OpenInReplyToTweet();
 
             _tweetObserver = new PropertyObserver<ITweet>(_tweet).
-                RegisterHandler(x => x.IsRead,
+                RegisterHandler(x => x.IsRead, 
                                 x => NotifyOfPropertyChange(() => Opacity));
         }
 
@@ -111,12 +124,6 @@ namespace Twiddler.Screens
             }
         }
 
-        private void OpenLinksFromTweet()
-        {
-            foreach (Uri textLink in _tweet.Links)
-                OpenLink(textLink);
-        }
-
         private void OpenLink(Uri uri)
         {
             ILinkThumbnailScreen linkScreen = _linkThumbnailScreenFactory.CreateScreenForLink(uri);
@@ -126,6 +133,12 @@ namespace Twiddler.Screens
                 this.OpenScreen(linkScreen);
                 Links.Add(linkScreen);
             }
+        }
+
+        private void OpenLinksFromTweet()
+        {
+            foreach (Uri textLink in _tweet.Links)
+                OpenLink(textLink);
         }
     }
 }

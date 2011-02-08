@@ -1,20 +1,27 @@
-using System.ComponentModel.Composition;
-using Caliburn.Core.IoC;
-using Caliburn.PresentationFramework.Screens;
-using Twiddler.Screens.Interfaces;
-using Twiddler.Services.Interfaces;
-
 namespace Twiddler.Screens
 {
-    [Singleton(typeof (IShellScreen))]
-    [Export(typeof (IShellScreen))]
-    public class ShellScreen : ScreenConductor<IScreen>.WithCollection.AllScreensActive, IShellScreen
+    #region Using Directives
+
+    using System.ComponentModel.Composition;
+
+    using Caliburn.Core.IoC;
+    using Caliburn.PresentationFramework.Screens;
+
+    using Twiddler.Screens.Interfaces;
+    using Twiddler.Services.Interfaces;
+
+    #endregion
+
+    [Singleton(typeof(IShellScreen))]
+    [Export(typeof(IShellScreen))]
+    public class ShellScreen : ScreenConductor<IScreen>.WithCollection.AllScreensActive, 
+                               IShellScreen
     {
         private readonly ITimelineUpdater _timelineUpdater;
 
         [ImportingConstructor]
-        public ShellScreen(ITimelineScreen timelineScreen,
-                           IStatusScreen statusScreen,
+        public ShellScreen(ITimelineScreen timelineScreen, 
+                           IStatusScreen statusScreen, 
                            ITimelineUpdater timelineUpdater)
             : base(true)
         {
@@ -23,9 +30,9 @@ namespace Twiddler.Screens
             Status = statusScreen;
         }
 
-        public ITimelineScreen Timeline { get; private set; }
-
         public IStatusScreen Status { get; private set; }
+
+        public ITimelineScreen Timeline { get; private set; }
 
         protected override void OnInitialize()
         {

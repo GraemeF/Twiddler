@@ -1,19 +1,26 @@
-﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.ComponentModel.Composition;
-using System.Linq;
-using Caliburn.Core.IoC;
-using Twiddler.Core.Models;
-using Twiddler.Core.Services;
-using Twiddler.Services.Interfaces;
-
-namespace Twiddler.Services
+﻿namespace Twiddler.Services
 {
-    [Singleton(typeof (ITimeline))]
-    [Export(typeof (ITimeline))]
+    #region Using Directives
+
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using System.ComponentModel.Composition;
+    using System.Linq;
+
+    using Caliburn.Core.IoC;
+
+    using Twiddler.Core.Models;
+    using Twiddler.Core.Services;
+    using Twiddler.Services.Interfaces;
+
+    #endregion
+
+    [Singleton(typeof(ITimeline))]
+    [Export(typeof(ITimeline))]
     public class StoreTimeline : ITimeline
     {
         private readonly object _mutex = new object();
+
         private readonly ITweetStore _tweetStore;
 
         [ImportingConstructor]
@@ -23,14 +30,14 @@ namespace Twiddler.Services
             Tweets = new ObservableCollection<ITweet>(tweetStore.GetInboxTweets());
         }
 
-        #region ITimeline Members
-
         public ObservableCollection<ITweet> Tweets { get; private set; }
+
+        #region ITweetSink members
 
         public void Add(ITweet tweet)
         {
             _tweetStore.Add(tweet);
-            AddNewTweets(new[] {tweet});
+            AddNewTweets(new[] { tweet });
         }
 
         public void Add(IEnumerable<ITweet> tweets)

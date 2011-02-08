@@ -1,22 +1,29 @@
-﻿using System;
-using System.ComponentModel;
-using System.ComponentModel.Composition;
-using Caliburn.Core.IoC;
-using Twiddler.Core;
-using Twiddler.Services.Interfaces;
-
-namespace Twiddler.Services
+﻿namespace Twiddler.Services
 {
-    [Singleton(typeof (IRequestLimitStatus))]
-    [Export(typeof (IRequestLimitStatus))]
+    #region Using Directives
+
+    using System;
+    using System.ComponentModel;
+    using System.ComponentModel.Composition;
+
+    using Caliburn.Core.IoC;
+
+    using Twiddler.Core;
+    using Twiddler.Services.Interfaces;
+
+    #endregion
+
+    [Singleton(typeof(IRequestLimitStatus))]
+    [Export(typeof(IRequestLimitStatus))]
     public class RequestLimitStatus : IRequestLimitStatus
     {
         private int _hourlyLimit = 350;
-        private TimeSpan _periodDuration = TimeSpan.FromHours(1);
-        private DateTime _periodEndTime;
-        private int _remainingHits;
 
-        #region IRequestLimitStatus Members
+        private TimeSpan _periodDuration = TimeSpan.FromHours(1);
+
+        private DateTime _periodEndTime;
+
+        private int _remainingHits;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -29,32 +36,6 @@ namespace Twiddler.Services
                 {
                     _hourlyLimit = value;
                     PropertyChanged.Raise(x => HourlyLimit);
-                }
-            }
-        }
-
-        public int RemainingHits
-        {
-            get { return _remainingHits; }
-            set
-            {
-                if (_remainingHits != value)
-                {
-                    _remainingHits = value;
-                    PropertyChanged.Raise(x => RemainingHits);
-                }
-            }
-        }
-
-        public DateTime PeriodEndTime
-        {
-            get { return _periodEndTime; }
-            set
-            {
-                if (_periodEndTime != value)
-                {
-                    _periodEndTime = value;
-                    PropertyChanged.Raise(x => PeriodEndTime);
                 }
             }
         }
@@ -72,6 +53,30 @@ namespace Twiddler.Services
             }
         }
 
-        #endregion
+        public DateTime PeriodEndTime
+        {
+            get { return _periodEndTime; }
+            set
+            {
+                if (_periodEndTime != value)
+                {
+                    _periodEndTime = value;
+                    PropertyChanged.Raise(x => PeriodEndTime);
+                }
+            }
+        }
+
+        public int RemainingHits
+        {
+            get { return _remainingHits; }
+            set
+            {
+                if (_remainingHits != value)
+                {
+                    _remainingHits = value;
+                    PropertyChanged.Raise(x => RemainingHits);
+                }
+            }
+        }
     }
 }

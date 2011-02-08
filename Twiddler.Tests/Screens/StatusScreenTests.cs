@@ -1,55 +1,35 @@
-﻿using System.ComponentModel;
-using System.Threading;
-using Caliburn.Testability.Extensions;
-using Moq;
-using Twiddler.Commands.Interfaces;
-using Twiddler.Core.Commands;
-using Twiddler.Core.Services;
-using Twiddler.Screens;
-using Twiddler.Screens.Interfaces;
-using Twiddler.Services.Interfaces;
-using Twiddler.TestData;
-using Xunit;
-using Xunit.Extensions;
-
-namespace Twiddler.Tests.Screens
+﻿namespace Twiddler.Tests.Screens
 {
+    #region Using Directives
+
+    using System.ComponentModel;
+    using System.Threading;
+
+    using Caliburn.Testability.Extensions;
+
+    using Moq;
+
+    using Twiddler.Commands.Interfaces;
+    using Twiddler.Core.Commands;
+    using Twiddler.Core.Services;
+    using Twiddler.Screens;
+    using Twiddler.Screens.Interfaces;
+    using Twiddler.TestData;
+
+    using Xunit;
+    using Xunit.Extensions;
+
+    #endregion
+
     public class StatusScreenTests
     {
         private readonly IAuthorizeCommand _authorizeCommand = new Mock<IAuthorizeCommand>().Object;
+
         private readonly IDeauthorizeCommand _deauthorizeCommand = new Mock<IDeauthorizeCommand>().Object;
+
         private readonly Mock<IAuthorizer> _fakeClient = new Mock<IAuthorizer>();
+
         private readonly Mock<IRequestMeterScreen> _fakeRequestMeter = new Mock<IRequestMeterScreen>();
-
-        [Theory]
-        [InlineData(AuthorizationStatus.Unknown)]
-        [InlineData(AuthorizationStatus.Verifying)]
-        [InlineData(AuthorizationStatus.Authorized)]
-        [InlineData(AuthorizationStatus.Unauthorized)]
-        public void GettingAuthorization__ReturnsStatusFromClient(AuthorizationStatus status)
-        {
-            ClientAuthorizationStatusChangesTo(status);
-
-            StatusScreen test = BuildDefaultTestSubject();
-            test.Initialize();
-
-            Assert.Equal(status, test.Authorization);
-        }
-
-        [Fact]
-        public void Initialize__ChecksAuthorization()
-        {
-            StatusScreen test = BuildDefaultTestSubject();
-            bool clientAuthorizationChecked = false;
-            _fakeClient.
-                Setup(x => x.CheckAuthorization()).
-                Callback(() => clientAuthorizationChecked = true);
-
-            test.Initialize();
-            Thread.Sleep(1000);
-
-            Wait.Until(() => clientAuthorizationChecked);
-        }
 
         [Fact]
         public void Authorization_WhenClientStatusChanges_RaisesPropertyChanged()
@@ -66,6 +46,21 @@ namespace Twiddler.Tests.Screens
                 When(() => ClientAuthorizationStatusChangesTo(newStatus));
 
             Assert.Equal(newStatus, test.Authorization);
+        }
+
+        [Theory]
+        [InlineData(AuthorizationStatus.Unknown)]
+        [InlineData(AuthorizationStatus.Verifying)]
+        [InlineData(AuthorizationStatus.Authorized)]
+        [InlineData(AuthorizationStatus.Unauthorized)]
+        public void GettingAuthorization__ReturnsStatusFromClient(AuthorizationStatus status)
+        {
+            ClientAuthorizationStatusChangesTo(status);
+
+            StatusScreen test = BuildDefaultTestSubject();
+            test.Initialize();
+
+            Assert.Equal(status, test.Authorization);
         }
 
         [Fact]
@@ -94,16 +89,31 @@ namespace Twiddler.Tests.Screens
             _fakeRequestMeter.Verify(x => x.Initialize());
         }
 
-        private void ClientAuthorizationStatusChangesTo(AuthorizationStatus status)
+        [Fact]
+        public void Initialize__ChecksAuthorization()
         {
-            _fakeClient.Setup(x => x.AuthorizationStatus).Returns(status);
-            _fakeClient.Raise(x => x.PropertyChanged += null,
-                              new PropertyChangedEventArgs("AuthorizationStatus"));
+            StatusScreen test = BuildDefaultTestSubject();
+            bool clientAuthorizationChecked = false;
+            _fakeClient.
+                Setup(x => x.CheckAuthorization()).
+                Callback(() => clientAuthorizationChecked = true);
+
+            test.Initialize();
+            Thread.Sleep(1000);
+
+            Wait.Until(() => clientAuthorizationChecked);
         }
 
         private StatusScreen BuildDefaultTestSubject()
         {
             return new StatusScreen(_fakeClient.Object, _authorizeCommand, _deauthorizeCommand, _fakeRequestMeter.Object);
+        }
+
+        private void ClientAuthorizationStatusChangesTo(AuthorizationStatus status)
+        {
+            _fakeClient.Setup(x => x.AuthorizationStatus).Returns(status);
+            _fakeClient.Raise(x => x.PropertyChanged += null, 
+                              new PropertyChangedEventArgs("AuthorizationStatus"));
         }
     }
 }

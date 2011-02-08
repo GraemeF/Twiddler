@@ -1,16 +1,26 @@
-﻿using System.Linq;
-using Moq;
-using Raven.Client;
-using Twiddler.Core.Models;
-using Twiddler.TwitterStore.Interfaces;
-using Xunit;
-
-namespace Twiddler.TwitterStore.Tests
+﻿namespace Twiddler.TwitterStore.Tests
 {
+    #region Using Directives
+
+    using System.Linq;
+
+    using Moq;
+
+    using Raven.Client;
+
+    using Twiddler.Core.Models;
+    using Twiddler.TwitterStore.Interfaces;
+
+    using Xunit;
+
+    #endregion
+
     public class CredentialsDocumentStoreTests
     {
         private readonly IDocumentSession _documentSession = Mock.Of<IDocumentSession>();
+
         private readonly IDocumentStore _documentStore;
+
         private readonly IDocumentStoreFactory _documentStoreFactory;
 
         public CredentialsDocumentStoreTests()
@@ -43,7 +53,7 @@ namespace Twiddler.TwitterStore.Tests
 
             Mock.Get(_documentSession).
                 Setup(x => x.Load<AccessToken>(id)).
-                Returns((AccessToken) null);
+                Returns((AccessToken)null);
 
             Assert.NotNull(test.Load(id));
         }

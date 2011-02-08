@@ -1,11 +1,15 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Collections.Specialized;
-using System.Linq;
-
-namespace Twiddler.Core
+﻿namespace Twiddler.Core
 {
+    #region Using Directives
+
+    using System;
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.Collections.Specialized;
+    using System.Linq;
+
+    #endregion
+
     public static class CollectionChangedExtensions
     {
         public static IEnumerable<T> SafeNewItems<T>(this NotifyCollectionChangedEventArgs args)
@@ -18,10 +22,10 @@ namespace Twiddler.Core
             return SafeItems<T>(args, x => x.OldItems);
         }
 
-        private static IEnumerable<T> SafeItems<T>(NotifyCollectionChangedEventArgs args,
+        private static IEnumerable<T> SafeItems<T>(NotifyCollectionChangedEventArgs args, 
                                                    Func<NotifyCollectionChangedEventArgs, IList> items)
         {
-            return (items(args) ?? new T[] {}).Cast<T>();
+            return (items(args) ?? new T[] { }).Cast<T>();
         }
     }
 }

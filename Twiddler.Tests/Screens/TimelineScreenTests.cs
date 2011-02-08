@@ -1,19 +1,27 @@
-﻿using System;
-using System.Collections.ObjectModel;
-using System.Windows.Input;
-using Moq;
-using Twiddler.Core.Models;
-using Twiddler.Screens;
-using Twiddler.Screens.Interfaces;
-using Twiddler.Services.Interfaces;
-using Twiddler.TestData;
-using Xunit;
-
-namespace Twiddler.Tests.Screens
+﻿namespace Twiddler.Tests.Screens
 {
+    #region Using Directives
+
+    using System;
+    using System.Collections.ObjectModel;
+    using System.Windows.Input;
+
+    using Moq;
+
+    using Twiddler.Core.Models;
+    using Twiddler.Screens;
+    using Twiddler.Screens.Interfaces;
+    using Twiddler.Services.Interfaces;
+    using Twiddler.TestData;
+
+    using Xunit;
+
+    #endregion
+
     public class TimelineScreenTests
     {
         private readonly Mock<ITimeline> _fakeTimeline = new Mock<ITimeline>();
+
         private readonly ObservableCollection<ITweet> _tweets = new ObservableCollection<ITweet>();
 
         public TimelineScreenTests()

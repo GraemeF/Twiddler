@@ -1,7 +1,11 @@
-﻿using Autofac;
-
-namespace Twiddler
+﻿namespace Twiddler
 {
+    #region Using Directives
+
+    using Autofac;
+
+    #endregion
+
     public class AutofacFactories : Factories
     {
         private readonly IContainer _container;
@@ -11,6 +15,12 @@ namespace Twiddler
             _container = container;
         }
 
+        protected override TPart ComposePartWith<TPart, TImport>(TImport import)
+        {
+            using (ILifetimeScope lifetime = _container.BeginLifetimeScope(builder => builder.RegisterInstance(import)))
+                return lifetime.Resolve<TPart>();
+        }
+
         protected override void RegisterFactory<TFactory>(TFactory factory)
         {
             var builder = new ContainerBuilder();
@@ -18,12 +28,6 @@ namespace Twiddler
             builder.RegisterInstance(factory);
 
             builder.Update(_container);
-        }
-
-        protected override TPart ComposePartWith<TPart, TImport>(TImport import)
-        {
-            using (ILifetimeScope lifetime = _container.BeginLifetimeScope(builder => builder.RegisterInstance(import)))
-                return lifetime.Resolve<TPart>();
         }
     }
 }

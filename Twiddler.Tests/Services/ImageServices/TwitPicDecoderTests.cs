@@ -1,21 +1,19 @@
-﻿using System;
-using Twiddler.Models;
-using Twiddler.Services.ImageServices;
-using Xunit;
-using Xunit.Extensions;
-
-namespace Twiddler.Tests.Services.ImageServices
+﻿namespace Twiddler.Tests.Services.ImageServices
 {
+    #region Using Directives
+
+    using System;
+
+    using Twiddler.Models;
+    using Twiddler.Services.ImageServices;
+
+    using Xunit;
+    using Xunit.Extensions;
+
+    #endregion
+
     public class TwitPicDecoderTests
     {
-        [Theory]
-        [InlineData("http://twitpic.com/1e10q")]
-        [InlineData("http://twitpic.com/show/thumb/1e10q")]
-        public void CanGetImageLocations_GivenTwitPicImageUrl_ReturnsTrue(string url)
-        {
-            Assert.True(new TwitPicDecoder().CanGetImageLocations(new Uri(url)));
-        }
-
         [Theory]
         [InlineData("http://some.other.com/")]
         [InlineData("http://twitpic.com/")]
@@ -25,14 +23,11 @@ namespace Twiddler.Tests.Services.ImageServices
         }
 
         [Theory]
-        [InlineData("http://twitpic.com/1e10q", "http://twitpic.com/show/mini/1e10q")]
-        [InlineData("http://twitpic.com/show/thumb/1e10q", "http://twitpic.com/show/mini/1e10q")]
-        [InlineData("http://twitpic.com/show/mini/1e10q", "http://twitpic.com/show/mini/1e10q")]
-        public void GetImageLocations_GivenTwitPicImageUrl_ReturnsThumbnailLocation(string url, string linkUrl)
+        [InlineData("http://twitpic.com/1e10q")]
+        [InlineData("http://twitpic.com/show/thumb/1e10q")]
+        public void CanGetImageLocations_GivenTwitPicImageUrl_ReturnsTrue(string url)
         {
-            ImageLocations locations = new TwitPicDecoder().GetImageLocations(new Uri(url));
-
-            Assert.Equal(linkUrl, locations.Thumbnail.ToString());
+            Assert.True(new TwitPicDecoder().CanGetImageLocations(new Uri(url)));
         }
 
         [Theory]
@@ -52,6 +47,17 @@ namespace Twiddler.Tests.Services.ImageServices
             ImageLocations locations = new TwitPicDecoder().GetImageLocations(new Uri("http://twitpic.com/1e10q"));
 
             Assert.Equal("http://twitpic.com/1e10q", locations.Link.ToString());
+        }
+
+        [Theory]
+        [InlineData("http://twitpic.com/1e10q", "http://twitpic.com/show/mini/1e10q")]
+        [InlineData("http://twitpic.com/show/thumb/1e10q", "http://twitpic.com/show/mini/1e10q")]
+        [InlineData("http://twitpic.com/show/mini/1e10q", "http://twitpic.com/show/mini/1e10q")]
+        public void GetImageLocations_GivenTwitPicImageUrl_ReturnsThumbnailLocation(string url, string linkUrl)
+        {
+            ImageLocations locations = new TwitPicDecoder().GetImageLocations(new Uri(url));
+
+            Assert.Equal(linkUrl, locations.Thumbnail.ToString());
         }
     }
 }

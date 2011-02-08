@@ -1,8 +1,13 @@
-﻿using System.Linq;
-using Fluid;
-
-namespace Twiddler.AcceptanceTests.TestEntities
+﻿namespace Twiddler.AcceptanceTests.TestEntities
 {
+    #region Using Directives
+
+    using System.Linq;
+
+    using Fluid;
+
+    #endregion
+
     public class AuthorizationWindow
     {
         private readonly Window _window;
@@ -10,6 +15,17 @@ namespace Twiddler.AcceptanceTests.TestEntities
         public AuthorizationWindow(Window window)
         {
             _window = window;
+        }
+
+        public bool HasError
+        {
+            get
+            {
+                return Window.
+                    In(_window).
+                    Matching(x => x.Current.Name == "Error").
+                    Any();
+            }
         }
 
         public string Pin
@@ -25,17 +41,6 @@ namespace Twiddler.AcceptanceTests.TestEntities
                 return EditBox.
                     In(_window).
                     Called("pinTextBox").First();
-            }
-        }
-
-        public bool HasError
-        {
-            get
-            {
-                return Window.
-                    In(_window).
-                    Matching(x => x.Current.Name == "Error").
-                    Any();
             }
         }
 

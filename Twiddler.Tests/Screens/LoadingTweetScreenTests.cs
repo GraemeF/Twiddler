@@ -1,19 +1,29 @@
-﻿using Moq;
-using Twiddler.Core.Models;
-using Twiddler.Core.Services;
-using Twiddler.Screens;
-using Twiddler.Screens.Interfaces;
-using Twiddler.TestData;
-using Xunit;
-
-namespace Twiddler.Tests.Screens
+﻿namespace Twiddler.Tests.Screens
 {
+    #region Using Directives
+
+    using Moq;
+
+    using Twiddler.Core.Models;
+    using Twiddler.Core.Services;
+    using Twiddler.Screens;
+    using Twiddler.Screens.Interfaces;
+    using Twiddler.TestData;
+
+    using Xunit;
+
+    #endregion
+
     public class LoadingTweetScreenTests
     {
         private readonly Mock<ITweetStore> _fakeStore = new Mock<ITweetStore>();
+
         private readonly Mock<ITweetPlaceholderScreen> _fakeTweetPlaceholderScreen = new Mock<ITweetPlaceholderScreen>();
+
         private readonly ITweet _tweet = A.Tweet.Build();
+
         private Mock<ITweetScreen> _fakeTweetScreen;
+
         private bool _storeAskedForTweet;
 
         public LoadingTweetScreenTests()
@@ -37,13 +47,14 @@ namespace Twiddler.Tests.Screens
         }
 
         [Fact]
-        public void Initialize__RequestsTweet()
+        public void Initialize_WhenStoreReturnsTweet_OpensTweetScreen()
         {
             LoadingTweetScreen test = BuildDefaultTestSubject();
 
             InitializeAndWaitUntilStoreIsAskedForTweet(test);
 
-            _fakeStore.Verify(x => x.GetTweet(_tweet.Id));
+            _fakeTweetScreen.Verify(x => x.Initialize());
+            Assert.Same(_fakeTweetScreen.Object, test.ActiveScreen);
         }
 
         [Fact]
@@ -57,22 +68,21 @@ namespace Twiddler.Tests.Screens
         }
 
         [Fact]
-        public void Initialize_WhenStoreReturnsTweet_OpensTweetScreen()
+        public void Initialize__RequestsTweet()
         {
             LoadingTweetScreen test = BuildDefaultTestSubject();
 
             InitializeAndWaitUntilStoreIsAskedForTweet(test);
 
-            _fakeTweetScreen.Verify(x => x.Initialize());
-            Assert.Same(_fakeTweetScreen.Object, test.ActiveScreen);
+            _fakeStore.Verify(x => x.GetTweet(_tweet.Id));
         }
 
         private LoadingTweetScreen BuildDefaultTestSubject()
         {
             _fakeTweetScreen = new Mock<ITweetScreen>();
-            return new LoadingTweetScreen(_fakeTweetPlaceholderScreen.Object,
-                                          _fakeStore.Object,
-                                          _tweet.Id,
+            return new LoadingTweetScreen(_fakeTweetPlaceholderScreen.Object, 
+                                          _fakeStore.Object, 
+                                          _tweet.Id, 
                                           x => _fakeTweetScreen.Object);
         }
 
