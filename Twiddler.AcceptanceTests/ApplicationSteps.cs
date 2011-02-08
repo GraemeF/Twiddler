@@ -2,8 +2,6 @@
 {
     #region Using Directives
 
-    using System;
-
     using TechTalk.SpecFlow;
 
     using Twiddler.AcceptanceTests.TestEntities;
@@ -26,28 +24,7 @@
             }
         }
 
-        [AfterScenario]
-        public static void AfterTestRun()
-        {
-            var disposable = Application as IDisposable;
-            if (disposable != null)
-                disposable.Dispose();
-        }
-
-        [Given(@"I have not previously authorized")]
-        public void GivenIHaveNotPreviouslyAuthorized()
-        {
-            ScenarioContext.Current.Set(true, "NewStore");
-        }
-
-        [BeforeScenario]
-        public void StartTwitterService()
-        {
-            Twitter = new TwitterService();
-            Twitter.Start();
-        }
-
-        protected static void Launch()
+        private static void Launch()
         {
             var application = new TwiddlerApplication();
             ScenarioContext.Current.Add("Application", application);

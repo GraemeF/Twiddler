@@ -14,6 +14,12 @@
     [Binding]
     public class AuthorizationStepDefinitions : ApplicationSteps
     {
+        [Given(@"I have not previously authorized")]
+        public void GivenIHaveNotPreviouslyAuthorized()
+        {
+            ScenarioContext.Current.Set(true, "NewStore");
+        }
+
         [Given(@"Twitter is unavailable")]
         public void GivenTwitterIsUnavailable()
         {

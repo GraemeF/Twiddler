@@ -60,6 +60,7 @@
       <DependentUpon>Authorization.feature</DependentUpon>
     </Compile>
     <Compile Include="AuthorizationStepDefinitions.cs" />
+    <Compile Include="EventDefinitions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Timeline.feature.cs">
       <AutoGen>True</AutoGen>

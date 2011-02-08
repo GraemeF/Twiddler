@@ -14,13 +14,6 @@
     /// </remarks>
     public class TwitterService : IDisposable
     {
-        /// <summary>
-        /// Finalizes an instance of the <see cref="TwitterService"/> class. 
-        /// 	Releases unmanaged resources before an instance of the <see cref="TwitterService"/> class is reclaimed by garbage collection.
-        /// </summary>
-        /// <remarks>
-        /// 	This method releases unmanaged resources by calling the virtual <see cref="Dispose(bool)"/> method, passing in <strong>false</strong>.
-        /// </remarks>
         ~TwitterService()
         {
             Dispose(false);
