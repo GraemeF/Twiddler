@@ -42,8 +42,7 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
     <Reference Include="TechTalk.SpecFlow, Version=1.4.0.0, Culture=neutral, PublicKeyToken=0778194805d6db41, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Library\SpecFlow\TechTalk.SpecFlow.dll</HintPath>
+      <HintPath>..\packages\SpecFlow.1.4.0\lib\TechTalk.SpecFlow.dll</HintPath>
     </Reference>
     <Reference Include="xunit">
       <HintPath>..\Library\Gallio\bin\Xunit\xunit.dll</HintPath>
@@ -77,6 +76,7 @@
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>Authorization.feature.cs</LastGenOutput>
     </None>
+    <None Include="packages.config" />
     <None Include="Timeline.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>Timeline.feature.cs</LastGenOutput>
