@@ -4,9 +4,10 @@
 
     using System;
 
-    using TechTalk.SpecFlow;
+    using Should.Core.Assertions;
+    using Should.Fluent;
 
-    using Xunit;
+    using TechTalk.SpecFlow;
 
     #endregion
 
@@ -23,7 +24,7 @@
         [Then(@"authorization should fail")]
         public void ThenAuthorizationShouldFail()
         {
-            Assert.True(Application.AuthorizationWindow.HasError);
+            Application.AuthorizationWindow.HasError.Should().Be.True();
         }
 
         [Then(@"I should be authorized")]

@@ -35,7 +35,6 @@
       <HintPath>..\Library\TweetSharp\Hammock.ClientProfile.dll</HintPath>
     </Reference>
     <Reference Include="Moq, Version=4.0.10827.0, Culture=neutral, PublicKeyToken=69f491c39445e920, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Library\Moq\NET40\Moq.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json">
@@ -52,11 +51,13 @@
     <Reference Include="TweetSharp.Next">
       <HintPath>..\Library\TweetSharp\TweetSharp.Next.dll</HintPath>
     </Reference>
-    <Reference Include="xunit">
-      <HintPath>..\Library\Gallio\bin\Xunit\xunit.dll</HintPath>
+    <Reference Include="xunit, Version=1.7.0.1540, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\xunit.1.7.0.1540\lib\xunit.dll</HintPath>
     </Reference>
-    <Reference Include="xunit.extensions">
-      <HintPath>..\Library\Gallio\bin\Xunit\xunit.extensions.dll</HintPath>
+    <Reference Include="xunit.extensions, Version=1.7.0.1540, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\xunit.extensions.1.7.0.1540\lib\xunit.extensions.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -77,6 +78,9 @@
       <Project>{77A16F4D-025B-43F5-86F1-F12212466445}</Project>
       <Name>Twiddler.TweetSharp</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

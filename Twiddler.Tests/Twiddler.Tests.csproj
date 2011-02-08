@@ -45,14 +45,13 @@
       <HintPath>..\Library\Caliburn\Caliburn.Testability.dll</HintPath>
     </Reference>
     <Reference Include="Moq, Version=4.0.10827.0, Culture=neutral, PublicKeyToken=69f491c39445e920, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Library\Moq\NET40\Moq.dll</HintPath>
     </Reference>
     <Reference Include="PresentationCore">
       <RequiredTargetFramework>3.0</RequiredTargetFramework>
     </Reference>
-    <Reference Include="Should.Fluent">
-      <HintPath>..\Library\Should\Should.Fluent.dll</HintPath>
+    <Reference Include="Should.Fluent, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ShouldFluent.1.1.12.0\lib\Should.Fluent.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
@@ -81,13 +80,13 @@
     <Reference Include="WindowsBase">
       <RequiredTargetFramework>3.0</RequiredTargetFramework>
     </Reference>
-    <Reference Include="xunit, Version=1.6.1.1521, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c, processorArchitecture=MSIL">
+    <Reference Include="xunit, Version=1.7.0.1540, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Library\Gallio\bin\Xunit\xunit.dll</HintPath>
+      <HintPath>..\packages\xunit.1.7.0.1540\lib\xunit.dll</HintPath>
     </Reference>
-    <Reference Include="xunit.extensions, Version=1.6.1.1521, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c, processorArchitecture=MSIL">
+    <Reference Include="xunit.extensions, Version=1.7.0.1540, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Library\Gallio\bin\Xunit\xunit.extensions.dll</HintPath>
+      <HintPath>..\packages\xunit.extensions.1.7.0.1540\lib\xunit.extensions.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -135,5 +134,8 @@
   <Import Project="$(LibraryPath)\Extensions.targets" />
   <ItemGroup>
     <GallioTestedAssembly Include="$(OutDir)Twiddler.exe" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
 </Project>

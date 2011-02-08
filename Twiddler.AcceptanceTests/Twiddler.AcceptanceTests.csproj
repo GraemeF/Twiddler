@@ -34,6 +34,9 @@
     <Reference Include="log4net">
       <HintPath>..\Library\White\log4net.dll</HintPath>
     </Reference>
+    <Reference Include="Should.Fluent">
+      <HintPath>..\packages\ShouldFluent.1.1.12.0\lib\Should.Fluent.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -44,12 +47,9 @@
     <Reference Include="TechTalk.SpecFlow, Version=1.4.0.0, Culture=neutral, PublicKeyToken=0778194805d6db41, processorArchitecture=MSIL">
       <HintPath>..\packages\SpecFlow.1.4.0\lib\TechTalk.SpecFlow.dll</HintPath>
     </Reference>
-    <Reference Include="xunit">
-      <HintPath>..\Library\Gallio\bin\Xunit\xunit.dll</HintPath>
-    </Reference>
-    <Reference Include="xunit.extensions, Version=1.6.1.1521, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c, processorArchitecture=MSIL">
+    <Reference Include="xunit, Version=1.7.0.1540, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Library\Gallio\bin\Xunit\xunit.extensions.dll</HintPath>
+      <HintPath>..\packages\xunit.1.7.0.1540\lib\xunit.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

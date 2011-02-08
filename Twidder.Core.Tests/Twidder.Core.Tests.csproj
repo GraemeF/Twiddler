@@ -38,8 +38,9 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="xunit">
-      <HintPath>..\Library\Gallio\bin\Xunit\xunit.dll</HintPath>
+    <Reference Include="xunit, Version=1.7.0.1540, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\xunit.1.7.0.1540\lib\xunit.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -61,5 +62,8 @@
   <Import Project="$(LibraryPath)\Extensions.targets" />
   <ItemGroup>
     <GallioTestedAssembly Include="$(OutDir)Twiddler.Core.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
 </Project>
