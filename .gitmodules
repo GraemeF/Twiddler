@@ -4,3 +4,6 @@
 [submodule "Library/Fluid"]
 	path = Library/Fluid
 	url = git://github.com/GraemeF/Fluid.git
+[submodule "Library/Gallio"]
+	path = Library/Gallio
+	url = https://github.com/GraemeF/GallioBin.git
