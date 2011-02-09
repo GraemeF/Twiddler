@@ -34,14 +34,20 @@
     <Reference Include="Caliburn.Core">
       <HintPath>..\Library\Caliburn\Caliburn.Core.dll</HintPath>
     </Reference>
+    <Reference Include="Hammock">
+      <HintPath>..\packages\Hammock.1.1.7\lib\4.0\Hammock.dll</HintPath>
+    </Reference>
     <Reference Include="Hammock.ClientProfile">
-      <HintPath>..\Library\TweetSharp\Hammock.ClientProfile.dll</HintPath>
+      <HintPath>..\packages\TweetSharp.0.0.10\lib\4.0\Hammock.ClientProfile.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json">
-      <HintPath>..\Library\TweetSharp\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\packages\TweetSharp.0.0.10\lib\4.0\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="Remotion.Data.Linq">
+      <HintPath>..\packages\TweetSharp.0.0.10\lib\4.0\Remotion.Data.Linq.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Core" />
@@ -51,8 +57,14 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="TweetSharp.Next">
-      <HintPath>..\Library\TweetSharp\TweetSharp.Next.dll</HintPath>
+    <Reference Include="TweetSharp">
+      <HintPath>..\packages\TweetSharp.0.0.10\lib\4.0\TweetSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="TweetSharp.Fluent">
+      <HintPath>..\packages\TweetSharp.0.0.10\lib\4.0\TweetSharp.Fluent.dll</HintPath>
+    </Reference>
+    <Reference Include="TweetSharp.Linq">
+      <HintPath>..\packages\TweetSharp.0.0.10\lib\4.0\TweetSharp.Linq.dll</HintPath>
     </Reference>
     <Reference Include="WindowsBase" />
   </ItemGroup>
@@ -88,6 +100,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

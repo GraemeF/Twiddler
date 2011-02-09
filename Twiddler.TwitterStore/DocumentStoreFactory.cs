@@ -16,7 +16,6 @@
     using Raven.Client.Client;
     using Raven.Client.Document;
     using Raven.Client.Indexes;
-    using Raven.Database.Config;
 
     using Twiddler.TwitterStore.Interfaces;
     using Twiddler.TwitterStore.Models;
@@ -59,10 +58,7 @@
         {
             var store = new EmbeddableDocumentStore
                             {
-                                Configuration = new RavenConfiguration
-                                                    {
-                                                        RunInMemory = _inMemory
-                                                    }
+                                RunInMemory = _inMemory
                             };
 
             if (!_inMemory &&
