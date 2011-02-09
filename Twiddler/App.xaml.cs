@@ -19,6 +19,9 @@
 
     public partial class App : CaliburnApplication
     {
+        private static readonly DirectoryCatalog DirectoryCatalog =
+            new DirectoryCatalog(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "Twiddler.*.dll");
+
         private static readonly AggregateCatalog Catalog =
             new AggregateCatalog(new ComposablePartCatalog[]
                                      {
@@ -26,15 +29,9 @@
                                          DirectoryCatalog
                                      });
 
-        private static readonly DirectoryCatalog DirectoryCatalog =
-            new DirectoryCatalog(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), "Twiddler.*.dll");
-
         private readonly IContainerFactory _containerFactory = 
-            
-            // new MefContainerFactory(Catalog);
             new AutofacContainerFactory(Catalog);
 
-        // new UnityContainerFactory(Catalog);
         protected override IServiceLocator CreateContainer()
         {
             return _containerFactory.CreateContainer();
