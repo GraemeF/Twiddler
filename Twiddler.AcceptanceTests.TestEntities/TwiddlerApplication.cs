@@ -12,8 +12,6 @@
     using Core;
     using Core.UIItems.WindowItems;
 
-    using Gallio.Framework;
-
     using MbUnit.Framework;
 
     using Twiddler.AcceptanceTests.TestEntities.Properties;
@@ -39,14 +37,14 @@
         #endregion
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="TwiddlerApplication"/> class. 
+        /// 	Initializes a new instance of the <see cref="TwiddlerApplication"/> class. 
         /// 	Launches an instance of Twiddler for testing.
         /// </summary>
         /// <param name="newStore">
-        /// The new Store.
+        /// 	The new Store.
         /// </param>
         /// <returns>
-        /// The launched instance.
+        /// 	The launched instance.
         /// </returns>
         public TwiddlerApplication(bool newStore)
         {
@@ -56,7 +54,6 @@
             args.AppendFormat(" /service={0}", DefaultService);
 
             string path = Path.GetFullPath(ApplicationPath);
-            TestLog.WriteLine("Starting \"{0}\" {1}", path, args.ToString());
 
             var startInfo = new ProcessStartInfo(path, args.ToString())
                                 {
