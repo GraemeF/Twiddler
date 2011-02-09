@@ -12,8 +12,6 @@
     using Core;
     using Core.UIItems.WindowItems;
 
-    using MbUnit.Framework;
-
     using Twiddler.AcceptanceTests.TestEntities.Properties;
 
     using Desktop = Fluid.Desktop;
@@ -112,19 +110,17 @@
 
             try
             {
-                Retry.
-                    WithPolling(1000).
-                    Repeat(10).
-                    DoBetween(AttemptToClose).
-                    Until(() => _application.HasExited);
+                Retry.Until(() =>
+                    {
+                        AttemptToClose();
+                        return _application.HasExited;
+                    }, 
+                            "Failed to close the application.");
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 if (!_application.HasExited)
-                {
                     _application.Kill();
-                    throw new ApplicationException("The application did not close after 10 seconds.", ex);
-                }
 
                 throw;
             }
