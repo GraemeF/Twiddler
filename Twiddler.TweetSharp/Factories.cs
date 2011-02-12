@@ -2,8 +2,10 @@
 {
     #region Using Directives
 
+    using System;
     using System.ComponentModel.Composition;
     using System.Globalization;
+    using System.Linq;
 
     using global::TweetSharp;
 
@@ -27,8 +29,8 @@
                            Status = status.Text, 
                            User = CreateUserFromTwitterUser(status.User), 
                            CreatedDate = status.CreatedDate, 
-                           // Links = status.TextLinks.ToList(),
-                           // Mentions = status.TextMentions.ToList(),
+                           Links = status.Entities.Urls.Select(x => new Uri(x.Value)).ToList(), 
+                           Mentions = status.Entities.Mentions.Select(x => x.ScreenName).ToList(), 
                            InReplyToStatusId = GetInReplyToStatusId(status), 
                            IsArchived = false, 
                            IsRead = false
