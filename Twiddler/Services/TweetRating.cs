@@ -11,7 +11,8 @@
 
     using MvvmFoundation.Wpf;
 
-    using Twiddler.Core;
+    using ReactiveUI;
+
     using Twiddler.Core.Models;
     using Twiddler.Core.Services;
 
@@ -20,13 +21,14 @@
     [PerRequest(typeof(ITweetRating))]
     [Export(typeof(ITweetRating))]
     [PartCreationPolicy(CreationPolicy.NonShared)]
-    public class TweetRating : ITweetRating
+    public class TweetRating : ReactiveObject, 
+                               ITweetRating
     {
         private readonly IAuthorizer _client;
 
         private readonly ITweet _tweet;
 
-        private bool _isMention;
+        private bool _IsMention;
 
         private PropertyObserver<IAuthorizer> _observer;
 
@@ -42,8 +44,6 @@
             UpdateIsMention();
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-
         public bool IsDirectMessage
         {
             get { throw new NotImplementedException(); }
@@ -51,15 +51,8 @@
 
         public bool IsMention
         {
-            get { return _isMention; }
-            private set
-            {
-                if (_isMention != value)
-                {
-                    _isMention = value;
-                    PropertyChanged.Raise(x => IsMention);
-                }
-            }
+            get { return _IsMention; }
+            private set { this.RaiseAndSetIfChanged(x => x.IsMention, value); }
         }
 
         private void UpdateIsMention()

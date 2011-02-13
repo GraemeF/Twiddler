@@ -20,13 +20,11 @@
 
     public class RequestConductorTests
     {
-        private readonly Mock<IAuthorizer> _fakeClient = new Mock<IAuthorizer>();
+        private readonly IAuthorizer _client = Mock.Of<IAuthorizer>();
 
         private readonly Mock<ITweetRequester> _fakeRequester = new Mock<ITweetRequester>();
 
         private readonly Mock<ITweetSink> _fakeSink = new Mock<ITweetSink>();
-
-        private readonly IEnumerable<ITweet> _newTweets = new[] { A.Tweet.Build() };
 
         private readonly IEnumerable<ITweet> _requestedTweets = new[] { A.Tweet.Build() };
 
@@ -36,7 +34,8 @@
         {
             _fakeRequester.
                 Setup(x => x.RequestTweets()).
-                Returns(_requestedTweets);
+                Returns(_requestedTweets).
+                Callback(() => _requestCompleted = true);
         }
 
         [Fact]
@@ -77,22 +76,21 @@
 
             Wait.Until(() => _requestCompleted);
 
-            _fakeSink.Verify(x => x.Add(_newTweets));
+            _fakeSink.Verify(x => x.Add(_requestedTweets));
         }
 
         private RequestConductor BuildDefaultTestSubject()
         {
-            return new RequestConductor(_fakeClient.Object, new[] { _fakeRequester.Object });
+            return new RequestConductor(_client, new[] { _fakeRequester.Object });
         }
 
         private void ClientAuthorizationStatusChangesTo(AuthorizationStatus authorizationStatus)
         {
-            _fakeClient.
-                Setup(x => x.AuthorizationStatus).
-                Returns(authorizationStatus);
+            Mock<IAuthorizer> fakeClient = Mock.Get(_client);
 
-            _fakeClient.Raise(x => x.PropertyChanged += null, 
-                              new PropertyChangedEventArgs("AuthorizationStatus"));
+            fakeClient.Setup(x => x.AuthorizationStatus).Returns(authorizationStatus);
+            fakeClient.Raise(x => x.PropertyChanged += null, 
+                             new PropertyChangedEventArgs("AuthorizationStatus"));
         }
     }
 }

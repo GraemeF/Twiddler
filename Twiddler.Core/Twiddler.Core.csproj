@@ -79,7 +79,6 @@
     <Compile Include="Models\AccessToken.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="NoCoverageAttribute.cs" />
-    <Compile Include="PropertyHelper.cs" />
     <Compile Include="Services\AuthorizationStatus.cs" />
     <Compile Include="Services\IAccessTokenStore.cs" />
     <Compile Include="Services\IAsyncTweetFetcher.cs" />

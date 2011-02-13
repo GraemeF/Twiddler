@@ -55,14 +55,6 @@
             Assert.Equal(linkUrl, locations.Link.ToString());
         }
 
-        [Fact]
-        public void GetImageLocations_GivenYFrogImageUrl_ReturnsLinkLocation()
-        {
-            ImageLocations locations = new YFrogDecoder().GetImageLocations(new Uri("http://yfrog.com/0u6mcz"));
-
-            Assert.Equal("http://yfrog.com/0u6mcz", locations.Link.ToString());
-        }
-
         [Theory]
         [InlineData("http://yfrog.com/0u6mcz", "http://yfrog.com/0u6mcz.th.jpg")]
         public void GetImageLocations_GivenYFrogImageUrl_ReturnsThumbnailLocation(string url, string linkUrl)

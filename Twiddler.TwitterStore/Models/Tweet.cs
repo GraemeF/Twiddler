@@ -4,25 +4,24 @@
 
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel;
 
-    using Twiddler.Core;
+    using ReactiveUI;
+
     using Twiddler.Core.Models;
 
     #endregion
 
-    public class Tweet : ITweet
+    public class Tweet : ReactiveObject, 
+                         ITweet
     {
-        private bool _isArchived;
+        private bool _IsArchived;
 
-        private bool _isRead;
+        private bool _IsRead;
 
         public Tweet()
         {
             Links = new List<Uri>();
         }
-
-        public event PropertyChangedEventHandler PropertyChanged;
 
         public DateTime CreatedDate { get; set; }
 
@@ -32,28 +31,14 @@
 
         public bool IsArchived
         {
-            get { return _isArchived; }
-            set
-            {
-                if (_isArchived != value)
-                {
-                    _isArchived = value;
-                    PropertyChanged.Raise(x => IsArchived);
-                }
-            }
+            get { return _IsArchived; }
+            set { this.RaiseAndSetIfChanged(x => x.IsArchived, value); }
         }
 
         public bool IsRead
         {
-            get { return _isRead; }
-            set
-            {
-                if (_isRead != value)
-                {
-                    _isRead = value;
-                    PropertyChanged.Raise(x => IsRead);
-                }
-            }
+            get { return _IsRead; }
+            set { this.RaiseAndSetIfChanged(x => x.IsRead, value); }
         }
 
         public List<Uri> Links { get; set; }

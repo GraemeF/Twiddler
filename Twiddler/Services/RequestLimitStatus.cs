@@ -3,80 +3,51 @@
     #region Using Directives
 
     using System;
-    using System.ComponentModel;
     using System.ComponentModel.Composition;
 
     using Caliburn.Core.IoC;
 
-    using Twiddler.Core;
+    using ReactiveUI;
+
     using Twiddler.Services.Interfaces;
 
     #endregion
 
     [Singleton(typeof(IRequestLimitStatus))]
     [Export(typeof(IRequestLimitStatus))]
-    public class RequestLimitStatus : IRequestLimitStatus
+    public class RequestLimitStatus : ReactiveObject, 
+                                      IRequestLimitStatus
     {
-        private int _hourlyLimit = 350;
+        private readonly TimeSpan _PeriodDuration = TimeSpan.FromHours(1);
 
-        private TimeSpan _periodDuration = TimeSpan.FromHours(1);
+        private int _HourlyLimit = 350;
 
-        private DateTime _periodEndTime;
+        private DateTime _PeriodEndTime;
 
-        private int _remainingHits;
-
-        public event PropertyChangedEventHandler PropertyChanged;
+        private int _RemainingHits;
 
         public int HourlyLimit
         {
-            get { return _hourlyLimit; }
-            set
-            {
-                if (_hourlyLimit != value)
-                {
-                    _hourlyLimit = value;
-                    PropertyChanged.Raise(x => HourlyLimit);
-                }
-            }
+            get { return _HourlyLimit; }
+            set { this.RaiseAndSetIfChanged(x => x.HourlyLimit, value); }
         }
 
         public TimeSpan PeriodDuration
         {
-            get { return _periodDuration; }
-            set
-            {
-                if (_periodDuration != value)
-                {
-                    _periodDuration = value;
-                    PropertyChanged.Raise(x => PeriodDuration);
-                }
-            }
+            get { return _PeriodDuration; }
+            set { this.RaiseAndSetIfChanged(x => x.PeriodDuration, value); }
         }
 
         public DateTime PeriodEndTime
         {
-            get { return _periodEndTime; }
-            set
-            {
-                if (_periodEndTime != value)
-                {
-                    _periodEndTime = value;
-                    PropertyChanged.Raise(x => PeriodEndTime);
-                }
-            }
+            get { return _PeriodEndTime; }
+            set { this.RaiseAndSetIfChanged(x => x.PeriodEndTime, value); }
         }
 
         public int RemainingHits
         {
-            get { return _remainingHits; }
-            set
-            {
-                if (_remainingHits != value)
-                {
-                    _remainingHits = value;
-                    PropertyChanged.Raise(x => RemainingHits);
-                }
-            }
+            get { return _RemainingHits; }
+            set { this.RaiseAndSetIfChanged(x => x.RemainingHits, value); }
         }
     }
 }

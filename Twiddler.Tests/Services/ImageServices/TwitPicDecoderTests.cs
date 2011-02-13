@@ -41,14 +41,6 @@
             Assert.Equal(linkUrl, locations.Link.ToString());
         }
 
-        [Fact]
-        public void GetImageLocations_GivenTwitPicImageUrl_ReturnsLinkLocation()
-        {
-            ImageLocations locations = new TwitPicDecoder().GetImageLocations(new Uri("http://twitpic.com/1e10q"));
-
-            Assert.Equal("http://twitpic.com/1e10q", locations.Link.ToString());
-        }
-
         [Theory]
         [InlineData("http://twitpic.com/1e10q", "http://twitpic.com/show/mini/1e10q")]
         [InlineData("http://twitpic.com/show/thumb/1e10q", "http://twitpic.com/show/mini/1e10q")]
