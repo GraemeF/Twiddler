@@ -45,7 +45,6 @@
 
 		<!-- Run Gallio from within NCover, recording the exit code as $(UnitTestResult) -->
 		<Gallio Files="@(GallioTestFixtureAssembly)"
-				RunnerType="NCover3"
 				ReportDirectory="$(ReportsPath)"
 				ReportNameFormat="@(GallioTestFixtureAssembly->'%(Filename).Gallio.tests')"
 				ReportTypes="xml"
