@@ -12,8 +12,6 @@
 
     #endregion
 
-    [Singleton(typeof(IAsyncTweetFetcher))]
-    [Export(typeof(IAsyncTweetFetcher))]
     public class StreamingAsyncTweetFetcher : IAsyncTweetFetcher
     {
         private readonly IAuthorizer _client;
