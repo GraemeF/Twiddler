@@ -2,14 +2,14 @@
 {
     #region Using Directives
 
-    using System.ComponentModel;
     using System.ComponentModel.Composition;
 
     using Caliburn.Core.IoC;
 
+    using ReactiveUI;
+
     using global::TweetSharp;
 
-    using Twiddler.Core;
     using Twiddler.Core.Models;
     using Twiddler.Core.Services;
 
@@ -17,7 +17,8 @@
 
     [Singleton(typeof(IAuthorizer))]
     [Export(typeof(IAuthorizer))]
-    public class Authorizer : IAuthorizer
+    public class Authorizer : ReactiveObject, 
+                              IAuthorizer
     {
         private readonly IAccessTokenStore _accessTokenStore;
 
@@ -41,32 +42,16 @@
             _userFactory = userFactory;
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-
         public User AuthenticatedUser
         {
             get { return _authenticatedUser; }
-            private set
-            {
-                if (_authenticatedUser != value)
-                {
-                    _authenticatedUser = value;
-                    PropertyChanged.Raise(x => AuthenticatedUser);
-                }
-            }
+            private set { this.RaiseAndSetIfChanged(x => x.AuthenticatedUser, value); }
         }
 
         public AuthorizationStatus AuthorizationStatus
         {
             get { return _authorizationStatus; }
-            private set
-            {
-                if (_authorizationStatus != value)
-                {
-                    _authorizationStatus = value;
-                    PropertyChanged.Raise(x => AuthorizationStatus);
-                }
-            }
+            private set { this.RaiseAndSetIfChanged(x => x.AuthorizationStatus, value); }
         }
 
         #region IAuthorizer members

@@ -2,13 +2,13 @@
 {
     #region Using Directives
 
-    using System.ComponentModel;
+    using ReactiveUI;
 
     using Twiddler.Core.Models;
 
     #endregion
 
-    public interface IAuthorizer : INotifyPropertyChanged
+    public interface IAuthorizer : IReactiveNotifyPropertyChanged
     {
         User AuthenticatedUser { get; }
 

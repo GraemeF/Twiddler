@@ -4,6 +4,7 @@ namespace Twiddler.Tests.Services
 
     using Moq;
 
+    using Twiddler.Core.Services;
     using Twiddler.Services;
     using Twiddler.Services.Interfaces;
 
@@ -13,7 +14,7 @@ namespace Twiddler.Tests.Services
 
     public class TimelineUpdaterTests
     {
-        private readonly Mock<IRequestConductor> _fakeRequestConductor = new Mock<IRequestConductor>();
+        private readonly Mock<IAsyncTweetFetcher> _fakeRequestConductor = new Mock<IAsyncTweetFetcher>();
 
         private readonly Mock<ITimeline> _fakeStore = new Mock<ITimeline>();
 

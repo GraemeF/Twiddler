@@ -6,6 +6,7 @@
 
     using Caliburn.Core.IoC;
 
+    using Twiddler.Core.Services;
     using Twiddler.Services.Interfaces;
 
     #endregion
@@ -14,14 +15,14 @@
     [Export(typeof(ITimelineUpdater))]
     public class TimelineUpdater : ITimelineUpdater
     {
-        private readonly IRequestConductor _requestConductor;
+        private readonly IAsyncTweetFetcher _asyncTweetFetcher;
 
         private readonly ITimeline _timeline;
 
         [ImportingConstructor]
-        public TimelineUpdater(IRequestConductor requestConductor, ITimeline timeline)
+        public TimelineUpdater(IAsyncTweetFetcher asyncTweetFetcher, ITimeline timeline)
         {
-            _requestConductor = requestConductor;
+            _asyncTweetFetcher = asyncTweetFetcher;
             _timeline = timeline;
         }
 
@@ -29,7 +30,7 @@
 
         public void Start()
         {
-            _requestConductor.Start(_timeline);
+            _asyncTweetFetcher.Start(_timeline);
         }
 
         #endregion

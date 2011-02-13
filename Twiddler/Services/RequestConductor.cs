@@ -17,9 +17,9 @@
 
     #endregion
 
-    [Singleton(typeof(IRequestConductor))]
-    [Export(typeof(IRequestConductor))]
-    public class RequestConductor : IRequestConductor
+    [Singleton(typeof(IAsyncTweetFetcher))]
+    [Export(typeof(IAsyncTweetFetcher))]
+    public class RequestConductor : IAsyncTweetFetcher
     {
         private readonly IAuthorizer _client;
 
