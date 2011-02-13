@@ -28,9 +28,9 @@
 
         private AccessToken _accessToken;
 
-        private User _authenticatedUser;
+        private User _AuthenticatedUser;
 
-        private AuthorizationStatus _authorizationStatus;
+        private AuthorizationStatus _AuthorizationStatus;
 
         [ImportingConstructor]
         public Authorizer(ITwitterApplicationCredentials applicationCredentials, 
@@ -44,13 +44,13 @@
 
         public User AuthenticatedUser
         {
-            get { return _authenticatedUser; }
+            get { return _AuthenticatedUser; }
             private set { this.RaiseAndSetIfChanged(x => x.AuthenticatedUser, value); }
         }
 
         public AuthorizationStatus AuthorizationStatus
         {
-            get { return _authorizationStatus; }
+            get { return _AuthorizationStatus; }
             private set { this.RaiseAndSetIfChanged(x => x.AuthorizationStatus, value); }
         }
 
