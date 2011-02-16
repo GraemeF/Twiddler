@@ -2,13 +2,14 @@ namespace Twiddler.Screens
 {
     #region Using Directives
 
+    using System;
     using System.ComponentModel.Composition;
     using System.Linq;
 
     using Caliburn.Core.IoC;
     using Caliburn.PresentationFramework.Screens;
 
-    using MvvmFoundation.Wpf;
+    using ReactiveUI;
 
     using Twiddler.Commands.Interfaces;
     using Twiddler.Core.Commands;
@@ -24,7 +25,7 @@ namespace Twiddler.Screens
     {
         private readonly IAuthorizer _client;
 
-        private PropertyObserver<IAuthorizer> _observer;
+        private IDisposable _observer;
 
         [ImportingConstructor]
         public StatusScreen(IAuthorizer client, 
@@ -54,9 +55,9 @@ namespace Twiddler.Screens
         {
             base.OnInitialize();
 
-            _observer = new PropertyObserver<IAuthorizer>(_client).
-                RegisterHandler(x => x.AuthorizationStatus, 
-                                y => NotifyOfPropertyChange(() => Authorization));
+            _observer = _client.
+                ObservableForProperty(x => x.AuthorizationStatus).
+                Subscribe(_ => NotifyOfPropertyChange(() => Authorization));
 
             Observable.Start(_client.CheckAuthorization);
         }

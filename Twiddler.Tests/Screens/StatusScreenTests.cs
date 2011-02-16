@@ -2,7 +2,6 @@
 {
     #region Using Directives
 
-    using System.ComponentModel;
     using System.Threading;
 
     using Caliburn.Testability.Extensions;
@@ -30,6 +29,11 @@
         private readonly Mock<IAuthorizer> _fakeClient = new Mock<IAuthorizer>();
 
         private readonly Mock<IRequestMeterScreen> _fakeRequestMeter = new Mock<IRequestMeterScreen>();
+
+        public StatusScreenTests()
+        {
+            _fakeClient.SetupReactiveObject();
+        }
 
         [Fact]
         public void Authorization_WhenClientStatusChanges_RaisesPropertyChanged()
@@ -111,9 +115,7 @@
 
         private void ClientAuthorizationStatusChangesTo(AuthorizationStatus status)
         {
-            _fakeClient.Setup(x => x.AuthorizationStatus).Returns(status);
-            _fakeClient.Raise(x => x.PropertyChanged += null, 
-                              new PropertyChangedEventArgs("AuthorizationStatus"));
+            _fakeClient.PropertyChanges(x => x.AuthorizationStatus, status);
         }
     }
 }
