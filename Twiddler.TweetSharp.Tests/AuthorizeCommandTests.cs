@@ -5,7 +5,7 @@
     using System;
     using System.ComponentModel;
 
-    using Moq;
+    using NSubstitute;
 
     using Twiddler.Core.Models;
     using Twiddler.Core.Services;
@@ -17,12 +17,12 @@
 
     public class AuthorizeCommandTests
     {
-        private readonly Mock<ITwitterApplicationCredentials> _fakeApplicationCredentials =
-            new Mock<ITwitterApplicationCredentials>();
+        private readonly IAuthorizer _authorizer = Substitute.For<IAuthorizer>();
 
-        private readonly Mock<IAuthorizer> _fakeClient = new Mock<IAuthorizer>();
+        private readonly IAccessTokenStore _credentialsStore = Substitute.For<IAccessTokenStore>();
 
-        private readonly Mock<IAccessTokenStore> _fakeCredentialsStore = new Mock<IAccessTokenStore>();
+        private readonly ITwitterApplicationCredentials _twitterApplicationCredentials =
+            Substitute.For<ITwitterApplicationCredentials>();
 
         [Fact]
         public void CanExecuteChanged_WhenAuthorizationStatusChanges_IsRaised()
@@ -66,16 +66,16 @@
 
         private AuthorizeCommand BuildDefaultTestSubject()
         {
-            return new AuthorizeCommand(_fakeApplicationCredentials.Object, 
-                                        _fakeClient.Object, 
-                                        _fakeCredentialsStore.Object);
+            return new AuthorizeCommand(_twitterApplicationCredentials, 
+                                        _authorizer, 
+                                        _credentialsStore);
         }
 
         private void ClientAuthorizationStatusChangesTo(AuthorizationStatus status)
         {
-            _fakeClient.Setup(x => x.AuthorizationStatus).Returns(status);
-            _fakeClient.Raise(x => x.PropertyChanged += null, 
-                              new PropertyChangedEventArgs("AuthorizationStatus"));
+            _authorizer.AuthorizationStatus.Returns(status);
+            _authorizer.PropertyChanged +=
+                Raise.Event<PropertyChangedEventHandler>(new PropertyChangedEventArgs("AuthorizationStatus"));
         }
     }
 }

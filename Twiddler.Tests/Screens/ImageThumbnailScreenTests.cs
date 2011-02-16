@@ -4,7 +4,7 @@
 
     using System;
 
-    using Moq;
+    using NSubstitute;
 
     using Twiddler.Commands.Interfaces;
     using Twiddler.Models;
@@ -23,7 +23,7 @@
                                                                   Thumbnail = new Uri("http://thumbnail")
                                                               };
 
-        private readonly IOpenLinkCommand _openLinkCommand = new Mock<IOpenLinkCommand>().Object;
+        private readonly IOpenLinkCommand _openLinkCommand = Substitute.For<IOpenLinkCommand>();
 
         [Fact]
         public void GettingFullSize__ReturnsFullSizeFromLocations()

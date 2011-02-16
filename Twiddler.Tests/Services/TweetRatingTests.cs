@@ -2,7 +2,7 @@
 {
     #region Using Directives
 
-    using Moq;
+    using NSubstitute;
 
     using Twiddler.Core.Models;
     using Twiddler.Core.Services;
@@ -49,12 +49,10 @@
 
         private TweetRating BuildDefaultTestSubject()
         {
-            var fakeClient = new Mock<IAuthorizer>();
-            fakeClient.
-                Setup(x => x.AuthenticatedUser).
-                Returns(_user);
+            var authorizer = Substitute.For<IAuthorizer>();
+            authorizer.AuthenticatedUser.Returns(_user);
 
-            return new TweetRating(fakeClient.Object, _tweet);
+            return new TweetRating(authorizer, _tweet);
         }
     }
 }

@@ -6,7 +6,7 @@
 
     using Caliburn.Testability.Extensions;
 
-    using Moq;
+    using NSubstitute;
 
     using Twiddler.Commands.Interfaces;
     using Twiddler.Core.Commands;
@@ -22,18 +22,13 @@
 
     public class StatusScreenTests
     {
-        private readonly IAuthorizeCommand _authorizeCommand = new Mock<IAuthorizeCommand>().Object;
+        private readonly IAuthorizeCommand _authorizeCommand = Substitute.For<IAuthorizeCommand>();
 
-        private readonly IDeauthorizeCommand _deauthorizeCommand = new Mock<IDeauthorizeCommand>().Object;
+        private readonly IAuthorizer _authorizer = Substitute.For<IAuthorizer>().WithReactiveProperties();
 
-        private readonly Mock<IAuthorizer> _fakeClient = new Mock<IAuthorizer>();
+        private readonly IDeauthorizeCommand _deauthorizeCommand = Substitute.For<IDeauthorizeCommand>();
 
-        private readonly Mock<IRequestMeterScreen> _fakeRequestMeter = new Mock<IRequestMeterScreen>();
-
-        public StatusScreenTests()
-        {
-            _fakeClient.SetupReactiveObject();
-        }
+        private readonly IRequestMeterScreen _requestMeterScreen = Substitute.For<IRequestMeterScreen>();
 
         [Fact]
         public void Authorization_WhenClientStatusChanges_RaisesPropertyChanged()
@@ -89,8 +84,8 @@
             StatusScreen test = BuildDefaultTestSubject();
             test.Initialize();
 
-            Assert.Same(_fakeRequestMeter.Object, test.RequestMeter);
-            _fakeRequestMeter.Verify(x => x.Initialize());
+            Assert.Same(_requestMeterScreen, test.RequestMeter);
+            _requestMeterScreen.Received().Initialize();
         }
 
         [Fact]
@@ -98,9 +93,7 @@
         {
             StatusScreen test = BuildDefaultTestSubject();
             bool clientAuthorizationChecked = false;
-            _fakeClient.
-                Setup(x => x.CheckAuthorization()).
-                Callback(() => clientAuthorizationChecked = true);
+            _authorizer.When(x => x.CheckAuthorization()).Do(_ => clientAuthorizationChecked = true);
 
             test.Initialize();
             Thread.Sleep(1000);
@@ -110,12 +103,12 @@
 
         private StatusScreen BuildDefaultTestSubject()
         {
-            return new StatusScreen(_fakeClient.Object, _authorizeCommand, _deauthorizeCommand, _fakeRequestMeter.Object);
+            return new StatusScreen(_authorizer, _authorizeCommand, _deauthorizeCommand, _requestMeterScreen);
         }
 
         private void ClientAuthorizationStatusChangesTo(AuthorizationStatus status)
         {
-            _fakeClient.PropertyChanges(x => x.AuthorizationStatus, status);
+            _authorizer.PropertyChanges(x => x.AuthorizationStatus, status);
         }
     }
 }

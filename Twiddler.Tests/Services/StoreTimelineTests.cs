@@ -4,7 +4,7 @@
 
     using System.Collections.Generic;
 
-    using Moq;
+    using NSubstitute;
 
     using Should.Fluent;
 
@@ -19,7 +19,7 @@
 
     public class StoreTimelineTests
     {
-        private readonly Mock<ITweetStore> _fakeStore = new Mock<ITweetStore>();
+        private readonly ITweetStore _tweetStore = Substitute.For<ITweetStore>();
 
         [Fact]
         public void Add_GivenANewTweet_AddsTweetToTweets()
@@ -40,7 +40,7 @@
             StoreTimeline test = BuildDefaultTestSubject();
             test.Add(tweet);
 
-            _fakeStore.Verify(x => x.Add(tweet));
+            _tweetStore.Received().Add(tweet);
         }
 
         [Fact]
@@ -62,7 +62,7 @@
             StoreTimeline test = BuildDefaultTestSubject();
             test.Add(tweets);
 
-            _fakeStore.Verify(x => x.Add(tweets));
+            _tweetStore.Received().Add(tweets);
         }
 
         [Fact]
@@ -86,14 +86,12 @@
 
         private StoreTimeline BuildDefaultTestSubject()
         {
-            return new StoreTimeline(_fakeStore.Object);
+            return new StoreTimeline(_tweetStore);
         }
 
         private void StoreHasInboxTweets(IEnumerable<ITweet> inboxTweets)
         {
-            _fakeStore.
-                Setup(x => x.GetInboxTweets()).
-                Returns(inboxTweets);
+            _tweetStore.GetInboxTweets().Returns(inboxTweets);
         }
     }
 }

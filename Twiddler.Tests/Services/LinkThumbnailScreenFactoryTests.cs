@@ -6,7 +6,7 @@
     using System.ComponentModel.Composition;
     using System.ComponentModel.Composition.Hosting;
 
-    using Moq;
+    using NSubstitute;
 
     using Twiddler.Models;
     using Twiddler.Screens.Interfaces;
@@ -25,7 +25,7 @@
 
         private readonly CompositionContainer _compostionContainer;
 
-        private readonly IImageThumbnailScreen _imageThumbnailScreen = new Mock<IImageThumbnailScreen>().Object;
+        private readonly IImageThumbnailScreen _imageThumbnailScreen = Substitute.For<IImageThumbnailScreen>();
 
         public LinkThumbnailScreenFactoryTests()
         {

@@ -2,7 +2,7 @@
 {
     #region Using Directives
 
-    using Moq;
+    using NSubstitute;
 
     using Twiddler.Screens;
     using Twiddler.Screens.Interfaces;
@@ -14,11 +14,11 @@
 
     public class ShellScreenTests
     {
-        private readonly Mock<IStatusScreen> _fakeStatus = new Mock<IStatusScreen>();
+        private readonly IStatusScreen _status = Substitute.For<IStatusScreen>();
 
-        private readonly Mock<ITimelineScreen> _fakeTimeline = new Mock<ITimelineScreen>();
+        private readonly ITimelineScreen _timeline = Substitute.For<ITimelineScreen>();
 
-        private readonly Mock<ITimelineUpdater> _fakeUpdater = new Mock<ITimelineUpdater>();
+        private readonly ITimelineUpdater _updater = Substitute.For<ITimelineUpdater>();
 
         [Fact]
         public void GettingStatus_WhenInitialized_ReturnsInitializedStatus()
@@ -26,8 +26,8 @@
             ShellScreen test = BuildDefaultTestSubject();
             test.Initialize();
 
-            _fakeStatus.Verify(x => x.Initialize());
-            Assert.Same(_fakeStatus.Object, test.Status);
+            _status.Received().Initialize();
+            Assert.Same(_status, test.Status);
         }
 
         [Fact]
@@ -36,8 +36,8 @@
             ShellScreen test = BuildDefaultTestSubject();
             test.Initialize();
 
-            _fakeTimeline.Verify(x => x.Initialize());
-            Assert.Same(_fakeTimeline.Object, test.Timeline);
+            _timeline.Received().Initialize();
+            Assert.Same(_timeline, test.Timeline);
         }
 
         [Fact]
@@ -46,12 +46,12 @@
             ShellScreen test = BuildDefaultTestSubject();
             test.Initialize();
 
-            _fakeUpdater.Verify(x => x.Start());
+            _updater.Received().Start();
         }
 
         private ShellScreen BuildDefaultTestSubject()
         {
-            return new ShellScreen(_fakeTimeline.Object, _fakeStatus.Object, _fakeUpdater.Object);
+            return new ShellScreen(_timeline, _status, _updater);
         }
     }
 }

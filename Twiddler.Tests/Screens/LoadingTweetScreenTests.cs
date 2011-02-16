@@ -2,7 +2,9 @@
 {
     #region Using Directives
 
-    using Moq;
+    using NSubstitute;
+
+    using Should.Fluent;
 
     using Twiddler.Core.Models;
     using Twiddler.Core.Services;
@@ -16,26 +18,25 @@
 
     public class LoadingTweetScreenTests
     {
-        private readonly Mock<ITweetStore> _fakeStore = new Mock<ITweetStore>();
-
-        private readonly Mock<ITweetPlaceholderScreen> _fakeTweetPlaceholderScreen = new Mock<ITweetPlaceholderScreen>();
+        private readonly ITweetStore _store = Substitute.For<ITweetStore>();
 
         private readonly ITweet _tweet = A.Tweet.Build();
 
-        private Mock<ITweetScreen> _fakeTweetScreen;
+        private readonly ITweetPlaceholderScreen _tweetPlaceholderScreen = Substitute.For<ITweetPlaceholderScreen>();
 
         private bool _storeAskedForTweet;
 
+        private ITweetScreen _tweetScreen;
+
         public LoadingTweetScreenTests()
         {
-            _fakeTweetPlaceholderScreen.
-                Setup(x => x.CanShutdown()).
-                Returns(true);
+            _tweetPlaceholderScreen.CanShutdown().Returns(true);
 
-            _fakeStore.
-                Setup(x => x.GetTweet(_tweet.Id)).
-                Callback(() => _storeAskedForTweet = true).
-                Returns(_tweet);
+            _store.GetTweet(_tweet.Id).Returns(_ =>
+                {
+                    _storeAskedForTweet = true;
+                    return _tweet;
+                });
         }
 
         [Fact]
@@ -53,8 +54,8 @@
 
             InitializeAndWaitUntilStoreIsAskedForTweet(test);
 
-            _fakeTweetScreen.Verify(x => x.Initialize());
-            Assert.Same(_fakeTweetScreen.Object, test.ActiveScreen);
+            _tweetScreen.Received().Initialize();
+            test.ActiveScreen.Should().Be.SameAs(_tweetScreen);
         }
 
         [Fact]
@@ -64,7 +65,7 @@
 
             test.Initialize();
 
-            Assert.Same(_fakeTweetPlaceholderScreen.Object, test.ActiveScreen);
+            test.ActiveScreen.Should().Be.SameAs(_tweetPlaceholderScreen);
         }
 
         [Fact]
@@ -74,16 +75,16 @@
 
             InitializeAndWaitUntilStoreIsAskedForTweet(test);
 
-            _fakeStore.Verify(x => x.GetTweet(_tweet.Id));
+            _store.Received().GetTweet(_tweet.Id);
         }
 
         private LoadingTweetScreen BuildDefaultTestSubject()
         {
-            _fakeTweetScreen = new Mock<ITweetScreen>();
-            return new LoadingTweetScreen(_fakeTweetPlaceholderScreen.Object, 
-                                          _fakeStore.Object, 
+            _tweetScreen = Substitute.For<ITweetScreen>();
+            return new LoadingTweetScreen(_tweetPlaceholderScreen, 
+                                          _store, 
                                           _tweet.Id, 
-                                          x => _fakeTweetScreen.Object);
+                                          x => _tweetScreen);
         }
 
         private void InitializeAndWaitUntilStoreIsAskedForTweet(LoadingTweetScreen test)

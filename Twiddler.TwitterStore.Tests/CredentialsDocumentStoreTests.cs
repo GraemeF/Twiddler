@@ -2,9 +2,7 @@
 {
     #region Using Directives
 
-    using System.Linq;
-
-    using Moq;
+    using NSubstitute;
 
     using Raven.Client;
 
@@ -17,16 +15,16 @@
 
     public class CredentialsDocumentStoreTests
     {
-        private readonly IDocumentSession _documentSession = Mock.Of<IDocumentSession>();
+        private readonly IDocumentSession _documentSession = Substitute.For<IDocumentSession>();
 
-        private readonly IDocumentStore _documentStore;
+        private readonly IDocumentStore _documentStore = Substitute.For<IDocumentStore>();
 
-        private readonly IDocumentStoreFactory _documentStoreFactory;
+        private readonly IDocumentStoreFactory _documentStoreFactory = Substitute.For<IDocumentStoreFactory>();
 
         public CredentialsDocumentStoreTests()
         {
-            _documentStore = Mocks.Of<IDocumentStore>().First(x => x.OpenSession() == _documentSession);
-            _documentStoreFactory = Mocks.Of<IDocumentStoreFactory>().First(x => x.GetDocumentStore() == _documentStore);
+            _documentStore.OpenSession().Returns(_documentSession);
+            _documentStoreFactory.GetDocumentStore().Returns(_documentStore);
         }
 
         [Fact]
@@ -37,9 +35,7 @@
 
             AccessTokenDocumentStore test = BuildDefaultTestSubject();
 
-            Mock.Get(_documentSession).
-                Setup(x => x.Load<AccessToken>(id)).
-                Returns(credentials);
+            _documentSession.Load<AccessToken>(id).Returns(credentials);
 
             Assert.Same(credentials, test.Load(id));
         }
@@ -51,9 +47,7 @@
 
             AccessTokenDocumentStore test = BuildDefaultTestSubject();
 
-            Mock.Get(_documentSession).
-                Setup(x => x.Load<AccessToken>(id)).
-                Returns((AccessToken)null);
+            _documentSession.Load<AccessToken>(id).Returns((AccessToken)null);
 
             Assert.NotNull(test.Load(id));
         }

@@ -3,9 +3,8 @@ namespace Twiddler.Tests.Commands
     #region Using Directives
 
     using System;
-    using System.ComponentModel;
 
-    using Moq;
+    using NSubstitute;
 
     using Twiddler.Commands;
     using Twiddler.Core.Services;
@@ -17,7 +16,7 @@ namespace Twiddler.Tests.Commands
 
     public class DeauthorizeCommandTests
     {
-        private readonly Mock<IAuthorizer> _fakeClient = new Mock<IAuthorizer>();
+        private readonly IAuthorizer _client = Substitute.For<IAuthorizer>().WithReactiveProperties();
 
         [Fact]
         public void CanExecuteChanged_WhenAuthorizationStatusChanges_IsRaised()
@@ -65,19 +64,17 @@ namespace Twiddler.Tests.Commands
 
             test.Execute(null);
 
-            _fakeClient.Verify(x => x.Deauthorize());
+            _client.Received().Deauthorize();
         }
 
         private DeauthorizeCommand BuildDefaultTestSubject()
         {
-            return new DeauthorizeCommand(_fakeClient.Object);
+            return new DeauthorizeCommand(_client);
         }
 
         private void ClientAuthorizationStatusChangesTo(AuthorizationStatus status)
         {
-            _fakeClient.Setup(x => x.AuthorizationStatus).Returns(status);
-            _fakeClient.Raise(x => x.PropertyChanged += null, 
-                              new PropertyChangedEventArgs("AuthorizationStatus"));
+            _client.PropertyChanges(x => x.AuthorizationStatus, status);
         }
     }
 }

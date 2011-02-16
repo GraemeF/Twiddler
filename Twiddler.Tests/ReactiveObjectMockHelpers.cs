@@ -1,4 +1,4 @@
-﻿namespace Twiddler.Tests.Screens
+﻿namespace Twiddler.Tests
 {
     #region Using Directives
 
@@ -7,7 +7,7 @@
     using System.ComponentModel;
     using System.Linq.Expressions;
 
-    using Moq;
+    using NSubstitute;
 
     using ReactiveUI;
 
@@ -15,26 +15,28 @@
 
     public static class ReactiveObjectMockHelpers
     {
-        public static void PropertyChanges<T, TValue>(this Mock<T> fake, 
+        public static void PropertyChanges<T, TValue>(this T substitute, 
                                                       Expression<Func<T, TValue>> expression, 
                                                       TValue newValue)
             where T : class, IReactiveNotifyPropertyChanged
         {
             string propertyName = GetPropertyName(expression);
-            T sender = fake.Object;
+            T sender = substitute;
 
             PublishChange(sender, sender.Changing, propertyName, newValue);
 
-            UpdatePropertyValue(expression, fake, newValue);
-            RaisePropertyChanged(fake, propertyName);
+            UpdatePropertyValue(expression, substitute, newValue);
+            RaisePropertyChanged(substitute, propertyName);
 
             PublishChange(sender, sender.Changed, propertyName, newValue);
         }
 
-        public static void SetupReactiveObject<T>(this Mock<T> fake) where T : class, IReactiveNotifyPropertyChanged
+        public static T WithReactiveProperties<T>(this T substitute) where T : class, IReactiveNotifyPropertyChanged
         {
-            SetupChangeSubject(fake, x => x.Changing);
-            SetupChangeSubject(fake, x => x.Changed);
+            substitute.Changing.Returns(new Subject<IObservedChange<object, object>>());
+            substitute.Changed.Returns(new Subject<IObservedChange<object, object>>());
+
+            return substitute;
         }
 
         private static string GetPropertyName<T, TValue>(Expression<Func<T, TValue>> expression)
@@ -56,30 +58,19 @@
                            });
         }
 
-        private static void RaisePropertyChanged<T>(Mock<T> fake, string propertyName)
+        private static void RaisePropertyChanged<T>(T substitute, string propertyName)
             where T : class, INotifyPropertyChanged
         {
-            fake.Raise(x => x.PropertyChanged += null, 
-                       new PropertyChangedEventArgs(propertyName));
-        }
-
-        private static void SetupChangeSubject<T>(Mock<T> fake, 
-                                                  Expression<Func<T, IObservable<IObservedChange<object, object>>>> expression)
-            where T : class
-        {
-            fake.
-                Setup(expression).
-                Returns(new Subject<IObservedChange<object, object>>());
+            substitute.PropertyChanged +=
+                Raise.Event<PropertyChangedEventHandler>(new PropertyChangedEventArgs(propertyName));
         }
 
         private static void UpdatePropertyValue<T, TValue>(Expression<Func<T, TValue>> property, 
-                                                           Mock<T> fake, 
+                                                           T substitute, 
                                                            TValue newValue)
             where T : class
         {
-            fake.
-                Setup(property).
-                Returns(newValue);
+            property.Compile()(substitute).Returns(newValue);
         }
     }
 }

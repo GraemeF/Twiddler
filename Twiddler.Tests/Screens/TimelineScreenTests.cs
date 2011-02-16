@@ -6,7 +6,7 @@
     using System.Collections.ObjectModel;
     using System.Windows.Input;
 
-    using Moq;
+    using NSubstitute;
 
     using Twiddler.Core.Models;
     using Twiddler.Screens;
@@ -20,19 +20,19 @@
 
     public class TimelineScreenTests
     {
-        private readonly Mock<ITimeline> _fakeTimeline = new Mock<ITimeline>();
+        private readonly ITimeline _timeline = Substitute.For<ITimeline>();
 
         private readonly ObservableCollection<ITweet> _tweets = new ObservableCollection<ITweet>();
 
         public TimelineScreenTests()
         {
-            _fakeTimeline.Setup(x => x.Tweets).Returns(_tweets);
+            _timeline.Tweets.Returns(_tweets);
         }
 
         [Fact]
         public void GettingScreens_WhenThereAreNoTweets_IsEmpty()
         {
-            var test = new TimelineScreen(new Lazy<ITimeline>(() => _fakeTimeline.Object), null);
+            var test = new TimelineScreen(new Lazy<ITimeline>(() => _timeline), null);
 
             Assert.Empty(test.Screens);
         }
@@ -40,38 +40,34 @@
         [Fact]
         public void GettingScreens_WhenThereIsATweet_ContainsAScreen()
         {
-            var mockScreen = new Mock<ITweetScreen>();
+            var mockScreen = Substitute.For<ITweetScreen>();
 
-            var test = new TimelineScreen(new Lazy<ITimeline>(() => _fakeTimeline.Object), x => mockScreen.Object);
+            var test = new TimelineScreen(new Lazy<ITimeline>(() => _timeline), x => mockScreen);
             test.Initialize();
 
             _tweets.Add(A.Tweet.Build());
 
-            Assert.Contains(mockScreen.Object, test.Screens);
-            mockScreen.Verify(x => x.Initialize());
+            Assert.Contains(mockScreen, test.Screens);
+            mockScreen.Received().Initialize();
         }
 
         [Fact]
         public void SettingSelection_WhenATweetWasSelected_MarksTweetAsRead()
         {
-            var mockScreen = new Mock<ITweetScreen>();
-            var mockCommand = new Mock<ICommand>();
+            var mockScreen = Substitute.For<ITweetScreen>();
+            var mockCommand = Substitute.For<ICommand>();
             bool commandExecuted = false;
 
-            mockScreen.
-                Setup(x => x.MarkAsReadCommand).
-                Returns(mockCommand.Object);
+            mockScreen.MarkAsReadCommand.Returns(mockCommand);
 
-            mockCommand.
-                Setup(x => x.Execute(null)).
-                Callback(() => commandExecuted = true);
+            mockCommand.When(x => x.Execute(null)).Do(_ => commandExecuted = true);
 
-            var test = new TimelineScreen(new Lazy<ITimeline>(() => _fakeTimeline.Object), x => mockScreen.Object);
+            var test = new TimelineScreen(new Lazy<ITimeline>(() => _timeline), x => mockScreen);
             test.Initialize();
 
             _tweets.Add(A.Tweet.Build());
 
-            test.Selection = mockScreen.Object;
+            test.Selection = mockScreen;
             test.Selection = null;
 
             Wait.Until(() => commandExecuted);

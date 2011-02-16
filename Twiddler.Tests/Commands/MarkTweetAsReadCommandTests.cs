@@ -2,7 +2,7 @@
 {
     #region Using Directives
 
-    using Moq;
+    using NSubstitute;
 
     using Twiddler.Commands;
     using Twiddler.Core.Models;
@@ -15,7 +15,7 @@
 
     public class MarkTweetAsReadCommandTests
     {
-        private readonly Mock<ITweetStore> _fakeStore = new Mock<ITweetStore>();
+        private readonly ITweetStore _store = Substitute.For<ITweetStore>();
 
         private readonly ITweet _tweet = A.Tweet.Build();
 
@@ -65,12 +65,12 @@
 
             test.Execute(null);
 
-            _fakeStore.Verify(x => x.Add(_tweet));
+            _store.Received().Add(_tweet);
         }
 
         private MarkTweetAsReadCommand BuildDefaultTestSubject()
         {
-            return new MarkTweetAsReadCommand(_tweet, _fakeStore.Object);
+            return new MarkTweetAsReadCommand(_tweet, _store);
         }
     }
 }

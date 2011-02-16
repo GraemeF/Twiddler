@@ -2,7 +2,7 @@
 {
     #region Using Directives
 
-    using Moq;
+    using NSubstitute;
 
     using Raven.Client;
 
@@ -15,33 +15,29 @@
 
     public class TwitterDocumentStoreTests
     {
-        private readonly Mock<IDocumentSession> _fakeDocumentSession = new Mock<IDocumentSession>();
+        private readonly IDocumentSession _documentSession = Substitute.For<IDocumentSession>();
 
-        private readonly Mock<IDocumentStore> _fakeDocumentStore = new Mock<IDocumentStore>();
+        private readonly IDocumentStore _documentStore = Substitute.For<IDocumentStore>();
 
-        private readonly Mock<IDocumentStoreFactory> _fakeDocumentStoreFactory = new Mock<IDocumentStoreFactory>();
+        private readonly IDocumentStoreFactory _documentStoreFactory = Substitute.For<IDocumentStoreFactory>();
 
         public TwitterDocumentStoreTests()
         {
-            _fakeDocumentStoreFactory.
-                Setup(x => x.GetDocumentStore()).
-                Returns(_fakeDocumentStore.Object);
+            _documentStoreFactory.GetDocumentStore().Returns(_documentStore);
 
-            _fakeDocumentStore.
-                Setup(x => x.OpenSession()).
-                Returns(_fakeDocumentSession.Object);
+            _documentStore.OpenSession().Returns(_documentSession);
         }
 
         [Fact]
         public void Add_GivenTweet_AddsTweetToDocumentStore()
         {
-            var test = new TwitterDocumentStore(_fakeDocumentStoreFactory.Object);
+            var test = new TwitterDocumentStore(_documentStoreFactory);
 
             var tweet = new Tweet();
             test.Add(tweet);
 
-            _fakeDocumentSession.Verify(x => x.Store(tweet));
-            _fakeDocumentSession.Verify(x => x.Dispose());
+            _documentSession.Received().Store(tweet);
+            _documentSession.Received().Dispose();
         }
 
         [Fact]
@@ -50,11 +46,9 @@
             var tweet = new Tweet();
             string id = "The tweet id";
 
-            var test = new TwitterDocumentStore(_fakeDocumentStoreFactory.Object);
+            var test = new TwitterDocumentStore(_documentStoreFactory);
 
-            _fakeDocumentSession.
-                Setup(x => x.Load<Tweet>(id)).
-                Returns(tweet);
+            _documentSession.Load<Tweet>(id).Returns(tweet);
 
             Assert.Same(tweet, test.GetTweet(id));
         }

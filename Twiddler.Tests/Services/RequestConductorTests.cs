@@ -6,7 +6,7 @@
     using System.Collections.Generic;
     using System.ComponentModel;
 
-    using Moq;
+    using NSubstitute;
 
     using Twiddler.Core.Models;
     using Twiddler.Core.Services;
@@ -20,11 +20,11 @@
 
     public class RequestConductorTests
     {
-        private readonly IAuthorizer _client = Mock.Of<IAuthorizer>();
+        private readonly IAuthorizer _client = Substitute.For<IAuthorizer>();
 
-        private readonly Mock<ITweetRequester> _fakeRequester = new Mock<ITweetRequester>();
+        private readonly ITweetRequester _tweetRequester = Substitute.For<ITweetRequester>();
 
-        private readonly Mock<ITweetSink> _fakeSink = new Mock<ITweetSink>();
+        private readonly ITweetSink _tweetSink = Substitute.For<ITweetSink>();
 
         private readonly IEnumerable<ITweet> _requestedTweets = new[] { A.Tweet.Build() };
 
@@ -32,10 +32,11 @@
 
         public RequestConductorTests()
         {
-            _fakeRequester.
-                Setup(x => x.RequestTweets()).
-                Returns(_requestedTweets).
-                Callback(() => _requestCompleted = true);
+            _tweetRequester.RequestTweets().Returns(_ =>
+                {
+                    _requestCompleted = true;
+                    return _requestedTweets;
+                });
         }
 
         [Fact]
@@ -43,14 +44,14 @@
         {
             RequestConductor test = BuildDefaultTestSubject();
 
-            test.Start(_fakeSink.Object);
+            test.Start(_tweetSink);
 
             ClientAuthorizationStatusChangesTo(AuthorizationStatus.Authorized);
             GC.KeepAlive(test);
 
             Wait.Until(() => _requestCompleted);
 
-            _fakeRequester.Verify(x => x.RequestTweets());
+            _tweetRequester.Received().RequestTweets();
         }
 
         [Fact]
@@ -60,10 +61,10 @@
 
             ClientAuthorizationStatusChangesTo(AuthorizationStatus.Authorized);
 
-            test.Start(_fakeSink.Object);
+            test.Start(_tweetSink);
             Wait.Until(() => _requestCompleted);
 
-            _fakeRequester.Verify(x => x.RequestTweets());
+            _tweetRequester.Received().RequestTweets();
         }
 
         [Fact]
@@ -72,25 +73,23 @@
             ClientAuthorizationStatusChangesTo(AuthorizationStatus.Authorized);
 
             RequestConductor test = BuildDefaultTestSubject();
-            test.Start(_fakeSink.Object);
+            test.Start(_tweetSink);
 
             Wait.Until(() => _requestCompleted);
 
-            _fakeSink.Verify(x => x.Add(_requestedTweets));
+            _tweetSink.Received().Add(_requestedTweets);
         }
 
         private RequestConductor BuildDefaultTestSubject()
         {
-            return new RequestConductor(_client, new[] { _fakeRequester.Object });
+            return new RequestConductor(_client, new[] { _tweetRequester });
         }
 
         private void ClientAuthorizationStatusChangesTo(AuthorizationStatus authorizationStatus)
         {
-            Mock<IAuthorizer> fakeClient = Mock.Get(_client);
-
-            fakeClient.Setup(x => x.AuthorizationStatus).Returns(authorizationStatus);
-            fakeClient.Raise(x => x.PropertyChanged += null, 
-                             new PropertyChangedEventArgs("AuthorizationStatus"));
+            _client.AuthorizationStatus.Returns(authorizationStatus);
+            _client.PropertyChanged +=
+                Raise.Event<PropertyChangedEventHandler>(new PropertyChangedEventArgs("AuthorizationStatus"));
         }
     }
 }

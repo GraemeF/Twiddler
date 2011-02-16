@@ -2,7 +2,7 @@ namespace Twiddler.Tests.Services
 {
     #region Using Directives
 
-    using Moq;
+    using NSubstitute;
 
     using Twiddler.Core.Services;
     using Twiddler.Services;
@@ -14,9 +14,9 @@ namespace Twiddler.Tests.Services
 
     public class TimelineUpdaterTests
     {
-        private readonly Mock<IAsyncTweetFetcher> _fakeRequestConductor = new Mock<IAsyncTweetFetcher>();
+        private readonly IAsyncTweetFetcher _requestConductor = Substitute.For<IAsyncTweetFetcher>();
 
-        private readonly Mock<ITimeline> _fakeStore = new Mock<ITimeline>();
+        private readonly ITimeline _store = Substitute.For<ITimeline>();
 
         [Fact]
         public void Start__StartsRequestingTweetsForStore()
@@ -24,12 +24,12 @@ namespace Twiddler.Tests.Services
             TimelineUpdater test = BuildDefaultTestSubject();
             test.Start();
 
-            _fakeRequestConductor.Verify(x => x.Start(_fakeStore.Object));
+            _requestConductor.Received().Start(_store);
         }
 
         private TimelineUpdater BuildDefaultTestSubject()
         {
-            return new TimelineUpdater(_fakeRequestConductor.Object, _fakeStore.Object);
+            return new TimelineUpdater(_requestConductor, _store);
         }
     }
 }

@@ -7,7 +7,7 @@ namespace Twiddler.Tests.Screens
 
     using Caliburn.Testability.Extensions;
 
-    using Moq;
+    using NSubstitute;
 
     using Twiddler.Commands;
     using Twiddler.Core.Models;
@@ -23,12 +23,12 @@ namespace Twiddler.Tests.Screens
 
     public class TweetScreenTests
     {
-        private readonly Mock<ILinkThumbnailScreenFactory> _fakeThumbnailFactory =
-            new Mock<ILinkThumbnailScreenFactory>();
+        private readonly ILinkThumbnailScreenFactory _linkThumbnailScreenFactory =
+            Substitute.For<ILinkThumbnailScreenFactory>();
 
-        private readonly Mock<ILinkThumbnailScreen> _fakeThumbnailScreen = new Mock<ILinkThumbnailScreen>();
+        private readonly ILinkThumbnailScreen _linkThumbnailScreen = Substitute.For<ILinkThumbnailScreen>();
 
-        private readonly Mock<ITweetRating> _fakeTweetRating = new Mock<ITweetRating>();
+        private readonly ITweetRating _tweetRating = Substitute.For<ITweetRating>();
 
         private readonly ITweet _tweet = A.Tweet.Build();
 
@@ -51,16 +51,16 @@ namespace Twiddler.Tests.Screens
         [Fact]
         public void GettingInReplyToTweet_WhenTheTweetIsAReply_IsALoadingTweetScreen()
         {
-            var mockScreen = new Mock<ILoadingTweetScreen>();
+            var mockScreen = Substitute.For<ILoadingTweetScreen>();
 
             var test = new TweetScreen(A.Tweet.InReplyTo("4").Build(), 
-                                       _fakeTweetRating.Object, 
-                                       _fakeThumbnailFactory.Object, 
-                                       x => mockScreen.Object, 
+                                       _tweetRating, 
+                                       _linkThumbnailScreenFactory, 
+                                       x => mockScreen, 
                                        null);
             test.Initialize();
 
-            Assert.Same(mockScreen.Object, test.InReplyToTweet);
+            Assert.Same(mockScreen, test.InReplyToTweet);
         }
 
         [Fact]
@@ -75,21 +75,19 @@ namespace Twiddler.Tests.Screens
         [Fact]
         public void GettingLinks_WhenTweetContainsALink_ReturnsCollectionWithOpenedLinkScreen()
         {
-            _fakeThumbnailFactory.
-                Setup(x => x.CreateScreenForLink(It.IsAny<Uri>())).
-                Returns(_fakeThumbnailScreen.Object);
+            _linkThumbnailScreenFactory.CreateScreenForLink(Arg.Any<Uri>()).Returns(_linkThumbnailScreen);
 
             var test =
                 new TweetScreen(A.Tweet.
                                     WithStatus("This tweet contains a link").
                                     LinkingTo(new Uri("http://link.one.com")).Build(), 
-                                _fakeTweetRating.Object, 
-                                _fakeThumbnailFactory.Object, 
+                                _tweetRating, 
+                                _linkThumbnailScreenFactory, 
                                 null, 
                                 null);
             test.Initialize();
 
-            Assert.Contains(_fakeThumbnailScreen.Object, test.Links);
+            Assert.Contains(_linkThumbnailScreen, test.Links);
         }
 
         [Fact]
@@ -104,9 +102,7 @@ namespace Twiddler.Tests.Screens
         public void GettingMentionVisibility_WhenTweetIsAMention_ReturnsVisible()
         {
             TweetScreen test = BuildDefaultTestSubject();
-            _fakeTweetRating.
-                Setup(x => x.IsMention).
-                Returns(true);
+            _tweetRating.IsMention.Returns(true);
 
             Assert.Equal(Visibility.Visible, test.MentionVisibility);
         }
@@ -155,7 +151,7 @@ namespace Twiddler.Tests.Screens
 
         private TweetScreen BuildDefaultTestSubject()
         {
-            return new TweetScreen(_tweet, _fakeTweetRating.Object, _fakeThumbnailFactory.Object, null, null);
+            return new TweetScreen(_tweet, _tweetRating, _linkThumbnailScreenFactory, null, null);
         }
     }
 }

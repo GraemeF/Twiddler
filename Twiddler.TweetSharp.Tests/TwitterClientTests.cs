@@ -2,7 +2,7 @@
 {
     #region Using Directives
 
-    using Moq;
+    using NSubstitute;
 
     using Twiddler.Core.Models;
     using Twiddler.Core.Services;
@@ -17,8 +17,8 @@
         [Fact]
         public void GettingAuthorization_Initially_ReturnsUnknown()
         {
-            var test = new Authorizer(new Mock<ITwitterApplicationCredentials>().Object, 
-                                      new Mock<IAccessTokenStore>().Object, 
+            var test = new Authorizer(Substitute.For<ITwitterApplicationCredentials>(), 
+                                      Substitute.For<IAccessTokenStore>(), 
                                       x => A.User);
 
             Assert.Equal(AuthorizationStatus.Unknown, test.AuthorizationStatus);

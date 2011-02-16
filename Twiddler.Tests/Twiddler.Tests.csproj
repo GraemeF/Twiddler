@@ -44,8 +44,8 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Library\Caliburn\Caliburn.Testability.dll</HintPath>
     </Reference>
-    <Reference Include="Moq, Version=4.0.10827.0, Culture=neutral, PublicKeyToken=69f491c39445e920, processorArchitecture=MSIL">
-      <HintPath>..\packages\Moq.4.0.10827\lib\NET40\Moq.dll</HintPath>
+    <Reference Include="NSubstitute">
+      <HintPath>..\packages\NSubstitute.1.0.0.0\lib\35\NSubstitute.dll</HintPath>
     </Reference>
     <Reference Include="PresentationCore">
       <RequiredTargetFramework>3.0</RequiredTargetFramework>
@@ -103,7 +103,7 @@
     <Compile Include="Commands\ArchiveTweetCommandTests.cs" />
     <Compile Include="Commands\DeauthorizeCommandTests.cs" />
     <Compile Include="Commands\MarkTweetAsReadCommandTests.cs" />
-    <Compile Include="Screens\ReactiveObjectMockHelpers.cs" />
+    <Compile Include="ReactiveObjectMockHelpers.cs" />
     <Compile Include="Services\StoreTimelineTests.cs" />
     <Compile Include="Screens\ImageThumbnailScreenTests.cs" />
     <Compile Include="Screens\LoadingTweetScreenTests.cs" />
