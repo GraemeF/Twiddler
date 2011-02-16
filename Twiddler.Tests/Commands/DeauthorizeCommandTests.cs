@@ -6,6 +6,8 @@ namespace Twiddler.Tests.Commands
 
     using NSubstitute;
 
+    using Should.Fluent;
+
     using Twiddler.Commands;
     using Twiddler.Core.Services;
 
@@ -30,7 +32,7 @@ namespace Twiddler.Tests.Commands
             ClientAuthorizationStatusChangesTo(AuthorizationStatus.Verifying);
             GC.KeepAlive(test);
 
-            Assert.True(eventRaised);
+            eventRaised.Should().Be.True();
         }
 
         [Fact]
@@ -40,7 +42,7 @@ namespace Twiddler.Tests.Commands
 
             ClientAuthorizationStatusChangesTo(AuthorizationStatus.Authorized);
 
-            Assert.True(test.CanExecute(null));
+            test.CanExecute(null).Should().Be.True();
         }
 
         [Theory]
@@ -54,7 +56,7 @@ namespace Twiddler.Tests.Commands
 
             ClientAuthorizationStatusChangesTo(status);
 
-            Assert.False(test.CanExecute(null));
+            test.CanExecute(null).Should().Be.False();
         }
 
         [Fact]

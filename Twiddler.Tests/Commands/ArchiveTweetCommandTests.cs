@@ -2,6 +2,8 @@
 {
     #region Using Directives
 
+    using Should.Fluent;
+
     using Twiddler.Commands;
     using Twiddler.Core.Models;
     using Twiddler.TestData;
@@ -23,7 +25,7 @@
 
             tweet.Archive();
 
-            Assert.True(eventRaised);
+            eventRaised.Should().Be.True();
         }
 
         [Fact]
@@ -31,7 +33,7 @@
         {
             var test = new ArchiveTweetCommand(A.Tweet.Build());
 
-            Assert.True(test.CanExecute(null));
+            test.CanExecute(null).Should().Be.True();
         }
 
         [Fact]
@@ -39,7 +41,7 @@
         {
             var test = new ArchiveTweetCommand(A.Tweet.Build());
 
-            Assert.True(test.CanExecute(null));
+            test.CanExecute(null).Should().Be.True();
         }
 
         [Fact]
@@ -50,7 +52,7 @@
 
             test.Execute(null);
 
-            Assert.True(tweet.IsArchived);
+            tweet.IsArchived.Should().Be.True();
         }
     }
 }

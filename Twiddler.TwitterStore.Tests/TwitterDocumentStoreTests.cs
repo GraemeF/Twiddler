@@ -6,6 +6,8 @@
 
     using Raven.Client;
 
+    using Should.Fluent;
+
     using Twiddler.TwitterStore.Interfaces;
     using Twiddler.TwitterStore.Models;
 
@@ -50,7 +52,7 @@
 
             _documentSession.Load<Tweet>(id).Returns(tweet);
 
-            Assert.Same(tweet, test.GetTweet(id));
+            test.GetTweet(id).Should().Be.SameAs(tweet);
         }
     }
 }

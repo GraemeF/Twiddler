@@ -44,7 +44,7 @@
         {
             LoadingTweetScreen test = BuildDefaultTestSubject();
 
-            Assert.Equal(_tweet.Id, test.Id);
+            test.Id.Should().Equal(_tweet.Id);
         }
 
         [Fact]

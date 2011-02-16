@@ -6,6 +6,8 @@
 
     using NSubstitute;
 
+    using Should.Fluent;
+
     using Twiddler.Commands.Interfaces;
     using Twiddler.Models;
     using Twiddler.Screens;
@@ -30,7 +32,7 @@
         {
             ImageThumbnailScreen test = BuildDefaultTestSubject();
 
-            Assert.Equal(_imageLocations.FullSize, test.FullSize);
+            test.FullSize.Should().Equal(_imageLocations.FullSize);
         }
 
         [Fact]
@@ -38,7 +40,7 @@
         {
             ImageThumbnailScreen test = BuildDefaultTestSubject();
 
-            Assert.Equal(_imageLocations.Link, test.Link);
+            test.Link.Should().Equal(_imageLocations.Link);
         }
 
         [Fact]
@@ -46,7 +48,7 @@
         {
             ImageThumbnailScreen test = BuildDefaultTestSubject();
 
-            Assert.Same(_openLinkCommand, test.OpenLinkCommand);
+            test.OpenLinkCommand.Should().Be.SameAs(_openLinkCommand);
         }
 
         [Fact]
@@ -54,7 +56,7 @@
         {
             ImageThumbnailScreen test = BuildDefaultTestSubject();
 
-            Assert.Equal(_imageLocations.Thumbnail, test.Thumbnail);
+            test.Thumbnail.Should().Equal(_imageLocations.Thumbnail);
         }
 
         private ImageThumbnailScreen BuildDefaultTestSubject()

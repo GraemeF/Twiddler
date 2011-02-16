@@ -4,6 +4,8 @@
 
     using NSubstitute;
 
+    using Should.Fluent;
+
     using Twiddler.Core.Models;
     using Twiddler.Core.Services;
     using Twiddler.TestData;
@@ -21,7 +23,7 @@
                                       Substitute.For<IAccessTokenStore>(), 
                                       x => A.User);
 
-            Assert.Equal(AuthorizationStatus.Unknown, test.AuthorizationStatus);
+            test.AuthorizationStatus.Should().Equal(AuthorizationStatus.Unknown);
         }
     }
 }

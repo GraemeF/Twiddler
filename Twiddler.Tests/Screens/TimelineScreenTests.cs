@@ -8,6 +8,8 @@
 
     using NSubstitute;
 
+    using Should.Fluent;
+
     using Twiddler.Core.Models;
     using Twiddler.Screens;
     using Twiddler.Screens.Interfaces;
@@ -34,7 +36,7 @@
         {
             var test = new TimelineScreen(new Lazy<ITimeline>(() => _timeline), null);
 
-            Assert.Empty(test.Screens);
+            test.Screens.Should().Be.Empty();
         }
 
         [Fact]
@@ -47,7 +49,7 @@
 
             _tweets.Add(A.Tweet.Build());
 
-            Assert.Contains(mockScreen, test.Screens);
+            test.Screens.Should().Contain.Item(mockScreen);
             mockScreen.Received().Initialize();
         }
 

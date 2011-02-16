@@ -4,6 +4,8 @@
 
     using System.Collections.Generic;
 
+    using Should.Fluent;
+
     using Twiddler.Core.Models;
     using Twiddler.Services;
     using Twiddler.TestData;
@@ -22,14 +24,14 @@
             ITweet tweet = A.Tweet.Build();
             test.Add(tweet);
 
-            Assert.Same(tweet, test.GetTweet(tweet.Id));
+            test.GetTweet(tweet.Id).Should().Be.SameAs(tweet);
         }
 
         [Fact]
         public void GetTweet_GivenAnUnknownTweet_Throws()
         {
             var test = new MemoryTweetStore();
-
+            
             Assert.Throws(typeof(KeyNotFoundException), 
                           () => test.GetTweet("456"));
         }

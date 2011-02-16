@@ -6,6 +6,8 @@
 
     using Raven.Client;
 
+    using Should.Fluent;
+
     using Twiddler.Core.Models;
     using Twiddler.TwitterStore.Interfaces;
 
@@ -37,7 +39,7 @@
 
             _documentSession.Load<AccessToken>(id).Returns(credentials);
 
-            Assert.Same(credentials, test.Load(id));
+            test.Load(id).Should().Be.SameAs(credentials);
         }
 
         [Fact]
@@ -49,7 +51,7 @@
 
             _documentSession.Load<AccessToken>(id).Returns((AccessToken)null);
 
-            Assert.NotNull(test.Load(id));
+            test.Load(id).Should().Not.Be.Null();
         }
 
         private AccessTokenDocumentStore BuildDefaultTestSubject()

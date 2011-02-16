@@ -9,6 +9,9 @@
 
     using NSubstitute;
 
+    using Should.Core.Exceptions;
+    using Should.Fluent;
+
     using Twiddler.Screens;
     using Twiddler.Services.Interfaces;
 
@@ -39,7 +42,7 @@
             const int hourlyLimit = 350;
             _requestStatus.HourlyLimit = hourlyLimit;
 
-            Assert.Equal(hourlyLimit, test.HourlyLimit);
+            test.HourlyLimit.Should().Equal(hourlyLimit);
         }
 
         [Fact]
@@ -51,7 +54,7 @@
             RequestMeterScreen test = BuildDefaultTestSubject();
             test.Initialize();
 
-            Assert.Equal("83m", test.PeriodDuration);
+            test.PeriodDuration.Should().Equal("83m");
         }
 
         [Fact]
@@ -62,7 +65,7 @@
             const int remainingHits = 33;
             _requestStatus.RemainingHits = remainingHits;
 
-            Assert.Equal(remainingHits, test.RemainingHits);
+            test.RemainingHits.Should().Equal(remainingHits);
         }
 
         [Fact]
@@ -73,7 +76,7 @@
             RequestMeterScreen test = BuildDefaultTestSubject();
             test.Initialize();
 
-            Assert.Equal("0m", test.RemainingTime);
+            test.RemainingTime.Should().Equal("0m");
         }
 
         [Fact]
@@ -84,7 +87,7 @@
             RequestMeterScreen test = BuildDefaultTestSubject();
             test.Initialize();
 
-            Assert.Equal("5m", test.RemainingTime);
+            test.RemainingTime.Should().Equal("5m");
         }
 
         [Theory]
@@ -101,7 +104,7 @@
             _requestStatus.RemainingHits = remainingHits;
             _requestStatus.HourlyLimit = 100;
 
-            Assert.Equal(fraction, test.UsedHitsFraction);
+            test.UsedHitsFraction.Should().Equal(fraction);
         }
 
         [Theory]
@@ -117,7 +120,7 @@
 
             TimeLeftInPeriodIs(TimeSpan.FromMinutes(remainingMinutes));
 
-            Assert.Equal(fraction, test.UsedTimeFraction);
+            test.UsedTimeFraction.Should().Equal(fraction);
         }
 
         [Fact]
@@ -150,7 +153,8 @@
             test.Initialize();
             test.Shutdown();
 
-            test.PropertyChanged += (sender, args) => Assert.True(false);
+            test.PropertyChanged +=
+                (sender, args) => { throw new AssertException("No properties should have changed."); };
 
             PropertyChangesOnRequestStatus("RemainingHits");
         }

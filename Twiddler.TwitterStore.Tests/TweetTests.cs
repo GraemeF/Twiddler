@@ -4,6 +4,8 @@
 
     using Caliburn.Testability.Extensions;
 
+    using Should.Fluent;
+
     using Twiddler.TwitterStore.Models;
 
     using Xunit;
@@ -26,7 +28,7 @@
         public void GettingIsRead_Initially_IsFalse()
         {
             var test = new Tweet();
-            Assert.False(test.IsRead);
+            test.IsRead.Should().Be.False();
         }
 
         [Fact]

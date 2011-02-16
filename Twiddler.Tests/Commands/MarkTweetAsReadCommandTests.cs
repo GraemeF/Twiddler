@@ -4,6 +4,8 @@
 
     using NSubstitute;
 
+    using Should.Fluent;
+
     using Twiddler.Commands;
     using Twiddler.Core.Models;
     using Twiddler.Core.Services;
@@ -29,7 +31,7 @@
 
             _tweet.MarkAsRead();
 
-            Assert.True(eventRaised);
+            eventRaised.Should().Be.True();
         }
 
         [Fact]
@@ -37,7 +39,7 @@
         {
             MarkTweetAsReadCommand test = BuildDefaultTestSubject();
 
-            Assert.True(test.CanExecute(null));
+            test.CanExecute(null).Should().Be.True();
         }
 
         [Fact]
@@ -45,7 +47,7 @@
         {
             MarkTweetAsReadCommand test = BuildDefaultTestSubject();
 
-            Assert.True(test.CanExecute(null));
+            test.CanExecute(null).Should().Be.True();
         }
 
         [Fact]
@@ -55,7 +57,7 @@
 
             test.Execute(null);
 
-            Assert.True(_tweet.IsRead);
+            _tweet.IsRead.Should().Be.True();
         }
 
         [Fact]

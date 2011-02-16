@@ -70,7 +70,7 @@
         {
             StoreTimeline test = BuildDefaultTestSubject();
 
-            Assert.Empty(test.Tweets);
+            test.Tweets.Should().Be.Empty();
         }
 
         [Fact]
@@ -81,7 +81,7 @@
 
             StoreTimeline test = BuildDefaultTestSubject();
 
-            Assert.Contains(tweet, test.Tweets);
+            test.Tweets.Should().Contain.Item(tweet);
         }
 
         private StoreTimeline BuildDefaultTestSubject()

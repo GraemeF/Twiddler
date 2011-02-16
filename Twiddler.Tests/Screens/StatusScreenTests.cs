@@ -8,6 +8,8 @@
 
     using NSubstitute;
 
+    using Should.Fluent;
+
     using Twiddler.Commands.Interfaces;
     using Twiddler.Core.Commands;
     using Twiddler.Core.Services;
@@ -44,7 +46,7 @@
                 AssertThatChangeNotificationIsRaisedBy(x => x.Authorization).
                 When(() => ClientAuthorizationStatusChangesTo(newStatus));
 
-            Assert.Equal(newStatus, test.Authorization);
+            test.Authorization.Should().Equal(newStatus);
         }
 
         [Theory]
@@ -59,7 +61,7 @@
             StatusScreen test = BuildDefaultTestSubject();
             test.Initialize();
 
-            Assert.Equal(status, test.Authorization);
+            test.Authorization.Should().Equal(status);
         }
 
         [Fact]
@@ -67,7 +69,7 @@
         {
             StatusScreen test = BuildDefaultTestSubject();
 
-            Assert.Same(_authorizeCommand, test.AuthorizeCommand);
+            test.AuthorizeCommand.Should().Be.SameAs(_authorizeCommand);
         }
 
         [Fact]
@@ -75,7 +77,7 @@
         {
             StatusScreen test = BuildDefaultTestSubject();
 
-            Assert.Same(_deauthorizeCommand, test.DeauthorizeCommand);
+            test.DeauthorizeCommand.Should().Be.SameAs(_deauthorizeCommand);
         }
 
         [Fact]
@@ -84,7 +86,7 @@
             StatusScreen test = BuildDefaultTestSubject();
             test.Initialize();
 
-            Assert.Same(_requestMeterScreen, test.RequestMeter);
+            test.RequestMeter.Should().Be.SameAs(_requestMeterScreen);
             _requestMeterScreen.Received().Initialize();
         }
 

@@ -9,6 +9,8 @@ namespace Twiddler.Tests.Screens
 
     using NSubstitute;
 
+    using Should.Fluent;
+
     using Twiddler.Commands;
     using Twiddler.Core.Models;
     using Twiddler.Core.Services;
@@ -23,21 +25,21 @@ namespace Twiddler.Tests.Screens
 
     public class TweetScreenTests
     {
+        private readonly ILinkThumbnailScreen _linkThumbnailScreen = Substitute.For<ILinkThumbnailScreen>();
+
         private readonly ILinkThumbnailScreenFactory _linkThumbnailScreenFactory =
             Substitute.For<ILinkThumbnailScreenFactory>();
 
-        private readonly ILinkThumbnailScreen _linkThumbnailScreen = Substitute.For<ILinkThumbnailScreen>();
+        private readonly ITweet _tweet = A.Tweet.Build();
 
         private readonly ITweetRating _tweetRating = Substitute.For<ITweetRating>();
-
-        private readonly ITweet _tweet = A.Tweet.Build();
 
         [Fact]
         public void GettingCreatedDate__ReturnsCreatedDate()
         {
             TweetScreen test = BuildDefaultTestSubject();
 
-            Assert.Equal(_tweet.CreatedDate, test.CreatedDate);
+            test.CreatedDate.Should().Equal(_tweet.CreatedDate);
         }
 
         [Fact]
@@ -45,7 +47,7 @@ namespace Twiddler.Tests.Screens
         {
             TweetScreen test = BuildDefaultTestSubject();
 
-            Assert.Equal(_tweet.Id, test.Id);
+            test.Id.Should().Equal(_tweet.Id);
         }
 
         [Fact]
@@ -60,7 +62,7 @@ namespace Twiddler.Tests.Screens
                                        null);
             test.Initialize();
 
-            Assert.Same(mockScreen, test.InReplyToTweet);
+            test.InReplyToTweet.Should().Be.SameAs(mockScreen);
         }
 
         [Fact]
@@ -69,7 +71,7 @@ namespace Twiddler.Tests.Screens
             TweetScreen test = BuildDefaultTestSubject();
             test.Initialize();
 
-            Assert.Null(test.InReplyToTweet);
+            test.InReplyToTweet.Should().Be.Null();
         }
 
         [Fact]
@@ -87,7 +89,7 @@ namespace Twiddler.Tests.Screens
                                 null);
             test.Initialize();
 
-            Assert.Contains(_linkThumbnailScreen, test.Links);
+            test.Links.Should().Contain.Item(_linkThumbnailScreen);
         }
 
         [Fact]
@@ -95,7 +97,7 @@ namespace Twiddler.Tests.Screens
         {
             TweetScreen test = BuildDefaultTestSubject();
 
-            Assert.IsType<MarkTweetAsReadCommand>(test.MarkAsReadCommand);
+            test.MarkAsReadCommand.Should().Be.OfType<MarkTweetAsReadCommand>();
         }
 
         [Fact]
@@ -104,21 +106,21 @@ namespace Twiddler.Tests.Screens
             TweetScreen test = BuildDefaultTestSubject();
             _tweetRating.IsMention.Returns(true);
 
-            Assert.Equal(Visibility.Visible, test.MentionVisibility);
+            test.MentionVisibility.Should().Equal(Visibility.Visible);
         }
 
         [Fact]
         public void GettingMentionVisibility_WhenTweetIsNotAMention_ReturnsCollapsed()
         {
             TweetScreen test = BuildDefaultTestSubject();
-            Assert.Equal(Visibility.Collapsed, test.MentionVisibility);
+            test.MentionVisibility.Should().Equal(Visibility.Collapsed);
         }
 
         [Fact]
         public void GettingOpacity_WhenTweetIsNotRead_ReturnsOpaque()
         {
             TweetScreen test = BuildDefaultTestSubject();
-            Assert.Equal(1.0, test.Opacity);
+            test.Opacity.Should().Equal(1.0);
         }
 
         [Fact]
@@ -130,7 +132,7 @@ namespace Twiddler.Tests.Screens
             test.
                 AssertThatChangeNotificationIsRaisedBy(x => x.Opacity).
                 When(() => _tweet.MarkAsRead());
-            Assert.Equal(.5, test.Opacity);
+            test.Opacity.Should().Equal(0.5);
         }
 
         [Fact]
@@ -138,7 +140,7 @@ namespace Twiddler.Tests.Screens
         {
             TweetScreen test = BuildDefaultTestSubject();
 
-            Assert.Equal(_tweet.Status, test.Status);
+            test.Status.Should().Equal(_tweet.Status);
         }
 
         [Fact]
@@ -146,7 +148,7 @@ namespace Twiddler.Tests.Screens
         {
             TweetScreen test = BuildDefaultTestSubject();
 
-            Assert.Equal(_tweet.User, test.User);
+            test.User.Should().Be.SameAs(_tweet.User);
         }
 
         private TweetScreen BuildDefaultTestSubject()

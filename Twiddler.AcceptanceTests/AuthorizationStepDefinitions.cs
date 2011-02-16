@@ -2,9 +2,6 @@
 {
     #region Using Directives
 
-    using System;
-
-    using Should.Core.Assertions;
     using Should.Fluent;
 
     using TechTalk.SpecFlow;
@@ -36,13 +33,13 @@
         [Then(@"I should be authorized")]
         public void ThenIShouldBeAuthorized()
         {
-            Assert.Equal("Authorized", Application.AuthorizationStatus, StringComparer.CurrentCultureIgnoreCase);
+            Application.AuthorizationStatus.Should().Equal("Authorized");
         }
 
         [Then(@"I should be unauthorized")]
         public void ThenIShouldBeUnuathorized()
         {
-            Assert.Equal("Unauthorized", Application.AuthorizationStatus, StringComparer.CurrentCultureIgnoreCase);
+            Application.AuthorizationStatus.Should().Equal("Unauthorized");
         }
 
         [When(@"I authorize with Twitter")]

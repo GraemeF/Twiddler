@@ -4,10 +4,11 @@
 
     using System;
 
+    using Should.Fluent;
+
     using Twiddler.Models;
     using Twiddler.Services.ImageServices;
 
-    using Xunit;
     using Xunit.Extensions;
 
     #endregion
@@ -19,7 +20,7 @@
         [InlineData("http://twitpic.com/")]
         public void CanGetImageLocations_GivenOtherUrl_ReturnsFalse(string url)
         {
-            Assert.False(new TwitPicDecoder().CanGetImageLocations(new Uri(url)));
+            new TwitPicDecoder().CanGetImageLocations(new Uri(url)).Should().Be.False();
         }
 
         [Theory]
@@ -27,7 +28,7 @@
         [InlineData("http://twitpic.com/show/thumb/1e10q")]
         public void CanGetImageLocations_GivenTwitPicImageUrl_ReturnsTrue(string url)
         {
-            Assert.True(new TwitPicDecoder().CanGetImageLocations(new Uri(url)));
+            new TwitPicDecoder().CanGetImageLocations(new Uri(url)).Should().Be.True();
         }
 
         [Theory]
@@ -38,7 +39,7 @@
         {
             ImageLocations locations = new TwitPicDecoder().GetImageLocations(new Uri(url));
 
-            Assert.Equal(linkUrl, locations.Link.ToString());
+            locations.Link.ToString().Should().Equal(linkUrl);
         }
 
         [Theory]
@@ -49,7 +50,7 @@
         {
             ImageLocations locations = new TwitPicDecoder().GetImageLocations(new Uri(url));
 
-            Assert.Equal(linkUrl, locations.Thumbnail.ToString());
+            locations.Thumbnail.ToString().Should().Equal(linkUrl);
         }
     }
 }

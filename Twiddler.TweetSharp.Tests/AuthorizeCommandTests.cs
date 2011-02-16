@@ -7,6 +7,8 @@
 
     using NSubstitute;
 
+    using Should.Fluent;
+
     using Twiddler.Core.Models;
     using Twiddler.Core.Services;
 
@@ -36,7 +38,7 @@
             ClientAuthorizationStatusChangesTo(AuthorizationStatus.Verifying);
             GC.KeepAlive(test);
 
-            Assert.True(eventRaised);
+            eventRaised.Should().Be.True();
         }
 
         [Theory]
@@ -47,7 +49,7 @@
 
             ClientAuthorizationStatusChangesTo(status);
 
-            Assert.True(test.CanExecute(null));
+            test.CanExecute(null).Should().Be.True();
         }
 
         [Theory]
@@ -61,7 +63,7 @@
 
             ClientAuthorizationStatusChangesTo(status);
 
-            Assert.False(test.CanExecute(null));
+            test.CanExecute(null).Should().Be.False();
         }
 
         private AuthorizeCommand BuildDefaultTestSubject()

@@ -2,6 +2,8 @@
 {
     #region Using Directives
 
+    using Should.Fluent;
+
     using Twiddler.Core.Models;
 
     using Xunit;
@@ -14,14 +16,14 @@
         public void GettingAreValid_WhenAccessTokenIsMissing_ReturnsFalse()
         {
             var test = new AccessToken("id", string.Empty, "accessTokenSecret");
-            Assert.False(test.IsValid);
+            test.IsValid.Should().Be.False();
         }
 
         [Fact]
         public void GettingAreValid_WhenCredentialsAreComplete_ReturnsTrue()
         {
             var test = new AccessToken("id", "accessToken", "accessTokenSecret");
-            Assert.True(test.IsValid);
+            test.IsValid.Should().Be.True();
         }
     }
 }

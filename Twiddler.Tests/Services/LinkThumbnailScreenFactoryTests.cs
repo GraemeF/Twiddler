@@ -8,6 +8,8 @@
 
     using NSubstitute;
 
+    using Should.Fluent;
+
     using Twiddler.Models;
     using Twiddler.Screens.Interfaces;
     using Twiddler.Services;
@@ -37,7 +39,7 @@
         {
             LinkThumbnailScreenFactory test = BuildDefaultTestSubject();
 
-            Assert.Same(_imageThumbnailScreen, test.CreateScreenForLink(KnownUri));
+            test.CreateScreenForLink(KnownUri).Should().Be.SameAs(_imageThumbnailScreen);
         }
 
         [Fact]
@@ -45,7 +47,7 @@
         {
             LinkThumbnailScreenFactory test = BuildDefaultTestSubject();
 
-            Assert.Null(test.CreateScreenForLink(UnknownUri));
+            test.CreateScreenForLink(UnknownUri).Should().Be.Null();
         }
 
         private LinkThumbnailScreenFactory BuildDefaultTestSubject()

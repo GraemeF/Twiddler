@@ -4,6 +4,8 @@
 
     using NSubstitute;
 
+    using Should.Fluent;
+
     using Twiddler.Core.Models;
     using Twiddler.Core.Services;
     using Twiddler.Services;
@@ -25,7 +27,7 @@
             _tweet = A.Tweet.Mentioning(_user.ScreenName).Build();
             TweetRating test = BuildDefaultTestSubject();
 
-            Assert.True(test.IsMention);
+            test.IsMention.Should().Be.True();
         }
 
         [Fact]
@@ -35,7 +37,7 @@
             _user = null;
             TweetRating test = BuildDefaultTestSubject();
 
-            Assert.False(test.IsMention);
+            test.IsMention.Should().Be.False();
         }
 
         [Fact]
@@ -44,7 +46,7 @@
             _tweet = A.Tweet.Build();
             TweetRating test = BuildDefaultTestSubject();
 
-            Assert.False(test.IsMention);
+            test.IsMention.Should().Be.False();
         }
 
         private TweetRating BuildDefaultTestSubject()

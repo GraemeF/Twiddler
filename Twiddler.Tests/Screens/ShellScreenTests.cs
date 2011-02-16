@@ -4,6 +4,8 @@
 
     using NSubstitute;
 
+    using Should.Fluent;
+
     using Twiddler.Screens;
     using Twiddler.Screens.Interfaces;
     using Twiddler.Services.Interfaces;
@@ -27,7 +29,7 @@
             test.Initialize();
 
             _status.Received().Initialize();
-            Assert.Same(_status, test.Status);
+            test.Status.Should().Be.SameAs(_status);
         }
 
         [Fact]
@@ -37,7 +39,7 @@
             test.Initialize();
 
             _timeline.Received().Initialize();
-            Assert.Same(_timeline, test.Timeline);
+            test.Timeline.Should().Be.SameAs(_timeline);
         }
 
         [Fact]

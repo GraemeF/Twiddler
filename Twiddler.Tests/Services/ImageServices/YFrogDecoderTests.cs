@@ -4,10 +4,11 @@
 
     using System;
 
+    using Should.Fluent;
+
     using Twiddler.Models;
     using Twiddler.Services.ImageServices;
 
-    using Xunit;
     using Xunit.Extensions;
 
     #endregion
@@ -19,7 +20,7 @@
         [InlineData("http://yfrog.com/")]
         public void CanGetImageLocations_GivenOtherUrl_ReturnsFalse(string url)
         {
-            Assert.False(new YFrogDecoder().CanGetImageLocations(new Uri(url)));
+            new YFrogDecoder().CanGetImageLocations(new Uri(url)).Should().Be.False();
         }
 
         [Theory]
@@ -35,7 +36,7 @@
         [InlineData("http://yfrog.eu/0u6mcz")]
         public void CanGetImageLocations_GivenYFrogImageUrl_ReturnsTrue(string url)
         {
-            Assert.True(new YFrogDecoder().CanGetImageLocations(new Uri(url)));
+            new YFrogDecoder().CanGetImageLocations(new Uri(url)).Should().Be.True();
         }
 
         [Theory]
@@ -43,7 +44,7 @@
         [InlineData("http://yfrog.com/0u6mcs")]
         public void CanGetImageLocations_GivenYFrogUrlOfOtherContentType_ReturnsFalse(string url)
         {
-            Assert.False(new YFrogDecoder().CanGetImageLocations(new Uri(url)));
+            new YFrogDecoder().CanGetImageLocations(new Uri(url)).Should().Be.False();
         }
 
         [Theory]
@@ -52,7 +53,7 @@
         {
             ImageLocations locations = new YFrogDecoder().GetImageLocations(new Uri(url));
 
-            Assert.Equal(linkUrl, locations.Link.ToString());
+            locations.Link.ToString().Should().Equal(linkUrl);
         }
 
         [Theory]
@@ -61,7 +62,7 @@
         {
             ImageLocations locations = new YFrogDecoder().GetImageLocations(new Uri(url));
 
-            Assert.Equal(linkUrl, locations.Thumbnail.ToString());
+            locations.Thumbnail.ToString().Should().Equal(linkUrl);
         }
     }
 }
