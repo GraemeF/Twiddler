@@ -3,9 +3,7 @@
     #region Using Directives
 
     using System;
-    using System.ComponentModel.Composition;
 
-    using Caliburn.Core.IoC;
     using Caliburn.PresentationFramework.Screens;
 
     using Twiddler.Commands.Interfaces;
@@ -14,13 +12,9 @@
 
     #endregion
 
-    [PerRequest(typeof(IImageThumbnailScreen))]
-    [Export(typeof(IImageThumbnailScreen))]
-    [PartCreationPolicy(CreationPolicy.NonShared)]
     public class ImageThumbnailScreen : Screen<Uri>, 
                                         IImageThumbnailScreen
     {
-        [ImportingConstructor]
         public ImageThumbnailScreen(ImageLocations imageLocations, IOpenLinkCommand openLinkCommand)
         {
             OpenLinkCommand = openLinkCommand;

@@ -3,9 +3,6 @@ namespace Twiddler.TweetSharp.TweetRequesters
     #region Using Directives
 
     using System.Collections.Generic;
-    using System.ComponentModel.Composition;
-
-    using Caliburn.Core.IoC;
 
     using global::TweetSharp;
 
@@ -13,11 +10,8 @@ namespace Twiddler.TweetSharp.TweetRequesters
 
     #endregion
 
-    [Singleton("Retweets", typeof(ITweetRequester))]
-    [Export(typeof(ITweetRequester))]
     public class RetweetsOfMeTweetRequester : TweetRequester
     {
-        [ImportingConstructor]
         public RetweetsOfMeTweetRequester(ITwitterClientFactory clientFactory, 
                                           IRequestLimitStatus requestLimitStatus, 
                                           Factories.TweetFactory tweetFactory)

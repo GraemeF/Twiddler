@@ -2,9 +2,6 @@ namespace Twiddler.Screens
 {
     #region Using Directives
 
-    using System.ComponentModel.Composition;
-
-    using Caliburn.Core.IoC;
     using Caliburn.PresentationFramework.Screens;
 
     using Twiddler.Screens.Interfaces;
@@ -12,14 +9,11 @@ namespace Twiddler.Screens
 
     #endregion
 
-    [Singleton(typeof(IShellScreen))]
-    [Export(typeof(IShellScreen))]
     public class ShellScreen : ScreenConductor<IScreen>.WithCollection.AllScreensActive, 
                                IShellScreen
     {
         private readonly ITimelineUpdater _timelineUpdater;
 
-        [ImportingConstructor]
         public ShellScreen(ITimelineScreen timelineScreen, 
                            IStatusScreen statusScreen, 
                            ITimelineUpdater timelineUpdater)

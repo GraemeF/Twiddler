@@ -4,21 +4,15 @@
 
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.Composition;
     using System.Linq;
     using System.Threading.Tasks;
-
-    using Caliburn.Core.IoC;
 
     using MvvmFoundation.Wpf;
 
     using Twiddler.Core.Services;
-    using Twiddler.Services.Interfaces;
 
     #endregion
 
-    [Singleton(typeof(IAsyncTweetFetcher))]
-    [Export(typeof(IAsyncTweetFetcher))]
     public class RequestConductor : IAsyncTweetFetcher
     {
         private readonly IAuthorizer _client;
@@ -31,9 +25,8 @@
 
         private ITweetSink _tweetSink;
 
-        [ImportingConstructor]
         public RequestConductor(IAuthorizer client, 
-                                [ImportMany] IEnumerable<ITweetRequester> tweetRequesters)
+                                IEnumerable<ITweetRequester> tweetRequesters)
         {
             _client = client;
             _tweetRequesters = tweetRequesters;
@@ -44,17 +37,7 @@
             Dispose(false);
         }
 
-        #region IDisposable members
-
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-
-        #endregion
-
-        #region IRequestConductor members
+        #region IAsyncTweetFetcher members
 
         public void Start(ITweetSink tweetSink)
         {
@@ -64,6 +47,16 @@
                 RegisterHandler(x => x.AuthorizationStatus, 
                                 y => PollIfAuthorized());
             PollIfAuthorized();
+        }
+
+        #endregion
+
+        #region IDisposable members
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
         }
 
         #endregion

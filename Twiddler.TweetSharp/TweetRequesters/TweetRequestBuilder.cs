@@ -9,6 +9,7 @@
     using global::TweetSharp;
 
     using Twiddler.Core.Models;
+    using Twiddler.Core.Services;
     using Twiddler.Services.Interfaces;
 
     #endregion

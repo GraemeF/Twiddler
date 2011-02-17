@@ -3,9 +3,6 @@
     #region Using Directives
 
     using System;
-    using System.ComponentModel.Composition;
-
-    using Caliburn.Core.IoC;
 
     using MvvmFoundation.Wpf;
 
@@ -15,9 +12,6 @@
 
     #endregion
 
-    [PerRequest(typeof(IMarkTweetAsReadCommand))]
-    [Export(typeof(IMarkTweetAsReadCommand))]
-    [PartCreationPolicy(CreationPolicy.NonShared)]
     public class MarkTweetAsReadCommand : IMarkTweetAsReadCommand
     {
         private readonly ITweet _tweet;
@@ -26,7 +20,6 @@
 
         private PropertyObserver<ITweet> _observer;
 
-        [ImportingConstructor]
         public MarkTweetAsReadCommand(ITweet tweet, ITweetSink tweetSink)
         {
             _tweet = tweet;

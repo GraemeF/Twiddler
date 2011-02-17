@@ -3,16 +3,14 @@
     #region Using Directives
 
     using System;
-    using System.ComponentModel.Composition;
     using System.Linq;
-
-    using Caliburn.Core.IoC;
 
     using Twiddler.Core.Services;
 
     #endregion
 
-    public class StreamingAsyncTweetFetcher : IAsyncTweetFetcher
+    public class StreamingAsyncTweetFetcher // : IAsyncTweetFetcher
+
     {
         private readonly IAuthorizer _client;
 
@@ -22,7 +20,6 @@
 
         private ITweetSink _tweetSink;
 
-        [ImportingConstructor]
         public StreamingAsyncTweetFetcher(IAuthorizer client)
         {
             _client = client;
@@ -33,7 +30,11 @@
             Dispose(false);
         }
 
-        #region IAsyncTweetFetcher members
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
 
         public void Start(ITweetSink tweetSink)
         {
@@ -47,18 +48,6 @@
 
             PollIfAuthorized();
         }
-
-        #endregion
-
-        #region IDisposable members
-
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-
-        #endregion
 
         protected virtual void Dispose(bool disposing)
         {

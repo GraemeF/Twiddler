@@ -190,8 +190,6 @@
     <Compile Include="AutofacContainerFactory.cs" />
     <Compile Include="AutofacFactories.cs" />
     <Compile Include="Models\TwiddlerApplication.cs" />
-    <Compile Include="UnityContainerFactory.cs" />
-    <Compile Include="UnityFactories.cs" />
     <Compile Include="Commands\ArchiveTweetCommand.cs" />
     <Compile Include="Commands\Interfaces\IArchiveTweetCommand.cs" />
     <Compile Include="Commands\Interfaces\IMarkTweetAsReadCommand.cs" />
@@ -199,8 +197,6 @@
     <Compile Include="Commands\MarkTweetAsReadCommand.cs" />
     <Compile Include="Commands\OpenLinkCommand.cs" />
     <Compile Include="IContainerFactory.cs" />
-    <Compile Include="MefContainerFactory.cs" />
-    <Compile Include="MefFactories.cs" />
     <Compile Include="Screens\Interfaces\ILinkThumbnailScreen.cs" />
     <Compile Include="Screens\Interfaces\IImageThumbnailScreen.cs" />
     <Compile Include="Screens\ImageThumbnailScreen.cs" />

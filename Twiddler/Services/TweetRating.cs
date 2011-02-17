@@ -3,11 +3,7 @@
     #region Using Directives
 
     using System;
-    using System.ComponentModel;
-    using System.ComponentModel.Composition;
     using System.Linq;
-
-    using Caliburn.Core.IoC;
 
     using MvvmFoundation.Wpf;
 
@@ -18,9 +14,6 @@
 
     #endregion
 
-    [PerRequest(typeof(ITweetRating))]
-    [Export(typeof(ITweetRating))]
-    [PartCreationPolicy(CreationPolicy.NonShared)]
     public class TweetRating : ReactiveObject, 
                                ITweetRating
     {
@@ -32,7 +25,6 @@
 
         private PropertyObserver<IAuthorizer> _observer;
 
-        [ImportingConstructor]
         public TweetRating(IAuthorizer client, ITweet tweet)
         {
             _client = client;

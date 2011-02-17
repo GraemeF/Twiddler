@@ -4,10 +4,7 @@
 
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
-    using System.ComponentModel.Composition;
     using System.Linq;
-
-    using Caliburn.Core.IoC;
 
     using Twiddler.Core.Models;
     using Twiddler.Core.Services;
@@ -15,15 +12,12 @@
 
     #endregion
 
-    [Singleton(typeof(ITimeline))]
-    [Export(typeof(ITimeline))]
     public class StoreTimeline : ITimeline
     {
         private readonly object _mutex = new object();
 
         private readonly ITweetStore _tweetStore;
 
-        [ImportingConstructor]
         public StoreTimeline(ITweetStore tweetStore)
         {
             _tweetStore = tweetStore;

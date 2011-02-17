@@ -3,9 +3,6 @@
     #region Using Directives
 
     using System.Collections.Generic;
-    using System.ComponentModel.Composition;
-
-    using Caliburn.Core.IoC;
 
     using global::TweetSharp;
 
@@ -13,11 +10,8 @@
 
     #endregion
 
-    [Singleton("Mine", typeof(ITweetRequester))]
-    [Export(typeof(ITweetRequester))]
     public class UserTimelineTweetRequester : TweetRequester
     {
-        [ImportingConstructor]
         public UserTimelineTweetRequester(ITwitterClientFactory clientFactory, 
                                           IRequestLimitStatus requestLimitStatus, 
                                           Factories.TweetFactory tweetFactory)

@@ -3,19 +3,12 @@
     #region Using Directives
 
     using System;
-    using System.ComponentModel.Composition;
     using System.Diagnostics;
 
-    using Caliburn.Core.IoC;
-
     using Twiddler.Commands.Interfaces;
-    using Twiddler.Core;
 
     #endregion
 
-    [Singleton(typeof(IOpenLinkCommand))]
-    [Export(typeof(IOpenLinkCommand))]
-    [NoCoverage]
     public class OpenLinkCommand : IOpenLinkCommand
     {
         #region IOpenLinkCommand Members

@@ -2,10 +2,6 @@
 {
     #region Using Directives
 
-    using System.ComponentModel.Composition;
-
-    using Caliburn.Core.IoC;
-
     using global::TweetSharp;
 
     using Twiddler.Core.Models;
@@ -14,15 +10,12 @@
 
     #endregion
 
-    [Singleton(typeof(ITwitterClientFactory))]
-    [Export(typeof(ITwitterClientFactory))]
     public class TwitterClientFactory : ITwitterClientFactory
     {
         private readonly IAccessTokenStore _accessTokenStore;
 
         private readonly ITwitterApplicationCredentials _applicationCredentials;
 
-        [ImportingConstructor]
         public TwitterClientFactory(IAccessTokenStore accessTokenStore, 
                                     ITwitterApplicationCredentials applicationCredentials)
         {

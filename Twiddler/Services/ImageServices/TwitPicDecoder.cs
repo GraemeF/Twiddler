@@ -6,14 +6,11 @@
     using System.ComponentModel.Composition;
     using System.Linq;
 
-    using Caliburn.Core.IoC;
-
     using Twiddler.Models;
     using Twiddler.Services.Interfaces;
 
     #endregion
 
-    [Singleton(typeof(IImageUriDecoder))]
     [Export(typeof(IImageUriDecoder))]
     public class TwitPicDecoder : IImageUriDecoder
     {

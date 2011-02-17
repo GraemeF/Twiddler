@@ -31,7 +31,7 @@
         public void GetTweet_GivenAnUnknownTweet_Throws()
         {
             var test = new MemoryTweetStore();
-            
+
             Assert.Throws(typeof(KeyNotFoundException), 
                           () => test.GetTweet("456"));
         }

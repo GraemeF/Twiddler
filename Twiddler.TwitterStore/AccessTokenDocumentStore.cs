@@ -2,10 +2,6 @@
 {
     #region Using Directives
 
-    using System.ComponentModel.Composition;
-
-    using Caliburn.Core.IoC;
-
     using Raven.Client;
 
     using Twiddler.Core.Models;
@@ -14,15 +10,12 @@
 
     #endregion
 
-    [Singleton(typeof(IAccessTokenStore))]
-    [Export(typeof(IAccessTokenStore))]
     public class AccessTokenDocumentStore : IAccessTokenStore
     {
         private readonly IDocumentStore _documentStore;
 
         private readonly object _mutex = new object();
 
-        [ImportingConstructor]
         public AccessTokenDocumentStore(IDocumentStoreFactory documentStoreFactory)
         {
             _documentStore = documentStoreFactory.GetDocumentStore();

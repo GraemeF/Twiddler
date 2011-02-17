@@ -11,8 +11,7 @@ namespace Twiddler.Services
 
     #endregion
 
-    // [Singleton(typeof (ITweetStore))]
-    public class MemoryTweetStore : ITweetResolver
+    public class MemoryTweetStore //: ITweetResolver
     {
         private readonly ConcurrentDictionary<string, ITweet> _tweets = new ConcurrentDictionary<string, ITweet>();
 

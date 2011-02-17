@@ -3,9 +3,6 @@
     #region Using Directives
 
     using System;
-    using System.ComponentModel.Composition;
-
-    using Caliburn.Core.IoC;
 
     using ReactiveUI;
 
@@ -13,8 +10,6 @@
 
     #endregion
 
-    [Singleton(typeof(IRequestLimitStatus))]
-    [Export(typeof(IRequestLimitStatus))]
     public class RequestLimitStatus : ReactiveObject, 
                                       IRequestLimitStatus
     {

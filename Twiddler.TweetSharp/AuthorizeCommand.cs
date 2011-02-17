@@ -2,10 +2,6 @@ namespace Twiddler.TweetSharp
 {
     #region Using Directives
 
-    using System.ComponentModel.Composition;
-
-    using Caliburn.Core.IoC;
-
     using Twiddler.Core;
     using Twiddler.Core.Commands;
     using Twiddler.Core.Models;
@@ -13,8 +9,6 @@ namespace Twiddler.TweetSharp
 
     #endregion
 
-    [Singleton(typeof(IAuthorizeCommand))]
-    [Export(typeof(IAuthorizeCommand))]
     public class AuthorizeCommand : AuthorizationCommand, 
                                     IAuthorizeCommand
     {
@@ -22,7 +16,6 @@ namespace Twiddler.TweetSharp
 
         private readonly ITwitterApplicationCredentials _applicationCredentials;
 
-        [ImportingConstructor]
         public AuthorizeCommand(ITwitterApplicationCredentials applicationCredentials, 
                                 IAuthorizer client, 
                                 IAccessTokenStore accessTokenStore)

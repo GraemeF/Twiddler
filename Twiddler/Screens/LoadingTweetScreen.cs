@@ -4,10 +4,8 @@ namespace Twiddler.Screens
 
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.Composition;
     using System.Linq;
 
-    using Caliburn.Core.IoC;
     using Caliburn.PresentationFramework.Screens;
 
     using Twiddler.Core.Models;
@@ -16,9 +14,6 @@ namespace Twiddler.Screens
 
     #endregion
 
-    [PerRequest(typeof(ILoadingTweetScreen))]
-    [Export(typeof(ILoadingTweetScreen))]
-    [PartCreationPolicy(CreationPolicy.NonShared)]
     public class LoadingTweetScreen : ScreenConductor<IScreen>, 
                                       ILoadingTweetScreen
     {
@@ -28,7 +23,6 @@ namespace Twiddler.Screens
 
         private readonly Factories.TweetScreenFactory _tweetScreenFactory;
 
-        [ImportingConstructor]
         public LoadingTweetScreen(ITweetPlaceholderScreen placeholderScreen, 
                                   ITweetStore store, 
                                   string id, 

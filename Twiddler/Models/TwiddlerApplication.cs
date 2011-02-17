@@ -2,16 +2,10 @@
 {
     #region Using Directives
 
-    using System.ComponentModel.Composition;
-
-    using Caliburn.Core.IoC;
-
     using Twiddler.Core.Models;
 
     #endregion
 
-    [Singleton(typeof(ITwitterApplicationCredentials))]
-    [Export(typeof(ITwitterApplicationCredentials))]
     public class TwiddlerApplication : ITwitterApplicationCredentials
     {
         public string ConsumerKey

@@ -29,7 +29,7 @@
                                          DirectoryCatalog
                                      });
 
-        private readonly IContainerFactory _containerFactory = 
+        private readonly IContainerFactory _containerFactory =
             new AutofacContainerFactory(Catalog);
 
         protected override IServiceLocator CreateContainer()

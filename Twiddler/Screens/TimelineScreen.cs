@@ -5,11 +5,9 @@
     using System;
     using System.Collections.Generic;
     using System.Collections.Specialized;
-    using System.ComponentModel.Composition;
     using System.Linq;
     using System.Threading.Tasks;
 
-    using Caliburn.Core.IoC;
     using Caliburn.PresentationFramework.Screens;
 
     using Twiddler.Core;
@@ -19,8 +17,6 @@
 
     #endregion
 
-    [Singleton(typeof(ITimelineScreen))]
-    [Export(typeof(ITimelineScreen))]
     public class TimelineScreen : ScreenConductor<ITweetScreen>.WithCollection.AllScreensActive, 
                                   ITimelineScreen
     {
@@ -36,7 +32,6 @@
 
         private IObservable<IEvent<NotifyCollectionChangedEventArgs>> _tweetsChanged;
 
-        [ImportingConstructor]
         public TimelineScreen(Lazy<ITimeline> timeline, Factories.TweetScreenFactory screenFactory)
             : base(false)
         {

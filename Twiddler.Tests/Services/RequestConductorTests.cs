@@ -22,11 +22,11 @@
     {
         private readonly IAuthorizer _client = Substitute.For<IAuthorizer>();
 
+        private readonly IEnumerable<ITweet> _requestedTweets = new[] { A.Tweet.Build() };
+
         private readonly ITweetRequester _tweetRequester = Substitute.For<ITweetRequester>();
 
         private readonly ITweetSink _tweetSink = Substitute.For<ITweetSink>();
-
-        private readonly IEnumerable<ITweet> _requestedTweets = new[] { A.Tweet.Build() };
 
         private bool _requestCompleted;
 

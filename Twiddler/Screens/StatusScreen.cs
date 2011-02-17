@@ -3,10 +3,8 @@ namespace Twiddler.Screens
     #region Using Directives
 
     using System;
-    using System.ComponentModel.Composition;
     using System.Linq;
 
-    using Caliburn.Core.IoC;
     using Caliburn.PresentationFramework.Screens;
 
     using ReactiveUI;
@@ -18,8 +16,6 @@ namespace Twiddler.Screens
 
     #endregion
 
-    [Singleton(typeof(IStatusScreen))]
-    [Export(typeof(IStatusScreen))]
     public class StatusScreen : ScreenConductor<IScreen>.WithCollection.AllScreensActive, 
                                 IStatusScreen
     {
@@ -27,7 +23,6 @@ namespace Twiddler.Screens
 
         private IDisposable _observer;
 
-        [ImportingConstructor]
         public StatusScreen(IAuthorizer client, 
                             IAuthorizeCommand authorizeCommand, 
                             IDeauthorizeCommand deauthorizeCommand, 

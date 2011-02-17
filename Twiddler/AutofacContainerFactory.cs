@@ -4,6 +4,7 @@
 
     using System.ComponentModel.Composition.Hosting;
     using System.ComponentModel.Composition.Primitives;
+    using System.Reflection;
 
     using Autofac;
 
@@ -11,7 +12,14 @@
 
     using Microsoft.Practices.ServiceLocation;
 
+    using Twiddler.Core.Services;
     using Twiddler.Screens.Interfaces;
+    using Twiddler.Services;
+    using Twiddler.Services.Interfaces;
+    using Twiddler.TweetSharp;
+    using Twiddler.TweetSharp.TweetRequesters;
+    using Twiddler.TwitterStore;
+    using Twiddler.TwitterStore.Interfaces;
 
     #endregion
 
@@ -56,6 +64,22 @@
         private ContainerBuilder ConfigureContainer()
         {
             var builder = new ContainerBuilder();
+
+            builder.RegisterAssemblyTypes(Assembly.GetExecutingAssembly()).AsImplementedInterfaces();
+            builder.RegisterAssemblyTypes(typeof(TweetSharp.Factories).Assembly).AsImplementedInterfaces();
+            builder.RegisterAssemblyTypes(typeof(TwitterDocumentStore).Assembly).AsImplementedInterfaces();
+            //builder.RegisterAssemblyTypes(typeof(TweetRequester).Assembly).
+            //    Where(x => x.BaseType == typeof(TweetRequester)).
+            //    As<ITweetRequester>();
+
+            builder.RegisterType<Authorizer>().As<IAuthorizer>().SingleInstance();
+            builder.RegisterType<TwitterClientFactory>().As<ITwitterClientFactory>().SingleInstance();
+            builder.RegisterType<AccessTokenDocumentStore>().As<IAccessTokenStore>().SingleInstance();
+            builder.RegisterType<DocumentStoreFactory>().As<IDocumentStoreFactory>().SingleInstance();
+            builder.RegisterType<TwitterDocumentStore>().As<ITweetStore>().SingleInstance();
+            builder.RegisterType<RequestLimitStatus>().As<IRequestLimitStatus>().SingleInstance();
+            builder.RegisterType<StoreTimeline>().As<ITimeline>().SingleInstance();
+            builder.RegisterType<LinkThumbnailScreenFactory>().As<ILinkThumbnailScreenFactory>().SingleInstance();
 
             var compositionContainer = new CompositionContainer(_catalog);
 

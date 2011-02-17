@@ -3,11 +3,9 @@
     #region Using Directives
 
     using System;
-    using System.ComponentModel.Composition;
     using System.Windows;
     using System.Windows.Input;
 
-    using Caliburn.Core.IoC;
     using Caliburn.PresentationFramework;
     using Caliburn.PresentationFramework.Screens;
 
@@ -21,9 +19,6 @@
 
     #endregion
 
-    [PerRequest(typeof(ITweetScreen))]
-    [Export(typeof(ITweetScreen))]
-    [PartCreationPolicy(CreationPolicy.NonShared)]
     public class TweetScreen : ScreenConductor<IScreen>.WithCollection.AllScreensActive, 
                                ITweetScreen
     {
@@ -37,7 +32,6 @@
 
         private PropertyObserver<ITweet> _tweetObserver;
 
-        [ImportingConstructor]
         public TweetScreen(ITweet tweet, 
                            ITweetRating tweetRating, 
                            ILinkThumbnailScreenFactory linkThumbnailScreenFactory, 

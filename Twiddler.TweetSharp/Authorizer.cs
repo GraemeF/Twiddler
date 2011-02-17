@@ -2,10 +2,6 @@
 {
     #region Using Directives
 
-    using System.ComponentModel.Composition;
-
-    using Caliburn.Core.IoC;
-
     using ReactiveUI;
 
     using global::TweetSharp;
@@ -15,8 +11,6 @@
 
     #endregion
 
-    [Singleton(typeof(IAuthorizer))]
-    [Export(typeof(IAuthorizer))]
     public class Authorizer : ReactiveObject, 
                               IAuthorizer
     {
@@ -26,13 +20,12 @@
 
         private readonly Factories.UserFactory _userFactory;
 
-        private AccessToken _accessToken;
-
         private User _AuthenticatedUser;
 
         private AuthorizationStatus _AuthorizationStatus;
 
-        [ImportingConstructor]
+        private AccessToken _accessToken;
+
         public Authorizer(ITwitterApplicationCredentials applicationCredentials, 
                           IAccessTokenStore accessTokenStore, 
                           Factories.UserFactory userFactory)

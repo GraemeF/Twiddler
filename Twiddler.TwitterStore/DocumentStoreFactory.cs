@@ -3,12 +3,9 @@
     #region Using Directives
 
     using System;
-    using System.ComponentModel.Composition;
     using System.IO;
     using System.Linq;
     using System.Windows;
-
-    using Caliburn.Core.IoC;
 
     using NDesk.Options;
 
@@ -22,8 +19,6 @@
 
     #endregion
 
-    [Singleton(typeof(IDocumentStoreFactory))]
-    [Export(typeof(IDocumentStoreFactory))]
     public class DocumentStoreFactory : IDocumentStoreFactory
     {
         private readonly Lazy<DocumentStore> _documentStore;
