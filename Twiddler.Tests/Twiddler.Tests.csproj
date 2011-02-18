@@ -104,6 +104,7 @@
     <Compile Include="Commands\DeauthorizeCommandTests.cs" />
     <Compile Include="Commands\MarkTweetAsReadCommandTests.cs" />
     <Compile Include="ReactiveObjectMockHelpers.cs" />
+    <Compile Include="Services\ImageServices\DefaultImageDecoderTests.cs" />
     <Compile Include="Services\StoreTimelineTests.cs" />
     <Compile Include="Screens\ImageThumbnailScreenTests.cs" />
     <Compile Include="Screens\LoadingTweetScreenTests.cs" />

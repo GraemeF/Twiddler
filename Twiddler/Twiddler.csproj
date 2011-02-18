@@ -203,6 +203,8 @@
     <Compile Include="Models\ImageLocations.cs" />
     <Compile Include="Screens\Interfaces\ITweetPlaceholderScreen.cs" />
     <Compile Include="Screens\TweetPlaceholderScreen.cs" />
+    <Compile Include="Services\Interfaces\IDefaultImageUriDecoder.cs" />
+    <Compile Include="Services\ImageServices\DefaultImageDecoder.cs" />
     <Compile Include="Services\Interfaces\IImageUriDecoder.cs" />
     <Compile Include="Services\Interfaces\ILinkThumbnailScreenFactory.cs" />
     <Compile Include="Screens\Interfaces\ILinkScreen.cs" />

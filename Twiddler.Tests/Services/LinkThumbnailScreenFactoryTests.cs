@@ -27,11 +27,18 @@
 
         private readonly CompositionContainer _compostionContainer;
 
+        private readonly ImageLocations _defaultImageLocations = new ImageLocations();
+
+        private readonly IImageThumbnailScreen _defaultImageThumbnailScreen = Substitute.For<IImageThumbnailScreen>();
+
+        private readonly IDefaultImageUriDecoder _defaultImageUriDecoder = Substitute.For<IDefaultImageUriDecoder>();
+
         private readonly IImageThumbnailScreen _imageThumbnailScreen = Substitute.For<IImageThumbnailScreen>();
 
         public LinkThumbnailScreenFactoryTests()
         {
             _compostionContainer = new CompositionContainer(new TypeCatalog(typeof(TestDecoder)));
+            _defaultImageUriDecoder.GetImageLocations(Arg.Any<Uri>()).Returns(_defaultImageLocations);
         }
 
         [Fact]
@@ -43,17 +50,20 @@
         }
 
         [Fact]
-        public void CreateScreenForLink_GivenUrlWithUnregisteredHost_ReturnsNull()
+        public void CreateScreenForLink_GivenUrlWithUnregisteredHost_ReturnsDefault()
         {
             LinkThumbnailScreenFactory test = BuildDefaultTestSubject();
 
-            test.CreateScreenForLink(UnknownUri).Should().Be.Null();
+            test.CreateScreenForLink(UnknownUri).Should().Be.SameAs(_defaultImageThumbnailScreen);
         }
 
         private LinkThumbnailScreenFactory BuildDefaultTestSubject()
         {
             return new LinkThumbnailScreenFactory(_compostionContainer, 
-                                                  x => _imageThumbnailScreen);
+                                                  _defaultImageUriDecoder, 
+                                                  x => x == _defaultImageLocations
+                                                           ? _defaultImageThumbnailScreen
+                                                           : _imageThumbnailScreen);
         }
 
         [Export(typeof(IImageUriDecoder))]

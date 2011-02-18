@@ -15,11 +15,15 @@
 
     public class LinkThumbnailScreenFactory : ILinkThumbnailScreenFactory
     {
+        private readonly IDefaultImageUriDecoder _defaultImageUriDecoder;
+
         private readonly Factories.ImageThumbnailScreenFactory _imageThumbnailScreenFactory;
 
         public LinkThumbnailScreenFactory(CompositionContainer compositionContainer, 
+                                          IDefaultImageUriDecoder defaultImageUriDecoder, 
                                           Factories.ImageThumbnailScreenFactory imageThumbnailScreenFactory)
         {
+            _defaultImageUriDecoder = defaultImageUriDecoder;
             _imageThumbnailScreenFactory = imageThumbnailScreenFactory;
 
             compositionContainer.ComposeParts(this);
@@ -32,7 +36,8 @@
 
         public ILinkThumbnailScreen CreateScreenForLink(Uri url)
         {
-            IImageUriDecoder decoder = ImageUriDecoders.FirstOrDefault(x => x.CanGetImageLocations(url));
+            IImageUriDecoder decoder = ImageUriDecoders.FirstOrDefault(x => x.CanGetImageLocations(url)) ??
+                                       _defaultImageUriDecoder;
 
             return decoder != null
                        ? _imageThumbnailScreenFactory(decoder.GetImageLocations(url))
