@@ -9,7 +9,8 @@
 		        MaxHeight="50"
 		        Command="{Binding OpenLinkCommand}"
 		        CommandParameter="{Binding Link}">
-			<Image Source="{Binding Thumbnail}" />
+			<Image Source="{Binding Thumbnail}"
+                   StretchDirection="DownOnly" />
 		</Button>
 	</Border>
 </UserControl>
