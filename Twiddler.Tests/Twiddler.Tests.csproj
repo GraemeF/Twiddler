@@ -36,13 +36,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Caliburn.PresentationFramework, Version=2.0.0.0, Culture=neutral, PublicKeyToken=8e5891231f2ed21f, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Library\Caliburn\Caliburn.PresentationFramework.dll</HintPath>
-    </Reference>
-    <Reference Include="Caliburn.Testability, Version=2.0.0.48647, Culture=neutral, PublicKeyToken=8e5891231f2ed21f, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Library\Caliburn\Caliburn.Testability.dll</HintPath>
+    <Reference Include="Caliburn.Micro">
+      <HintPath>..\Library\Caliburn.Micro\Caliburn.Micro.dll</HintPath>
     </Reference>
     <Reference Include="NSubstitute">
       <HintPath>..\packages\NSubstitute.1.0.0.0\lib\35\NSubstitute.dll</HintPath>
@@ -103,12 +98,12 @@
     <Compile Include="Commands\ArchiveTweetCommandTests.cs" />
     <Compile Include="Commands\DeauthorizeCommandTests.cs" />
     <Compile Include="Commands\MarkTweetAsReadCommandTests.cs" />
-    <Compile Include="ReactiveObjectMockHelpers.cs" />
+    <Compile Include="Assertions.cs" />
     <Compile Include="Services\ImageServices\DefaultImageDecoderTests.cs" />
     <Compile Include="Services\StoreTimelineTests.cs" />
-    <Compile Include="Screens\ImageThumbnailScreenTests.cs" />
-    <Compile Include="Screens\LoadingTweetScreenTests.cs" />
-    <Compile Include="Screens\RequestMeterScreenTests.cs" />
+    <Compile Include="ViewModels\ImageThumbnailViewModelTests.cs" />
+    <Compile Include="ViewModels\LoadingTweetViewModelTests.cs" />
+    <Compile Include="ViewModels\RequestMeterViewModelTests.cs" />
     <Compile Include="Services\ClockTests.cs" />
     <Compile Include="Services\ImageServices\TwitPicDecoderTests.cs" />
     <Compile Include="Services\ImageServices\YFrogDecoderTests.cs" />
@@ -117,10 +112,10 @@
     <Compile Include="Services\TweetRatingTests.cs" />
     <Compile Include="Services\TwitterStoreUpdaterTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Screens\ShellScreenTests.cs" />
-    <Compile Include="Screens\StatusScreenTests.cs" />
-    <Compile Include="Screens\TimelineScreenTests.cs" />
-    <Compile Include="Screens\TweetScreenTests.cs" />
+    <Compile Include="ViewModels\ShellViewModelTests.cs" />
+    <Compile Include="ViewModels\StatusViewModelTests.cs" />
+    <Compile Include="ViewModels\TimelineViewModelTests.cs" />
+    <Compile Include="ViewModels\TweetViewModelTests.cs" />
     <Compile Include="Services\MemoryTweetStoreTests.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -135,6 +130,10 @@
     <ProjectReference Include="..\Twiddler\Twiddler.csproj">
       <Project>{5DD421AA-A0AE-4052-8E61-B7A4B61ABAD4}</Project>
       <Name>Twiddler</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\UnitTests\ReactiveUI.Testing\ReactiveUI.Testing.csproj">
+      <Project>{4A26C9C3-463C-4FF3-89F8-327A408DC056}</Project>
+      <Name>ReactiveUI.Testing</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

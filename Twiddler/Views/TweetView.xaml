@@ -1,7 +1,6 @@
 ﻿<UserControl x:Class="Twiddler.Views.TweetView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:cal="clr-namespace:Caliburn.PresentationFramework.Views;assembly=Caliburn.PresentationFramework">
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:cal="clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro">
 	<Border BorderThickness="4"
 	        CornerRadius="4"
 	        BorderBrush="#FF6C99CE"
@@ -16,7 +15,7 @@
 				       Margin="4"
 				       HorizontalAlignment="Left" />
 				<DockPanel>
-					<ItemsControl ItemsSource="{Binding Screens}"
+					<ItemsControl ItemsSource="{Binding Items}"
 					              DockPanel.Dock="Right">
 						<ItemsControl.ItemTemplate>
 							<DataTemplate>

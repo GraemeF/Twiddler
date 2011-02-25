@@ -8,7 +8,7 @@
     using System.ComponentModel.Composition.Hosting;
     using System.Linq;
 
-    using Twiddler.Screens.Interfaces;
+    using Twiddler.ViewModels.Interfaces;
     using Twiddler.Services.Interfaces;
 
     #endregion

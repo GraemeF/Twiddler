@@ -4,7 +4,7 @@ namespace Twiddler
 
     using Twiddler.Core.Models;
     using Twiddler.Models;
-    using Twiddler.Screens.Interfaces;
+    using Twiddler.ViewModels.Interfaces;
 
     #endregion
 

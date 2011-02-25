@@ -4,7 +4,11 @@ namespace Twiddler.Tests.Commands
 
     using System;
 
+    using Caliburn.Micro;
+
     using NSubstitute;
+
+    using ReactiveUI.Testing;
 
     using Should.Fluent;
 
@@ -30,6 +34,7 @@ namespace Twiddler.Tests.Commands
             test.CanExecuteChanged += (sender, args) => eventRaised = true;
 
             ClientAuthorizationStatusChangesTo(AuthorizationStatus.Verifying);
+            TestDispatcher.PushFrame();
             GC.KeepAlive(test);
 
             eventRaised.Should().Be.True();

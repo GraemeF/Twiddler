@@ -11,7 +11,7 @@
     using Should.Fluent;
 
     using Twiddler.Models;
-    using Twiddler.Screens.Interfaces;
+    using Twiddler.ViewModels.Interfaces;
     using Twiddler.Services;
     using Twiddler.Services.Interfaces;
 

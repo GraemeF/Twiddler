@@ -41,34 +41,17 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Autofac">
-      <HintPath>..\Library\Caliburn\Autofac.dll</HintPath>
+      <HintPath>..\packages\Autofac.2.4.4.705\lib\NET40\Autofac.dll</HintPath>
     </Reference>
-    <Reference Include="Caliburn.Autofac">
-      <HintPath>..\Library\Caliburn\Caliburn.Autofac.dll</HintPath>
+    <Reference Include="Autofac.Configuration">
+      <HintPath>..\packages\Autofac.2.4.4.705\lib\NET40\Autofac.Configuration.dll</HintPath>
     </Reference>
-    <Reference Include="Caliburn.Core, Version=2.0.0.48647, Culture=neutral, PublicKeyToken=8e5891231f2ed21f, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Library\Caliburn\Caliburn.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="Caliburn.MEF">
-      <HintPath>..\Library\Caliburn\Caliburn.MEF.dll</HintPath>
-    </Reference>
-    <Reference Include="Caliburn.PresentationFramework, Version=2.0.0.48647, Culture=neutral, PublicKeyToken=8e5891231f2ed21f, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Library\Caliburn\Caliburn.PresentationFramework.dll</HintPath>
-    </Reference>
-    <Reference Include="Caliburn.Unity">
-      <HintPath>..\Library\Caliburn\Caliburn.Unity.dll</HintPath>
+    <Reference Include="Caliburn.Micro">
+      <HintPath>..\Library\Caliburn.Micro\Caliburn.Micro.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Expression.Interactions, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Library\Expression Blend SDK\Microsoft.Expression.Interactions.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Practices.ServiceLocation">
-      <HintPath>..\Library\Caliburn\Microsoft.Practices.ServiceLocation.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Practices.Unity">
-      <HintPath>..\Library\Caliburn\Microsoft.Practices.Unity.dll</HintPath>
     </Reference>
     <Reference Include="MvvmFoundation.Wpf, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -187,7 +170,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="AutofacContainerFactory.cs" />
+    <Compile Include="TwiddlerBootstrapper.cs" />
     <Compile Include="AutofacFactories.cs" />
     <Compile Include="Models\TwiddlerApplication.cs" />
     <Compile Include="Commands\ArchiveTweetCommand.cs" />
@@ -196,29 +179,29 @@
     <Compile Include="Commands\Interfaces\IOpenLinkCommand.cs" />
     <Compile Include="Commands\MarkTweetAsReadCommand.cs" />
     <Compile Include="Commands\OpenLinkCommand.cs" />
-    <Compile Include="IContainerFactory.cs" />
-    <Compile Include="Screens\Interfaces\ILinkThumbnailScreen.cs" />
-    <Compile Include="Screens\Interfaces\IImageThumbnailScreen.cs" />
-    <Compile Include="Screens\ImageThumbnailScreen.cs" />
+    <Compile Include="ViewModels\Interfaces\ILinkThumbnailScreen.cs" />
+    <Compile Include="ViewModels\Interfaces\IImageThumbnailScreen.cs" />
+    <Compile Include="ViewModels\ImageThumbnailViewModel.cs" />
     <Compile Include="Models\ImageLocations.cs" />
-    <Compile Include="Screens\Interfaces\ITweetPlaceholderScreen.cs" />
-    <Compile Include="Screens\TweetPlaceholderScreen.cs" />
+    <Compile Include="ViewModels\Interfaces\ITweetPlaceholderScreen.cs" />
+    <Compile Include="ViewModels\TweetPlaceholderViewModel.cs" />
     <Compile Include="Services\Interfaces\IDefaultImageUriDecoder.cs" />
     <Compile Include="Services\ImageServices\DefaultImageDecoder.cs" />
     <Compile Include="Services\Interfaces\IImageUriDecoder.cs" />
     <Compile Include="Services\Interfaces\ILinkThumbnailScreenFactory.cs" />
-    <Compile Include="Screens\Interfaces\ILinkScreen.cs" />
-    <Compile Include="Screens\Interfaces\IRequestMeterScreen.cs" />
+    <Compile Include="ViewModels\Interfaces\ILinkScreen.cs" />
+    <Compile Include="ViewModels\Interfaces\IRequestMeterScreen.cs" />
     <Compile Include="Services\Clock.cs" />
     <Compile Include="Services\StoreTimeline.cs" />
     <Compile Include="Services\TweetRating.cs" />
     <Compile Include="Services\Interfaces\IClock.cs" />
-    <Compile Include="Screens\RequestMeterScreen.cs" />
+    <Compile Include="ViewModels\RequestMeterViewModel.cs" />
     <Compile Include="Services\ImageServices\TwitPicDecoder.cs" />
     <Compile Include="Services\ImageServices\YFrogDecoder.cs" />
     <Compile Include="Services\LinkThumbnailScreenFactory.cs" />
     <Compile Include="Services\RequestConductor.cs" />
     <Compile Include="Services\RequestLimitStatus.cs" />
+    <Compile Include="TypedAutofacBootStrapper.cs" />
     <Compile Include="Views\ImageThumbnailView.xaml.cs">
       <DependentUpon>ImageThumbnailView.xaml</DependentUpon>
     </Compile>
@@ -233,14 +216,14 @@
   <ItemGroup>
     <Compile Include="Commands\DeauthorizeCommand.cs" />
     <Compile Include="Factories.cs" />
-    <Compile Include="Screens\Interfaces\ILoadingTweetScreen.cs" />
-    <Compile Include="Screens\LoadingTweetScreen.cs" />
+    <Compile Include="ViewModels\Interfaces\ILoadingTweetScreen.cs" />
+    <Compile Include="ViewModels\LoadingTweetViewModel.cs" />
     <Compile Include="Services\Interfaces\ITwitterStoreUpdater.cs" />
     <Compile Include="Services\MemoryTweetStore.cs" />
     <Compile Include="Commands\Interfaces\IDeauthorizeCommand.cs" />
-    <Compile Include="Screens\Interfaces\IStatusScreen.cs" />
-    <Compile Include="Screens\StatusScreen.cs" />
-    <Compile Include="Screens\TweetScreen.cs" />
+    <Compile Include="ViewModels\Interfaces\IStatusScreen.cs" />
+    <Compile Include="ViewModels\StatusViewModel.cs" />
+    <Compile Include="ViewModels\TweetViewModel.cs" />
     <Compile Include="Services\Interfaces\ITweetSource.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
@@ -255,12 +238,12 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
-    <Compile Include="Screens\Interfaces\IShellScreen.cs" />
-    <Compile Include="Screens\Interfaces\ITweetScreen.cs" />
+    <Compile Include="ViewModels\Interfaces\IShellScreen.cs" />
+    <Compile Include="ViewModels\Interfaces\ITweetScreen.cs" />
     <Compile Include="Services\Interfaces\ITimeline.cs" />
-    <Compile Include="Screens\Interfaces\ITimelineScreen.cs" />
-    <Compile Include="Screens\ShellScreen.cs" />
-    <Compile Include="Screens\TimelineScreen.cs" />
+    <Compile Include="ViewModels\Interfaces\ITimelineScreen.cs" />
+    <Compile Include="ViewModels\ShellViewModel.cs" />
+    <Compile Include="ViewModels\TimelineViewModel.cs" />
     <Compile Include="Services\TwitterStoreUpdater.cs" />
     <Compile Include="Views\LoadingTweetView.xaml.cs">
       <DependentUpon>LoadingTweetView.xaml</DependentUpon>

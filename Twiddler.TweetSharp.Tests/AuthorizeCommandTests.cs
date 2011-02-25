@@ -3,9 +3,11 @@
     #region Using Directives
 
     using System;
-    using System.ComponentModel;
+    using System.Windows.Threading;
 
     using NSubstitute;
+
+    using ReactiveUI.Testing;
 
     using Should.Fluent;
 
@@ -19,7 +21,7 @@
 
     public class AuthorizeCommandTests
     {
-        private readonly IAuthorizer _authorizer = Substitute.For<IAuthorizer>();
+        private readonly IAuthorizer _authorizer = Substitute.For<IAuthorizer>().WithReactiveProperties();
 
         private readonly IAccessTokenStore _credentialsStore = Substitute.For<IAccessTokenStore>();
 
@@ -36,6 +38,8 @@
             test.CanExecuteChanged += (sender, args) => eventRaised = true;
 
             ClientAuthorizationStatusChangesTo(AuthorizationStatus.Verifying);
+            TestDispatcher.PushFrame();
+
             GC.KeepAlive(test);
 
             eventRaised.Should().Be.True();
@@ -75,9 +79,7 @@
 
         private void ClientAuthorizationStatusChangesTo(AuthorizationStatus status)
         {
-            _authorizer.AuthorizationStatus.Returns(status);
-            _authorizer.PropertyChanged +=
-                Raise.Event<PropertyChangedEventHandler>(new PropertyChangedEventArgs("AuthorizationStatus"));
+            _authorizer.PropertyChanges(x => x.AuthorizationStatus, status);
         }
     }
 }

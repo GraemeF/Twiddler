@@ -4,7 +4,7 @@
 
     using System;
 
-    using Twiddler.Screens.Interfaces;
+    using Twiddler.ViewModels.Interfaces;
 
     #endregion
 

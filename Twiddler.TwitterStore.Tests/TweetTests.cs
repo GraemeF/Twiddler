@@ -2,10 +2,9 @@
 {
     #region Using Directives
 
-    using Caliburn.Testability.Extensions;
-
     using Should.Fluent;
 
+    using Twiddler.Tests;
     using Twiddler.TwitterStore.Models;
 
     using Xunit;
@@ -20,8 +19,7 @@
             var test = new Tweet();
 
             test.
-                AssertThatChangeNotificationIsRaisedBy(x => x.IsArchived).
-                When(test.Archive);
+                AssertThatChangeNotificationIsRaisedBy(x => x.IsArchived, test.Archive);
         }
 
         [Fact]
@@ -37,8 +35,7 @@
             var test = new Tweet();
 
             test.
-                AssertThatChangeNotificationIsRaisedBy(x => x.IsRead).
-                When(test.MarkAsRead);
+                AssertThatChangeNotificationIsRaisedBy(x => x.IsRead, test.MarkAsRead);
         }
     }
 }

@@ -1,6 +1,14 @@
-﻿<ApplicationModel:CaliburnApplication x:Class="Twiddler.App"
-                                      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                                      xmlns:ApplicationModel="clr-namespace:Caliburn.PresentationFramework.ApplicationModel;assembly=Caliburn.PresentationFramework">
-	<Application.Resources></Application.Resources>
-</ApplicationModel:CaliburnApplication>
+﻿<Application xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:Twiddler"
+             x:Class="Twiddler.App">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary>
+                    <local:TwiddlerBootstrapper x:Key="bootstrapper" />
+                </ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

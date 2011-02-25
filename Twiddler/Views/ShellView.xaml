@@ -1,8 +1,6 @@
 ﻿<Window x:Class="Twiddler.Views.ShellView"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:cal="clr-namespace:Caliburn.PresentationFramework.Views;assembly=Caliburn.PresentationFramework"
-        Title="Twiddler"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:cal="clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro" Title="Twiddler"
         MinHeight="300"
         MinWidth="300"
         Background="White">

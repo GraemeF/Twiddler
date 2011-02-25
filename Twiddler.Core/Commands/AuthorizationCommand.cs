@@ -3,9 +3,10 @@ namespace Twiddler.Core.Commands
     #region Using Directives
 
     using System;
+    using System.Linq;
     using System.Windows.Input;
 
-    using MvvmFoundation.Wpf;
+    using ReactiveUI;
 
     using Twiddler.Core.Services;
 
@@ -17,16 +18,17 @@ namespace Twiddler.Core.Commands
 
         private readonly AuthorizationStatus _executableStatus;
 
-        private PropertyObserver<IAuthorizer> _observer;
+        private IDisposable _observer;
 
         protected AuthorizationCommand(IAuthorizer client, AuthorizationStatus executableStatus)
         {
             Client = client;
             _executableStatus = executableStatus;
 
-            _observer = new PropertyObserver<IAuthorizer>(Client).
-                RegisterHandler(x => x.AuthorizationStatus, 
-                                y => OnCanExecuteChanged());
+            _observer = client.
+                WhenAny(x => x.AuthorizationStatus, _ => true).
+                ObserveOnDispatcher().
+                Subscribe(Observer.Create<bool>(_ => CanExecuteChanged(this, EventArgs.Empty)));
         }
 
         public event EventHandler CanExecuteChanged = delegate { };
@@ -41,10 +43,5 @@ namespace Twiddler.Core.Commands
         public abstract void Execute(object parameter);
 
         #endregion
-
-        private void OnCanExecuteChanged()
-        {
-            Caliburn.PresentationFramework.Invocation.Execute.OnUIThread(() => CanExecuteChanged(this, EventArgs.Empty));
-        }
     }
 }

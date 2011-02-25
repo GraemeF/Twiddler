@@ -88,6 +88,7 @@
     <Reference Include="TweetSharp.Linq">
       <HintPath>..\packages\TweetSharp.0.0.10\lib\4.0\TweetSharp.Linq.dll</HintPath>
     </Reference>
+    <Reference Include="WindowsBase" />
     <Reference Include="xunit, Version=1.7.0.1540, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\xunit.1.7.0.1540\lib\xunit.dll</HintPath>
@@ -114,6 +115,10 @@
     <ProjectReference Include="..\Twiddler.TweetSharp\Twiddler.TweetSharp.csproj">
       <Project>{77A16F4D-025B-43F5-86F1-F12212466445}</Project>
       <Name>Twiddler.TweetSharp</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\UnitTests\ReactiveUI.Testing\ReactiveUI.Testing.csproj">
+      <Project>{4A26C9C3-463C-4FF3-89F8-327A408DC056}</Project>
+      <Name>ReactiveUI.Testing</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
