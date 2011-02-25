@@ -10,6 +10,7 @@
 
     using Autofac;
 
+    using Twiddler.Core.Models;
     using Twiddler.Core.Services;
     using Twiddler.ViewModels.Interfaces;
     using Twiddler.Services;

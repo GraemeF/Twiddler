@@ -9,6 +9,7 @@
 
     using MvvmFoundation.Wpf;
 
+    using Twiddler.Core.Models;
     using Twiddler.ViewModels.Interfaces;
     using Twiddler.Services.Interfaces;
 

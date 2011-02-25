@@ -12,6 +12,7 @@
     using Should.Core.Exceptions;
     using Should.Fluent;
 
+    using Twiddler.Core.Models;
     using Twiddler.ViewModels;
     using Twiddler.Services.Interfaces;
 

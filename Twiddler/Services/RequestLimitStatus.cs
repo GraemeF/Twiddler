@@ -6,6 +6,7 @@
 
     using ReactiveUI;
 
+    using Twiddler.Core.Models;
     using Twiddler.Services.Interfaces;
 
     #endregion
