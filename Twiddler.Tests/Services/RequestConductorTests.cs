@@ -4,14 +4,14 @@
 
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel;
 
     using NSubstitute;
+
+    using ReactiveUI.Testing;
 
     using Twiddler.Core.Models;
     using Twiddler.Core.Services;
     using Twiddler.Services;
-    using Twiddler.Services.Interfaces;
     using Twiddler.TestData;
 
     using Xunit;
@@ -20,7 +20,7 @@
 
     public class RequestConductorTests
     {
-        private readonly IAuthorizer _client = Substitute.For<IAuthorizer>();
+        private readonly IAuthorizer _authorizer = Substitute.For<IAuthorizer>().WithReactiveProperties();
 
         private readonly IEnumerable<ITweet> _requestedTweets = new[] { A.Tweet.Build() };
 
@@ -48,6 +48,7 @@
 
             ClientAuthorizationStatusChangesTo(AuthorizationStatus.Authorized);
             GC.KeepAlive(test);
+            TestDispatcher.PushFrame();
 
             Wait.Until(() => _requestCompleted);
 
@@ -82,14 +83,12 @@
 
         private RequestConductor BuildDefaultTestSubject()
         {
-            return new RequestConductor(_client, new[] { _tweetRequester });
+            return new RequestConductor(_authorizer, new[] { _tweetRequester });
         }
 
         private void ClientAuthorizationStatusChangesTo(AuthorizationStatus authorizationStatus)
         {
-            _client.AuthorizationStatus.Returns(authorizationStatus);
-            _client.PropertyChanged +=
-                Raise.Event<PropertyChangedEventHandler>(new PropertyChangedEventArgs("AuthorizationStatus"));
+            _authorizer.PropertyChanges(x => x.AuthorizationStatus, authorizationStatus);
         }
     }
 }

@@ -53,10 +53,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Library\Expression Blend SDK\Microsoft.Expression.Interactions.dll</HintPath>
     </Reference>
-    <Reference Include="MvvmFoundation.Wpf, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Library\MvvmFoundation\MvvmFoundation.Wpf.dll</HintPath>
-    </Reference>
     <Reference Include="Raven.Munin">
       <HintPath>..\Library\RavenDB\Raven.Munin.dll</HintPath>
     </Reference>

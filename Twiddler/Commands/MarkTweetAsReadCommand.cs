@@ -4,7 +4,7 @@
 
     using System;
 
-    using MvvmFoundation.Wpf;
+    using ReactiveUI;
 
     using Twiddler.Commands.Interfaces;
     using Twiddler.Core.Models;
@@ -18,15 +18,15 @@
 
         private readonly ITweetSink _tweetSink;
 
-        private PropertyObserver<ITweet> _observer;
+        private IDisposable _subscription;
 
         public MarkTweetAsReadCommand(ITweet tweet, ITweetSink tweetSink)
         {
             _tweet = tweet;
             _tweetSink = tweetSink;
-            _observer = new PropertyObserver<ITweet>(_tweet).
-                RegisterHandler(x => x.IsRead, 
-                                x => CanExecuteChanged(this, EventArgs.Empty));
+            _subscription = _tweet.
+                WhenAny(x => x.IsRead, _ => true).
+                Subscribe(x => CanExecuteChanged(this, EventArgs.Empty));
         }
 
         public event EventHandler CanExecuteChanged = delegate { };

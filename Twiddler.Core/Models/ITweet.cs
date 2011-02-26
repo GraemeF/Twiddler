@@ -4,11 +4,12 @@
 
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel;
+
+    using ReactiveUI;
 
     #endregion
 
-    public interface ITweet : INotifyPropertyChanged
+    public interface ITweet : IReactiveNotifyPropertyChanged
     {
         DateTime CreatedDate { get; set; }
 

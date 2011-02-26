@@ -5,8 +5,6 @@
     using System;
     using System.Linq;
 
-    using MvvmFoundation.Wpf;
-
     using ReactiveUI;
 
     using Twiddler.Core.Models;
@@ -23,16 +21,17 @@
 
         private bool _IsMention;
 
-        private PropertyObserver<IAuthorizer> _observer;
+        private IDisposable _subscription;
 
         public TweetRating(IAuthorizer client, ITweet tweet)
         {
             _client = client;
             _tweet = tweet;
 
-            _observer = new PropertyObserver<IAuthorizer>(_client).
-                RegisterHandler(x => x.AuthenticatedUser, 
-                                x => UpdateIsMention());
+            _subscription = _client.
+                WhenAny(x => x.AuthenticatedUser, _ => true).
+                Subscribe(_ => UpdateIsMention());
+
             UpdateIsMention();
         }
 

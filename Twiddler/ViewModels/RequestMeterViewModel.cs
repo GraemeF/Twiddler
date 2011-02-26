@@ -7,11 +7,11 @@
 
     using Caliburn.Micro;
 
-    using MvvmFoundation.Wpf;
+    using ReactiveUI;
 
     using Twiddler.Core.Models;
-    using Twiddler.ViewModels.Interfaces;
     using Twiddler.Services.Interfaces;
+    using Twiddler.ViewModels.Interfaces;
 
     #endregion
 
@@ -25,7 +25,11 @@
 
         private readonly IRequestLimitStatus _limitStatus;
 
-        private PropertyObserver<IRequestLimitStatus> _observer;
+        private IDisposable _hourlyLimitSubscription;
+
+        private IDisposable _periodSubscription;
+
+        private IDisposable _remainingHitsSubscription;
 
         private IDisposable _timePassingSubscription;
 
@@ -98,12 +102,9 @@
             if (close)
             {
                 _timePassingSubscription.Dispose();
-                _timePassingSubscription = null;
-
-                _observer.
-                    UnregisterHandler(x => x.HourlyLimit).
-                    UnregisterHandler(x => x.RemainingHits);
-                _observer = null;
+                _periodSubscription.Dispose();
+                _hourlyLimitSubscription.Dispose();
+                _remainingHitsSubscription.Dispose();
             }
 
             base.OnDeactivate(close);
@@ -113,11 +114,17 @@
         {
             base.OnInitialize();
 
-            _observer =
-                new PropertyObserver<IRequestLimitStatus>(_limitStatus).
-                    RegisterHandler(x => x.PeriodDuration, y => UpdatePeriodDuration()).
-                    RegisterHandler(x => x.HourlyLimit, y => UpdateHourlyLimit()).
-                    RegisterHandler(x => x.RemainingHits, y => UpdateRemainingHits());
+            _periodSubscription = _limitStatus.
+                WhenAny(x => x.PeriodDuration, _ => true).
+                Subscribe(_ => UpdatePeriodDuration());
+
+            _hourlyLimitSubscription = _limitStatus.
+                WhenAny(x => x.HourlyLimit, _ => true).
+                Subscribe(_ => UpdateHourlyLimit());
+
+            _remainingHitsSubscription = _limitStatus.
+                WhenAny(x => x.RemainingHits, _ => true).
+                Subscribe(_ => UpdateRemainingHits());
 
             UpdateHourlyLimit();
             UpdateRemainingTime();
@@ -127,16 +134,16 @@
             _timePassingSubscription = _elapsedSeconds.Subscribe(x => UpdateRemainingTime());
         }
 
+        private static string FormatTimeSpan(TimeSpan timeSpan)
+        {
+            return string.Concat((int)Math.Ceiling(timeSpan.TotalMinutes), "m");
+        }
+
         private void Dispose(bool disposing)
         {
             if (disposing)
                 if (_timePassingSubscription != null)
                     _timePassingSubscription.Dispose();
-        }
-
-        private string FormatTimeSpan(TimeSpan timeSpan)
-        {
-            return string.Concat((int)Math.Ceiling(timeSpan.TotalMinutes), "m");
         }
 
         private TimeSpan GetRemainingTime()

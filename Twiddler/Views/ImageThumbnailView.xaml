@@ -7,9 +7,11 @@
 	<Border>
 		<Button MaxWidth="50"
 		        MaxHeight="50"
-		        Command="{Binding OpenLinkCommand}"
-		        CommandParameter="{Binding Link}">
-			<Image Source="{Binding Thumbnail}"
+                MinWidth="16"
+                MinHeight="16"
+		        Command="{Binding Path=OpenLinkCommand}"
+		        CommandParameter="{Binding Path=Link}">
+			<Image Source="{Binding Path=Thumbnail}"
                    StretchDirection="DownOnly" />
 		</Button>
 	</Border>

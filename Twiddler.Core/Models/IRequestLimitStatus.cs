@@ -3,11 +3,12 @@
     #region Using Directives
 
     using System;
-    using System.ComponentModel;
+
+    using ReactiveUI;
 
     #endregion
 
-    public interface IRequestLimitStatus : INotifyPropertyChanged
+    public interface IRequestLimitStatus : IReactiveNotifyPropertyChanged
     {
         int HourlyLimit { get; set; }
 
