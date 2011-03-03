@@ -8,13 +8,13 @@
 
     using Caliburn.Micro;
 
-    using MvvmFoundation.Wpf;
+    using ReactiveUI;
 
     using Twiddler.Commands;
     using Twiddler.Core.Models;
     using Twiddler.Core.Services;
-    using Twiddler.ViewModels.Interfaces;
     using Twiddler.Services.Interfaces;
+    using Twiddler.ViewModels.Interfaces;
 
     #endregion
 
@@ -29,7 +29,7 @@
 
         private readonly ITweetRating _tweetRating;
 
-        private PropertyObserver<ITweet> _tweetObserver;
+        private IDisposable _subscription;
 
         public TweetViewModel(ITweet tweet, 
                               ITweetRating tweetRating, 
@@ -106,9 +106,9 @@
             OpenLinksFromTweet();
             OpenInReplyToTweet();
 
-            _tweetObserver = new PropertyObserver<ITweet>(_tweet).
-                RegisterHandler(x => x.IsRead, 
-                                x => NotifyOfPropertyChange(() => Opacity));
+            _subscription = _tweet.
+                WhenAny(x => x.IsRead, _ => true).
+                Subscribe(x => NotifyOfPropertyChange(() => Opacity));
         }
 
         private void OpenInReplyToTweet()

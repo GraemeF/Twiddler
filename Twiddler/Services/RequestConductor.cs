@@ -7,7 +7,7 @@
     using System.Linq;
     using System.Threading.Tasks;
 
-    using MvvmFoundation.Wpf;
+    using ReactiveUI;
 
     using Twiddler.Core.Services;
 
@@ -19,7 +19,7 @@
 
         private readonly IEnumerable<ITweetRequester> _tweetRequesters;
 
-        private PropertyObserver<IAuthorizer> _statusObserver;
+        private IDisposable _authorizationSubscription;
 
         private IDisposable _subscription;
 
@@ -43,9 +43,10 @@
         {
             _tweetSink = tweetSink;
 
-            _statusObserver = new PropertyObserver<IAuthorizer>(_client).
-                RegisterHandler(x => x.AuthorizationStatus, 
-                                y => PollIfAuthorized());
+            _authorizationSubscription = _client.
+                WhenAny(x => x.AuthorizationStatus, _ => true).
+                Subscribe(_ => PollIfAuthorized());
+
             PollIfAuthorized();
         }
 

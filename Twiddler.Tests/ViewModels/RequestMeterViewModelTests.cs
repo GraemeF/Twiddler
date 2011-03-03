@@ -3,17 +3,19 @@
     #region Using Directives
 
     using System;
-    using System.ComponentModel;
 
     using Caliburn.Micro;
 
     using NSubstitute;
 
+    using ReactiveUI.Testing;
+
     using Should.Core.Exceptions;
     using Should.Fluent;
 
-    using Twiddler.ViewModels;
+    using Twiddler.Core.Models;
     using Twiddler.Services.Interfaces;
+    using Twiddler.ViewModels;
 
     using Xunit;
     using Xunit.Extensions;
@@ -26,12 +28,25 @@
 
         private readonly IClock _clock = Substitute.For<IClock>();
 
-        private readonly IRequestLimitStatus _requestStatus = Substitute.For<IRequestLimitStatus>();
+        private readonly IRequestLimitStatus _requestStatus = Substitute.For<IRequestLimitStatus>().WithReactiveProperties();
 
         public RequestMeterViewModelTests()
         {
             _requestStatus.PeriodEndTime = EndOfPeriod;
             _requestStatus.PeriodDuration.Returns(TimeSpan.FromMinutes(100));
+        }
+
+        [Fact]
+        public void Deactivate__UnsubscribesFromRequestStatusChanges()
+        {
+            RequestMeterViewModel test = BuildDefaultTestSubject();
+            ((IActivate)test).Activate();
+            ((IDeactivate)test).Deactivate(true);
+
+            test.PropertyChanged +=
+                (sender, args) => { throw new AssertException("No properties should have changed."); };
+
+            _requestStatus.PropertyChanges(x => x.RemainingHits, 123);
         }
 
         [Fact]
@@ -131,7 +146,7 @@
 
             test.
                 AssertThatChangeNotificationIsRaisedBy(x => x.HourlyLimit, 
-                                                       () => PropertyChangesOnRequestStatus("HourlyLimit"));
+                                                       () => _requestStatus.PropertyChanges(x => x.HourlyLimit, 123));
         }
 
         [Fact]
@@ -142,31 +157,12 @@
 
             test.
                 AssertThatChangeNotificationIsRaisedBy(x => x.RemainingHits, 
-                                                       () => PropertyChangesOnRequestStatus("RemainingHits"));
-        }
-
-        [Fact]
-        public void Deactivate__UnsubscribesFromRequestStatusChanges()
-        {
-            RequestMeterViewModel test = BuildDefaultTestSubject();
-            ((IActivate)test).Activate();
-            ((IDeactivate)test).Deactivate(true);
-
-            test.PropertyChanged +=
-                (sender, args) => { throw new AssertException("No properties should have changed."); };
-
-            PropertyChangesOnRequestStatus("RemainingHits");
+                                                       () => _requestStatus.PropertyChanges(x => x.RemainingHits, 123));
         }
 
         private RequestMeterViewModel BuildDefaultTestSubject()
         {
             return new RequestMeterViewModel(_requestStatus, _clock);
-        }
-
-        private void PropertyChangesOnRequestStatus(string propertyName)
-        {
-            _requestStatus.PropertyChanged +=
-                Raise.Event<PropertyChangedEventHandler>(new PropertyChangedEventArgs(propertyName));
         }
 
         private void TimeLeftInPeriodIs(TimeSpan remainingTime)

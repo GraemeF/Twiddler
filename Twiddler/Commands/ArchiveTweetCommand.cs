@@ -4,7 +4,7 @@
 
     using System;
 
-    using MvvmFoundation.Wpf;
+    using ReactiveUI;
 
     using Twiddler.Commands.Interfaces;
     using Twiddler.Core.Models;
@@ -15,14 +15,15 @@
     {
         private readonly ITweet _tweet;
 
-        private PropertyObserver<ITweet> _observer;
+        private IDisposable _subscription;
 
         public ArchiveTweetCommand(ITweet tweet)
         {
             _tweet = tweet;
-            _observer = new PropertyObserver<ITweet>(_tweet).
-                RegisterHandler(x => x.IsArchived, 
-                                x => CanExecuteChanged(this, EventArgs.Empty));
+
+            _subscription = _tweet.
+                WhenAny(x => x.IsArchived, _ => true).
+                Subscribe(_ => CanExecuteChanged(this, EventArgs.Empty));
         }
 
         public event EventHandler CanExecuteChanged = delegate { };
