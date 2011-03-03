@@ -5,8 +5,6 @@
     using System;
     using System.Linq;
 
-    using MvvmFoundation.Wpf;
-
     using ReactiveUI;
 
     using Twiddler.Core.Models;
@@ -21,24 +19,34 @@
 
         private readonly ITweet _tweet;
 
+        private bool _IsDirectMessage;
+
         private bool _IsMention;
 
-        private PropertyObserver<IAuthorizer> _observer;
+        private bool _IsRead;
+
+        private IDisposable _mentionSubscription;
+
+        private IDisposable _readSubscription;
 
         public TweetRating(IAuthorizer client, ITweet tweet)
         {
             _client = client;
             _tweet = tweet;
 
-            _observer = new PropertyObserver<IAuthorizer>(_client).
-                RegisterHandler(x => x.AuthenticatedUser, 
-                                x => UpdateIsMention());
-            UpdateIsMention();
+            _readSubscription = tweet.
+                WhenAny(x => x.IsRead, isRead => isRead.Value).
+                Subscribe(x => IsRead = x);
+
+            _mentionSubscription = _client.
+                WhenAny(x => x.AuthenticatedUser, x => IsUserMentioned(x.Value)).
+                Subscribe(x => IsMention = x);
         }
 
         public bool IsDirectMessage
         {
-            get { throw new NotImplementedException(); }
+            get { return _IsDirectMessage; }
+            private set { this.RaiseAndSetIfChanged(x => x.IsDirectMessage, value); }
         }
 
         public bool IsMention
@@ -47,16 +55,21 @@
             private set { this.RaiseAndSetIfChanged(x => x.IsMention, value); }
         }
 
-        private void UpdateIsMention()
+        public bool IsRead
         {
-            User authenticatedUser = _client.AuthenticatedUser;
-            if (authenticatedUser == null)
-                return;
+            get { return _IsRead; }
+            private set { this.RaiseAndSetIfChanged(x => x.IsRead, value); }
+        }
+
+        private bool IsUserMentioned(User user)
+        {
+            if (user == null)
+                return false;
             if (_tweet.Mentions == null)
-                return;
+                return false;
             if (!_tweet.Mentions.Any())
-                return;
-            IsMention = _tweet.Mentions.Contains(authenticatedUser.ScreenName);
+                return false;
+            return _tweet.Mentions.Contains(user.ScreenName);
         }
     }
 }

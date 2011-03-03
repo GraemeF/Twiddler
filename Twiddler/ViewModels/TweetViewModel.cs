@@ -85,6 +85,11 @@
             get { return _tweet.Status; }
         }
 
+        public ITweetRating Rating
+        {
+            get { return _tweetRating; }
+        }
+
         public User User
         {
             get { return _tweet.User; }

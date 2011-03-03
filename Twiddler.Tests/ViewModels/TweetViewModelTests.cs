@@ -14,10 +14,10 @@ namespace Twiddler.Tests.ViewModels
     using Twiddler.Commands;
     using Twiddler.Core.Models;
     using Twiddler.Core.Services;
-    using Twiddler.ViewModels;
-    using Twiddler.ViewModels.Interfaces;
     using Twiddler.Services.Interfaces;
     using Twiddler.TestData;
+    using Twiddler.ViewModels;
+    using Twiddler.ViewModels.Interfaces;
 
     using Xunit;
 
@@ -56,10 +56,10 @@ namespace Twiddler.Tests.ViewModels
             var mockScreen = Substitute.For<ILoadingTweetScreen>();
 
             var test = new TweetViewModel(A.Tweet.InReplyTo("4").Build(), 
-                                       _tweetRating, 
-                                       _linkThumbnailScreenFactory, 
-                                       x => mockScreen, 
-                                       null);
+                                          _tweetRating, 
+                                          _linkThumbnailScreenFactory, 
+                                          x => mockScreen, 
+                                          null);
             ((IActivate)test).Activate();
 
             test.InReplyToTweet.Should().Be.SameAs(mockScreen);
@@ -81,12 +81,12 @@ namespace Twiddler.Tests.ViewModels
 
             var test =
                 new TweetViewModel(A.Tweet.
-                                    WithStatus("This tweet contains a link").
-                                    LinkingTo(new Uri("http://link.one.com")).Build(), 
-                                _tweetRating, 
-                                _linkThumbnailScreenFactory, 
-                                null, 
-                                null);
+                                       WithStatus("This tweet contains a link").
+                                       LinkingTo(new Uri("http://link.one.com")).Build(), 
+                                   _tweetRating, 
+                                   _linkThumbnailScreenFactory, 
+                                   null, 
+                                   null);
             ((IActivate)test).Activate();
 
             test.Links.Should().Contain.Item(_linkThumbnailScreen);
@@ -132,6 +132,14 @@ namespace Twiddler.Tests.ViewModels
             test.
                 AssertThatChangeNotificationIsRaisedBy(x => x.Opacity, () => _tweet.MarkAsRead());
             test.Opacity.Should().Equal(0.5);
+        }
+
+        [Fact]
+        public void GettingRating__ReturnsTweetRating()
+        {
+            TweetViewModel test = BuildDefaultTestSubject();
+
+            test.Rating.Should().Be.SameAs(_tweetRating);
         }
 
         [Fact]

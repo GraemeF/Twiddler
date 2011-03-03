@@ -6,16 +6,17 @@
     using System.Collections.Generic;
     using System.Linq;
 
+    using NSubstitute;
+
+    using ReactiveUI.Testing;
+
     using Twiddler.Core.Models;
-    using Twiddler.TwitterStore.Models;
 
     #endregion
 
     public class TweetBuilder
     {
         private readonly DateTime _createdDate = DateTime.Now.AddMinutes(-5.0);
-
-        private readonly bool _isRead;
 
         private readonly User _user = A.User;
 
@@ -24,6 +25,8 @@
         private string _inReplyToStatusId;
 
         private bool _isArchived;
+
+        private bool _isRead;
 
         private List<Uri> _links = new List<Uri>();
 
@@ -58,18 +61,19 @@
 
         public ITweet Build()
         {
-            return new Tweet
-                       {
-                           CreatedDate = _createdDate, 
-                           Id = _id, 
-                           InReplyToStatusId = _inReplyToStatusId, 
-                           IsArchived = _isArchived, 
-                           IsRead = _isRead, 
-                           Status = _status, 
-                           User = _user, 
-                           Links = new List<Uri>(_links), 
-                           Mentions = new List<string>(_mentions)
-                       };
+            ITweet tweet = Substitute.For<ITweet>().WithReactiveProperties();
+
+            tweet.CreatedDate.Returns(_createdDate);
+            tweet.Id.Returns(_id);
+            tweet.InReplyToStatusId.Returns(_inReplyToStatusId);
+            tweet.IsArchived.Returns(_isArchived);
+            tweet.IsRead.Returns(_isRead);
+            tweet.Status.Returns(_status);
+            tweet.User.Returns(_user);
+            tweet.Links.Returns(new List<Uri>(_links));
+            tweet.Mentions.Returns(new List<string>(_mentions));
+
+            return tweet;
         }
 
         public TweetBuilder IdentifiedBy(string id)
@@ -115,6 +119,22 @@
             return new TweetBuilder(this)
                        {
                            _isArchived = false
+                       };
+        }
+
+        public TweetBuilder WhichHasBeenRead()
+        {
+            return new TweetBuilder(this)
+                       {
+                           _isRead = true
+                       };
+        }
+
+        public TweetBuilder WhichIsUnread()
+        {
+            return new TweetBuilder(this)
+                       {
+                           _isRead = false
                        };
         }
 
